@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * @Route("/image")
@@ -34,7 +35,24 @@ class ImageController extends AbstractController
         $form = $this->createForm(ImageType::class, $image);
         $form->handleRequest($request);
 
+        
         if ($form->isSubmitted() && $form->isValid()) {
+            $photo = $form->get('image')->getData();
+            $nom = $form->get('nom')->getData();
+            if ($nom != null)
+           { $fichier = $nom.'.'.$photo->guessExtension();}
+           else
+           {$fichier = $form->get('image')->getData()->getClientOriginalName(); 
+            $image->setNom($fichier);
+            }
+        
+            // On copie le fichier dans le dossier uploads
+            $photo->move(
+                $this->getParameter('images_directory'),
+                $fichier
+            );
+            
+           
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($image);
             $entityManager->flush();
