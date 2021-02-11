@@ -1,5 +1,8 @@
 {{ form_start(form) }}
   <label> Téléchargez l'image: </label>
     {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+    {% if app.request.attributes.get('_route') == 'image_edit' %}
+        <img src="{{ asset('/uploads/'~image.nom) }}"  width="150">
+    {% endif %}
+    <button class="btn">{{ button_label|default('Enregistrer') }}</button>
 {{ form_end(form) }}

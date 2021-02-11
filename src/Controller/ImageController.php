@@ -43,8 +43,9 @@ class ImageController extends AbstractController
            { $fichier = $nom.'.'.$photo->guessExtension();}
            else
            {$fichier = $form->get('image')->getData()->getClientOriginalName(); 
-            $image->setNom($fichier);
+           
             }
+            $image->setNom($fichier);
         
             // On copie le fichier dans le dossier uploads
             $photo->move(

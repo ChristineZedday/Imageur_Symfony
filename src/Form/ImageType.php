@@ -19,12 +19,12 @@ class ImageType extends AbstractType
             ->add('legend')
             ->add('dossier')
             ->add('image', FileType::class,[
-                'label' => false,
+                'label' => 'fichier à télécharger',
                 'multiple' => false,
                 'mapped' => false,
                 'required' => true])
             ->add('vignette', FileType::class,[
-                 'label' => false,
+                 'label' => 'vignette (facultatif)',
                  'multiple' => false,
                  'mapped' => false,
                  'required' => false])
