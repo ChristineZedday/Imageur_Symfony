@@ -12,7 +12,7 @@
                 <th>Nom</th>
                 <th>Alt</th>
                 <th>Legend</th>
-                <th>Dossier</th>
+                <th>Usage</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -23,7 +23,7 @@
                 <td>{{ image.nom }}</td>
                 <td>{{ image.alt }}</td>
                 <td>{{ image.legend }}</td>
-                <td>{{ image.dossier }}</td>
+                <td>{{ image.pour}}</td>
                 <td>
                     <a href="{{ path('image_show', {'id': image.id}) }}">show</a>
                     <a href="{{ path('image_edit', {'id': image.id}) }}">edit</a>

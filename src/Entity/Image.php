@@ -35,7 +35,7 @@ class Image
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $usage;
+    private $pour;
 
     public function getId(): ?int
     {
@@ -78,14 +78,14 @@ class Image
         return $this;
     }
 
-    public function getUsage(): ?string
+    public function getPour(): ?string
     {
-        return $this->usage;
+        return $this->pour;
     }
 
-    public function setUsage(string $usage): self
+    public function setPour(string $pour): self
     {
-        $this->usage = $usage;
+        $this->pour = $pour;
 
         return $this;
     }

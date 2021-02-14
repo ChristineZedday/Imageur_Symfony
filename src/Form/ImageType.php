@@ -7,6 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ImageType extends AbstractType
@@ -17,7 +18,7 @@ class ImageType extends AbstractType
             ->add('nom', TextType::class,['required'=>false])
             ->add('alt')
             ->add('legend')
-            ->add('usage')
+            ->add('pour', ChoiceType::class, [ 'choices' => ['carrousel' => 'carrousel', 'illustration' => 'illustration']])
             ->add('image', FileType::class,[
                 'label' => 'fichier à télécharger',
                 'multiple' => false,

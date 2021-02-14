@@ -46,10 +46,22 @@ class ImageController extends AbstractController
            
             }
             $image->setNom($fichier);
+
+            if ($form->get('pour')->getData() == 'carrousel')
+            {
+               
+                $dossier = '/grandes_images';
+            }
+            else 
+            {
+            
+                $dossier = '';
+            }
         
             // On copie le fichier dans le dossier uploads
+           
             $photo->move(
-                $this->getParameter('images_directory'),
+                $this->getParameter('images_directory').$dossier,
                 $fichier
             );
             
