@@ -17,7 +17,7 @@ class ImageType extends AbstractType
             ->add('nom', TextType::class,['required'=>false])
             ->add('alt')
             ->add('legend')
-            ->add('dossier')
+            ->add('usage')
             ->add('image', FileType::class,[
                 'label' => 'fichier à télécharger',
                 'multiple' => false,

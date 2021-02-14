@@ -35,7 +35,7 @@ class Image
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $dossier;
+    private $usage;
 
     public function getId(): ?int
     {
@@ -78,14 +78,14 @@ class Image
         return $this;
     }
 
-    public function getDossier(): ?string
+    public function getUsage(): ?string
     {
-        return $this->dossier;
+        return $this->usage;
     }
 
-    public function setDossier(string $dossier): self
+    public function setUsage(string $usage): self
     {
-        $this->dossier = $dossier;
+        $this->usage = $usage;
 
         return $this;
     }
