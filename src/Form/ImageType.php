@@ -25,7 +25,7 @@ class ImageType extends AbstractType
                 'mapped' => false,
                 'required' => true])
             ->add('vignette', FileType::class,[
-                 'label' => 'vignette (facultatif)',
+                 'label' => 'vignette (facultatif, vous pouvez la télécharger plus tard)',
                  'multiple' => false,
                  'mapped' => false,
                  'required' => false])

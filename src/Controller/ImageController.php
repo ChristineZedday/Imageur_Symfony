@@ -64,6 +64,17 @@ class ImageController extends AbstractController
                 $this->getParameter('images_directory').$dossier,
                 $fichier
             );
+
+            $vignette = $form->get('vignette')->getData();
+            if (isset($vignette))
+            {
+                $dossier = "/petites_images";
+                $vignette->move(
+                    $this->getParameter('images_directory').$dossier,
+                    $fichier
+                );
+                $image->setVignette (true);
+            }
             
            
             $entityManager = $this->getDoctrine()->getManager();

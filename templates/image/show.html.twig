@@ -29,6 +29,11 @@
             </tr>
         </tbody>
     </table>
+      {%  if image.pour == 'carrousel' %}
+        <img src="{{ asset('/uploads/petites_images/'~image.nom) }}"  width="150">
+      {% else %}
+      <img src="{{ asset('/uploads/'~image.nom) }}"  width="300">
+      {% endif %}
 
     <a href="{{ path('image_index') }}">back to list</a>
 

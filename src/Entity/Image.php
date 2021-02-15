@@ -37,6 +37,11 @@ class Image
      */
     private $pour;
 
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $vignette;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -89,4 +94,18 @@ class Image
 
         return $this;
     }
+
+    public function getVignette(): ?bool
+    {
+        return $this->vignette;
+    }
+
+    public function setVignette(?bool $vignette): self
+    {
+        $this->vignette = $vignette;
+
+        return $this;
+    }
+
+   
 }
