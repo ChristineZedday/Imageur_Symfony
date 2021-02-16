@@ -24,6 +24,10 @@
                 <td>{{ image.legend }}</td>
             </tr>
             <tr>
+            <th>Vignette</th>
+            </tr>
+              <td>{% if image.vignette %} oui {% else %} non {% endif %}</td>
+            <tr>
                 <th>Usage</th>
                 <td>{{ image.pour }}</td>
             </tr>
