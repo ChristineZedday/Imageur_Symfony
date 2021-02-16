@@ -109,6 +109,9 @@ class ImageController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            //ici mettre le code pour la vignette
+
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('image_index');
