@@ -53,21 +53,8 @@ class ImageType extends AbstractType
                 }
             });
             
-            // ->add('nom', TextType::class,['required'=>false])
     $builder->add('alt')
             ->add('legend')
-            // ->add('pour', ChoiceType::class, [ 'choices' => ['carrousel' => 'carrousel', 'illustration' => 'illustration']])
-
-            // ->add('image', FileType::class,[
-            //     'label' => 'fichier à télécharger',
-            //     'multiple' => false,
-            //     'mapped' => false,
-            //     'required' => true])
-            // ->add('vignette', FileType::class,[
-            //      'label' => 'vignette (facultatif, vous pouvez la télécharger plus tard)',
-            //      'multiple' => false,
-            //      'mapped' => false,
-            //      'required' => false])
         ;
     }
 
