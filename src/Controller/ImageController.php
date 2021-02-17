@@ -110,7 +110,16 @@ class ImageController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            //ici mettre le code pour la vignette
+            $vignette = $form->get('vignette')->getData();
+            if (isset($vignette))
+            {
+                $dossier = "/petites_images";
+                $vignette->move(
+                    $this->getParameter('images_directory').$dossier,
+                    $image->getNom()
+                );
+                $image->setVignette (true);
+            }
 
             $this->getDoctrine()->getManager()->flush();
 
