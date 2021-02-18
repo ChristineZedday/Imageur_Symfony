@@ -5,3 +5,5 @@
 <p>les carrousels de mon site Web sont gérés par une fonction javascript qui lors d'un clic sur une vignette déclenche le carrousel à partir de l'image cliquée (pour l'instant le carrousel inclut toutes les images de la page sauf les isolées). Les "alt" concernent les vignettes et les images isolées et la légende (figcaption) les grandes images du carrousel.</p>
 
 <p><a href="main.js">Code javascript des carrousels </a></p>
+
+<p>A terme le but sera de générer automatiquement les carrousels!</p>
