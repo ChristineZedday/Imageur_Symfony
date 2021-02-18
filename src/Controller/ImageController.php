@@ -65,8 +65,8 @@ class ImageController extends AbstractController
                 $fichier
             );
 
-            $vignette = $form->get('vignette')->getData();
-            if (isset($vignette))
+           
+            if (array_key_exists('vignette', $_POST) && $form->get('vignette') !== null)
             {
                 $dossier = "/petites_images";
                 $vignette->move(
@@ -110,8 +110,7 @@ class ImageController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $vignette = $form->get('vignette')->getData();
-            if (isset($vignette))
+            if (array_key_exists('vignette', $_POST))
             {
                 $dossier = "/petites_images";
                 $vignette->move(
