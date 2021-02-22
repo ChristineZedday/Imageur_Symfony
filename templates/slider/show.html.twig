@@ -26,6 +26,11 @@
         </tbody>
     </table>
 
+    {% for image in slider.images %}
+    <img src="/uploads/petites_images/{{image.nom}}">
+
+    {% endfor %}
+
     <a href="{{ path('slider_index') }}">back to list</a>
 
     <a href="{{ path('slider_edit', {'id': slider.id}) }}">edit</a>
