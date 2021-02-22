@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Slider index{% endblock %}
+
+{% block body %}
+    <h1>Slider index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Article</th>
+                <th>Section</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for slider in sliders %}
+            <tr>
+                <td>{{ slider.id }}</td>
+                <td>{{ slider.nom }}</td>
+                <td>{{ slider.article }}</td>
+                <td>{{ slider.section }}</td>
+                <td>
+                    <a href="{{ path('slider_show', {'id': slider.id}) }}">show</a>
+                    <a href="{{ path('slider_edit', {'id': slider.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('slider_new') }}">Create new</a>
+{% endblock %}
