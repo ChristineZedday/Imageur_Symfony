@@ -54,6 +54,8 @@ class SliderController extends AbstractController
                 $slider->addImage($image);
             }
 
+            $entityManager->flush();
+
             return $this->redirectToRoute('slider_index');
         }
 
@@ -102,6 +104,8 @@ class SliderController extends AbstractController
                 $image = $imageRepository->find($image);
                 $slider->addImage($image);
             }
+
+            $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('slider_index');
         }

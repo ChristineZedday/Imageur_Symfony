@@ -18,7 +18,7 @@ class SliderType extends AbstractType
       
         foreach ($options['images'] as $image)
         {
-           $photos[$image->getNom()]  = $image->getId();
+           $photos[$image->getNom()]  = $image->getId(); //on affiche le nom, on transmet l'id!
           
         }
        
