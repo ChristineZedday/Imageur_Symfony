@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Slider{% endblock %}
+{% block title %}Nouveau Carrousel{% endblock %}
 
 {% block body %}
-    <h1>Create new Slider</h1>
+    <h1>Créer un nouveau carrousel</h1>
 
     {{ include('slider/_form.html.twig') }}
 
-    <a href="{{ path('slider_index') }}">back to list</a>
+    <a href="{{ path('slider_index') }}">retour à la liste</a>
 {% endblock %}
