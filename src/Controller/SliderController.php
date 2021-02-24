@@ -65,15 +65,14 @@ class SliderController extends AbstractController
         ]);
     }
      /**
-     * @Route("/add/{id}", name="add_image", methods={"GET"})
+     * @Route("/{slider}/remove/{image}", name="slider_remove_image")
      */
-    public function addImages (Slider $slider)
+    public function removeImage (Request $request, Slider $slider,Image $image)
     {
-        $images = Image::findAll();
-        return $this->render('slider/add.html.twig', [
-            'slider' => $slider, 'images' => $images
-        ]);
+       $slider->removeImage($image);
+       return $this->redirectToRoute('slider_index');
     }
+   
 
     /**
      * @Route("/{id}", name="slider_show", methods={"GET"})

@@ -1,4 +1,14 @@
 {{ form_start(form) }}
     {{ form_widget(form) }}
+    {% if app.request.attributes.get('_route') == 'slider_edit' %}
+        <h2>Images</h2>
+        {% for image in slider.images %}
+            <div>
+                <img src="/uploads/petites_images/{{image.nom}}" alt="{{image.alt}}" width="150">
+ 
+                <a href="{{ path('slider_remove_image', {slider: slider.id, image: image.id})}}">Retirer du carrousel</a>
+            </div>
+        {% endfor %}
+    {% endif %}
     <button class="btn">{{ button_label|default('Enregistrer') }}</button>
 {{ form_end(form) }}
