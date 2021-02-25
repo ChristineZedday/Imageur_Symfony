@@ -3,6 +3,7 @@
 {% block title %}Slider index{% endblock %}
 
 {% block body %}
+ <a href="{{ path('home') }}">Accueil</a>
     <h1>Slider index</h1>
 
     <table class="table">
@@ -29,11 +30,12 @@
             </tr>
         {% else %}
             <tr>
-                <td colspan="5">no records found</td>
+                <td colspan="5">Aucun enregistrement</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('slider_new') }}">Create new</a>
+    <a href="{{ path('slider_new') }}">Nouveau carrousel</a>
+     
 {% endblock %}

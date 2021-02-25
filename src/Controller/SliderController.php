@@ -70,6 +70,9 @@ class SliderController extends AbstractController
     public function removeImage (Request $request, Slider $slider,Image $image)
     {
        $slider->removeImage($image);
+       $entityManager = $this->getDoctrine()->getManager();
+       $entityManager->persist($slider);
+       $entityManager->flush();
        return $this->redirectToRoute('slider_index');
     }
    

@@ -93,13 +93,13 @@ article {
     text-align: justify;
     font-size: 16px;
     font-family: Tahoma, Geneva, sans-serif; }
-  article figure {
+  .carrousel figure {
     padding: 0;
     margin: 0; }
-    article figure img {
+    .carrousel figure img {
       border: 0;
       max-width: 100%; }
-    article figure figcaption {
+      .carrousel figure figcaption {
       font-family: Tahoma, Geneva, sans-serif;
       text-align: center;
       font-size: 14px;
