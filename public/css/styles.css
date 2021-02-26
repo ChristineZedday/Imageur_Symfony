@@ -1,4 +1,49 @@
 @charset "UTF-8";
+
+h1 {
+  color: #752115;
+  text-align: center;
+  font-size: 30px;
+  font-variant: small-caps; }
+h2 {
+  color: #752115;
+  text-align: justify;
+  font-size: 24px; }
+ h3 {
+  color: #331111;
+  text-align: justify;
+  font-size: 20px; }
+a {
+  color: #331111; }
+p {
+  color: #331111;
+  text-align: justify;
+  font-size: 16px;
+  font-family: Tahoma, Geneva, sans-serif; }
+
+.carrousel {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.carrousel figure {
+ 
+  display: flex;
+  flex-direction: column;
+}
+.carrousel figure img {
+    border: 0;
+    width: 150px; 
+  height:100px;
+}
+.carrousel figure figcaption {
+    font-family: Tahoma, Geneva, sans-serif;
+    text-align: center;
+    font-size: 12px;
+    font-style: italic; }
+
+
 #som {
   top: 0;
   margin-top: 0px;
@@ -41,7 +86,8 @@
       #flexnav li a :visited {
         color: #CCBB99; }
 
-@media all and (max-width: 900px) {
+@media all and (max-width: 900px)
+ {
   #som {
     max-width: 100%;
     width: 100vw; }
@@ -57,92 +103,12 @@
         flex-direction: row;
         flex-wrap: wrap;
         align-items: flex-start;
-        justify-content: space-between; } }
+        justify-content: space-between; }
+ }
 
-#main {
-  flex-grow: 2; }
 
-.supertitre {
-  color: #752115;
-  text-align: left;
-  font-size: 20px;
-  font-variant: small-caps; }
 
-article {
-  display: block;
-  flex-grow: 2;
-  max-width: 650px;
-  padding: 30px; }
-  article h1 {
-    color: #752115;
-    text-align: center;
-    font-size: 30px;
-    font-variant: small-caps; }
-  article h2 {
-    color: #752115;
-    text-align: justify;
-    font-size: 24px; }
-  article h3 {
-    color: #331111;
-    text-align: justify;
-    font-size: 20px; }
-  article a {
-    color: #331111; }
-  article p {
-    color: #331111;
-    text-align: justify;
-    font-size: 16px;
-    font-family: Tahoma, Geneva, sans-serif; }
-  .carrousel figure {
-    padding: 0;
-    margin: 0; }
-    .carrousel figure img {
-      border: 0;
-      max-width: 100%; }
-      .carrousel figure figcaption {
-      font-family: Tahoma, Geneva, sans-serif;
-      text-align: center;
-      font-size: 14px;
-      font-style: italic; }
-
-@media all and (max-width: 900px) {
-  article {
-    width: 100%;
-    padding: 15px; }
-  img {
-    max-width: 90vw; } }
-
-#aside {
-  flex-grow: 1; }
-
-#acote {
-  flex-grow: 1;
-  background-color: #8CCC5E;
-  height: 300px; }
-
-aside {
-  display: block;
-  padding: 30px;
-  padding-top: 50px; }
-
-a {
-  text-decoration: none;
-  color: #331111;
-  padding: 10px; }
-
-#me {
-  margin: 50px; }
-
-@media all and (max-width: 900px) {
-  aside {
-    width: 100%;
-    padding: 15px; } }
-
-.foot {
-  display: block;
-  padding: 30px;
-  text-align: center;
-  font-size: 16px; }
+ 
 
 @media all and (max-width: 900px) {
   .foot {
@@ -172,39 +138,7 @@ caption {
   font-family: Tahoma, Geneva, sans-serif;
   height: 40px; }
 
-.jeu figure {
-  position: relative !important;
-  display: block;
-  top: 0px;
-  left: 0px;
-  width: 500px;
-  height: 370px;
-  padding: 0px;
-  margin: 30px; }
 
-.jeu img {
-  width: 500px;
-  height: 365px;
-  position: absolute !important;
-  display: block;
-  top: 0px;
-  left: 0px; }
-  .jeu img #fond {
-    z-index: 0; }
-  .jeu img #base {
-    z-index: 2; }
-  .jeu img #gris {
-    z-index: 4; }
-  .jeu img #motif1 {
-    z-index: 6; }
-  .jeu img #motif2 {
-    z-index: 8; }
-
-.jeu figcaption {
-  position: absolute;
-  top: 400;
-  left: 0;
-  text-align: center; }
 
 .container {
   width: 100%;
@@ -283,8 +217,8 @@ body {
   font-family: Tahoma, Geneva, sans-serif;
   text-align: justify;
   font-size: 16px;
-  margin: 0;
-  padding-bottom: 100px; }
+  padding: 50px;
+   }
 
 * {
   -moz-box-sizing: border-box;

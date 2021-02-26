@@ -62,6 +62,7 @@ class SliderController extends AbstractController
         return $this->render('slider/new.html.twig', [
             'slider' => $slider,
             'form' => $form->createView(),
+            'images' => $images,
         ]);
     }
      /**
@@ -115,6 +116,7 @@ class SliderController extends AbstractController
         return $this->render('slider/edit.html.twig', [
             'slider' => $slider,
             'form' => $form->createView(),
+            'images' => $images,
         ]);
     }
 
