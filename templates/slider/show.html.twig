@@ -25,12 +25,19 @@
             </tr>
         </tbody>
     </table>
-
+     <div class="container">
     {% for image in slider.images %}
-    <img src="/uploads/petites_images/{{image.nom}}">
+   
+        <figure class="slide">
+            <img class="clickable" src="/uploads/petites_images/{{image.nom}}" onclick="displaySlides(src);" alt="{{image.alt}}" />
+            <figcaption hidden>
+            {{image.legend}}
+            </figcaption>
+       </figure>
+    
 
     {% endfor %}
-
+    </div>
     <a href="{{ path('slider_index') }}">back to list</a>
 
     <a href="{{ path('slider_edit', {'id': slider.id}) }}">edit</a>
