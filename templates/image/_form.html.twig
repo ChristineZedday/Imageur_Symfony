@@ -1,6 +1,7 @@
 {{ form_start(form) }}
-  <label> Téléchargez l'image: </label>
+ 
     {{ form_widget(form) }}
+     <label> Téléchargez l'image: </label>
     {% if app.request.attributes.get('_route') == 'image_edit' %}
       {%  if image.pour == 'carrousel' %}
         <img src="{{ asset('/uploads/petites_images/'~image.nom) }}"  width="150">
