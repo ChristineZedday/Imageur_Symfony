@@ -56,7 +56,7 @@ class SliderController extends AbstractController
 
             $entityManager->flush();
 
-            return $this->redirectToRoute('slider_index');
+            return $this->redirectToRoute('slider_edit', ['id' => $slider->getId()]);
         }
 
         return $this->render('slider/new.html.twig', [
@@ -74,9 +74,20 @@ class SliderController extends AbstractController
        $entityManager = $this->getDoctrine()->getManager();
        $entityManager->persist($slider);
        $entityManager->flush();
-       return $this->redirectToRoute('slider_index');
+       return $this->redirectToRoute('slider_edit', ['id' => $slider->getId()]);
     }
    
+     /**
+     * @Route("/{slider}/add/{image}", name="slider_add_image")
+     */
+    public function addImage (Request $request, Slider $slider,Image $image)
+    {
+       $slider->addImage($image);
+       $entityManager = $this->getDoctrine()->getManager();
+       $entityManager->persist($slider);
+       $entityManager->flush();
+       return $this->redirectToRoute('slider_edit', ['id' => $slider->getId()]);
+    }
 
     /**
      * @Route("/{id}", name="slider_show", methods={"GET"})

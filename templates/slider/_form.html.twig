@@ -2,32 +2,8 @@
     {{ form_widget(form) }}
     <button class="btn">{{ button_label|default('Enregistrer') }}</button>
 {{ form_end(form) }}
-
-    <h2>Images disponibles</h2> 
-       <div class='carrousel'>
-      
-       {% for image in images %}
-          
-            <figure>
-                <img src="/uploads/petites_images/{{image.nom}}" alt="{{image.alt}}" width="150">
-                <figcaption>{{ image.legend }}</figcaption>
-            </figure>
-         
-           
-        {% endfor %}
-         </div>
-    {% if app.request.attributes.get('_route') == 'slider_edit' %}
-      <h2>Images déjà dans le carrousel</h2>  
-         <div class='carrousel'>
-        {% for image in slider.images %}
-         
-            <figure>
-                <img src="/uploads/petites_images/{{image.nom}}" alt="{{image.alt}}" width="150">
-                <figcaption>{{ image.legend }}</figcaption>
-                <a href="{{ path('slider_remove_image', {slider: slider.id, image: image.id})}}
-                ">Retirer du carrousel</a>
-            </figure>
-         
-        {% endfor %}
-           </div>
-    {% endif %}
+     {% if app.request.attributes.get('_route') == 'slider_edit' %}
+    {{ include('slider/_form_add_image.html.twig') }}
+    {{ include('slider/_form_remove_image.html.twig') }}
+      {% endif %}
+ 

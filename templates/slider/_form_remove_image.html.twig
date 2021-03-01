@@ -1,0 +1,17 @@
+{{ form_start(form) }}
+ 
+      <h2>Images déjà dans le carrousel</h2>  
+         <div class='carrousel'>
+        {% for image in slider.images %}
+         
+            <figure>
+                <img src="/uploads/petites_images/{{image.nom}}" alt="{{image.alt}}" width="150">
+                <figcaption>{{ image.legend }}</figcaption>
+                <a href="{{ path('slider_remove_image', {slider: slider.id, image: image.id})}}
+                ">Retirer du carrousel</a>
+            </figure>
+         
+        {% endfor %}
+           </div>
+  
+{{ form_end(form) }}
