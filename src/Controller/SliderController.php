@@ -104,7 +104,7 @@ class SliderController extends AbstractController
      */
     public function edit(Request $request, Slider $slider, ImageRepository $imageRepository): Response
     {
-        $images = $imageRepository->findAll();
+        $images = $imageRepository->findDispo($slider);
 
         $form = $this->createForm(SliderType::class, $slider, ['images'=> $images]);
         $form->handleRequest($request);

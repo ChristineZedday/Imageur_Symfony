@@ -19,6 +19,38 @@ class ImageRepository extends ServiceEntityRepository
         parent::__construct($registry, Image::class);
     }
 
+    public function findDispo ($slider)
+    {
+
+    
+// public function notIn($x, $y); // Returns Expr\Func instance
+
+  $images = $slider->getImages();
+        $imids = [];
+        $i = 0;
+        foreach ($images as $image)
+      
+        {$imids[$i] = $image->getId();
+        $i++;}
+
+        $entityManager = $this->getEntityManager();
+
+        if (!empty($imids))
+        {$query = $entityManager->createQuery('select i
+                from App\Entity\Image i
+                where i.id NOT IN (:imids)'
+                )->setParameter('imids', $imids);}
+        else{
+            return $this->findAll();
+        }
+      
+  
+
+        return   $query->getResult();
+
+
+    }
+
     // /**
     //  * @return Image[] Returns an array of Image objects
     //  */

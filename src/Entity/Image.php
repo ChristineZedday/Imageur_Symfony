@@ -42,6 +42,12 @@ class Image
      */
     private $vignette;
 
+     /**
+   * @ORM\ManyToMany(targetEntity="App\Entity\Slider", cascade={"persist"})
+   */
+  private $sliders;
+ 
+
     public function getId(): ?int
     {
         return $this->id;
@@ -106,6 +112,12 @@ class Image
 
         return $this;
     }
-
+    /**
+     * @return Collection|Slider[]
+     */
+    public function getSliders(): Collection
+    {
+        return $this->sliders;
+    }
    
 }
