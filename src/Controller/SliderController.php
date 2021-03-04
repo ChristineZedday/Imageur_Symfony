@@ -66,14 +66,18 @@ class SliderController extends AbstractController
         ]);
     }
      /**
-     * @Route("/{slider}/remove/{image}", name="slider_remove_image")
+     * @Route("/{slider}/remove", name="slider_remove_images")
      */
-    public function removeImage (Request $request, Slider $slider,Image $image)
+    public function removeImages (Request $request, Slider $slider, ImageRepository $imageRepository)
     {
-       $slider->removeImage($image);
+        $images = $request->get('images');
+        foreach ($images as $image)
+      {  
+        $image = $imageRepository->find($image);
+          $slider->removeImage($image);
        $entityManager = $this->getDoctrine()->getManager();
        $entityManager->persist($slider);
-       $entityManager->flush();
+       $entityManager->flush();}
        return $this->redirectToRoute('slider_edit', ['id' => $slider->getId()]);
     }
    

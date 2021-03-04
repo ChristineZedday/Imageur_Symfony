@@ -1,4 +1,4 @@
-{{ form_start(form) }}
+<form name="rem" action="{{ path('slider_remove_images', {slider: slider.id})}}" method="post">
  
       <h2>Images déjà dans le carrousel</h2>  
          <div class='carrousel'>
@@ -7,11 +7,11 @@
             <figure>
                 <img src="/uploads/petites_images/{{image.nom}}" alt="{{image.alt}}" width="150">
                 <figcaption>{{ image.legend }}</figcaption>
-                <a href="{{ path('slider_remove_image', {slider: slider.id, image: image.id})}}
-                ">Retirer du carrousel</a>
+                 <input type="checkbox" value="{{image.id}}" name="images[]"/>
             </figure>
          
         {% endfor %}
            </div>
+           <button class="btn" type="submit">enlever les images cochées du carrousel</button>
   
-{{ form_end(form) }}
+</form>
