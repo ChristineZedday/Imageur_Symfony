@@ -28,12 +28,12 @@ class SliderType extends AbstractType
             ->add('nom')
             ->add('article')
             ->add('section')
-            ->add('images', ChoiceType::class,[
-                'choices' => $photos,
-                // 'choice_attr' => $attr,
-                'multiple' => true,
-                'mapped' => false,
-                'required' => false])
+            // ->add('images', ChoiceType::class,[
+            //     'choices' => $photos,
+            //     // 'choice_attr' => $attr,
+            //     'multiple' => true,
+            //     'mapped' => false,
+            //     'required' => false])
         ;
     }
 

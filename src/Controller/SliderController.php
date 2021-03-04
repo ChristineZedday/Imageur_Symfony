@@ -32,13 +32,13 @@ class SliderController extends AbstractController
     /**
      * @Route("/new", name="slider_new", methods={"GET","POST"})
      */
-    public function new(Request $request, ImageRepository $imageRepository): Response
+    public function new(Request $request): Response
     {
         $slider = new Slider();
 
-        $images = $imageRepository->findAll();
+        // $images = $imageRepository->findAll();
 
-        $form = $this->createForm(SliderType::class, $slider, ['images'=> $images]);
+        $form = $this->createForm(SliderType::class, $slider);
 
         $form->handleRequest($request);
 
@@ -47,14 +47,14 @@ class SliderController extends AbstractController
             $entityManager->persist($slider);
             $entityManager->flush();
 
-            $images = $form->get('images')->getData();
-            foreach ( $images as $image)
-            {
-                $image = $imageRepository->find($image);
-                $slider->addImage($image);
-            }
+            // $images = $form->get('images')->getData();
+            // foreach ( $images as $image)
+            // {
+            //     $image = $imageRepository->find($image);
+            //     $slider->addImage($image);
+            // }
 
-            $entityManager->flush();
+            // $entityManager->flush();
 
             return $this->redirectToRoute('slider_edit', ['id' => $slider->getId()]);
         }
@@ -62,7 +62,7 @@ class SliderController extends AbstractController
         return $this->render('slider/new.html.twig', [
             'slider' => $slider,
             'form' => $form->createView(),
-            'images' => $images,
+            // 'images' => $images,
         ]);
     }
      /**
@@ -111,24 +111,24 @@ class SliderController extends AbstractController
     /**
      * @Route("/{id}/edit", name="slider_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, Slider $slider, ImageRepository $imageRepository): Response
+    public function edit(Request $request, Slider $slider,  ImageRepository $imageRepository ): Response
     {
         $images = $imageRepository->findDispo($slider);
 
-        $form = $this->createForm(SliderType::class, $slider, ['images'=> $images]);
+        $form = $this->createForm(SliderType::class, $slider);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            $images = $form->get('images')->getData();
-            foreach ( $images as $image)
-            {
-                $image = $imageRepository->find($image);
-                $slider->addImage($image);
-            }
+            // $images = $form->get('images')->getData();
+            // foreach ( $images as $image)
+            // {
+            //     $image = $imageRepository->find($image);
+            //     $slider->addImage($image);
+            // }
 
-            $this->getDoctrine()->getManager()->flush();
+            // $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('slider_index');
         }
