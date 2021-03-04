@@ -78,14 +78,19 @@ class SliderController extends AbstractController
     }
    
      /**
-     * @Route("/{slider}/add/{image}", name="slider_add_image")
+     * @Route("/{slider}/add", name="slider_add_images")
      */
-    public function addImage (Request $request, Slider $slider,Image $image)
+    public function addImages (Request $request, Slider $slider, ImageRepository $imageRepository)
     {
-       $slider->addImage($image);
+        $images = $request->get('images');
+        foreach ($images as $image)
+     { 
+        $image = $imageRepository->find($image);
+        $slider->addImage($image);
        $entityManager = $this->getDoctrine()->getManager();
        $entityManager->persist($slider);
-       $entityManager->flush();
+       $entityManager->flush();}
+
        return $this->redirectToRoute('slider_edit', ['id' => $slider->getId()]);
     }
 

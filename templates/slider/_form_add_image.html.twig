@@ -1,4 +1,4 @@
-{{ form_start(form) }}
+<form name="add" action="{{ path('slider_add_images', {slider: slider.id})}}" method="post">
 <h2>Images disponibles</h2> 
        <div class='carrousel'>
       
@@ -8,11 +8,14 @@
                 <img src="/uploads/petites_images/{{image.nom}}" alt="{{image.alt}}" width="150">
                 <figcaption>{{ image.legend }}</figcaption>
                
-				<a href="{{ path('slider_add_image', {slider: slider.id, image: image.id})}}">Ajouter l'image</a>
+			
+                <input type="checkbox" value="{{image.id}}" name="images[]"/>
+                
                
             </figure>
          
            
         {% endfor %}
          </div>
-{{ form_end(form) }}
+           <button class="btn" type="submit">ajouter les images cochées</button>
+</form>

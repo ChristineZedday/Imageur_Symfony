@@ -2,8 +2,4 @@
     {{ form_widget(form) }}
     <button class="btn">{{ button_label|default('Enregistrer') }}</button>
 {{ form_end(form) }}
-     {% if app.request.attributes.get('_route') == 'slider_edit' %}
-    {{ include('slider/_form_add_image.html.twig') }}
-    {{ include('slider/_form_remove_image.html.twig') }}
-      {% endif %}
- 
+    
