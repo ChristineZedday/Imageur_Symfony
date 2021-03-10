@@ -153,4 +153,14 @@ class SliderController extends AbstractController
 
         return $this->redirectToRoute('slider_index');
     }
+
+     /**
+     * @Route("/genere/{id}", name="slider_genere", methods={"GET"})
+     */
+    public function sliderGenere(Slider $slider)
+    {
+       $dir = $this->getParameter('generated_directory');
+        $slider->genereSlider($dir);
+        return $this->redirectToRoute('slider_index');
+    }
 }

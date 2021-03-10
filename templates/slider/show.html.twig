@@ -38,9 +38,10 @@
 
     {% endfor %}
     </div>
-    <a href="{{ path('slider_index') }}">back to list</a>
+    <a href="{{ path('slider_index') }}">retourner à la liste</a>
 
-    <a href="{{ path('slider_edit', {'id': slider.id}) }}">edit</a>
+    <a href="{{ path('slider_edit', {'id': slider.id}) }}">éditer</a>
+      <a href="{{ path('slider_genere', {'id': slider.id}) }}">générer le carrousel PHP</a>
 
     {{ include('slider/_delete_form.html.twig') }}
 {% endblock %}

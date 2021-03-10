@@ -6,4 +6,4 @@
 
 <p><a href="main.js">Code javascript des carrousels </a></p>
 
-<p>A terme le but sera de générer automatiquement les carrousels, et de n'avoir plus qu'à les inclure dans les fichiers php et les envoyer sur le site.</p>
+<p>Une fois le carrousel renseigné en base de donnée, on peut le générer automatiquement pour n'avoir plus qu'à l'envoyer sur le site et l'inclure dans la bonne page au bon endroit (manuellement pour le moment).</p>

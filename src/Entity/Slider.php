@@ -109,4 +109,23 @@ class Slider
 
         return $this;
     }
+
+    public function genereSlider($dir)
+    {
+      
+         $path = $dir."/slider_".$this->getNom().".php";
+        $sliderFile = fopen($path, 'w');
+       
+        fwrite($sliderFile,'<div class="container"> ');
+        foreach ($this->getImages() as $image)
+        {
+            fwrite($sliderFile, '<figure class="slide"> ');
+          
+            fwrite($sliderFile, ' <img class="clickable" src="petites_images/'.$image->getNom().'" width=150 height=100 onclick="displaySlides(src) ;"> ');
+            fwrite($sliderFile, '<figcaption hidden>'.$image->getLegend().'</figcaption>');
+            fwrite($sliderFile, '</figure> ');
+        }
+
+        fwrite($sliderFile,'</div>');
+    }
 }
