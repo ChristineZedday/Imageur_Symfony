@@ -127,5 +127,6 @@ class Slider
         }
 
         fwrite($sliderFile,'</div>');
+        fclose($sliderFile);
     }
 }
