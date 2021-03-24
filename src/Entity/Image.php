@@ -1,5 +1,11 @@
 <?php
 
+/*
+ * Imageur_Symfony
+ * Symfony 5
+ * Christine Zedday
+ */
+
 namespace App\Entity;
 
 use App\Repository\ImageRepository;
@@ -43,10 +49,9 @@ class Image
     private $vignette;
 
     /**
-   * @ORM\ManyToMany(targetEntity="App\Entity\Slider", cascade={"persist"})
-   */
+     * @ORM\ManyToMany(targetEntity="App\Entity\Slider", cascade={"persist"})
+     */
     private $sliders;
- 
 
     public function getId(): ?int
     {
@@ -112,6 +117,7 @@ class Image
 
         return $this;
     }
+
     /**
      * @return Collection|Slider[]
      */

@@ -1,5 +1,11 @@
 <?php
 
+/*
+ * Imageur_Symfony
+ * Symfony 5
+ * Christine Zedday
+ */
+
 namespace App\Controller;
 
 use App\Entity\Image;
@@ -9,7 +15,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * @Route("/image")
@@ -35,41 +40,38 @@ class ImageController extends AbstractController
         $form = $this->createForm(ImageType::class, $image);
         $form->handleRequest($request);
 
-        
         if ($form->isSubmitted() && $form->isValid()) {
             $photo = $form->get('image')->getData();
             $nom = $form->get('nom')->getData();
-            if ($nom != null) {
+            if (null !== $nom) {
                 $fichier = $nom.'.'.$photo->guessExtension();
             } else {
                 $fichier = $form->get('image')->getData()->getClientOriginalName();
             }
             $image->setNom($fichier);
 
-            if ($form->get('pour')->getData() == 'carrousel') {
+            if ('carrousel' === $form->get('pour')->getData()) {
                 $dossier = '/grandes_images';
             } else {
                 $dossier = '';
             }
-        
+
             // On copie le fichier dans le dossier uploads
-           
+
             $photo->move(
                 $this->getParameter('images_directory').$dossier,
                 $fichier
             );
 
-           
-            if (array_key_exists('vignette', $_POST) && $form->get('vignette') !== null) {
-                $dossier = "/petites_images";
+            if (\array_key_exists('vignette', $_POST) && null !== $form->get('vignette')) {
+                $dossier = '/petites_images';
                 $vignette->move(
                     $this->getParameter('images_directory').$dossier,
                     $fichier
                 );
                 $image->setVignette(true);
             }
-            
-           
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($image);
             $entityManager->flush();
@@ -102,8 +104,8 @@ class ImageController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            if (array_key_exists('vignette', $_POST)) {
-                $dossier = "/petites_images";
+            if (\array_key_exists('vignette', $_POST)) {
+                $dossier = '/petites_images';
                 $vignette->move(
                     $this->getParameter('images_directory').$dossier,
                     $image->getNom()

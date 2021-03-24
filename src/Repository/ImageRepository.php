@@ -1,5 +1,11 @@
 <?php
 
+/*
+ * Imageur_Symfony
+ * Symfony 5
+ * Christine Zedday
+ */
+
 namespace App\Repository;
 
 use App\Entity\Image;
@@ -21,8 +27,6 @@ class ImageRepository extends ServiceEntityRepository
 
     public function findDispo($slider)
     {
-
-    
 // public function notIn($x, $y); // Returns Expr\Func instance
 
         $images = $slider->getImages();
@@ -30,7 +34,7 @@ class ImageRepository extends ServiceEntityRepository
         $i = 0;
         foreach ($images as $image) {
             $imids[$i] = $image->getId();
-            $i++;
+            ++$i;
         }
 
         $entityManager = $this->getEntityManager();
@@ -44,10 +48,8 @@ class ImageRepository extends ServiceEntityRepository
         } else {
             return $this->findAll();
         }
-      
-  
 
-        return   $query->getResult();
+        return $query->getResult();
     }
 
     // /**

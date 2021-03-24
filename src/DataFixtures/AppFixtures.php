@@ -1,10 +1,16 @@
 <?php
 
+/*
+ * Imageur_Symfony
+ * Symfony 5
+ * Christine Zedday
+ */
+
 namespace App\DataFixtures;
 
+use App\Entity\Image;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
-use App\Entity\Image;
 
 class AppFixtures extends Fixture
 {
@@ -13,8 +19,8 @@ class AppFixtures extends Fixture
         $nb_fichiers = 0;
         if ($dossier = opendir("C:\laragon\www\Imageur\public\uploads\petites_images")) {
             while (false !== ($fichier = readdir($dossier))) {
-                if ($fichier != '.' && $fichier != '..' && $fichier != 'index.php') {
-                    $nb_fichiers++;
+                if ('.' !== $fichier && '..' !== $fichier && 'index.php' !== $fichier) {
+                    ++$nb_fichiers;
 
                     $image = new Image();
                     $image->setNom($fichier);

@@ -1,17 +1,21 @@
 <?php
 
+/*
+ * Imageur_Symfony
+ * Symfony 5
+ * Christine Zedday
+ */
+
 namespace App\Controller;
 
 use App\Entity\Slider;
-use App\Entity\Image;
 use App\Form\SliderType;
-use App\Repository\SliderRepository;
 use App\Repository\ImageRepository;
+use App\Repository\SliderRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Doctrine\ORM\EntityRepository;
 
 /**
  * @Route("/slider")
@@ -64,9 +68,10 @@ class SliderController extends AbstractController
             // 'images' => $images,
         ]);
     }
+
     /**
-    * @Route("/{slider}/remove", name="slider_remove_images")
-    */
+     * @Route("/{slider}/remove", name="slider_remove_images")
+     */
     public function removeImages(Request $request, Slider $slider, ImageRepository $imageRepository)
     {
         $images = $request->get('images');
@@ -77,12 +82,13 @@ class SliderController extends AbstractController
             $entityManager->persist($slider);
             $entityManager->flush();
         }
+
         return $this->redirectToRoute('slider_edit', ['id' => $slider->getId()]);
     }
-   
+
     /**
-    * @Route("/{slider}/add", name="slider_add_images")
-    */
+     * @Route("/{slider}/add", name="slider_add_images")
+     */
     public function addImages(Request $request, Slider $slider, ImageRepository $imageRepository)
     {
         $images = $request->get('images');
@@ -154,12 +160,13 @@ class SliderController extends AbstractController
     }
 
     /**
-    * @Route("/genere/{id}", name="slider_genere", methods={"GET"})
-    */
+     * @Route("/genere/{id}", name="slider_genere", methods={"GET"})
+     */
     public function sliderGenere(Slider $slider)
     {
         $dir = $this->getParameter('generated_directory');
         $slider->genereSlider($dir);
+
         return $this->redirectToRoute('slider_index');
     }
 }

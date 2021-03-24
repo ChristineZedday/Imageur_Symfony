@@ -1,12 +1,17 @@
 <?php
 
+/*
+ * Imageur_Symfony
+ * Symfony 5
+ * Christine Zedday
+ */
+
 namespace App\Entity;
 
 use App\Repository\SliderRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use App\Entity\Image;
 
 /**
  * @ORM\Entity(repositoryClass=SliderRepository::class)
@@ -36,8 +41,8 @@ class Slider
     private $section;
 
     /**
-   * @ORM\ManyToMany(targetEntity="App\Entity\Image", cascade={"persist"})
-   */
+     * @ORM\ManyToMany(targetEntity="App\Entity\Image", cascade={"persist"})
+     */
     private $images;
 
     public function __construct()
@@ -112,13 +117,13 @@ class Slider
 
     public function genereSlider($dir)
     {
-        $path = $dir."/slider_".$this->getNom().".php";
+        $path = $dir.'/slider_'.$this->getNom().'.php';
         $sliderFile = fopen($path, 'w');
-       
+
         fwrite($sliderFile, '<div class="container"> ');
         foreach ($this->getImages() as $image) {
             fwrite($sliderFile, '<figure class="slide"> ');
-          
+
             fwrite($sliderFile, ' <img class="clickable" src="petites_images/'.$image->getNom().'" width=150 height=100 onclick="displaySlides(src) ;"> ');
             fwrite($sliderFile, '<figcaption hidden>'.$image->getLegend().'</figcaption>');
             fwrite($sliderFile, '</figure> ');
