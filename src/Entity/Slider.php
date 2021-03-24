@@ -38,12 +38,12 @@ class Slider
     /**
    * @ORM\ManyToMany(targetEntity="App\Entity\Image", cascade={"persist"})
    */
-  private $images;
+    private $images;
 
-  public function __construct()
-  {
-      $this->images = new ArrayCollection();
-  }
+    public function __construct()
+    {
+        $this->images = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -112,13 +112,11 @@ class Slider
 
     public function genereSlider($dir)
     {
-      
-         $path = $dir."/slider_".$this->getNom().".php";
+        $path = $dir."/slider_".$this->getNom().".php";
         $sliderFile = fopen($path, 'w');
        
-        fwrite($sliderFile,'<div class="container"> ');
-        foreach ($this->getImages() as $image)
-        {
+        fwrite($sliderFile, '<div class="container"> ');
+        foreach ($this->getImages() as $image) {
             fwrite($sliderFile, '<figure class="slide"> ');
           
             fwrite($sliderFile, ' <img class="clickable" src="petites_images/'.$image->getNom().'" width=150 height=100 onclick="displaySlides(src) ;"> ');
@@ -126,7 +124,7 @@ class Slider
             fwrite($sliderFile, '</figure> ');
         }
 
-        fwrite($sliderFile,'</div>');
+        fwrite($sliderFile, '</div>');
         fclose($sliderFile);
     }
 }

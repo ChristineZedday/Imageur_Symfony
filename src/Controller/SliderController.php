@@ -13,7 +13,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\ORM\EntityRepository;
 
-
 /**
  * @Route("/slider")
  */
@@ -65,37 +64,37 @@ class SliderController extends AbstractController
             // 'images' => $images,
         ]);
     }
-     /**
-     * @Route("/{slider}/remove", name="slider_remove_images")
-     */
-    public function removeImages (Request $request, Slider $slider, ImageRepository $imageRepository)
+    /**
+    * @Route("/{slider}/remove", name="slider_remove_images")
+    */
+    public function removeImages(Request $request, Slider $slider, ImageRepository $imageRepository)
     {
         $images = $request->get('images');
-        foreach ($images as $image)
-      {  
-        $image = $imageRepository->find($image);
-          $slider->removeImage($image);
-       $entityManager = $this->getDoctrine()->getManager();
-       $entityManager->persist($slider);
-       $entityManager->flush();}
-       return $this->redirectToRoute('slider_edit', ['id' => $slider->getId()]);
+        foreach ($images as $image) {
+            $image = $imageRepository->find($image);
+            $slider->removeImage($image);
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($slider);
+            $entityManager->flush();
+        }
+        return $this->redirectToRoute('slider_edit', ['id' => $slider->getId()]);
     }
    
-     /**
-     * @Route("/{slider}/add", name="slider_add_images")
-     */
-    public function addImages (Request $request, Slider $slider, ImageRepository $imageRepository)
+    /**
+    * @Route("/{slider}/add", name="slider_add_images")
+    */
+    public function addImages(Request $request, Slider $slider, ImageRepository $imageRepository)
     {
         $images = $request->get('images');
-        foreach ($images as $image)
-     { 
-        $image = $imageRepository->find($image);
-        $slider->addImage($image);
-       $entityManager = $this->getDoctrine()->getManager();
-       $entityManager->persist($slider);
-       $entityManager->flush();}
+        foreach ($images as $image) {
+            $image = $imageRepository->find($image);
+            $slider->addImage($image);
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($slider);
+            $entityManager->flush();
+        }
 
-       return $this->redirectToRoute('slider_edit', ['id' => $slider->getId()]);
+        return $this->redirectToRoute('slider_edit', ['id' => $slider->getId()]);
     }
 
     /**
@@ -111,7 +110,7 @@ class SliderController extends AbstractController
     /**
      * @Route("/{id}/edit", name="slider_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, Slider $slider,  ImageRepository $imageRepository ): Response
+    public function edit(Request $request, Slider $slider, ImageRepository $imageRepository): Response
     {
         $images = $imageRepository->findDispo($slider);
 
@@ -154,12 +153,12 @@ class SliderController extends AbstractController
         return $this->redirectToRoute('slider_index');
     }
 
-     /**
-     * @Route("/genere/{id}", name="slider_genere", methods={"GET"})
-     */
+    /**
+    * @Route("/genere/{id}", name="slider_genere", methods={"GET"})
+    */
     public function sliderGenere(Slider $slider)
     {
-       $dir = $this->getParameter('generated_directory');
+        $dir = $this->getParameter('generated_directory');
         $slider->genereSlider($dir);
         return $this->redirectToRoute('slider_index');
     }

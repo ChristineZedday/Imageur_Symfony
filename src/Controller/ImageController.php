@@ -39,22 +39,16 @@ class ImageController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $photo = $form->get('image')->getData();
             $nom = $form->get('nom')->getData();
-            if ($nom != null)
-           { $fichier = $nom.'.'.$photo->guessExtension();}
-           else
-           {$fichier = $form->get('image')->getData()->getClientOriginalName(); 
-           
+            if ($nom != null) {
+                $fichier = $nom.'.'.$photo->guessExtension();
+            } else {
+                $fichier = $form->get('image')->getData()->getClientOriginalName();
             }
             $image->setNom($fichier);
 
-            if ($form->get('pour')->getData() == 'carrousel')
-            {
-               
+            if ($form->get('pour')->getData() == 'carrousel') {
                 $dossier = '/grandes_images';
-            }
-            else 
-            {
-            
+            } else {
                 $dossier = '';
             }
         
@@ -66,14 +60,13 @@ class ImageController extends AbstractController
             );
 
            
-            if (array_key_exists('vignette', $_POST) && $form->get('vignette') !== null)
-            {
+            if (array_key_exists('vignette', $_POST) && $form->get('vignette') !== null) {
                 $dossier = "/petites_images";
                 $vignette->move(
                     $this->getParameter('images_directory').$dossier,
                     $fichier
                 );
-                $image->setVignette (true);
+                $image->setVignette(true);
             }
             
            
@@ -109,15 +102,13 @@ class ImageController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
-            if (array_key_exists('vignette', $_POST))
-            {
+            if (array_key_exists('vignette', $_POST)) {
                 $dossier = "/petites_images";
                 $vignette->move(
                     $this->getParameter('images_directory').$dossier,
                     $image->getNom()
                 );
-                $image->setVignette (true);
+                $image->setVignette(true);
             }
 
             $this->getDoctrine()->getManager()->flush();

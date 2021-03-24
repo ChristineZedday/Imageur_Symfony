@@ -25,27 +25,26 @@ class ImageType extends AbstractType
                 // If no data is passed to the form, the data is "null".
                 // This should be considered a new "Image"
                 if (!$image || null === $image->getId()) {
-                    $form->add('nom', TextType::class,['required'=>false]);
+                    $form->add('nom', TextType::class, ['required'=>false]);
                     $form->add('pour', ChoiceType::class, [ 'choices' => ['carrousel' => 'carrousel', 'illustration' => 'illustration']]);
-                    $form->add('image', FileType::class,[
+                    $form->add('image', FileType::class, [
                         'label' => 'fichier à télécharger',
                         'multiple' => false,
                         'mapped' => false,
                         'required' => true]);
-                    $form->add('vignette', FileType::class,[
+                    $form->add('vignette', FileType::class, [
                         'label' => 'vignette (facultatif, vous pouvez la télécharger plus tard)',
                         'multiple' => false,
                         'mapped' => false,
                         'required' => false]);
                 }
             });
-            $builder
+        $builder
             ->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
                 $image = $event->getData();
                 $form = $event->getForm();
-                if ($image && $image->getVignette() == false && $image->getPour() == "carrousel")
-                {
-                    $form->add('vignette', FileType::class,[
+                if ($image && $image->getVignette() == false && $image->getPour() == "carrousel") {
+                    $form->add('vignette', FileType::class, [
                         'label' => 'vignette ',
                         'multiple' => false,
                         'mapped' => false,
@@ -53,9 +52,8 @@ class ImageType extends AbstractType
                 }
             });
             
-    $builder->add('alt', TextType::class, ['label' => 'texte alternatif', 'attr' => ['size' => '150']]);
-    $builder->add('legend', TextType::class, ['label' => 'légende', 'attr' => ['size' => '150']]);
-        
+        $builder->add('alt', TextType::class, ['label' => 'texte alternatif', 'attr' => ['size' => '150']]);
+        $builder->add('legend', TextType::class, ['label' => 'légende', 'attr' => ['size' => '150']]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

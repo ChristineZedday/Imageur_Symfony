@@ -10,17 +10,15 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\ChoiceList\ChoiceList;
 use App\Entity\Image;
 
-
 class SliderType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-       $photos = [];
-       $attr=[];
+        $photos = [];
+        $attr=[];
       
-        foreach ($options['images'] as $image)
-        {
-           $photos[$image->getNom()]  = $image->getId(); //on affiche le nom, on transmet l'id!
+        foreach ($options['images'] as $image) {
+            $photos[$image->getNom()]  = $image->getId(); //on affiche le nom, on transmet l'id!
         //   $attr[$image->getNom()]  = ['alt' => $image->getAlt()]; //pour savoir ce que représente la photo
         }
        
@@ -44,6 +42,5 @@ class SliderType extends AbstractType
             'images' => [],
 
         ]);
-       
     }
 }

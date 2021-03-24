@@ -11,12 +11,9 @@ class AppFixtures extends Fixture
     public function load(ObjectManager $manager)
     {
         $nb_fichiers = 0;
-        if ($dossier = opendir("C:\laragon\www\Imageur\public\uploads\petites_images"))
-        {
-            while(false !== ($fichier = readdir($dossier)))
-            {
-                if($fichier != '.' && $fichier != '..' && $fichier != 'index.php')
-                {
+        if ($dossier = opendir("C:\laragon\www\Imageur\public\uploads\petites_images")) {
+            while (false !== ($fichier = readdir($dossier))) {
+                if ($fichier != '.' && $fichier != '..' && $fichier != 'index.php') {
                     $nb_fichiers++;
 
                     $image = new Image();
@@ -26,12 +23,11 @@ class AppFixtures extends Fixture
                     $image->setPour('carrousel');
                     $image->setVignette(true);
                     $manager->persist($image);
-                   
                 }
-                    
             }
             $manager->flush();
+        } else {
+            dd('pas bon le chemin');
         }
-        else { dd('pas bon le chemin');}
     }
 }
