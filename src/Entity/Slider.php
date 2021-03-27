@@ -30,10 +30,6 @@ class Slider
      */
     private $nom;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $article;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -44,6 +40,12 @@ class Slider
      * @ORM\ManyToMany(targetEntity="App\Entity\Image", cascade={"persist"})
      */
     private $images;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Article::class, inversedBy="sliders")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $article;
 
     public function __construct()
     {
