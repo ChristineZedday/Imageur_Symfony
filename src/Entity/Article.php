@@ -39,16 +39,7 @@ class Article
      */
     private $sliders;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Section::class, inversedBy="articles")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $section;
-
-    /**
-     * @ORM\OneToMany(targetEntity=Section::class, mappedBy="article")
-     */
-    private $sections;
+    
 
     public function __construct()
     {
@@ -127,34 +118,6 @@ class Article
         return $this;
     }
 
-    /**
-     * @return Collection|Section[]
-     */
-    public function getSections(): Collection
-    {
-        return $this->sections;
-    }
 
-    public function addSection(Section $section): self
-    {
-        if (!$this->sections->contains($section)) {
-            $this->sections[] = $section;
-            $section->setArticle($this);
-        }
-
-        return $this;
-    }
-
-    public function removeSection(Section $section): self
-    {
-        if ($this->sections->removeElement($section)) {
-            // set the owning side to null (unless already changed)
-            if ($section->getArticle() === $this) {
-                $section->setArticle(null);
-            }
-        }
-
-        return $this;
-    }
 
 }
