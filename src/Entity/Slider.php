@@ -31,11 +31,7 @@ class Slider
     private $nom;
 
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $section;
-
+  
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Image", cascade={"persist"})
      */
@@ -46,6 +42,16 @@ class Slider
      * @ORM\JoinColumn(nullable=false)
      */
     private $article;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $relation;
+
+    /**
+     * @ORM\OneToOne(targetEntity=Section::class, inversedBy="slider", cascade={"persist", "remove"})
+     */
+    private $section;
 
     public function __construct()
     {
@@ -81,17 +87,6 @@ class Slider
         return $this;
     }
 
-    public function getSection(): ?string
-    {
-        return $this->section;
-    }
-
-    public function setSection(?string $section): self
-    {
-        $this->section = $section;
-
-        return $this;
-    }
 
     /**
      * @return Collection|Image[]
@@ -133,5 +128,29 @@ class Slider
 
         fwrite($sliderFile, '</div>');
         fclose($sliderFile);
+    }
+
+    public function getRelation(): ?string
+    {
+        return $this->relation;
+    }
+
+    public function setRelation(string $relation): self
+    {
+        $this->relation = $relation;
+
+        return $this;
+    }
+
+    public function getSection(): ?Section
+    {
+        return $this->section;
+    }
+
+    public function setSection(?Section $section): self
+    {
+        $this->section = $section;
+
+        return $this;
     }
 }

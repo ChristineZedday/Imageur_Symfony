@@ -34,6 +34,12 @@ class Section
      */
     private $articles;
 
+    /**
+     * @ORM\OneToOne(targetEntity=Slider::class, mappedBy="section", cascade={"persist", "remove"})
+     */
+    private $slider;
+
+    
     public function __construct()
     {
         $this->articles = new ArrayCollection();
@@ -97,4 +103,28 @@ class Section
 
         return $this;
     }
+
+    public function getSlider(): ?Slider
+    {
+        return $this->slider;
+    }
+
+    public function setSlider(?Slider $slider): self
+    {
+        // unset the owning side of the relation if necessary
+        if ($slider === null && $this->slider !== null) {
+            $this->slider->setSection(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($slider !== null && $slider->getSection() !== $this) {
+            $slider->setSection($this);
+        }
+
+        $this->slider = $slider;
+
+        return $this;
+    }
+
+   
 }
