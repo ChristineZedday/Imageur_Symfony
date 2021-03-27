@@ -14,6 +14,7 @@ class SectionType extends AbstractType
         $builder
             ->add('titre')
             ->add('Contenu')
+            ->add('article')
         ;
     }
 

@@ -28,7 +28,6 @@ class SliderType extends AbstractType
 
         $builder
             ->add('nom')
-            ->add('article')
             ->add('section')
             // ->add('images', ChoiceType::class,[
             //     'choices' => $photos,
