@@ -45,9 +45,15 @@ class Article
      */
     private $section;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Section::class, mappedBy="article")
+     */
+    private $sections;
+
     public function __construct()
     {
         $this->sliders = new ArrayCollection();
+        $this->sections = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -121,15 +127,34 @@ class Article
         return $this;
     }
 
-    public function getSection(): ?Section
+    /**
+     * @return Collection|Section[]
+     */
+    public function getSections(): Collection
     {
-        return $this->section;
+        return $this->sections;
     }
 
-    public function setSection(?Section $section): self
+    public function addSection(Section $section): self
     {
-        $this->section = $section;
+        if (!$this->sections->contains($section)) {
+            $this->sections[] = $section;
+            $section->setArticle($this);
+        }
 
         return $this;
     }
+
+    public function removeSection(Section $section): self
+    {
+        if ($this->sections->removeElement($section)) {
+            // set the owning side to null (unless already changed)
+            if ($section->getArticle() === $this) {
+                $section->setArticle(null);
+            }
+        }
+
+        return $this;
+    }
+
 }

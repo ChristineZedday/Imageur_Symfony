@@ -37,16 +37,6 @@ class Slider
      */
     private $images;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Article::class, inversedBy="sliders")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $article;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $relation;
 
     /**
      * @ORM\OneToOne(targetEntity=Section::class, inversedBy="slider", cascade={"persist", "remove"})

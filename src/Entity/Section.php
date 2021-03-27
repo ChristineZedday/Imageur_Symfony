@@ -39,6 +39,12 @@ class Section
      */
     private $slider;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Article::class, inversedBy="sections")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $article;
+
     
     public function __construct()
     {
@@ -74,35 +80,7 @@ class Section
         return $this;
     }
 
-    /**
-     * @return Collection|Article[]
-     */
-    public function getArticles(): Collection
-    {
-        return $this->articles;
-    }
-
-    public function addArticle(Article $article): self
-    {
-        if (!$this->articles->contains($article)) {
-            $this->articles[] = $article;
-            $article->setSection($this);
-        }
-
-        return $this;
-    }
-
-    public function removeArticle(Article $article): self
-    {
-        if ($this->articles->removeElement($article)) {
-            // set the owning side to null (unless already changed)
-            if ($article->getSection() === $this) {
-                $article->setSection(null);
-            }
-        }
-
-        return $this;
-    }
+  
 
     public function getSlider(): ?Slider
     {
@@ -122,6 +100,18 @@ class Section
         }
 
         $this->slider = $slider;
+
+        return $this;
+    }
+
+    public function getArticle(): ?Article
+    {
+        return $this->article;
+    }
+
+    public function setArticle(?Article $article): self
+    {
+        $this->article = $article;
 
         return $this;
     }
