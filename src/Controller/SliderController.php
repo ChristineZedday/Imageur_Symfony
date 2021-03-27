@@ -12,6 +12,7 @@ use App\Entity\Slider;
 use App\Form\SliderType;
 use App\Repository\ImageRepository;
 use App\Repository\SliderRepository;
+use App\Repository\SectionRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -35,13 +36,13 @@ class SliderController extends AbstractController
     /**
      * @Route("/new", name="slider_new", methods={"GET","POST"})
      */
-    public function new(Request $request): Response
+    public function new(Request $request, SectionRepository $sectionRepository): Response
     {
         $slider = new Slider();
 
-        // $images = $imageRepository->findAll();
+        $sections = $sectionRepository->findAll();
 
-        $form = $this->createForm(SliderType::class, $slider);
+        $form = $this->createForm(SliderType::class, $slider, $sections);
 
         $form->handleRequest($request);
 
