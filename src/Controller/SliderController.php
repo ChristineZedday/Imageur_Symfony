@@ -42,7 +42,7 @@ class SliderController extends AbstractController
 
         $sections = $sectionRepository->findAll();
 
-        $form = $this->createForm(SliderType::class, $slider, $sections);
+        $form = $this->createForm(SliderType::class, $slider, ['sections' => $sections]);
 
         $form->handleRequest($request);
 
@@ -117,11 +117,11 @@ class SliderController extends AbstractController
     /**
      * @Route("/{id}/edit", name="slider_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, Slider $slider, ImageRepository $imageRepository): Response
+    public function edit(Request $request, Slider $slider, ImageRepository $imageRepository,  SectionRepository $sectionRepository): Response
     {
         $images = $imageRepository->findDispo($slider);
-
-        $form = $this->createForm(SliderType::class, $slider);
+        $sections = $sectionRepository->findAll();
+        $form = $this->createForm(SliderType::class, $slider, ['sections' => $sections]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

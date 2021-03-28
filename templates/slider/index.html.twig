@@ -20,7 +20,7 @@
             <tr>
                 <td>{{ slider.id }}</td>
                 <td>{{ slider.nom }}</td>
-                <td>{{ slider.section }}</td>
+                <td>{{ slider.section.titre }}</td>
                 <td>
                     <a href="{{ path('slider_show', {'id': slider.id}) }}">show</a>
                     <a href="{{ path('slider_edit', {'id': slider.id}) }}">edit</a>

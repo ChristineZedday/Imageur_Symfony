@@ -64,9 +64,10 @@ class SectionController extends AbstractController
     /**
      * @Route("/{id}/edit", name="section_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, Section $section): Response
+    public function edit(Request $request, Section $section, ArticleRepository $articleRepository): Response
     {
-        $form = $this->createForm(SectionType::class, $section);
+        $articles = $articleRepository->findAll();
+        $form = $this->createForm(SectionType::class, $section,  ['articles' => $articles,]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
