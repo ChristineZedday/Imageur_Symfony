@@ -53,6 +53,11 @@ class Image
      */
     private $sliders;
 
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $rang;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -124,5 +129,17 @@ class Image
     public function getSliders(): Collection
     {
         return $this->sliders;
+    }
+
+    public function getRang(): ?int
+    {
+        return $this->rang;
+    }
+
+    public function setRang(?int $rang): self
+    {
+        $this->rang = $rang;
+
+        return $this;
     }
 }

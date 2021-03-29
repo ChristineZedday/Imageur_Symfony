@@ -60,6 +60,7 @@ class ImageType extends AbstractType
 
         $builder->add('alt', TextType::class, ['label' => 'texte alternatif', 'attr' => ['size' => '150']]);
         $builder->add('legend', TextType::class, ['label' => 'légende', 'attr' => ['size' => '150']]);
+        $builder->add('rang');
     }
 
     public function configureOptions(OptionsResolver $resolver)

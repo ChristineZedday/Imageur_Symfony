@@ -34,6 +34,7 @@ class Slider
   
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Image", cascade={"persist"})
+     * @ORM\OrderBy({"rang" = "ASC"})
      */
     private $images;
 

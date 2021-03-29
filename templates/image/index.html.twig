@@ -14,6 +14,7 @@
                 <th>Alt</th>
                 <th>Legend</th>
                 <th>Usage</th>
+                 <th>Rang</th>
                 <th>Vignette</th>
                 <th>actions</th>
             </tr>
@@ -26,6 +27,7 @@
                 <td>{{ image.alt }}</td>
                 <td>{{ image.legend }}</td>
                 <td>{{ image.pour}}</td>
+                 <td>{{ image.rang}}</td>
                  <td>{% if image.vignette %} oui {% else %} non {% endif %}</td>
                 <td>
                     <a href="{{ path('image_show', {'id': image.id}) }}">show</a>
