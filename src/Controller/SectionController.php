@@ -95,4 +95,15 @@ class SectionController extends AbstractController
 
         return $this->redirectToRoute('section_index');
     }
+
+      /**
+     * @Route("section/genere/{id}", name="section_genere", methods={"GET"})
+     */
+    public function sectionGenere(Section $section)
+    {
+        $dir = $this->getParameter('generated_directory');
+        $section->genereSection($dir);
+
+        return $this->redirectToRoute('section_index');
+    }
 }

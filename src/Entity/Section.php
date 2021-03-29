@@ -140,5 +140,27 @@ class Section
         return $this;
     }
 
+    public function genereSection($dir)
+    {
+        $path = $dir.'/section_'.$this->getId().'.php';
+        $sectionFile = fopen($path, 'w');
+
+        fwrite($sectionFile, '<section><h2>'.$this->getTitre().'</h2>');
+       
+    
+        fwrite($sectionFile, $this->getContenu());
+        if (null !== $this->getSlider())
+        {
+            $nom = $this->getSlider()->getNom();
+            if (file_exists($dir.'/slider_'.$nom.'.php'))
+            {
+                $fichier = 'slider_'.$nom.'.php'; //si structure site distant différents dossiers, ajuster
+                fwrite($sectionFile, '<?php include ('.$fichier.'); ?>');
+            }
+        }
+        fwrite($sectionFile, '</section>');
+        fclose($sectionFile);
+    }
+
    
 }

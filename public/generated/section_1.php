@@ -1,0 +1,1 @@
+<section><h2>Des chevaux caméléons?</h2><p>La robe d'un cheval varie &eacute;norm&eacute;ment au cours du temps: en fonction de l'&acirc;ge (les poulains changent énormément dans les premiers mois!), de la saison, de l'&eacute;clairage et m&ecirc;me de l'&eacute;tat de sant&eacute; du cheval.</p></section>

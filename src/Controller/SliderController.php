@@ -161,7 +161,7 @@ class SliderController extends AbstractController
     }
 
     /**
-     * @Route("/genere/{id}", name="slider_genere", methods={"GET"})
+     * @Route("slider/genere/{id}", name="slider_genere", methods={"GET"})
      */
     public function sliderGenere(Slider $slider)
     {

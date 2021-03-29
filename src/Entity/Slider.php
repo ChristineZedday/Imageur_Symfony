@@ -121,17 +121,6 @@ class Slider
         fclose($sliderFile);
     }
 
-    public function getRelation(): ?string
-    {
-        return $this->relation;
-    }
-
-    public function setRelation(string $relation): self
-    {
-        $this->relation = $relation;
-
-        return $this;
-    }
 
     public function getSection(): ?Section
     {
