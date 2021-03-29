@@ -39,6 +39,14 @@ class Article
      */
     private $sliders;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Section::class, mappedBy="article")
+     * @ORM\OrderBy({"rang" = "ASC"})
+     */
+    private $sections;
+
+   
+
     
 
     public function __construct()
@@ -112,6 +120,36 @@ class Article
             // set the owning side to null (unless already changed)
             if ($slider->getArticle() === $this) {
                 $slider->setArticle(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Section[]
+     */
+    public function getSections(): Collection
+    {
+        return $this->sections;
+    }
+
+    public function addSection(Section $section): self
+    {
+        if (!$this->sections->contains($section)) {
+            $this->sections[] = $section;
+            $section->setG($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSection(Section $section): self
+    {
+        if ($this->sections->removeElement($section)) {
+            // set the owning side to null (unless already changed)
+            if ($section->getG() === $this) {
+                $section->setG(null);
             }
         }
 

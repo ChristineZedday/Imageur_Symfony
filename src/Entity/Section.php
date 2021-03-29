@@ -30,11 +30,6 @@ class Section
     private $Contenu;
 
     /**
-     * @ORM\OneToMany(targetEntity=Article::class, mappedBy="section")
-     */
-    private $articles;
-
-    /**
      * @ORM\OneToOne(targetEntity=Slider::class, mappedBy="section", cascade={"persist", "remove"})
      */
     private $slider;
@@ -44,6 +39,11 @@ class Section
      * @ORM\JoinColumn(nullable=false)
      */
     private $article;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $rang;
 
     
     public function __construct()
@@ -112,6 +112,30 @@ class Section
     public function setArticle(?Article $article): self
     {
         $this->article = $article;
+
+        return $this;
+    }
+
+    public function getRang(): ?int
+    {
+        return $this->rang;
+    }
+
+    public function setRang(?int $rang): self
+    {
+        $this->rang = $rang;
+
+        return $this;
+    }
+
+    public function getG(): ?Article
+    {
+        return $this->g;
+    }
+
+    public function setG(?Article $g): self
+    {
+        $this->g = $g;
 
         return $this;
     }

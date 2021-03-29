@@ -13,6 +13,7 @@
                 <th>Article</th>
                 <th>Titre</th>
                 <th>Contenu</th>
+                <th>Rang dans l'article</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -22,7 +23,8 @@
                 <td>{{ section.id }}</td>
                  <td>{{ section.article.titre }}</td>
                 <td>{{ section.titre }}</td>
-                <td>{{ section.Contenu }}</td>
+                <td>{{ section.contenu }}</td>
+                 <td>{{ section.rang }}</td>
                 <td>
                     <a href="{{ path('section_show', {'id': section.id}) }}">show</a>
                     <a href="{{ path('section_edit', {'id': section.id}) }}">edit</a>

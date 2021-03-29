@@ -25,6 +25,7 @@ class SectionType extends AbstractType
                     'multiple' => false,
                     'mapped' => true,
                     'required' => true])
+            ->add('rang')
             ;
         ;
     }
