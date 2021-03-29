@@ -25,11 +25,6 @@ class Section
     private $titre;
 
     /**
-     * @ORM\Column(type="blob", nullable=true)
-     */
-    private $Contenu;
-
-    /**
      * @ORM\OneToOne(targetEntity=Slider::class, mappedBy="section", cascade={"persist", "remove"})
      */
     private $slider;
@@ -44,6 +39,11 @@ class Section
      * @ORM\Column(type="integer", nullable=true)
      */
     private $rang;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $contenu;
 
     
     public function __construct()
@@ -70,12 +70,12 @@ class Section
 
     public function getContenu()
     {
-        return $this->Contenu;
+        return $this->contenu;
     }
 
-    public function setContenu($Contenu): self
+    public function setContenu($contenu): self
     {
-        $this->Contenu = $Contenu;
+        $this->contenu = $contenu;
 
         return $this;
     }

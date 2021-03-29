@@ -20,7 +20,7 @@ class SectionType extends AbstractType
         }
         $builder
             ->add('titre')
-            ->add('Contenu',  TextareaType::class, ['label' => 'contenu', 'attr' => ['size' => '1000']])
+            ->add('Contenu',  TextareaType::class, ['label' => 'contenu', 'attr' => ['rows' => '15', 'cols' => '100']])
             ->add('article', ChoiceType::class,[
                     'choices' => $titres,
                     'multiple' => false,
