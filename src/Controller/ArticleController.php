@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Entity\Section;
 
 /**
  * @Route("/article")
@@ -88,6 +89,18 @@ class ArticleController extends AbstractController
             $entityManager->remove($article);
             $entityManager->flush();
         }
+
+        return $this->redirectToRoute('article_index');
+    }
+
+    
+      /**
+     * @Route("article/genere/{id}", name="article_genere", methods={"GET"})
+     */
+    public function articleGenere(Article $article)
+    {
+        $dir = $this->getParameter('generated_directory');
+        $article->genereArticle($dir);
 
         return $this->redirectToRoute('article_index');
     }

@@ -156,6 +156,21 @@ class Article
         return $this;
     }
 
+    public function genereArticle($dir)
+    {
+        $path = $dir.'/article_'.$this->getId().'.php';
+        $articleFile = fopen($path, 'w');
+
+        fwrite($articleFile, '<article class="contenu><h1>'.$this->getTitre().'</h1>');
+        foreach ($this->getSections() as $section)
+       {
+        fwrite($articleFile, 'include(\'section_'.$section->getId().'.php\');');
+       }
+    
+      
+        fwrite($articleFile, '</article>');
+        fclose($articleFile);
+    }
 
 
 }

@@ -30,5 +30,7 @@
 
     <a href="{{ path('article_edit', {'id': article.id}) }}">edit</a>
 
+     <a href="{{ path('article_genere', {'id': article.id}) }}">générer l'article</a>
+
     {{ include('article/_delete_form.html.twig') }}
 {% endblock %}
