@@ -78,7 +78,7 @@
 			function popupContent(ref, box, texte) {
 			    
 			          var img = document.createElement('img');
-			            img.src = "grandes_images/"+ref;
+			            img.src = "C:laragon/www/chevaux2021/images/grandes_images/"+ref;
 						img.alt = "photo " +ref;
 						img.maxWidth = "100%";
 						img.marginTop = 0;
