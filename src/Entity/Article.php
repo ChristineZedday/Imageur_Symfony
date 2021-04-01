@@ -29,10 +29,6 @@ class Article
      */
     private $auteur;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $topic;
 
     /**
      * @ORM\OneToMany(targetEntity=Slider::class, mappedBy="article")
@@ -44,6 +40,11 @@ class Article
      * @ORM\OrderBy({"rang" = "ASC"})
      */
     private $sections;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Rubrique::class, inversedBy="articles")
+     */
+    private $rubrique;
 
    
 
@@ -170,6 +171,18 @@ class Article
       
         fwrite($articleFile, '</article>');
         fclose($articleFile);
+    }
+
+    public function getRubrique(): ?Rubrique
+    {
+        return $this->rubrique;
+    }
+
+    public function setRubrique(?Rubrique $rubrique): self
+    {
+        $this->rubrique = $rubrique;
+
+        return $this;
     }
 
 
