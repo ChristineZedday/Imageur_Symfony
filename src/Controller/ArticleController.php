@@ -30,7 +30,7 @@ class ArticleController extends AbstractController
     /**
      * @Route("/new", name="article_new", methods={"GET","POST"})
      */
-    public function new(Request $request, RubriqueRepostory $rubriqueRepository): Response
+    public function new(Request $request, RubriqueRepository $rubriqueRepository): Response
     {
         $article = new Article();
         $rubriques = $rubriqueRepository->findAll();

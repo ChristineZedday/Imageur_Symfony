@@ -6,6 +6,7 @@
 parameters:
     images_directory: 'C:/laragon/www/chevaux2021/images'
     generated_directory: 'C:/laragon/www/chevaux2021/fichiers'
+    author: 'Christine Zedday'
 services:
     # default configuration for services in *this* file
     _defaults:

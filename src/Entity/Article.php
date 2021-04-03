@@ -54,12 +54,12 @@ class Article
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $description;
+    private $description ='';
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $keywords;
+    private $keywords ='';
 
    
 
@@ -69,6 +69,7 @@ class Article
     {
         $this->sliders = new ArrayCollection();
         $this->sections = new ArrayCollection();
+        $this->auteur -> $this->getParameter('author');
     }
 
     public function getId(): ?int
