@@ -13,6 +13,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Nav;
 use App\Entity\Metas;
+use App\Entity\Footer;
 use App\Repository\RubriqueRepository;
 
 class HomeController extends AbstractController
@@ -37,14 +38,30 @@ class HomeController extends AbstractController
 
         return $this->redirectToRoute('home');
     }
+
+     /**
+     * @Route("footer/genere/", name="footer", methods={"GET"})
+     */
+    public function footerGenere()
+    {
+        $dir = $this->getParameter('generated_directory');
+        $text1 = $this->getParameter('footerText1');
+        $text2 = $this->getParameter('footerText2');
+        $contact =  $this->getParameter('contact');
+        $text= $text1.'<br/>'.$text2.'</p><p>contact: '.$contact.'</p>';
+        $footer= new Footer();
+        $footer->genereFooter($dir, $text);
+
+        return $this->redirectToRoute('home');
+    }
       /**
      * @Route("metas/genere/", name="metas", methods={"GET"})
      */
     public function metasGenere()
     {
         $dir = $this->getParameter('generated_directory');
-        $nav= new Metas();
-        $nav->genereMetas($dir);
+        $metas= new Metas();
+        $metas->genereMetas($dir);
 
         return $this->redirectToRoute('home');
     }

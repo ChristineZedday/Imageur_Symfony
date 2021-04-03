@@ -31,8 +31,10 @@ class ArticleType extends AbstractType
                 'mapped' => true,
                 'required' => true])
              ->add('description', TextType::class, [
+             'required' => false,
                 'attr' => ['size' => '150']])
              ->add('keywords',  TextType::class, [
+                 'required' => false, 
                 'attr' => ['size' => '150']])
         ;
     }
