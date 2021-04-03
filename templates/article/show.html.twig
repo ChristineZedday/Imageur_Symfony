@@ -8,8 +8,8 @@
     <table class="table">
         <tbody>
             <tr>
-                <th>Id</th>
-                <td>{{ article.id }}</td>
+                <th>Nom</th>
+                <td>{{ article.nom }}</td>
             </tr>
             <tr>
                 <th>Titre</th>
@@ -22,6 +22,14 @@
             <tr>
                 <th>Rubrique</th>
                 <td>{{ article.rubrique.nom }}</td>
+            </tr>
+             <tr>
+                <th>Description</th>
+                <td>{{ article.description }}</td>
+            </tr>
+             <tr>
+                <th>Mots clés</th>
+                <td>{{ article.keywords }}</td>
             </tr>
         </tbody>
     </table>

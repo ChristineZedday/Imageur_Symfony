@@ -21,11 +21,14 @@ class ArticleType extends AbstractType
         $builder
             ->add('titre')
             ->add('auteur')
+            ->add('nom')
             ->add('rubrique', ChoiceType::class,[
                 'choices' => $noms,
                 'multiple' => false,
                 'mapped' => true,
                 'required' => true])
+             ->add('description')
+             ->add('keywords')
         ;
     }
 

@@ -46,6 +46,21 @@ class Article
      */
     private $rubrique;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $nom;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $description;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $keywords;
+
    
 
     
@@ -85,17 +100,6 @@ class Article
         return $this;
     }
 
-    public function getTopic(): ?string
-    {
-        return $this->topic;
-    }
-
-    public function setTopic(?string $topic): self
-    {
-        $this->topic = $topic;
-
-        return $this;
-    }
 
     /**
      * @return Collection|Slider[]
@@ -164,8 +168,8 @@ class Article
 
         fwrite($articleFile, '<!DOCTYPE html><html lang="fr"><head><title>'.$this->getTitre().'</title>');
         fwrite($articleFile, '<meta name="author" content="'.$this->getAuteur().'" />');
-        fwrite($articleFile, '<meta name="description" content="'.'DESCRIPTION ici'.'"/>');
-        fwrite($articleFile, '<meta name="keywords" content="'.'MOTS CLES ici'.'"/>');
+        fwrite($articleFile, '<meta name="description" content="'.$this->getDescription().'"/>');
+        fwrite($articleFile, '<meta name="keywords" content="'.$this->getKeywords().'"/>');
 
         fwrite($articleFile, '<?php include(\'metas.php\'); ?>');
         fwrite($articleFile, '</head><body><div id = "conteneur">');
@@ -189,6 +193,42 @@ class Article
     public function setRubrique(?Rubrique $rubrique): self
     {
         $this->rubrique = $rubrique;
+
+        return $this;
+    }
+
+    public function getNom(): ?string
+    {
+        return $this->nom;
+    }
+
+    public function setNom(?string $nom): self
+    {
+        $this->nom = $nom;
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(?string $description): self
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    public function getKeywords(): ?string
+    {
+        return $this->keywords;
+    }
+
+    public function setKeywords(?string $keywords): self
+    {
+        $this->keywords = $keywords;
 
         return $this;
     }
