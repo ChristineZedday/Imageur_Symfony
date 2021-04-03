@@ -29,7 +29,12 @@ class Nav
             }
             foreach ($rubrique->getArticles() as $article)
             {
-                fwrite($navFile, '<li><a href="article_'.$article->getId().'.php">'.$article->getTitre().'</a></li>');
+                $file = $article->getNom().'.php';
+               
+                if (file_exists($dir.'/'.$file)) {  
+            fwrite($navFile, '<li><a href="'.$file.'">'.$article->getTitre().'</a></li>');
+                }
+
             }
        
         }

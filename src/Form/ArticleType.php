@@ -7,6 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class ArticleType extends AbstractType
 {
@@ -19,16 +20,20 @@ class ArticleType extends AbstractType
 
         }
         $builder
-            ->add('titre')
+            ->add('titre',  TextType::class, [
+                 'attr' => ['size' => '150']])
             ->add('auteur')
-            ->add('nom')
-            ->add('rubrique', ChoiceType::class,[
+            ->add('nom', TextType::class, [
+                'label' => 'Nom pour le fichier (éviter accents)'])
+            ->add('rubrique', ChoiceType::class,[ 
                 'choices' => $noms,
                 'multiple' => false,
                 'mapped' => true,
                 'required' => true])
-             ->add('description')
-             ->add('keywords')
+             ->add('description', TextType::class, [
+                'attr' => ['size' => '150']])
+             ->add('keywords',  TextType::class, [
+                'attr' => ['size' => '150']])
         ;
     }
 

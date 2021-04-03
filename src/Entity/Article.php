@@ -164,7 +164,7 @@ class Article
 
     public function genereArticle($dir)
     {
-        $path = $dir.'/article_'.$this->getId().'.php';
+        $path = $dir.'/'.$this->getNom().'.php';
         $articleFile = fopen($path, 'w');
 
         fwrite($articleFile, '<!DOCTYPE html><html lang="fr"><head><title>'.$this->getTitre().'</title>');

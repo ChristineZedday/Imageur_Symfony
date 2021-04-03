@@ -8,6 +8,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class SectionType extends AbstractType
 {
@@ -19,7 +20,9 @@ class SectionType extends AbstractType
 
         }
         $builder
-            ->add('titre')
+        ->add('titre',  TextType::class, [
+            'required' =>false,
+            'attr' => ['size' => '150']])
             ->add('Contenu',  TextareaType::class, ['label' => 'contenu', 'attr' => ['rows' => '15', 'cols' => '100']])
             ->add('article', ChoiceType::class,[
                     'choices' => $titres,

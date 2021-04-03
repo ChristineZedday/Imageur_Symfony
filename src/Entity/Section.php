@@ -144,8 +144,10 @@ class Section
     {
         $path = $dir.'/section_'.$this->getId().'.php';
         $sectionFile = fopen($path, 'w');
-
-        fwrite($sectionFile, '<section><h2>'.$this->getTitre().'</h2>');
+        fwrite($sectionFile, '<section>');
+        if (null !== $this->getTitre() && '' !== $this->getTitre()) { 
+            fwrite($sectionFile, '<h2>'.$this->getTitre().'</h2>');
+        }
        
     
         fwrite($sectionFile, $this->getContenu());
