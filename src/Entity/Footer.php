@@ -16,7 +16,7 @@ class Footer
         $footerFile = fopen($path, 'w');
 		
 
-        fwrite($footerFile, '<footer><p>'.$footerText.'</p></footer>');
+        fwrite($footerFile, '<footer><p>Cette page a été générée automatiquement par <a href="https://github.com/christinezedday/Imageur_Symfony">Imageur</a></p><p>'.$footerText.'</p></footer>');
        
         fclose($footerFile);
     }
