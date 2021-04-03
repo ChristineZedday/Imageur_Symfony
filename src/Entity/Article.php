@@ -65,11 +65,11 @@ class Article
 
     
 
-    public function __construct()
+    public function __construct($auteur)
     {
         $this->sliders = new ArrayCollection();
         $this->sections = new ArrayCollection();
-        $this->auteur -> $this->getParameter('author');
+        $this->auteur = $auteur;
     }
 
     public function getId(): ?int

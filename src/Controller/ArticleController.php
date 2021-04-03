@@ -32,7 +32,8 @@ class ArticleController extends AbstractController
      */
     public function new(Request $request, RubriqueRepository $rubriqueRepository): Response
     {
-        $article = new Article();
+        $auteur = $this->getParameter('author');
+        $article = new Article($auteur);
         $rubriques = $rubriqueRepository->findAll();
         $form = $this->createForm(ArticleType::class, $article, ['rubriques' => $rubriques]);
         $form->handleRequest($request);
