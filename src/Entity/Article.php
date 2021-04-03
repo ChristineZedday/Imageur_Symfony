@@ -29,10 +29,6 @@ class Article
      */
     private $auteur;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $topic;
 
     /**
      * @ORM\OneToMany(targetEntity=Slider::class, mappedBy="article")
@@ -44,6 +40,26 @@ class Article
      * @ORM\OrderBy({"rang" = "ASC"})
      */
     private $sections;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Rubrique::class, inversedBy="articles")
+     */
+    private $rubrique;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $nom;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $description;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $keywords;
 
    
 
@@ -84,17 +100,6 @@ class Article
         return $this;
     }
 
-    public function getTopic(): ?string
-    {
-        return $this->topic;
-    }
-
-    public function setTopic(?string $topic): self
-    {
-        $this->topic = $topic;
-
-        return $this;
-    }
 
     /**
      * @return Collection|Slider[]
@@ -156,6 +161,77 @@ class Article
         return $this;
     }
 
+    public function genereArticle($dir)
+    {
+        $path = $dir.'/article_'.$this->getId().'.php';
+        $articleFile = fopen($path, 'w');
+
+        fwrite($articleFile, '<!DOCTYPE html><html lang="fr"><head><title>'.$this->getTitre().'</title>');
+        fwrite($articleFile, '<meta name="author" content="'.$this->getAuteur().'" />');
+        fwrite($articleFile, '<meta name="description" content="'.$this->getDescription().'"/>');
+        fwrite($articleFile, '<meta name="keywords" content="'.$this->getKeywords().'"/>');
+
+        fwrite($articleFile, '<?php include(\'metas.php\'); ?>');
+        fwrite($articleFile, '</head><body><div id = "conteneur">');
+        fwrite($articleFile, '<?php include(\'nav.php\'); ?>');
+        fwrite($articleFile, '<article class="contenu"><h1>'.$this->getTitre().'</h1>');
+        foreach ($this->getSections() as $section)
+       {
+        fwrite($articleFile, '<?php include(\'section_'.$section->getId().'.php\'); ?>');
+       }
+    
+      
+        fwrite($articleFile, '</article></div></body></html>');
+        fclose($articleFile);
+    }
+
+    public function getRubrique(): ?Rubrique
+    {
+        return $this->rubrique;
+    }
+
+    public function setRubrique(?Rubrique $rubrique): self
+    {
+        $this->rubrique = $rubrique;
+
+        return $this;
+    }
+
+    public function getNom(): ?string
+    {
+        return $this->nom;
+    }
+
+    public function setNom(?string $nom): self
+    {
+        $this->nom = $nom;
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(?string $description): self
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    public function getKeywords(): ?string
+    {
+        return $this->keywords;
+    }
+
+    public function setKeywords(?string $keywords): self
+    {
+        $this->keywords = $keywords;
+
+        return $this;
+    }
 
 
 }

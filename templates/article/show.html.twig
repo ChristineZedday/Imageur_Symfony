@@ -8,8 +8,8 @@
     <table class="table">
         <tbody>
             <tr>
-                <th>Id</th>
-                <td>{{ article.id }}</td>
+                <th>Nom</th>
+                <td>{{ article.nom }}</td>
             </tr>
             <tr>
                 <th>Titre</th>
@@ -20,8 +20,16 @@
                 <td>{{ article.auteur }}</td>
             </tr>
             <tr>
-                <th>Topic</th>
-                <td>{{ article.topic }}</td>
+                <th>Rubrique</th>
+                <td>{{ article.rubrique.nom }}</td>
+            </tr>
+             <tr>
+                <th>Description</th>
+                <td>{{ article.description }}</td>
+            </tr>
+             <tr>
+                <th>Mots clés</th>
+                <td>{{ article.keywords }}</td>
             </tr>
         </tbody>
     </table>
@@ -29,6 +37,8 @@
     <a href="{{ path('article_index') }}">back to list</a>
 
     <a href="{{ path('article_edit', {'id': article.id}) }}">edit</a>
+
+     <a href="{{ path('article_genere', {'id': article.id}) }}">générer l'article</a>
 
     {{ include('article/_delete_form.html.twig') }}
 {% endblock %}

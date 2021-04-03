@@ -155,7 +155,7 @@ class Section
             if (file_exists($dir.'/slider_'.$nom.'.php'))
             {
                 $fichier = 'slider_'.$nom.'.php'; //si structure site distant différents dossiers, ajuster
-                fwrite($sectionFile, '<?php include ('.$fichier.'); ?>');
+                fwrite($sectionFile, '<?php include (\''.$fichier.'\'); ?>');
             }
         }
         fwrite($sectionFile, '</section>');

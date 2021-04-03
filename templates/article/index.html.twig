@@ -9,20 +9,24 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
+                <th>Nom</th>
                 <th>Titre</th>
                 <th>Auteur</th>
-                <th>Topic</th>
+                <th>Rubrique</th>
+                <th>Description</th>
+                <th>Mots clés</th>
                 <th>actions</th>
             </tr>
         </thead>
         <tbody>
         {% for article in articles %}
             <tr>
-                <td>{{ article.id }}</td>
+                <td>{{ article.nom }}</td>
                 <td>{{ article.titre }}</td>
                 <td>{{ article.auteur }}</td>
-                <td>{{ article.topic }}</td>
+                <td>{% if (article.rubrique) %}{{ article.rubrique.nom }}{% endif %}</td>
+               <td>{% if (article.description) %}{{ article.description }}{% endif %}</td>
+               <td>{% if (article.keywords) %}{{ article.keywords }}{% endif %}</td>
                 <td>
                     <a href="{{ path('article_show', {'id': article.id}) }}">show</a>
                     <a href="{{ path('article_edit', {'id': article.id}) }}">edit</a>
