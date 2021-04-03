@@ -162,14 +162,22 @@ class Article
         $path = $dir.'/article_'.$this->getId().'.php';
         $articleFile = fopen($path, 'w');
 
-        fwrite($articleFile, '<article class="contenu><h1>'.$this->getTitre().'</h1>');
+        fwrite($articleFile, '<!DOCTYPE html><html lang="fr"><head><title>'.$this->getTitre().'</title>');
+        fwrite($articleFile, '<meta name="author" content="'.$this->getAuteur().'" />');
+        fwrite($articleFile, '<meta name="description" content="'.'DESCRIPTION ici'.'"/>');
+        fwrite($articleFile, '<meta name="keywords" content="'.'MOTS CLES ici'.'"/>');
+
+        fwrite($articleFile, '<?php include(\'metas.php\'); ?>');
+        fwrite($articleFile, '</head><body><div id = "conteneur">');
+        fwrite($articleFile, '<?php include(\'nav.php\'); ?>');
+        fwrite($articleFile, '<article class="contenu"><h1>'.$this->getTitre().'</h1>');
         foreach ($this->getSections() as $section)
        {
-        fwrite($articleFile, 'include(\'section_'.$section->getId().'.php\');');
+        fwrite($articleFile, '<?php include(\'section_'.$section->getId().'.php\'); ?>');
        }
     
       
-        fwrite($articleFile, '</article>');
+        fwrite($articleFile, '</article></div></body></html>');
         fclose($articleFile);
     }
 

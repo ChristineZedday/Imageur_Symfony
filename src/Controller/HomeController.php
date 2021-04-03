@@ -12,6 +12,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Nav;
+use App\Entity\Metas;
 use App\Repository\RubriqueRepository;
 
 class HomeController extends AbstractController
@@ -33,6 +34,17 @@ class HomeController extends AbstractController
         $dir = $this->getParameter('generated_directory');
         $nav= new Nav();
         $nav->genereNav($dir, $rubriqueRepository);
+
+        return $this->redirectToRoute('home');
+    }
+      /**
+     * @Route("metas/genere/", name="metas", methods={"GET"})
+     */
+    public function metasGenere()
+    {
+        $dir = $this->getParameter('generated_directory');
+        $nav= new Metas();
+        $nav->genereMetas($dir);
 
         return $this->redirectToRoute('home');
     }
