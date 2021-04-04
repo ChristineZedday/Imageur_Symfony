@@ -6,6 +6,7 @@ use App\Entity\Article;
 use App\Form\ArticleType;
 use App\Repository\ArticleRepository;
 use App\Repository\RubriqueRepository;
+use App\Repository\AsideRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -30,12 +31,13 @@ class ArticleController extends AbstractController
     /**
      * @Route("/new", name="article_new", methods={"GET","POST"})
      */
-    public function new(Request $request, RubriqueRepository $rubriqueRepository): Response
+    public function new(Request $request, RubriqueRepository $rubriqueRepository, AsideRepository $asideRepository): Response
     {
         $auteur = $this->getParameter('author');
         $article = new Article($auteur);
         $rubriques = $rubriqueRepository->findAll();
-        $form = $this->createForm(ArticleType::class, $article, ['rubriques' => $rubriques]);
+        $asides = $asideRepository->findAll();
+        $form = $this->createForm(ArticleType::class, $article, ['rubriques' => $rubriques, 'asides' => $asides]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -65,10 +67,11 @@ class ArticleController extends AbstractController
     /**
      * @Route("/{id}/edit", name="article_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, Article $article, RubriqueRepository $rubriqueRepository): Response
+    public function edit(Request $request, Article $article, RubriqueRepository $rubriqueRepository, AsideRepository $asideRepository): Response
     {
         $rubriques = $rubriqueRepository->findAll();
-        $form = $this->createForm(ArticleType::class, $article, ['rubriques' => $rubriques]);
+        $asides = $asideRepository->findAll();
+        $form = $this->createForm(ArticleType::class, $article, ['rubriques' => $rubriques, 'asides' => $asides]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

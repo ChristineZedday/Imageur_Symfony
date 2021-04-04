@@ -66,6 +66,11 @@ class Article
      */
     private $keywords ='';
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Aside::class, inversedBy="articles")
+     */
+    private $aside;
+
    
 
     
@@ -198,8 +203,18 @@ class Article
         {
             $footer = new Footer();
             $footer->genereFooter($dir,'');}
-        fwrite($articleFile, '</article></div> <script type="text/javascript" src="../ressources/js/main.js">  </script></body></html>');
-        fclose($articleFile);
+        fwrite($articleFile, '</article></div>');
+        if ($this->GetAside())
+        {
+            fwrite($articleFile, '<div class=element id="acote"><aside>'); 
+            if (file_exists($dir.'/aside_'.$this->getAside()->getNom().'.php'))
+            {
+                fwrite($articleFile, '<?php include(\'aside_'.$this->getAside()->getNom().'.php\'); ?>');
+            }
+            fwrite($articleFile, '</div></aside>');   
+        }
+        fwrite($articleFile, '   <script type="text/javascript" src="../ressources/js/main.js">  </script></body></html>');
+        
     }
 
     public function getRubrique(): ?Rubrique
@@ -246,6 +261,18 @@ class Article
     public function setKeywords(?string $keywords): self
     {
         $this->keywords = $keywords;
+
+        return $this;
+    }
+
+    public function getAside(): ?Aside
+    {
+        return $this->aside;
+    }
+
+    public function setAside(?Aside $aside): self
+    {
+        $this->aside = $aside;
 
         return $this;
     }

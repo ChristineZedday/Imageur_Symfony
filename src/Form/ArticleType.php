@@ -19,6 +19,10 @@ class ArticleType extends AbstractType
             $noms[$rubrique->getNom()] = $rubrique;
 
         }
+        $sides = [];
+        foreach ($options['asides'] as $aside) {
+            $sides[$aside->getNom()] = $aside;
+        }
         $builder
             ->add('titre',  TextType::class, [
                  'attr' => ['size' => '150']])
@@ -36,6 +40,12 @@ class ArticleType extends AbstractType
              ->add('keywords',  TextType::class, [
                  'required' => false, 
                 'attr' => ['size' => '150']])
+            ->add('aside', ChoiceType::class, [
+                'choices' => $sides,
+                'required' =>false,
+                'multiple' => false,
+                'mapped' => true,
+            ])
         ;
     }
 
@@ -44,6 +54,7 @@ class ArticleType extends AbstractType
         $resolver->setDefaults([
             'data_class' => Article::class,
             'rubriques' => [],
+            'asides' => [],
         ]);
     }
 }
