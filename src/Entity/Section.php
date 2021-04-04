@@ -154,11 +154,12 @@ class Section
         if (null !== $this->getSlider())
         {
             $nom = $this->getSlider()->getNom();
-            if (file_exists($dir.'/slider_'.$nom.'.php'))
+            if (!file_exists($dir.'/slider_'.$nom.'.php'))
             {
-                $fichier = 'slider_'.$nom.'.php'; //si structure site distant différents dossiers, ajuster
-                fwrite($sectionFile, '<?php include (\''.$fichier.'\'); ?>');
+                $this->getSlider()->genereSlider($dir);
             }
+            $fichier = 'slider_'.$nom.'.php'; //si structure site distant différents dossiers, ajuster
+            fwrite($sectionFile, '<?php include (\''.$fichier.'\'); ?>');
         }
         fwrite($sectionFile, '</section>');
         fclose($sectionFile);
