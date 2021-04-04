@@ -114,4 +114,20 @@ class Aside
 
         return $this;
     }
+
+    public function genereAside($dir)
+    {
+        $path = $dir.'/aside_'.$this->getNom().'.php';
+        $asideFile = fopen($path, 'w');
+        fwrite($asideFile, '<aside>');
+        if (null !== $this->getTitre() && 'sans' !== $this->getTitre()) { 
+            fwrite( $asideFile, '<h2>'.$this->getTitre().'</h2>');
+        }
+       
+        fwrite( $asideFile, $this->getContenu());
+
+       
+        fwrite( $asideFile, '</aside>');
+        fclose($asideFile);
+    }
 }

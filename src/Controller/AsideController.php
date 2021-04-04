@@ -91,4 +91,16 @@ class AsideController extends AbstractController
 
         return $this->redirectToRoute('aside_index');
     }
+
+    
+      /**
+     * @Route("aside/genere/{id}", name="aside_genere", methods={"GET"})
+     */
+    public function asideGenere(Aside $aside)
+    {
+        $dir = $this->getParameter('generated_directory');
+        $aside->genereAside($dir);
+
+        return $this->redirectToRoute('aside_index');
+    }
 }

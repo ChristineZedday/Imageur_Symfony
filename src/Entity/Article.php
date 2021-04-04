@@ -206,12 +206,12 @@ class Article
         fwrite($articleFile, '</article></div>');
         if ($this->GetAside())
         {
-            fwrite($articleFile, '<div class=element id="acote"><aside>'); 
+            fwrite($articleFile, '<div class=element id="acote">'); 
             if (file_exists($dir.'/aside_'.$this->getAside()->getNom().'.php'))
             {
                 fwrite($articleFile, '<?php include(\'aside_'.$this->getAside()->getNom().'.php\'); ?>');
             }
-            fwrite($articleFile, '</div></aside>');   
+            fwrite($articleFile, '</div>');   
         }
         fwrite($articleFile, '   <script type="text/javascript" src="../ressources/js/main.js">  </script></body></html>');
         
