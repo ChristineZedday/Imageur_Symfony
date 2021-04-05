@@ -1,0 +1,24 @@
+@import 'variables';
+
+.foot {
+	display: block;  
+	padding:30px; 
+	text-align:center; 
+	font-size:16px;
+ }
+
+
+
+
+@media all and (max-width: 900px)
+{
+	.foot {   
+		width:100%; 
+		padding:15px; 
+		text-align:center; 
+		font-size:16px;
+	}
+}
+
+
+
