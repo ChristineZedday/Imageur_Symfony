@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Aside{% endblock %}
+
+{% block body %}
+    <h1>Edit Aside</h1>
+
+    {{ include('aside/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('aside_index') }}">back to list</a>
+
+    {{ include('aside/_delete_form.html.twig') }}
+{% endblock %}

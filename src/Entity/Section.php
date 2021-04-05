@@ -22,7 +22,7 @@ class Section
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $titre;
+    private $titre= 'sans';
 
     /**
      * @ORM\OneToOne(targetEntity=Slider::class, mappedBy="section", cascade={"persist", "remove"})
@@ -144,19 +144,22 @@ class Section
     {
         $path = $dir.'/section_'.$this->getId().'.php';
         $sectionFile = fopen($path, 'w');
-
-        fwrite($sectionFile, '<section><h2>'.$this->getTitre().'</h2>');
+        fwrite($sectionFile, '<section>');
+        if (null !== $this->getTitre() && 'sans' !== $this->getTitre()) { 
+            fwrite($sectionFile, '<h2>'.$this->getTitre().'</h2>');
+        }
        
-    
         fwrite($sectionFile, $this->getContenu());
+
         if (null !== $this->getSlider())
         {
             $nom = $this->getSlider()->getNom();
-            if (file_exists($dir.'/slider_'.$nom.'.php'))
+            if (!file_exists($dir.'/slider_'.$nom.'.php'))
             {
-                $fichier = 'slider_'.$nom.'.php'; //si structure site distant différents dossiers, ajuster
-                fwrite($sectionFile, '<?php include (\''.$fichier.'\'); ?>');
+                $this->getSlider()->genereSlider($dir);
             }
+            $fichier = 'slider_'.$nom.'.php'; //si structure site distant différents dossiers, ajuster
+            fwrite($sectionFile, '<?php include (\''.$fichier.'\'); ?>');
         }
         fwrite($sectionFile, '</section>');
         fclose($sectionFile);

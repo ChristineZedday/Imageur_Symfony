@@ -6,6 +6,11 @@
 parameters:
     images_directory: 'C:/laragon/www/chevaux2021/images'
     generated_directory: 'C:/laragon/www/chevaux2021/fichiers'
+    author: 'Christine Zedday'
+    footerText1: 'Textes et dessins de Christine Zedday'
+    footerText2: 'Photos Christine Zedday, Alain et H&eacute;l&egrave;ne Bache, Leïla et Nora Zedday '
+    contact: 'chrizedday@free.fr'
+
 services:
     # default configuration for services in *this* file
     _defaults:
