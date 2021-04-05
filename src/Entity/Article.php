@@ -203,6 +203,8 @@ class Article
         {
             $footer = new Footer();
             $footer->genereFooter($dir,'');}
+            fwrite($articleFile, '<?php include(\'footer.php\'); ?>');
+
         fwrite($articleFile, '</article></div>');
         if ($this->GetAside())
         {

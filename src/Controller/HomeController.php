@@ -65,4 +65,15 @@ class HomeController extends AbstractController
 
         return $this->redirectToRoute('home');
     }
+
+     /**
+     * @Route("css/genere/", name="css", methods={"GET"})
+     */
+    public function cssCopie()
+    {
+        $dir = $this->getParameter('generated_assets');
+        $cop = copy ('build/app.css' , $dir.'/css/app.css' );
+
+        return $this->redirectToRoute('home');
+    }
 }

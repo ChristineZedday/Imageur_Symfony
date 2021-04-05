@@ -6,6 +6,7 @@
 parameters:
     images_directory: 'C:/laragon/www/chevaux2021/images'
     generated_directory: 'C:/laragon/www/chevaux2021/fichiers'
+    generated_assets: 'C:/laragon/www/chevaux2021/ressources'
     author: 'Christine Zedday'
     footerText1: 'Textes et dessins de Christine Zedday'
     footerText2: 'Photos Christine Zedday, Alain et H&eacute;l&egrave;ne Bache, Leïla et Nora Zedday '
@@ -35,3 +36,5 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+    build\:
+        resource: '../public/build/'

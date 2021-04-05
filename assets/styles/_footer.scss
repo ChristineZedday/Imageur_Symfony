@@ -1,6 +1,6 @@
 @import 'variables';
 
-.foot {
+footer {
 	display: block;  
 	padding:30px; 
 	text-align:center; 
@@ -12,7 +12,7 @@
 
 @media all and (max-width: 900px)
 {
-	.foot {   
+	footer {   
 		width:100%; 
 		padding:15px; 
 		text-align:center; 
