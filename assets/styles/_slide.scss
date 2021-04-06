@@ -1,0 +1,127 @@
+@import 'variables';
+
+.container {
+
+	width: 100%;
+	margin-bottom: 20px;
+	margin-top: 20px;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
+	align-items: center;
+    box-shadow: 5px 5px 5px $dark;
+
+    #infobulle{
+
+        position: absolute;
+        top: 40vh;
+        left: 40vw;
+        width: 200px;
+        height:30px;
+
+        // display:none;
+        // :hover {
+        //     display: inline;
+        // }
+    
+    }
+	
+}
+
+.clickable
+{
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+.overlay {
+    position: fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height: 100vh;
+    background-color:$dark;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.popup
+{
+    background-color: $cream;
+    padding:50px;
+    width: 60%;  /*carré width: 60vh height: 60vh;*/
+    height: 100vh;
+   display: flex ;
+    flex-direction: column;
+   align-items: flex-start;
+   overflow:auto;
+
+   img {
+       max-width: 100%;
+       max-height: 100%;
+   }
+
+}
+
+.next
+{
+    cursor: pointer;
+    color: $bay;
+    font-size: 30px;
+    margin:10px;
+}
+
+.prev {
+    cursor: pointer;
+    color: $bay;
+    font-size: 30px;
+    margin:10px;
+}
+
+.close {
+    cursor: pointer;
+    position: absolute;
+    right: 30px;
+    top: 30px;
+    color: $bay;
+    font-size: 30px;
+    margin:10px;
+}
+
+// @media all and (max-width: 900px)
+// {
+   
+//     .overlay {
+//         position: fixed;
+//         top:0;
+//         left:0;
+//         width:100%;
+//         height: 100vh;
+//         background-color:$dark;
+//         display: flex;
+//         flex-direction: column;
+//         justify-content: center;
+//         align-items: center;
+//     }
+
+        
+//     .popup
+//     {
+//         background-color: $cream;
+//         padding:20px;
+//         width: 100vw;  /*carré width: 60vh height: 60vh;*/
+//         height: 75vh;
+//         display: flex ;
+//         flex-direction: column;
+//         align-items: flex-start;
+//         overflow:auto;
+
+//         img {
+//             max-width: 100%;
+//             max-height: 100%;
+//         }
+
+//     }
+    
+// }

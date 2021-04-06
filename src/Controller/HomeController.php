@@ -48,7 +48,7 @@ class HomeController extends AbstractController
         $text1 = $this->getParameter('footerText1');
         $text2 = $this->getParameter('footerText2');
         $contact =  $this->getParameter('contact');
-        $text= $text1.'<br/>'.$text2.'</p><p>contact: '.$contact.'</p>';
+        $text= '<p>'.$text1.'<br/>'.$text2.'</p><p>contact: '.$contact.'</p>';
         $footer= new Footer();
         $footer->genereFooter($dir, $text);
 
@@ -62,6 +62,17 @@ class HomeController extends AbstractController
         $dir = $this->getParameter('generated_directory');
         $metas= new Metas();
         $metas->genereMetas($dir);
+
+        return $this->redirectToRoute('home');
+    }
+
+     /**
+     * @Route("css/genere/", name="css", methods={"GET"})
+     */
+    public function cssCopie()
+    {
+        $dir = $this->getParameter('generated_assets');
+        $cop = copy ('build/app.css' , $dir.'/css/app.css' );
 
         return $this->redirectToRoute('home');
     }
