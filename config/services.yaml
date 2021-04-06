@@ -11,6 +11,7 @@ parameters:
     footerText1: 'Textes et dessins de Christine Zedday'
     footerText2: 'Photos Christine Zedday, Alain et H&eacute;l&egrave;ne Bache, Leïla et Nora Zedday '
     contact: 'chrizedday@free.fr'
+    icons_directory: 'C:/laragon/www/imageur_symfony/public/icones/'
 
 services:
     # default configuration for services in *this* file
@@ -38,3 +39,4 @@ services:
     # please note that last definitions always *replace* previous ones
     build\:
         resource: '../public/build/'
+    
