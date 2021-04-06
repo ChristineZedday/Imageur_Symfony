@@ -119,7 +119,7 @@ class Aside
     {
         $path = $dir.'/aside_'.$this->getNom().'.php';
         $asideFile = fopen($path, 'w');
-        fwrite($asideFile, '<aside>');
+        fwrite($asideFile, '<aside class="acote">');
         if (null !== $this->getTitre() && 'sans' !== $this->getTitre()) { 
             fwrite( $asideFile, '<h2>'.$this->getTitre().'</h2>');
         }

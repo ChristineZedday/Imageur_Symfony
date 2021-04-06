@@ -48,7 +48,7 @@ class HomeController extends AbstractController
         $text1 = $this->getParameter('footerText1');
         $text2 = $this->getParameter('footerText2');
         $contact =  $this->getParameter('contact');
-        $text= $text1.'<br/>'.$text2.'</p><p>contact: '.$contact.'</p>';
+        $text= '<p>'.$text1.'<br/>'.$text2.'</p><p>contact: '.$contact.'</p>';
         $footer= new Footer();
         $footer->genereFooter($dir, $text);
 
