@@ -4,6 +4,7 @@
 
 {% block body %}
 {{ parent() }}
+<article>
     <h1>Section index</h1>
 
     <table class="table">
@@ -12,7 +13,6 @@
                 <th>Id</th>
                 <th>Article</th>
                 <th>Titre</th>
-                <th>Contenu</th>
                 <th>Rang dans l'article</th>
                 <th>actions</th>
             </tr>
@@ -23,20 +23,20 @@
                 <td>{{ section.id }}</td>
                  <td>{{ section.article.titre }}</td>
                 <td>{{ section.titre }}</td>
-                <td>{{ section.contenu }}</td>
                  <td>{{ section.rang }}</td>
                 <td>
-                    <a href="{{ path('section_show', {'id': section.id}) }}">show</a>
-                    <a href="{{ path('section_edit', {'id': section.id}) }}">edit</a>
+                    <a href="{{ path('section_show', {'id': section.id}) }}">{{ include('./_showicone.html.twig')}}</a>
+                    <a href="{{ path('section_edit', {'id': section.id}) }}">{{ include('./_editicone.html.twig')}}</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="4">no records found</td>
+                <td colspan="4">Pas de sections enregistrées</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('section_new') }}">Create new</a>
+  <p class="supertitre">  <a href="{{ path('section_new') }}">Ajouter une section</a></p>
+    </article>
 {% endblock %}

@@ -3,11 +3,14 @@
 {% block title %}Edit Article{% endblock %}
 
 {% block body %}
+<article>
     <h1>Modifier</h1>
-
+<p>
     {{ include('article/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
-
+</p><p>
     <a href="{{ path('article_index') }}">retour à la liste</a>
-
+</p><p<
     {{ include('article/_delete_form.html.twig') }}
+    </p>
+    </article>
 {% endblock %}
