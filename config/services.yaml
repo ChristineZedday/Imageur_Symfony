@@ -39,4 +39,5 @@ services:
     # please note that last definitions always *replace* previous ones
     build\:
         resource: '../public/build/'
+   
     
