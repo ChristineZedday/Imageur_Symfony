@@ -4,6 +4,7 @@
 
 {% block body %}
 {{ parent() }}
+<article>
     <h1>Article index</h1>
 
     <table class="table">
@@ -34,13 +35,14 @@
             </tr>
         {% else %}
             <tr>
-                <td colspan="5">no records found</td>
+                <td colspan="5">pas d'articles enregistrés</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('article_new') }}">Create new</a>
+    <p class="supertitre"><a href="{{ path('article_new') }}">Ajouter un article</a></p>
 
        {{ include('./_crediticones.html.twig')}}
+       <article>
 {% endblock %}
