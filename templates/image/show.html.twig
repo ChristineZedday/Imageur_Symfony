@@ -38,9 +38,9 @@
         </tbody>
     </table>
       {%  if image.pour == 'carrousel' %}
-        <img src="{{ 'http://chevaux2021.test/images/petites_images/'~image.nom}}"  width="150">
+        <img src="{{ petites_images~image.nom}}"  width="150">
       {% else %}
-      <img src="{{ 'http://chevaux2021.test/images/'~image.nom }}"  width="300">
+      <img src="{{ images~image.nom }}"  width="300">
       {% endif %}
 
     <a href="{{ path('image_index') }}">Retour à la liste</a>

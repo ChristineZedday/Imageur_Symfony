@@ -32,7 +32,7 @@
                 <td>{{ image.pour}}</td>
                  <td>{{ image.rang}}</td>
                  <td>{% if image.vignette %} oui {% else %} non {% endif %}</td>
-                 <td>{% if image.vignette %}<img src="{{ 'http://chevaux2021.test/images/petites_images/'~image.nom}}" width="60px" height="40px">{% else %} <img src="{{ 'http://chevaux2021.test/images/petites_images/'~image.nom}}" width="60px" height="40px"> }}{% endif %}</td>
+                 <td>{% if image.vignette %}<img src="{{ petites_images~image.nom}}" width="60px" height="40px">{% else %} <img src="{{ images~image.nom}}" width="60px" height="40px"> }}{% endif %}</td>
                 <td>
                     <a href="{{ path('image_show', {'id': image.id}) }}">  {{ include('./_showicone.html.twig')}}</a>
                     <a href="{{ path('image_edit', {'id': image.id}) }}">  {{ include('./_editicone.html.twig')}}</a>
