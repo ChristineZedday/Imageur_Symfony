@@ -3,9 +3,11 @@
 {% block title %}New Rubrique{% endblock %}
 
 {% block body %}
-    <h1>Create new Rubrique</h1>
+<article>
+    <h1>Créer une nouvelle rubrique</h1>
 
     {{ include('rubrique/_form.html.twig') }}
 
-    <a href="{{ path('rubrique_index') }}">back to list</a>
+    <a href="{{ path('rubrique_index') }}">retour à la liste</a>
+    </article>
 {% endblock %}
