@@ -1,7 +1,9 @@
 @import 'variables';
+@import 'jeu';
 
 #main {
 	flex-grow: 2;
+	max-width: 650px;
 }
 
 .supertitre
@@ -14,9 +16,8 @@
 
 article {
 		display:block; 
-		flex-grow: 2;
-		max-width:650px;
 		padding: 30px; 
+		width: 100%;
 
 	
 

@@ -3,6 +3,7 @@
 {% block title %}Slider{% endblock %}
 
 {% block body %}
+<article>
     <h1>Carrousel</h1>
 
     <table class="table">
@@ -29,7 +30,7 @@
     {% for image in slider.images %}
    
         <figure class="slide">
-            <img class="clickable" src="/uploads/petites_images/{{image.nom}}" onclick="displaySlides(src);" alt="{{image.alt}}" />
+            <img class="clickable" src="{{ 'http://chevaux2021.test/images/petites_images/'~image.nom}}" onclick="displaySlides(src);" alt="{{image.alt}}" />
             <figcaption hidden>
             {{image.legend}}
             </figcaption>
@@ -38,10 +39,11 @@
 
     {% endfor %}
     </div>
-    <a href="{{ path('slider_index') }}">retourner à la liste</a>
+    <a href="{{ path('slider_index') }}">Retourner à la liste</a>
 
-    <a href="{{ path('slider_edit', {'id': slider.id}) }}">éditer</a>
-      <a href="{{ path('slider_genere', {'id': slider.id}) }}">générer le carrousel PHP</a>
+    <a href="{{ path('slider_edit', {'id': slider.id}) }}">Modifier</a>
+      <a href="{{ path('slider_genere', {'id': slider.id}) }}">Générer le carrousel PHP</a>
 
     {{ include('slider/_delete_form.html.twig') }}
+    </article>
 {% endblock %}

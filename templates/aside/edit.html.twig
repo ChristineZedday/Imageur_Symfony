@@ -3,11 +3,13 @@
 {% block title %}Edit Aside{% endblock %}
 
 {% block body %}
-    <h1>Edit Aside</h1>
+<article>
+    <h1>Modifier</h1>
 
-    {{ include('aside/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('aside/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
 
-    <a href="{{ path('aside_index') }}">back to list</a>
+    <a href="{{ path('aside_index') }}">Retour à la liste</a>
 
     {{ include('aside/_delete_form.html.twig') }}
+    </artticle>
 {% endblock %}

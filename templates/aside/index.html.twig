@@ -3,7 +3,7 @@
 {% block title %}Aside index{% endblock %}
 
 {% block body %}
-    <h1>Aside index</h1>
+    <h1>Index des à-côté</h1>
 
     <table class="table">
         <thead>
@@ -23,17 +23,18 @@
                 <td>{{ aside.nom }}</td>
                 <td>{{ aside.contenu }}</td>
                 <td>
-                    <a href="{{ path('aside_show', {'id': aside.id}) }}">show</a>
-                    <a href="{{ path('aside_edit', {'id': aside.id}) }}">edit</a>
+                    <a href="{{ path('aside_show', {'id': aside.id}) }}">{{ include('./_showicone.html.twig')}}</a>
+                    <a href="{{ path('aside_edit', {'id': aside.id}) }}">{{ include('./_editicone.html.twig')}}</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="5">no records found</td>
+                <td colspan="5">Pas d'à-côté enregistrés</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('aside_new') }}">Create new</a>
+    <a href="{{ path('aside_new') }}">Ajouter un à-côté</a>
+    {{ include('./_crediticones.html.twig')}}
 {% endblock %}

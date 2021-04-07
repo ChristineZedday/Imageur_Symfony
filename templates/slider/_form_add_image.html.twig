@@ -5,7 +5,7 @@
        {% for image in images %}
           
             <figure>
-                <img src="/uploads/petites_images/{{image.nom}}" alt="{{image.alt}}" width="150">
+                <img src="{{ 'http://chevaux2021.test/images/petites_images/'~image.nom}}" alt="{{image.alt}}" width="150">
                 <figcaption>{{ image.legend }}</figcaption>
                
 			
@@ -17,5 +17,5 @@
            
         {% endfor %}
          </div>
-           <button class="btn" type="submit">ajouter les images cochées</button>
+           <button class="btn" type="submit">Ajouter les images cochées</button>
 </form>
