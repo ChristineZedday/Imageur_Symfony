@@ -4,7 +4,8 @@
 
 {% block body %}
 {{ parent() }}
-    <h1>Rubrique index</h1>
+<article>
+    <h1>Index des rubriques</h1>
 
     <table class="table">
         <thead>
@@ -22,17 +23,19 @@
                 <td>{{ rubrique.nom }}</td>
                 <td>{{ rubrique.titre }}</td>
                 <td>
-                    <a href="{{ path('rubrique_show', {'id': rubrique.id}) }}">show</a>
-                    <a href="{{ path('rubrique_edit', {'id': rubrique.id}) }}">edit</a>
+                    <a href="{{ path('rubrique_show', {'id': rubrique.id}) }}">  {{ include('./_showicone.html.twig')}}</a>
+                    <a href="{{ path('rubrique_edit', {'id': rubrique.id}) }}">  {{ include('./_editicone.html.twig')}}</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="4">no records found</td>
+                <td colspan="4">Pas de rubriques enregistrées</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('rubrique_new') }}">Create new</a>
+    <a href="{{ path('rubrique_new') }}">Ajouter une rubrique</a>
+      {{ include('./_crediticones.html.twig')}}
+      </article>
 {% endblock %}

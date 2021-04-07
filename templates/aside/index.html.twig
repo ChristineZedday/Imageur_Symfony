@@ -23,8 +23,8 @@
                 <td>{{ aside.nom }}</td>
                 <td>{{ aside.contenu }}</td>
                 <td>
-                    <a href="{{ path('aside_show', {'id': aside.id}) }}">show</a>
-                    <a href="{{ path('aside_edit', {'id': aside.id}) }}">edit</a>
+                    <a href="{{ path('aside_show', {'id': aside.id}) }}">{{ include('./_showicone.html.twig')}}</a>
+                    <a href="{{ path('aside_edit', {'id': aside.id}) }}">{{ include('./_editicone.html.twig')}}</a>
                 </td>
             </tr>
         {% else %}
@@ -36,4 +36,5 @@
     </table>
 
     <a href="{{ path('aside_new') }}">Ajouter un à-côté</a>
+    {{ include('./_crediticones.html.twig')}}
 {% endblock %}
