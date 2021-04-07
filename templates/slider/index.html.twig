@@ -4,7 +4,8 @@
 
 {% block body %}
 {{ parent() }}
-    <h1>Slider index</h1>
+<article>
+    <h1>Index des carrousels</h1>
 
     <table class="table">
         <thead>
@@ -22,8 +23,8 @@
                 <td>{{ slider.nom }}</td>
                 <td>{{ slider.section.titre }}</td>
                 <td>
-                    <a href="{{ path('slider_show', {'id': slider.id}) }}">show</a>
-                    <a href="{{ path('slider_edit', {'id': slider.id}) }}">edit</a>
+                    <a href="{{ path('slider_show', {'id': slider.id}) }}">{{ include('./_showicone.html.twig')}}</a>
+                    <a href="{{ path('slider_edit', {'id': slider.id}) }}">{{ include('./_editicone.html.twig')}}</a>
                 </td>
             </tr>
         {% else %}
@@ -35,5 +36,7 @@
     </table>
 
     <a href="{{ path('slider_new') }}">Nouveau carrousel</a>
+    {{ include('./_crediticones.html.twig')}}
+    </article>
      
 {% endblock %}
