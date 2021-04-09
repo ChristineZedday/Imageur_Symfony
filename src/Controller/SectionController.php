@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Section;
+use App\Entity\Article;
 use App\Form\SectionType;
 use App\Repository\SectionRepository;
 use App\Repository\ArticleRepository;
@@ -48,6 +49,38 @@ class SectionController extends AbstractController
         return $this->render('section/new.html.twig', [
             'section' => $section,
             'form' => $form->createView(),
+        ]);
+    }
+
+
+   
+
+
+     /**
+     * @Route("/article/{id}/new", name="new_section_article", methods={"GET","POST"})
+     */
+    public function newSectionArticle(Request $request, ArticleRepository $articleRepository, Article $article): Response
+    {
+        $section = new Section();
+
+        $section->setArticle($article) ;
+        
+       
+        $form = $this->createForm(SectionType::class, $section);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($section);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('section_index');
+        }
+
+        return $this->render('section/new.html.twig', [
+            'section' => $section,
+            'form' => $form->createView(),
+            'article' => $article,
         ]);
     }
 
