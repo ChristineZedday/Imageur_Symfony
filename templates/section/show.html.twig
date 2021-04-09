@@ -28,6 +28,10 @@
                 <th>Rang dans l'article</th>
                 <td>{{ section.rang }}</td>
             </tr>
+             <tr>
+                <th>Carrousel?</th>
+                 <td>{% if (section.slider) %}{{ section.slider.nom }} {% else %} Pas de carrousel {% endif %}</td>
+            </tr>
         </tbody>
     </table>
 <p>

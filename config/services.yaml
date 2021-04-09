@@ -14,6 +14,7 @@ parameters:
     icons_directory: 'C:/laragon/www/imageur_symfony/public/icones/'
      ##chevaux2021.test correspond à localhost/chevaux2021 (pretty URL Laragon)
     images_url: 'http://chevaux2021.test/images'
+    files_url: 'http://chevaux2021.test/fichiers'
 
 services:
     # default configuration for services in *this* file

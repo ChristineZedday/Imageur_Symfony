@@ -3,4 +3,5 @@ twig:
     globals:
         images: '%images_url%'
         petites_images: '%images_url%/petites_images/'
+        fichiers: '%files_url%/'
         
