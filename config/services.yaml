@@ -4,17 +4,24 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
-    images_directory: 'C:/laragon/www/chevaux2021/images'
-    generated_directory: 'C:/laragon/www/chevaux2021/fichiers'
-    generated_assets: 'C:/laragon/www/chevaux2021/ressources'
+    generated_directory: 'C:/laragon/www/chevaux2021'
+    images_directory: '%generated_directory%/images'
+    thumbs_directory: '%images_directory%/petites_images'
+    big_images_directory: '%images_directory%/grandes_images'
+    middle_images_directory: '%images_directory%' 
+    generated_assets: '%generated_directory%/ressources'
+    generated_css: '%generated_assets%/css'
+    generated_pages: '%generated_directory%/fichiers'
+    generated_includes: '%generated_directory%/fichiers'
     author: 'Christine Zedday'
     footerText1: 'Textes et dessins de Christine Zedday'
     footerText2: 'Photos Christine Zedday, Alain et H&eacute;l&egrave;ne Bache, Leïla et Nora Zedday '
     contact: 'chrizedday@free.fr'
     icons_directory: 'C:/laragon/www/imageur_symfony/public/icones/'
      ##chevaux2021.test correspond à localhost/chevaux2021 (pretty URL Laragon)
-    images_url: 'http://chevaux2021.test/images'
-    files_url: 'http://chevaux2021.test/fichiers'
+    generated_site_url: 'http://chevaux2021.test'
+    images_url: '%generated_site_url%/images'
+    files_url: '%generated_site_url%/fichiers'
 
 services:
     # default configuration for services in *this* file

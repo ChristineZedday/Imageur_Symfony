@@ -36,6 +36,9 @@ class ImageController extends AbstractController
      */
     public function new(Request $request): Response
     {
+        $thumbs = $this->getParameter('thumbs_directory');
+        $grandes = $this->getParameter('grandes_images_directory');
+        $autres = $this->getParameter('middle_images_directory');
         $image = new Image();
         $form = $this->createForm(ImageType::class, $image);
         $form->handleRequest($request);
@@ -51,24 +54,18 @@ class ImageController extends AbstractController
             $image->setNom($fichier);
 
             if ('carrousel' === $form->get('pour')->getData()) {
-                $dossier = '/grandes_images';
+                $dossier = $grandes;
             } else {
-                $dossier = '';
+                $dossier = $autres;
             }
 
-            // On copie le fichier dans le dossier uploads
+            // On copie le fichier dans le dossier images du site
 
-            $photo->move(
-                $this->getParameter('images_directory').$dossier,
-                $fichier
-            );
+            $photo->move($dossier,$fichier);
 
             if (\array_key_exists('vignette', $_POST) && null !== $form->get('vignette')) {
-                $dossier = '/petites_images';
-                $vignette->move(
-                    $this->getParameter('images_directory').$dossier,
-                    $fichier
-                );
+                $dossier = $thumbs;
+                $vignette->move($dossier,$fichier);
                 $image->setVignette(true);
             }
 
@@ -100,14 +97,15 @@ class ImageController extends AbstractController
      */
     public function edit(Request $request, Image $image): Response
     {
+        $thumbs = $this->getParameter('thumbs_directory');
+       
         $form = $this->createForm(ImageType::class, $image);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             if (\array_key_exists('vignette', $_POST)) {
-                $dossier = '/petites_images';
                 $vignette->move(
-                    $this->getParameter('images_directory').$dossier,
+                    $thumbs,
                     $image->getNom()
                 );
                 $image->setVignette(true);

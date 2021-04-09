@@ -101,7 +101,7 @@ class SectionController extends AbstractController
      */
     public function sectionGenere(Section $section)
     {
-        $dir = $this->getParameter('generated_directory');
+        $dir = $this->getParameter('generated_includes');
         $section->genereSection($dir);
 
         return $this->redirectToRoute('section_index');

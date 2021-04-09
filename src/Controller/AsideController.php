@@ -98,7 +98,7 @@ class AsideController extends AbstractController
      */
     public function asideGenere(Aside $aside)
     {
-        $dir = $this->getParameter('generated_directory');
+        $dir = $this->getParameter('generated_includes');
         $aside->genereAside($dir);
 
         return $this->redirectToRoute('aside_index');
