@@ -14,8 +14,8 @@ class GeneratedController extends AbstractController
      */
     public function index(): Response
     {
-       
-        return new RedirectResponse('http://localhost/chevaux2021');
+        $url = $this->getParameter('generated_site_url');
+        return new RedirectResponse($url);
        
     }
 }

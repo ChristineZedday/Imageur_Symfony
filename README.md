@@ -10,3 +10,29 @@
 
 <p>Mais finalement, tant qu'à générer les carrousels, pourquoi ne pas générer directement les sections, puis les articles, ainsi que les menus correspondants?
  Du coup, mon projet est sur le point de se transformer en mini CMS qui fonctionne en local pour gérer un site distant statique!</p>
+ 
+ <p>Imageur est configuré pour un site qui a l'architecture suivante, et qui se trouve dans un dossier ectérieur à Imageur:</p>
+ <h1>Index of /chevaux2021</h1>
+<ul><li><a href="/"> Parent Directory</a></li>
+<li><a href="fichiers/"> fichiers/</a></li>
+<li><a href="images/"> images/</a></li>
+<li><a href="ressources/"> ressources/</a></li>
+</ul>
+
+<p>Tous les fichiers php se trouvent à la racine de fichiers</p>
+
+<h1>Index of /chevaux2021/images</h1>
+<ul><li><a href="/chevaux2021/"> Parent Directory</a></li>
+<li><a href="grandes_images/"> grandes_images/</a></li>
+<li><a href="petites_images/"> petites_images/</a></li>
+</ul>
+
+<h1>Index of /chevaux2021/ressources</h1>
+<ul><li><a href="/chevaux2021/"> Parent Directory</a></li>
+<li><a href="css/"> css/</a></li>
+<li><a href="js/"> js/</a></li>
+</ul>
+
+<p>Les fichiers de configuration (nom du site, URLs, auteur, etc...) sont dans le dossier config, services.yaml et twig.yaml dans le sous-dossier packages (j'ai fini par le trouver, il va m'être bien utile!)<br/>
+Je travaille actuellement à mettre toute l'architecture du site généré dans les fichiers de config afin que ce soit plus facile à adapter à n'importe quel site.
+ </p>

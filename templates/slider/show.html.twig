@@ -30,7 +30,7 @@
     {% for image in slider.images %}
    
         <figure class="slide">
-            <img class="clickable" src="{{ 'http://chevaux2021.test/images/petites_images/'~image.nom}}" onclick="displaySlides(src);" alt="{{image.alt}}" />
+            <img class="clickable" src="{{ petites_images~image.nom}}" onclick="displaySlides(src);" alt="{{image.alt}}" />
             <figcaption hidden>
             {{image.legend}}
             </figcaption>

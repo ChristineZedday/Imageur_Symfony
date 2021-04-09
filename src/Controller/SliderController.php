@@ -165,8 +165,13 @@ class SliderController extends AbstractController
      */
     public function sliderGenere(Slider $slider)
     {
-        $dir = $this->getParameter('generated_directory');
-        $slider->genereSlider($dir);
+        $dir = $this->getParameter('generated_includes');
+        $imgs = $this->getParameter('images_url');
+        $imgs = $imgs.'/';
+        $slider->genereSlider($dir, $imgs);
+        $slider->setIsGenerated(true);
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->flush();
 
         return $this->redirectToRoute('slider_index');
     }

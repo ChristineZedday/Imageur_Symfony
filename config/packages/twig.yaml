@@ -1,2 +1,8 @@
 twig:
     default_path: '%kernel.project_dir%/templates'
+    globals:
+        images: '%images_url%'
+        petites_images: '%images_url%/petites_images/'
+        moyennes_images: '%images_url%/'
+        fichiers: '%files_url%/'
+        

@@ -45,11 +45,6 @@ class Section
      */
     private $contenu;
 
-    
-    public function __construct()
-    {
-        $this->articles = new ArrayCollection();
-    }
 
     public function getId(): ?int
     {
@@ -128,17 +123,7 @@ class Section
         return $this;
     }
 
-    public function getG(): ?Article
-    {
-        return $this->g;
-    }
-
-    public function setG(?Article $g): self
-    {
-        $this->g = $g;
-
-        return $this;
-    }
+   
 
     public function genereSection($dir)
     {

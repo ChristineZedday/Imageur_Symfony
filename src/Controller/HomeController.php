@@ -32,7 +32,7 @@ class HomeController extends AbstractController
      */
     public function navGenere(RubriqueRepository $rubriqueRepository)
     {
-        $dir = $this->getParameter('generated_directory');
+        $dir = $this->getParameter('generated_includes');
         $nav= new Nav();
         $nav->genereNav($dir, $rubriqueRepository);
 
@@ -44,7 +44,7 @@ class HomeController extends AbstractController
      */
     public function footerGenere()
     {
-        $dir = $this->getParameter('generated_directory');
+        $dir = $this->getParameter('generated_includes');
         $text1 = $this->getParameter('footerText1');
         $text2 = $this->getParameter('footerText2');
         $contact =  $this->getParameter('contact');
@@ -59,7 +59,7 @@ class HomeController extends AbstractController
      */
     public function metasGenere()
     {
-        $dir = $this->getParameter('generated_directory');
+        $dir = $this->getParameter('generated_includes');
         $metas= new Metas();
         $metas->genereMetas($dir);
 
@@ -71,8 +71,8 @@ class HomeController extends AbstractController
      */
     public function cssCopie()
     {
-        $dir = $this->getParameter('generated_assets');
-        $cop = copy ('build/app.css' , $dir.'/css/app.css' );
+        $dir = $this->getParameter('generated_css');
+        $cop = copy ('build/app.css' , $dir.'/app.css' );
 
         return $this->redirectToRoute('home');
     }

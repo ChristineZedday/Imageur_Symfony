@@ -86,6 +86,7 @@ class ArticleController extends AbstractController
         ]);
     }
 
+
     /**
      * @Route("/{id}", name="article_delete", methods={"DELETE"})
      */
@@ -106,7 +107,7 @@ class ArticleController extends AbstractController
      */
     public function articleGenere(Article $article)
     {
-        $dir = $this->getParameter('generated_directory');
+        $dir = $this->getParameter('generated_pages');
         $article->genereArticle($dir);
 
         return $this->redirectToRoute('article_index');

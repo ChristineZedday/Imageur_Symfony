@@ -188,8 +188,8 @@ class Article
         fwrite($articleFile, '<?php include(\'metas.php\'); ?>');
         fwrite($articleFile, '</head><body><div id = "conteneur">');
         if (file_exists($dir.'/nav.php'))
-        { fwrite($articleFile, '<?php include(\'nav.php\'); ?>');}
-        fwrite($articleFile, '<article class="contenu"><h1>'.$this->getTitre().'</h1>');
+        { fwrite($articleFile, '<div><?php include(\'nav.php\'); ?></div>');}
+        fwrite($articleFile, '<div class="element" id="main"><article class="contenu"><h1>'.$this->getTitre().'</h1>');
         foreach ($this->getSections() as $section)
        {
         if (!file_exists($dir.'/section_'.$section->getId().'.php'))
@@ -213,7 +213,7 @@ class Article
             {
                 fwrite($articleFile, '<?php include(\'aside_'.$this->getAside()->getNom().'.php\'); ?>');
             }
-            fwrite($articleFile, '</div>');   
+            fwrite($articleFile, '</div></div>');   
         }
         fwrite($articleFile, '   <script type="text/javascript" src="../ressources/js/main.js">  </script></body></html>');
         
