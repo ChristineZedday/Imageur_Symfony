@@ -166,7 +166,7 @@ class SliderController extends AbstractController
     public function sliderGenere(Slider $slider)
     {
         $dir = $this->getParameter('generated_includes');
-        $imgs = $this->getParameter('images_url');
+        $imgs = $this->getParameter('petites_images_url');
         $imgs = $imgs.'/';
         $slider->genereSlider($dir, $imgs);
         $slider->setIsGenerated(true);

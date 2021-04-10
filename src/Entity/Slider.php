@@ -117,8 +117,8 @@ class Slider
         fwrite($sliderFile, '<div class="container"> ');
         foreach ($this->getImages() as $image) {
             fwrite($sliderFile, '<figure class="slide"> ');
-            $src = $imgs.'petites_images/'.$image->getNom();
-            fwrite($sliderFile, ' <img class="clickable" src="'.$src.'" width=150 height=100 onclick="displaySlides(src) ;"> ');
+            $src = $imgs.$image->getNom();
+            fwrite($sliderFile, ' <img class="clickable" src="'.$src.'" width=150 height=100 onclick="displaySlides(src) ;" /> ');
             fwrite($sliderFile, '<figcaption hidden>'.$image->getLegend().'</figcaption>');
             fwrite($sliderFile, '</figure> ');
         }

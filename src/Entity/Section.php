@@ -125,7 +125,7 @@ class Section
 
    
 
-    public function genereSection($dir)
+    public function genereSection($dir, $imgs)
     {
         $path = $dir.'/section_'.$this->getId().'.php';
         $sectionFile = fopen($path, 'w');
@@ -141,9 +141,9 @@ class Section
             $nom = $this->getSlider()->getNom();
             if (!file_exists($dir.'/slider_'.$nom.'.php'))
             {
-                $this->getSlider()->genereSlider($dir);
+                $this->getSlider()->genereSlider($dir, $imgs);
             }
-            $fichier = 'slider_'.$nom.'.php'; //si structure site distant différents dossiers, ajuster
+            $fichier = $dir.'/slider_'.$nom.'.php'; //si structure site distant différents dossiers, ajuster
             fwrite($sectionFile, '<?php include (\''.$fichier.'\'); ?>');
         }
         fwrite($sectionFile, '</section>');

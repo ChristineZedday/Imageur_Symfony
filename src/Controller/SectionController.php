@@ -135,7 +135,8 @@ class SectionController extends AbstractController
     public function sectionGenere(Section $section)
     {
         $dir = $this->getParameter('generated_includes');
-        $section->genereSection($dir);
+        $imgs = $this->getParameter('petites_images_url').'/';
+        $section->genereSection($dir, $imgs);
 
         return $this->redirectToRoute('section_index');
     }
