@@ -74,7 +74,7 @@ class SectionController extends AbstractController
             $entityManager->persist($section);
             $entityManager->flush();
 
-            return $this->redirectToRoute('section_index');
+            return $this->redirectToRoute('article_show', ['id' =>$article->getId()]);
         }
 
         return $this->render('section/new.html.twig', [

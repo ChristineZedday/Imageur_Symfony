@@ -3,6 +3,8 @@
 {% block title %}Aside index{% endblock %}
 
 {% block body %}
+       {{ parent() }}
+<article>
     <h1>Index des à-côté</h1>
 
     <table class="table">
@@ -16,6 +18,7 @@
             </tr>
         </thead>
         <tbody>
+
         {% for aside in asides %}
             <tr>
                 <td>{{ aside.id }}</td>
@@ -37,4 +40,5 @@
 
     <a href="{{ path('aside_new') }}">Ajouter un à-côté</a>
     {{ include('./_crediticones.html.twig')}}
+    </article>
 {% endblock %}
