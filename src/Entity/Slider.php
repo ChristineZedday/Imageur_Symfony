@@ -40,7 +40,7 @@ class Slider
 
 
     /**
-     * @ORM\OneToOne(targetEntity=Section::class, inversedBy="slider", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=Section::class, inversedBy="slider", cascade={"persist"})
      */
     private $section;
 
@@ -113,11 +113,12 @@ class Slider
     {
         $path = $dir.'/slider_'.$this->getNom().'.php';
         $sliderFile = fopen($path, 'w');
+        $rel_images = '../images/petites_images/';
 
         fwrite($sliderFile, '<div class="container"> ');
         foreach ($this->getImages() as $image) {
             fwrite($sliderFile, '<figure class="slide"> ');
-            $src = $imgs.$image->getNom();
+            $src = $rel_images.$image->getNom();
             fwrite($sliderFile, ' <img class="clickable" src="'.$src.'" width=150 height=100 onclick="displaySlides(src) ;" /> ');
             fwrite($sliderFile, '<figcaption hidden>'.$image->getLegend().'</figcaption>');
             fwrite($sliderFile, '</figure> ');
@@ -125,6 +126,7 @@ class Slider
 
         fwrite($sliderFile, '</div>');
         fclose($sliderFile);
+        $this->setIsGenerated(true);
        
     }
 

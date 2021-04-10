@@ -169,7 +169,7 @@ class SliderController extends AbstractController
         $imgs = $this->getParameter('petites_images_url');
         $imgs = $imgs.'/';
         $slider->genereSlider($dir, $imgs);
-        $slider->setIsGenerated(true);
+        
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->flush();
 
