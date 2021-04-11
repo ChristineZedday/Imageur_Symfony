@@ -37,7 +37,7 @@ class ImageController extends AbstractController
     public function new(Request $request): Response
     {
         $thumbs = $this->getParameter('thumbs_directory');
-        $grandes = $this->getParameter('grandes_images_directory');
+        $grandes = $this->getParameter('big_images_directory');
         $autres = $this->getParameter('middle_images_directory');
         $image = new Image();
         $form = $this->createForm(ImageType::class, $image);
