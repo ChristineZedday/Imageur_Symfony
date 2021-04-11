@@ -57,6 +57,18 @@ class ImageType extends AbstractType
                         'required' => false, ]);
                 }
             });
+            $builder
+            ->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
+                $image = $event->getData();
+                $form = $event->getForm();
+                if ($image  && 'illustration' === $image->getPour()) {
+                    $form->add('section', FileType::class, [
+                        'label' => 'section ',
+                        'multiple' => false,
+                        'mapped' => true,
+                        'required' => true, ]);
+                }
+            });
 
         $builder->add('alt', TextType::class, ['label' => 'texte alternatif', 'attr' => ['size' => '150']]);
         $builder->add('legend', TextType::class, ['label' => 'légende', 'attr' => ['size' => '150']]);

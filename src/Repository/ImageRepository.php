@@ -52,7 +52,21 @@ class ImageRepository extends ServiceEntityRepository
         return $query->getResult();
     }
 
-  
+    public function findIllustrations()
+    {
+
+        $entityManager = $this->getEntityManager();
+
+       
+            $query = $entityManager->createQuery(
+                'select i
+                from App\Entity\Image i
+                where i.pour = \'illustration\'');
+        
+     
+
+        return $query->getResult();
+    } 
 
     // /**
     //  * @return Image[] Returns an array of Image objects

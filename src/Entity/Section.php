@@ -45,6 +45,13 @@ class Section
      */
     private $contenu;
 
+    /**
+     * @ORM\OneToOne(targetEntity=Image::class, mappedBy="section", cascade={"persist", "remove"})
+     */
+    private $image;
+
+    
+
 
     public function getId(): ?int
     {
@@ -149,6 +156,30 @@ class Section
         fwrite($sectionFile, '</section>');
         fclose($sectionFile);
     }
+
+    public function getImage(): ?Image
+    {
+        return $this->image;
+    }
+
+    public function setImage(?Image $image): self
+    {
+        // unset the owning side of the relation if necessary
+        if ($image === null && $this->image !== null) {
+            $this->image->setSection(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($image !== null && $image->getSection() !== $this) {
+            $image->setSection($this);
+        }
+
+        $this->image = $image;
+
+        return $this;
+    }
+
+ 
 
    
 }

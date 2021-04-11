@@ -58,6 +58,13 @@ class Image
      */
     private $rang;
 
+    /**
+     * @ORM\OneToOne(targetEntity=Section::class, inversedBy="image", cascade={"persist"})
+     */
+    private $section;
+
+   
+
     public function getId(): ?int
     {
         return $this->id;
@@ -142,4 +149,20 @@ class Image
 
         return $this;
     }
+
+    public function getSection(): ?Section
+    {
+        return $this->section;
+    }
+
+    public function setSection(?Section $section): self
+    {
+        $this->section = $section;
+
+        return $this;
+    }
+
+  
+
+   
 }

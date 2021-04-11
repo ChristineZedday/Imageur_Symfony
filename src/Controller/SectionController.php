@@ -7,6 +7,7 @@ use App\Entity\Article;
 use App\Form\SectionType;
 use App\Repository\SectionRepository;
 use App\Repository\ArticleRepository;
+use App\Repository\ImageRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -30,10 +31,11 @@ class SectionController extends AbstractController
     /**
      * @Route("/new", name="section_new", methods={"GET","POST"})
      */
-    public function new(Request $request, ArticleRepository $articleRepository): Response
+    public function new(Request $request, ArticleRepository $articleRepository ): Response
     {
         $section = new Section();
         $articles = $articleRepository->findAll();
+      
     
         $form = $this->createForm(SectionType::class, $section, ['articles' => $articles,]);
         $form->handleRequest($request);
@@ -97,7 +99,7 @@ class SectionController extends AbstractController
     /**
      * @Route("/{id}/edit", name="section_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, Section $section, ArticleRepository $articleRepository): Response
+    public function edit(Request $request, Section $section, ArticleRepository $articleRepository ): Response
     {
         $articles = $articleRepository->findAll();
         $form = $this->createForm(SectionType::class, $section,  ['articles' => $articles,]);
