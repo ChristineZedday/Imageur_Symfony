@@ -11,6 +11,7 @@ namespace App\Controller;
 use App\Entity\Image;
 use App\Form\ImageType;
 use App\Repository\ImageRepository;
+use App\Repository\SectionRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -36,8 +37,9 @@ class ImageController extends AbstractController
      */
     public function new(Request $request): Response
     {
+       
         $thumbs = $this->getParameter('thumbs_directory');
-        $grandes = $this->getParameter('grandes_images_directory');
+        $grandes = $this->getParameter('big_images_directory');
         $autres = $this->getParameter('middle_images_directory');
         $image = new Image();
         $form = $this->createForm(ImageType::class, $image);
@@ -98,6 +100,7 @@ class ImageController extends AbstractController
     public function edit(Request $request, Image $image): Response
     {
         $thumbs = $this->getParameter('thumbs_directory');
+       
        
         $form = $this->createForm(ImageType::class, $image);
         $form->handleRequest($request);

@@ -3,6 +3,8 @@
 {% block title %}Image{% endblock %}
 
 {% block body %}
+{{ parent() }}
+<article>
     <h1>Image</h1>
 
     <table class="table">
@@ -25,12 +27,19 @@
             </tr>
             <tr>
             <th>Vignette</th>
-            </tr>
+           
               <td>{% if image.vignette %} oui {% else %} non {% endif %}</td>
+              </tr>
             <tr>
                 <th>Usage</th>
                 <td>{{ image.pour }}</td>
             </tr>
+            {% if image.pour == 'illustration' %}
+            <tr>
+                <th>Section</th>
+                <td>{{ image.section.titre }}</td>
+            </tr>
+            {% endif %}
              <tr>
                 <th>Rang</th>
                 <td>{{ image.rang }}</td>
@@ -40,7 +49,7 @@
       {%  if image.pour == 'carrousel' %}
         <img src="{{ petites_images~image.nom}}"  width="150">
       {% else %}
-      <img src="{{ images~image.nom }}"  width="300">
+      <img src="{{ moyennes_images~image.nom }}"  width="300">
       {% endif %}
 
     <a href="{{ path('image_index') }}">Retour à la liste</a>
@@ -48,4 +57,5 @@
     <a href="{{ path('image_edit', {'id': image.id}) }}">Modifier</a>
 
     {{ include('image/_delete_form.html.twig') }}
+    </article>
 {% endblock %}

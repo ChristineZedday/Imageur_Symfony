@@ -36,3 +36,4 @@
 <p>Les fichiers de configuration (nom du site, URLs, auteur, etc...) sont dans le dossier config, services.yaml et twig.yaml dans le sous-dossier packages (j'ai fini par le trouver, il va m'être bien utile!)<br/>
 Je travaille actuellement à mettre toute l'architecture du site généré dans les fichiers de config afin que ce soit plus facile à adapter à n'importe quel site.
  </p>
+ <p>Pour le javascript de la vue twig des carrousels (main.js qui est dans le dossier public/js), il faut mettre la valeur {{ grandes_images }} dans un input hidden pour la récupérer (ça ne concerne pas le site généré, pour lequel il faut l'url du dossier grandes_images du site en dur, évidemment).</p>

@@ -45,6 +45,13 @@ class Section
      */
     private $contenu;
 
+    /**
+     * @ORM\OneToOne(targetEntity=Image::class, mappedBy="section", cascade={"persist", "remove"})
+     */
+    private $image;
+
+    
+
 
     public function getId(): ?int
     {
@@ -125,7 +132,7 @@ class Section
 
    
 
-    public function genereSection($dir)
+    public function genereSection($dir, $imgs, $image)
     {
         $path = $dir.'/section_'.$this->getId().'.php';
         $sectionFile = fopen($path, 'w');
@@ -141,14 +148,43 @@ class Section
             $nom = $this->getSlider()->getNom();
             if (!file_exists($dir.'/slider_'.$nom.'.php'))
             {
-                $this->getSlider()->genereSlider($dir);
+                $this->getSlider()->genereSlider($dir, $imgs);
             }
-            $fichier = 'slider_'.$nom.'.php'; //si structure site distant différents dossiers, ajuster
+            $fichier = $dir.'/slider_'.$nom.'.php'; //si structure site distant différents dossiers, ajuster
             fwrite($sectionFile, '<?php include (\''.$fichier.'\'); ?>');
+        }
+        else if (null !== $this->getImage()) {
+            $nom = $this->getImage()->getNom();
+            $alt = $this->getImage()->getAlt();
+            fwrite($sectionFile, '<img src="'.$image.$nom.'" alt="'.$alt.'" />');
         }
         fwrite($sectionFile, '</section>');
         fclose($sectionFile);
     }
+
+    public function getImage(): ?Image
+    {
+        return $this->image;
+    }
+
+    public function setImage(?Image $image): self
+    {
+        // unset the owning side of the relation if necessary
+        if ($image === null && $this->image !== null) {
+            $this->image->setSection(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($image !== null && $image->getSection() !== $this) {
+            $image->setSection($this);
+        }
+
+        $this->image = $image;
+
+        return $this;
+    }
+
+ 
 
    
 }

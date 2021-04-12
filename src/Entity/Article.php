@@ -71,6 +71,13 @@ class Article
      */
     private $aside;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $lien;
+
+   
+
    
 
     
@@ -172,50 +179,56 @@ class Article
         return $this;
     }
 
-    public function genereArticle($dir)
+    public function genereArticle($dir, $pages, $imgs, $includes, $image)
     {
-        $path = $dir.'/'.$this->getNom().'.php';
+        $path = $pages.'/'.$this->getNom().'.php';
+
+        $rel_includes = '';
+       
         $articleFile = fopen($path, 'w');
 
         fwrite($articleFile, '<!DOCTYPE html><html lang="fr"><head><title>'.$this->getTitre().'</title>');
         fwrite($articleFile, '<meta name="author" content="'.$this->getAuteur().'" />');
         fwrite($articleFile, '<meta name="description" content="'.$this->getDescription().'"/>');
         fwrite($articleFile, '<meta name="keywords" content="'.$this->getKeywords().'"/>');
-        if (!file_exists($dir.'/metas.php'))
+       if (!file_exists($includes.'/metas.php'))
         {
             $metas = new Metas();
-            $metas->genereMetas($dir);}
-        fwrite($articleFile, '<?php include(\'metas.php\'); ?>');
-        fwrite($articleFile, '</head><body><div id = "conteneur">');
-        if (file_exists($dir.'/nav.php'))
-        { fwrite($articleFile, '<div><?php include(\'nav.php\'); ?></div>');}
-        fwrite($articleFile, '<div class="element" id="main"><article class="contenu"><h1>'.$this->getTitre().'</h1>');
-        foreach ($this->getSections() as $section)
+            $metas->genereMetas($includes);}
+        fwrite($articleFile, '<?php include(\''.$rel_includes.'metas.php\'); ?>');
+     fwrite($articleFile, '</head><body><div id = "conteneur">');
+        if (file_exists($includes.'/nav.php'))
+        { fwrite($articleFile, '<div><?php include(\''.$rel_includes.'nav.php\'); ?></div>');}
+        fwrite($articleFile, '<div class="element" id="main"><article class="contenu">');
+        fwrite($articleFile, '<h1>'.$this->getTitre().'</h1>');
+       foreach ($this->getSections() as $section)
        {
-        if (!file_exists($dir.'/section_'.$section->getId().'.php'))
-        {$section->genereSection($dir);}
-       fwrite($articleFile, '<?php include(\'section_'.$section->getId().'.php\'); ?>');
+        if (!file_exists($includes.'/section_'.$section->getId().'.php'))
+        {$section->genereSection($includes,$imgs, $image);}
+       fwrite($articleFile, '<?php include (\''.$rel_includes.'section_'.$section->getId().'.php\'); ?>');
       
       
        }
     
-       if (!file_exists($dir.'/footer.php'))
+      if (!file_exists($includes.'/footer.php'))
         {
             $footer = new Footer();
-            $footer->genereFooter($dir,'');}
-            fwrite($articleFile, '<?php include(\'footer.php\'); ?>');
+            $footer->genereFooter($includes,'');}
+            fwrite($articleFile, '<?php include(\''.$rel_includes.'footer.php\'); ?>');
 
         fwrite($articleFile, '</article></div>');
-        if ($this->GetAside())
+       if ($this->GetAside())
         {
             fwrite($articleFile, '<div class=element id="acote">'); 
-            if (file_exists($dir.'/aside_'.$this->getAside()->getNom().'.php'))
+            if (file_exists($includes.'/aside_'.$this->getAside()->getNom().'.php'))
             {
-                fwrite($articleFile, '<?php include(\'aside_'.$this->getAside()->getNom().'.php\'); ?>');
+                fwrite($articleFile, '<?php include(\''.$rel_includes.'aside_'.$this->getAside()->getNom().'.php\'); ?>');
             }
-            fwrite($articleFile, '</div></div>');   
+            fwrite($articleFile, '</div>');   
         }
-        fwrite($articleFile, '   <script type="text/javascript" src="../ressources/js/main.js">  </script></body></html>');
+        fwrite($articleFile, '</div>');   
+        fwrite($articleFile, '<script type="text/javascript" src="../ressources/js/main.js"> </script></body></html>');
+        fclose($articleFile);
         
     }
 
@@ -278,6 +291,20 @@ class Article
 
         return $this;
     }
+
+    public function getLien(): ?string
+    {
+        return $this->lien;
+    }
+
+    public function setLien(?string $lien): self
+    {
+        $this->lien = $lien;
+
+        return $this;
+    }
+
+   
 
 
 }

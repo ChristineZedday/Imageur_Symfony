@@ -3,10 +3,13 @@
 {% block title %}Nouvelle Image{% endblock %}
 
 {% block body %}
+{{ parent() }}
+<article>
     <h1>Télécharger une image et l'enregistrer en base</h1>
   
 
     {{ include('image/_form.html.twig') }}
 
     <a href="{{ path('image_index') }}">Retour à la liste</a>
+    </article>
 {% endblock %}

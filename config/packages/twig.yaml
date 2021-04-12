@@ -4,5 +4,6 @@ twig:
         images: '%images_url%'
         petites_images: '%images_url%/petites_images/'
         moyennes_images: '%images_url%/'
+        grandes_images: '%images_url%/grandes_images/'
         fichiers: '%files_url%/'
         

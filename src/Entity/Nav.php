@@ -30,9 +30,15 @@ class Nav
             foreach ($rubrique->getArticles() as $article)
             {
                 $file = $article->getNom().'.php';
+                $lien = $article->getLien();
                
                 if (file_exists($dir.'/'.$file)) {  
+                    if (null !== $lien) {
+                        fwrite($navFile, '<li><a href="'.$file.'">'.$lien.'</a></li>');      
+                    }
+                    else {
             fwrite($navFile, '<li><a href="'.$file.'">'.$article->getTitre().'</a></li>');
+                    }
                 }
 
             }

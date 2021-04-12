@@ -21,7 +21,13 @@ parameters:
      ##chevaux2021.test correspond à localhost/chevaux2021 (pretty URL Laragon)
     generated_site_url: 'http://chevaux2021.test'
     images_url: '%generated_site_url%/images'
+    petites_images_url: '%images_url%/petites_images'
     files_url: '%generated_site_url%/fichiers'
+    relatif_files_images_url: '../images/'
+    relatif_includes_petites_images_url: '%relatif_files_images_url%petites_images/'
+    relatif_files_grandes_images_url: '%relatif_files_images_url%grandes_images/'
+    relatif_files_moyennes_images_url: '%relatif_files_images_url%'
+    relatif_files_includes_url: './'
 
 services:
     # default configuration for services in *this* file

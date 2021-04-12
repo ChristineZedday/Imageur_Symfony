@@ -3,6 +3,7 @@
 {% block title %}Slider{% endblock %}
 
 {% block body %}
+{{ parent() }}
 <article>
     <h1>Carrousel</h1>
 
@@ -38,6 +39,7 @@
     
 
     {% endfor %}
+     <input type="hidden" id="param" value="{{ grandes_images }}"/>
     </div>
     <a href="{{ path('slider_index') }}">Retourner à la liste</a>
 
