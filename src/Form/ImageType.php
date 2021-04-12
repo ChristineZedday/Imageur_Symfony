@@ -22,12 +22,12 @@ class ImageType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $titres = [];
-            if (!empty($options['sections'])) {
-                foreach ($options['sections'] as $section) {
-                    $titres[$section->getTitre().' article '.$section->getArticle()->getTitre()] = $section;
-                }
-              }
+        // $titres = [];
+        //     if (!empty($options['sections'])) {
+        //         foreach ($options['sections'] as $section) {
+        //             $titres[$section->getTitre().' article '.$section->getArticle()->getTitre()] = $section;
+        //         }
+        //       }
        
         $builder
             ->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
@@ -65,19 +65,19 @@ class ImageType extends AbstractType
                       ]);
                 }
             });
-            $builder
-            ->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) use ($titres) {
-                $image = $event->getData();
-                $form = $event->getForm();
-                if (!$image || null === $image->getId() || 'illustration' === $image->getPour()) {
-                    $form->add('section', ChoiceType::class, [
-                        'label' => 'section ',
-                        'multiple' => 'false',
-                        'mapped' => true,
-                        'required' => true,
-                        'choices' =>  $titres, ]);
-                }
-            });
+            // $builder
+            // ->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) use ($titres) {
+            //     $image = $event->getData();
+            //     $form = $event->getForm();
+            //     if (!$image || null === $image->getId() || 'illustration' === $image->getPour()) {
+            //         $form->add('section', ChoiceType::class, [
+            //             'label' => 'section ',
+            //             'multiple' => 'false',
+            //             'mapped' => true,
+            //             'required' => true,
+            //             'choices' =>  $titres, ]);
+            //     }
+            // });
 
         $builder->add('alt', TextType::class, ['label' => 'texte alternatif', 'attr' => ['size' => '150']]);
         $builder->add('legend', TextType::class, ['label' => 'légende', 'required' => 'false', 'attr' => ['size' => '150']]);
@@ -88,7 +88,7 @@ class ImageType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Image::class,
-            'sections' => [],
+            // 'sections' => [],
         ]);
     }
 }

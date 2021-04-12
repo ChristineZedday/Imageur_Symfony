@@ -23,12 +23,12 @@ class SectionType extends AbstractType
                     $titresArticles[$article->getTitre()] = $article;
                 }
               }
-        // $imagesUniques = [];
-        // if (!empty($options['images'])) {
-        //     foreach ($options['images'] as $image) {
-        //         $imagesUniques[$image->getNom()] = $image;
-        //     }
-        //   }
+        $imagesUniques = [];
+        if (!empty($options['images'])) {
+            foreach ($options['images'] as $image) {
+                $imagesUniques[$image->getNom()] = $image;
+            }
+          }
            
         $builder
         ->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) use ($titresArticles) {
@@ -52,20 +52,20 @@ class SectionType extends AbstractType
             ->add('Contenu',  TextareaType::class, ['label' => 'contenu', 'attr' => ['rows' => '15', 'cols' => '100']])
             ->add('rang');
 
-            // $builder
-            // ->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) use ($imagesUniques) {
-            //     $section = $event->getData();
-            //     $form = $event->getForm();
+            $builder
+            ->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) use ($imagesUniques) {
+                $section = $event->getData();
+                $form = $event->getForm();
                
-            //    if (null === $section->getSlider()) { //pas à la fois une imge plus un carrousel!
+               if (null === $section->getSlider()) { //pas à la fois une imge plus un carrousel!
                
                
-                //    $form->add('image', ChoiceType::class,[
-                // 'choices' => $imagesUniques,
-                // 'multiple' => false,
-                // 'mapped' => true,
-                // 'required' => true]);
-                // }});
+                   $form->add('image', ChoiceType::class,[
+                'choices' => $imagesUniques,
+                'multiple' => false,
+                'mapped' => true,
+                'required' => false]);
+                }});
     }
             
     public function configureOptions(OptionsResolver $resolver)
@@ -73,7 +73,7 @@ class SectionType extends AbstractType
         $resolver->setDefaults([
             'data_class' => Section::class,
             'articles' => [],
-            // 'images' =>[],
+            'images' =>[],
         ]);
     }
 }

@@ -35,14 +35,14 @@ class ImageController extends AbstractController
     /**
      * @Route("/new", name="image_new", methods={"GET","POST"})
      */
-    public function new(Request $request, SectionRepository $sectionRepository): Response
+    public function new(Request $request): Response
     {
-        $sections = $sectionRepository->findAll();
+       
         $thumbs = $this->getParameter('thumbs_directory');
         $grandes = $this->getParameter('big_images_directory');
         $autres = $this->getParameter('middle_images_directory');
         $image = new Image();
-        $form = $this->createForm(ImageType::class, $image, ['sections' => $sections]);
+        $form = $this->createForm(ImageType::class, $image);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -97,12 +97,12 @@ class ImageController extends AbstractController
     /**
      * @Route("/{id}/edit", name="image_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, Image $image, SectionRepository $sectionRepository): Response
+    public function edit(Request $request, Image $image): Response
     {
         $thumbs = $this->getParameter('thumbs_directory');
-        $sections = $sectionRepository->findAll();
        
-        $form = $this->createForm(ImageType::class, $image, ['sections' => $sections]);
+       
+        $form = $this->createForm(ImageType::class, $image);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

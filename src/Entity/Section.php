@@ -132,7 +132,7 @@ class Section
 
    
 
-    public function genereSection($dir, $imgs)
+    public function genereSection($dir, $imgs, $image)
     {
         $path = $dir.'/section_'.$this->getId().'.php';
         $sectionFile = fopen($path, 'w');
@@ -152,6 +152,11 @@ class Section
             }
             $fichier = $dir.'/slider_'.$nom.'.php'; //si structure site distant différents dossiers, ajuster
             fwrite($sectionFile, '<?php include (\''.$fichier.'\'); ?>');
+        }
+        else if (null !== $this->getImage()) {
+            $nom = $this->getImage()->getNom();
+            $alt = $this->getImage()->getAlt();
+            fwrite($sectionFile, '<img src="'.$image.$nom.'" alt="'.$alt.'" />');
         }
         fwrite($sectionFile, '</section>');
         fclose($sectionFile);

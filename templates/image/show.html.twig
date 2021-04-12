@@ -27,8 +27,9 @@
             </tr>
             <tr>
             <th>Vignette</th>
-            </tr>
+           
               <td>{% if image.vignette %} oui {% else %} non {% endif %}</td>
+              </tr>
             <tr>
                 <th>Usage</th>
                 <td>{{ image.pour }}</td>
@@ -36,7 +37,7 @@
             {% if image.pour == 'illustration' %}
             <tr>
                 <th>Section</th>
-                <td>{{ image.section }}</td>
+                <td>{{ image.section.titre }}</td>
             </tr>
             {% endif %}
              <tr>

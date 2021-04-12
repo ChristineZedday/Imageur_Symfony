@@ -24,7 +24,7 @@ parameters:
     petites_images_url: '%images_url%/petites_images'
     files_url: '%generated_site_url%/fichiers'
     relatif_files_images_url: '../images/'
-    relatif_files_petites_images_url: '%relatif_files_images_url%petites_images/'
+    relatif_includes_petites_images_url: '%relatif_files_images_url%petites_images/'
     relatif_files_grandes_images_url: '%relatif_files_images_url%grandes_images/'
     relatif_files_moyennes_images_url: '%relatif_files_images_url%'
     relatif_files_includes_url: './'
