@@ -25,7 +25,7 @@ class ImageType extends AbstractType
         $titres = [];
             if (!empty($options['sections'])) {
                 foreach ($options['sections'] as $section) {
-                    $titres[$section->getTitre()] = $section;
+                    $titres[$section->getTitre().' article '.$section->getArticle()->getTitre()] = $section;
                 }
               }
        
@@ -69,13 +69,13 @@ class ImageType extends AbstractType
             ->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) use ($titres) {
                 $image = $event->getData();
                 $form = $event->getForm();
-                if (!$image || 'illustration' === $image->getPour()) {
+                if (!$image || null === $image->getId() || 'illustration' === $image->getPour()) {
                     $form->add('section', ChoiceType::class, [
                         'label' => 'section ',
                         'multiple' => 'false',
                         'mapped' => true,
                         'required' => true,
-                        'choices' =>  $titres ]);
+                        'choices' =>  $titres, ]);
                 }
             });
 
