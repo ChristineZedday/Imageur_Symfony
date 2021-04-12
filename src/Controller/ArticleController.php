@@ -111,7 +111,9 @@ class ArticleController extends AbstractController
         $pages = $this->getParameter('generated_pages');
         $imgs = $this->getParameter('petites_images_url');
         $includes = $this->getParameter('generated_includes');
-        $article->genereArticle($dir, $pages, $imgs, $includes);
+        $imgs = $this->getParameter('relatif_includes_petites_images_url').'/';
+        $image = $this->getParameter('relatif_files_moyennes_images_url').'/';
+        $article->genereArticle($dir, $pages, $imgs, $includes, $image);
 
         return $this->redirectToRoute('article_index');
     }

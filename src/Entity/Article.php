@@ -71,6 +71,13 @@ class Article
      */
     private $aside;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $lien;
+
+   
+
    
 
     
@@ -172,7 +179,7 @@ class Article
         return $this;
     }
 
-    public function genereArticle($dir, $pages, $imgs, $includes)
+    public function genereArticle($dir, $pages, $imgs, $includes, $image)
     {
         $path = $pages.'/'.$this->getNom().'.php';
 
@@ -192,11 +199,12 @@ class Article
      fwrite($articleFile, '</head><body><div id = "conteneur">');
         if (file_exists($includes.'/nav.php'))
         { fwrite($articleFile, '<div><?php include(\''.$rel_includes.'nav.php\'); ?></div>');}
-        fwrite($articleFile, '<div class="element" id="main"><article class="contenu"><h1>'.$this->getTitre().'</h1>');
+        fwrite($articleFile, '<div class="element" id="main"><article class="contenu">');
+        fwrite($articleFile, '<h1>'.$this->getTitre().'</h1>');
        foreach ($this->getSections() as $section)
        {
         if (!file_exists($includes.'/section_'.$section->getId().'.php'))
-        {$section->genereSection($includes,$imgs);}
+        {$section->genereSection($includes,$imgs, $image);}
        fwrite($articleFile, '<?php include (\''.$rel_includes.'section_'.$section->getId().'.php\'); ?>');
       
       
@@ -283,6 +291,20 @@ class Article
 
         return $this;
     }
+
+    public function getLien(): ?string
+    {
+        return $this->lien;
+    }
+
+    public function setLien(?string $lien): self
+    {
+        $this->lien = $lien;
+
+        return $this;
+    }
+
+   
 
 
 }
