@@ -42,7 +42,7 @@
       {%  if image.pour == 'carrousel' %}
         <img src="{{ petites_images~image.nom}}"  width="150">
       {% else %}
-      <img src="{{ images~image.nom }}"  width="300">
+      <img src="{{ moyennes_images~image.nom }}"  width="300">
       {% endif %}
 
     <a href="{{ path('image_index') }}">Retour à la liste</a>

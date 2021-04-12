@@ -22,6 +22,13 @@ class ImageType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $titres = [];
+            if (!empty($options['sections'])) {
+                foreach ($options['sections'] as $section) {
+                    $titres[$section->getTitre()] = $section;
+                }
+              }
+       
         $builder
             ->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
                 $image = $event->getData();
@@ -54,24 +61,26 @@ class ImageType extends AbstractType
                         'label' => 'vignette ',
                         'multiple' => false,
                         'mapped' => false,
-                        'required' => false, ]);
+                        'required' => false, 
+                      ]);
                 }
             });
             $builder
-            ->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
+            ->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) use ($titres) {
                 $image = $event->getData();
                 $form = $event->getForm();
-                if ($image  && 'illustration' === $image->getPour()) {
-                    $form->add('section', FileType::class, [
+                if (!$image || 'illustration' === $image->getPour()) {
+                    $form->add('section', ChoiceType::class, [
                         'label' => 'section ',
-                        'multiple' => false,
+                        'multiple' => 'false',
                         'mapped' => true,
-                        'required' => true, ]);
+                        'required' => true,
+                        'choices' =>  $titres ]);
                 }
             });
 
         $builder->add('alt', TextType::class, ['label' => 'texte alternatif', 'attr' => ['size' => '150']]);
-        $builder->add('legend', TextType::class, ['label' => 'légende', 'attr' => ['size' => '150']]);
+        $builder->add('legend', TextType::class, ['label' => 'légende', 'required' => 'false', 'attr' => ['size' => '150']]);
         $builder->add('rang');
     }
 
@@ -79,6 +88,7 @@ class ImageType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Image::class,
+            'sections' => [],
         ]);
     }
 }

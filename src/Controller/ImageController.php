@@ -11,6 +11,7 @@ namespace App\Controller;
 use App\Entity\Image;
 use App\Form\ImageType;
 use App\Repository\ImageRepository;
+use App\Repository\SectionRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -34,13 +35,14 @@ class ImageController extends AbstractController
     /**
      * @Route("/new", name="image_new", methods={"GET","POST"})
      */
-    public function new(Request $request): Response
+    public function new(Request $request, SectionRepository $sectionRepository): Response
     {
+        $sections = $sectionRepository->findAll();
         $thumbs = $this->getParameter('thumbs_directory');
         $grandes = $this->getParameter('big_images_directory');
         $autres = $this->getParameter('middle_images_directory');
         $image = new Image();
-        $form = $this->createForm(ImageType::class, $image);
+        $form = $this->createForm(ImageType::class, $image, ['sections' => $sections]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -95,11 +97,12 @@ class ImageController extends AbstractController
     /**
      * @Route("/{id}/edit", name="image_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, Image $image): Response
+    public function edit(Request $request, Image $image, SectionRepository $sectionRepository): Response
     {
         $thumbs = $this->getParameter('thumbs_directory');
+        $sections = $sectionRepository->findAll();
        
-        $form = $this->createForm(ImageType::class, $image);
+        $form = $this->createForm(ImageType::class, $image, ['sections' => $sections]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
