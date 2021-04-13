@@ -31,6 +31,7 @@ class Rubrique
 
     /**
      * @ORM\OneToMany(targetEntity=Article::class, mappedBy="rubrique")
+     * @ORM\OrderBy({"rang" = "ASC"})
      */
     private $articles;
 

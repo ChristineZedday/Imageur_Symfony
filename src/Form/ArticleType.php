@@ -8,6 +8,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 
 class ArticleType extends AbstractType
 {
@@ -27,7 +28,8 @@ class ArticleType extends AbstractType
             ->add('titre',  TextType::class, [
                  'attr' => ['size' => '150']])
                 ->add('lien',  TextType::class, [
-                    'label' => 'Nom du lien si différent du titre'])
+                    'label' => 'Nom du lien si différent du titre',
+                    'required' => false])
             ->add('auteur')
             ->add('nom', TextType::class, [
                 'label' => 'Nom pour le fichier (éviter accents)'])
@@ -46,6 +48,10 @@ class ArticleType extends AbstractType
                 'choices' => $sides,
                 'required' =>false,
                 'multiple' => false,
+                'mapped' => true,])
+            ->add('rang', NumberType::class, [
+                'label' =>'rang dans la rubrique',
+                'required' =>false,
                 'mapped' => true,
             ])
         ;

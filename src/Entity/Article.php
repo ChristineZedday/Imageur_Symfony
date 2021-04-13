@@ -76,6 +76,11 @@ class Article
      */
     private $lien;
 
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $rang;
+
    
 
    
@@ -198,7 +203,7 @@ class Article
         fwrite($articleFile, '<?php include(\''.$rel_includes.'metas.php\'); ?>');
      fwrite($articleFile, '</head><body><div id = "conteneur">');
         if (file_exists($includes.'/nav.php'))
-        { fwrite($articleFile, '<div><?php include(\''.$rel_includes.'nav.php\'); ?></div>');}
+        { fwrite($articleFile, '<div><?php include(\''.$rel_includes.'sommaire.php\'); ?></div>');}
         fwrite($articleFile, '<div class="element" id="main"><article class="contenu">');
         fwrite($articleFile, '<h1>'.$this->getTitre().'</h1>');
        foreach ($this->getSections() as $section)
@@ -300,6 +305,18 @@ class Article
     public function setLien(?string $lien): self
     {
         $this->lien = $lien;
+
+        return $this;
+    }
+
+    public function getRang(): ?int
+    {
+        return $this->rang;
+    }
+
+    public function setRang(?int $rang): self
+    {
+        $this->rang = $rang;
 
         return $this;
     }
