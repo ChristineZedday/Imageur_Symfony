@@ -8,6 +8,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 
 class ArticleType extends AbstractType
 {
@@ -47,6 +48,10 @@ class ArticleType extends AbstractType
                 'choices' => $sides,
                 'required' =>false,
                 'multiple' => false,
+                'mapped' => true,])
+            ->add('rang', NumberType::class, [
+                'label' =>'rang dans la rubrique',
+                'required' =>false,
                 'mapped' => true,
             ])
         ;

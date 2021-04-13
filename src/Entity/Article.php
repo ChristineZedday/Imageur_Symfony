@@ -76,6 +76,11 @@ class Article
      */
     private $lien;
 
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $rang;
+
    
 
    
@@ -300,6 +305,18 @@ class Article
     public function setLien(?string $lien): self
     {
         $this->lien = $lien;
+
+        return $this;
+    }
+
+    public function getRang(): ?int
+    {
+        return $this->rang;
+    }
+
+    public function setRang(?int $rang): self
+    {
+        $this->rang = $rang;
 
         return $this;
     }
