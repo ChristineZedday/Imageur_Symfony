@@ -27,7 +27,8 @@ class ArticleType extends AbstractType
             ->add('titre',  TextType::class, [
                  'attr' => ['size' => '150']])
                 ->add('lien',  TextType::class, [
-                    'label' => 'Nom du lien si différent du titre'])
+                    'label' => 'Nom du lien si différent du titre',
+                    'required' => false])
             ->add('auteur')
             ->add('nom', TextType::class, [
                 'label' => 'Nom pour le fichier (éviter accents)'])
