@@ -203,7 +203,7 @@ class Article
         fwrite($articleFile, '<?php include(\''.$rel_includes.'metas.php\'); ?>');
      fwrite($articleFile, '</head><body><div id = "conteneur">');
         if (file_exists($includes.'/nav.php'))
-        { fwrite($articleFile, '<div><?php include(\''.$rel_includes.'nav.php\'); ?></div>');}
+        { fwrite($articleFile, '<div><?php include(\''.$rel_includes.'sommaire.php\'); ?></div>');}
         fwrite($articleFile, '<div class="element" id="main"><article class="contenu">');
         fwrite($articleFile, '<h1>'.$this->getTitre().'</h1>');
        foreach ($this->getSections() as $section)

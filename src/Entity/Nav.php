@@ -16,7 +16,7 @@ class Nav
 
 	public function genereNav($dir, RubriqueRepository $rubriqueRepository)
     {
-        $path = $dir.'/nav.php';
+        $path = $dir.'/sommaire.php';
         $navFile = fopen($path, 'w');
 		
 		$rubriques = $rubriqueRepository->findAll();
