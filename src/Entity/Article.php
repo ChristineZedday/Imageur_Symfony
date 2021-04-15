@@ -202,7 +202,7 @@ class Article
             $metas->genereMetas($includes);}
         fwrite($articleFile, '<?php include(\''.$rel_includes.'metas.php\'); ?>');
      fwrite($articleFile, '</head><body><div id = "conteneur">');
-        if (file_exists($includes.'/nav.php'))
+        if (file_exists($includes.'/sommaire.php'))
         { fwrite($articleFile, '<div><?php include(\''.$rel_includes.'sommaire.php\'); ?></div>');}
         fwrite($articleFile, '<div class="element" id="main"><article class="contenu">');
         fwrite($articleFile, '<h1>'.$this->getTitre().'</h1>');
