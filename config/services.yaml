@@ -57,5 +57,13 @@ services:
     # please note that last definitions always *replace* previous ones
     build\:
         resource: '../public/build/'
+
+    ####Services generating and including files for generated site
+    App\Service\Includor:
+        arguments:
+             $params:
+                 $includes_dir_from_files: '%relatif_files_includes_url%'
+                 $includes_dir_from_home: '%relatif_home_includes_url%'
+                 $includes_dir: '%generated_includes%'
    
     

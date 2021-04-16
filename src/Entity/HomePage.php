@@ -101,9 +101,9 @@ class HomePage
         fwrite($articleFile, '<meta name="author" content="'.$auteur.'" />');
         fwrite($articleFile, '<meta name="description" content="'.$this->getDescription().'"/>');
         fwrite($articleFile, '<meta name="keywords" content="'.$this->getKeywords().'"/>');
-        $metas = new Metas();
-        $includor = new Includor($container);
-       $includor->includeFileHomepage($this, $metas);
+    //     $metas = new Metas();
+    //     $includor = new Includor($container);
+    //    $includor->includeFileHomepage($this, $metas);
      fwrite($articleFile, '</head><body><div id = "conteneur">');
         if (file_exists($includes.'/sommaire.php'))
         { fwrite($articleFile, '<div><?php include(\''.$rel_includes.'sommaire.php\'); ?></div>');}
