@@ -16,6 +16,7 @@ use App\Entity\Metas;
 use App\Entity\Footer;
 use App\Repository\RubriqueRepository;
 
+
 class HomeController extends AbstractController
 {
     /**
@@ -35,7 +36,7 @@ class HomeController extends AbstractController
         $dir = $this->getParameter('generated_includes');
         $nav= new Nav();
         $nav->genereNav($dir, $rubriqueRepository);
-
+      
         return $this->redirectToRoute('home');
     }
 

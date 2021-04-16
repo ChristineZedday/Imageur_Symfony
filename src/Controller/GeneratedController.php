@@ -18,4 +18,6 @@ class GeneratedController extends AbstractController
         return new RedirectResponse($url);
        
     }
+
+  
 }

@@ -28,6 +28,7 @@ parameters:
     relatif_files_grandes_images_url: '%relatif_files_images_url%grandes_images/'
     relatif_files_moyennes_images_url: '%relatif_files_images_url%'
     relatif_files_includes_url: './'
+    relatif_home_includes_url: './fichiers'
 
 services:
     # default configuration for services in *this* file
@@ -50,6 +51,7 @@ services:
     App\Controller\:
         resource: '../src/Controller/'
         tags: ['controller.service_arguments']
+       
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
