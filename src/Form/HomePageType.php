@@ -30,6 +30,9 @@ class HomePageType extends AbstractType
                        ->add('contenu',  TextType::class, [
                         'required' => false, 
                        'attr' => ['size' => '150']])
+                       ->add('auteur',  TextType::class, [
+                        'required' => false, 
+                       'attr' => ['size' => '150']])
         ;
     }
 

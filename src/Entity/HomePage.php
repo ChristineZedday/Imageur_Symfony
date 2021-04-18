@@ -48,6 +48,11 @@ class HomePage
      */
     private $contenu;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $auteur;
+
   
 
     public function getId(): ?int
@@ -170,6 +175,18 @@ class HomePage
     public function setContenu(?string $contenu): self
     {
         $this->contenu = $contenu;
+
+        return $this;
+    }
+
+    public function getAuteur(): ?string
+    {
+        return $this->auteur;
+    }
+
+    public function setAuteur(?string $auteur): self
+    {
+        $this->auteur = $auteur;
 
         return $this;
     }

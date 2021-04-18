@@ -114,56 +114,7 @@ class HomePageController extends AbstractController
       
       
         $generator->genereFileHomePage($home, $home, $adressRepository);
-    //    $dir = $this->getParameter('generated_directory');
-    //    $path = $dir.'/index.php';
-       
-    //     $auteur =  $this->getParameter('author');
-    //    $includes = $this->getParameter('generated_includes');
-    //     $image = $this->getParameter('relatif_files_moyennes_images_url').'/';
-      
-    //     $home->genereHomePage($dir, $includes, $image, $auteur);
    
-
-    $rel_includes = '/fichiers';
-   
-    $articleFile = fopen($path, 'w');
-
-    fwrite($articleFile, '<!DOCTYPE html><html lang="fr"><head><title>'.$this->getTitre().'</title>');
-    fwrite($articleFile, '<meta name="author" content="'.$auteur.'" />');
-    fwrite($articleFile, '<meta name="description" content="'.$this->getDescription().'"/>');
-    fwrite($articleFile, '<meta name="keywords" content="'.$this->getKeywords().'"/>');
-//     $metas = new Metas();
-//     $includor = new Includor($container);
-//    $includor->includeFileHomepage($this, $metas);
- fwrite($articleFile, '</head><body><div id = "conteneur">');
-    if (file_exists($includes.'/sommaire.php'))
-    { fwrite($articleFile, '<div><?php include(\''.$rel_includes.'sommaire.php\'); ?></div>');}
-    fwrite($articleFile, '<div class="element" id="main"><article class="contenu">');
-    fwrite($articleFile, '<h1>'.$this->getTitre().'</h1>');
-  
-  fwrite($articleFile, $this->getContenu());
-  
-
-  if (!file_exists($includes.'/footer.php'))
-    {
-        $footer = new Footer();
-        $footer->genereFooter($includes,'');}
-        fwrite($articleFile, '<?php include(\''.$rel_includes.'footer.php\'); ?>');
-
-    fwrite($articleFile, '</article></div>');
-   if ($this->GetAside())
-    {
-        fwrite($articleFile, '<div class=element id="acote">'); 
-        if (file_exists($includes.'/aside_'.$this->getAside()->getNom().'.php'))
-        {
-            fwrite($articleFile, '<?php include(\''.$rel_includes.'aside_'.$this->getAside()->getNom().'.php\'); ?>');
-        }
-        fwrite($articleFile, '</div>');   
-    }
-    fwrite($articleFile, '</div>');   
-    fwrite($articleFile, '</body></html>');
-    fclose($articleFile);
-    
 
         return $this->redirectToRoute('home_page_index');
     }

@@ -12,6 +12,47 @@ use App\Entity\HomePage;
 use App\Repository\AdressRepository;
 
 define('ENTETE_HTML', '<!DOCTYPE html><html lang="fr">');
+define('END_HTML','</body></html>');
+define('METAS_HTML', '<head><meta charset="utf-8"/><meta name="viewport" content="width=device-width" />');
+define('MIDDLE_HTML', '</head><body>');
+
+function get_class_name($classname)
+{
+    if ($pos = strrpos($classname, '\\')) return substr($classname, $pos + 1);
+    return $pos;
+}
+
+function makePage($filename, Object $entity)
+{
+	$file = fopen($filename, 'w');
+	fwrite($file, ENTETE_HTML.METAS_HTML);
+	if (null !== $entity->getAuteur())
+	{
+		fwrite ($file, '<meta name="author" content="'.$entity->getAuteur().'"/>');
+	}
+	if (null !== $entity->getTitre())
+	{
+		fwrite ($file, '<meta name="title" content="'.$entity->getTitre().'"/>');
+	}
+	if (null !== $entity->getDescription())
+	{
+		fwrite ($file, '<meta name="description" content="'.$entity->getDescription().'"/>');
+	}
+	if (null !== $entity->getKeywords())
+	{
+		fwrite ($file, '<meta name="keywords" content="'.$entity->getKeywords().'"/>');
+	}
+
+	
+	
+
+
+	fwrite($file, MIDDLE_HTML);
+
+	fwrite($file, END_HTML);
+	fclose($file);
+			
+}
 
 
 class Generator 
@@ -27,6 +68,8 @@ class Generator
     public function genereFileHomePage(HomePage $home, Object $entity, AdressRepository $adressRepository)
     {
         $type= get_class($entity);
+		$type= get_class_name($type);
+
 		$dir = $adressRepository->findOneByName('home')->getPhysique() ;
 		$includes_path = $adressRepository->findOneByName('includes')->getPhysique();
 
@@ -35,9 +78,8 @@ class Generator
         switch($type){
 			case 'HomePage':
 				$filepath = $dir.'index.php';
-				$file = open($filepath, w);
-				fwrite($file, ENTETE_HTML);
-				fclose($file);
+				makePage($filepath, $home);
+				
 				break;
 			
              case 'Metas':
