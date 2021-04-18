@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Adress index{% endblock %}
+
+{% block body %}
+{{ parent() }}
+<article>
+    <h1>Index des adresses</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Physique</th>
+                <th>Url</th>
+                <th>Relative_accueil</th>
+                <th>Relative_fichiers</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for adress in adresses %}
+            <tr>
+                <td>{{ adress.id }}</td>
+                <td>{{ adress.nom }}</td>
+                <td>{{ adress.physique }}</td>
+                <td>{{ adress.url }}</td>
+                <td>{{ adress.relativeAccueil }}</td>
+                <td>{{ adress.relativeFichiers }}</td>
+                <td>
+                    <a href="{{ path('adress_show', {'id': adress.id}) }}"> {{ include('./_showicone.html.twig')}}</a>
+                    <a href="{{ path('adress_edit', {'id': adress.id}) }}"> {{ include('./_editicone.html.twig')}}</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">Pas d'adresses enregistrées</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('adress_new') }}">Ajouter une adresse</a>
+     {{ include('./_crediticones.html.twig')}}
+    </article>
+{% endblock %}

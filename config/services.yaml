@@ -35,6 +35,11 @@ services:
     _defaults:
         autowire: true      # Automatically injects dependencies in your services.
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+        bind:
+             string $includes_dir_from_files: '%relatif_files_includes_url%'
+             string $includes_dir_from_home: '%relatif_home_includes_url%'
+             string $includes_dir: '%generated_includes%'
+            
 
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name
@@ -59,11 +64,9 @@ services:
         resource: '../public/build/'
 
     ####Services generating and including files for generated site
-    App\Service\Includor:
-        arguments:
-             $params:
-                 $includes_dir_from_files: '%relatif_files_includes_url%'
-                 $includes_dir_from_home: '%relatif_home_includes_url%'
-                 $includes_dir: '%generated_includes%'
-   
+#    Generator:
+#        class: App\Service\Generator
+#    Includor:
+#        class: App\Service\Includor
+    
     

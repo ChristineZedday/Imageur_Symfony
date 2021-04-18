@@ -12,22 +12,22 @@ use App\Entity\HomePage;
 use Symfony\Component\DependencyInjection\ParameterBag\ContainerBagInterface;
 
 
-class Includor 
+class Generator 
 {
 	
-	private $includes_dir, $includes_dir_from_files, $includes_dir_from_home;
+	
 
-
-	public function includeFileArticle(Article $article, Object $entity): string
+	public function genereFileArticle(Article $article, Object $entity)
     {
 		$type= get_class($entity);
     }
 
-    public function includeFileHomePage(HomePage $home, Object $entity): string
+    public function genereFileHomePage(HomePage $home, Object $entity)
     {
         $type= get_class($entity);
-		dd($this);
-		$path = $this->params->get('$includes_dir_from_home');
+
+		$path = $includes_dir_from_home;
+		dd($path);
 		$dir = $this->params->get('$includes_dir');
         
         switch($type){

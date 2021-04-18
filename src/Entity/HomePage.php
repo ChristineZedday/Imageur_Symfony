@@ -4,7 +4,7 @@ namespace App\Entity;
 
 use App\Repository\HomePageRepository;
 use Doctrine\ORM\Mapping as ORM;
-use App\Controller\Includor;
+use App\Service\Includor;
 
 /**
  * @ORM\Entity(repositoryClass=HomePageRepository::class)
@@ -91,6 +91,7 @@ class HomePage
 
     public function genereHomePage($dir, $includes, $image, $auteur)
     {
+       
         $path = $dir.'/index.php';
 
         $rel_includes = '/fichiers';
