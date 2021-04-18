@@ -9,7 +9,9 @@ namespace App\Service;
 
 
 use App\Entity\HomePage;
-use Symfony\Component\DependencyInjection\ParameterBag\ContainerBagInterface;
+use App\Repository\AdressRepository;
+
+define('ENTETE_HTML', '<!DOCTYPE html><html lang="fr">');
 
 
 class Generator 
@@ -22,18 +24,24 @@ class Generator
 		$type= get_class($entity);
     }
 
-    public function genereFileHomePage(HomePage $home, Object $entity)
+    public function genereFileHomePage(HomePage $home, Object $entity, AdressRepository $adressRepository)
     {
         $type= get_class($entity);
+		$dir = $adressRepository->findOneByName('home')->getPhysique() ;
+		$includes_path = $adressRepository->findOneByName('includes')->getPhysique();
 
-		$path = $includes_dir_from_home;
-		dd($path);
-		$dir = $this->params->get('$includes_dir');
-        
+
+		
         switch($type){
+			case 'HomePage':
+				$filepath = $dir.'index.php';
+				$file = open($filepath, w);
+				fwrite($file, ENTETE_HTML);
+				fclose($file);
+				break;
 			
              case 'Metas':
-				if (!file_exists($path.'metas.php')) {
+				if (!file_exists($includes_path.'metas.php')) {
 					$entity->genereMetas($dir);
 				}
                 return '<?php include('.$path.'metas.php) ?>';

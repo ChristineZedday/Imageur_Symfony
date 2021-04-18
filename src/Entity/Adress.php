@@ -6,7 +6,7 @@ use App\Repository\AdressRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=AdressRepository::class)
+ * @ORM\Entity(repositoryClass=adressRepository::class)
  */
 class Adress
 {

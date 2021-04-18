@@ -7,10 +7,10 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @method Adress|null find($id, $lockMode = null, $lockVersion = null)
- * @method Adress|null findOneBy(array $criteria, array $orderBy = null)
- * @method Adress[]    findAll()
- * @method Adress[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method adress|null find($id, $lockMode = null, $lockVersion = null)
+ * @method adress|null findOneBy(array $criteria, array $orderBy = null)
+ * @method adress[]    findAll()
+ * @method adress[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
 class AdressRepository extends ServiceEntityRepository
 {
@@ -20,7 +20,7 @@ class AdressRepository extends ServiceEntityRepository
     }
 
     // /**
-    //  * @return Adress[] Returns an array of Adress objects
+    //  * @return adress[] Returns an array of adress objects
     //  */
     /*
     public function findByExampleField($value)
@@ -36,15 +36,15 @@ class AdressRepository extends ServiceEntityRepository
     }
     */
 
-    /*
-    public function findOneBySomeField($value): ?Adress
+    
+    public function findOneByName($value): ?adress
     {
         return $this->createQueryBuilder('a')
-            ->andWhere('a.exampleField = :val')
+            ->andWhere('a.nom = :val')
             ->setParameter('val', $value)
             ->getQuery()
             ->getOneOrNullResult()
         ;
     }
-    */
+    
 }

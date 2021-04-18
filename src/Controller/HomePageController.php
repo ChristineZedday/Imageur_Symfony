@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\HomePage;
 use App\Form\HomePageType;
 use App\Repository\HomePageRepository;
+use App\Repository\AdressRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -95,24 +96,24 @@ class HomePageController extends AbstractController
         return $this->redirectToRoute('home_page_index');
     }
 
-    public function newGenerator(Generator $generator): Response
-{
-    // thanks to the type-hint, the container will instantiate a
-    // new MessageGenerator and pass it to you!
-    // ...
+//     public function newGenerator(Generator $generator): Response
+// {
+//     // thanks to the type-hint, the container will instantiate a
+//     // new MessageGenerator and pass it to you!
+//     // ...
 
-    $this->addFlash('success', 'oui');
-    // ...
-}
+//     $this->addFlash('success', 'oui');
+//     // ...
+// }
 
       /**
      * @Route("home/genere/{id}", name="home_page_genere", methods={"GET"})
      */
-    public function homePageGenere(Generator $generator, Includor $includor, HomePage $home)
+    public function homePageGenere(Generator $generator, Includor $includor, HomePage $home, AdressRepository $adressRepository)
     {
       
       
-        $generator->genereFileHomePage($home, $home);
+        $generator->genereFileHomePage($home, $home, $adressRepository);
     //    $dir = $this->getParameter('generated_directory');
     //    $path = $dir.'/index.php';
        

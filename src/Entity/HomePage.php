@@ -48,6 +48,8 @@ class HomePage
      */
     private $contenu;
 
+  
+
     public function getId(): ?int
     {
         return $this->id;
@@ -171,5 +173,6 @@ class HomePage
 
         return $this;
     }
+
 }
 

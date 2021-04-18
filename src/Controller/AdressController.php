@@ -31,7 +31,7 @@ class AdressController extends AbstractController
     public function new(Request $request): Response
     {
         $adress = new Adress();
-        $form = $this->createForm(AdressType::class, $adress);
+        $form = $this->createForm(adressType::class, $adress);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -61,7 +61,7 @@ class AdressController extends AbstractController
     /**
      * @Route("/{id}/edit", name="adress_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, Adress $adress): Response
+    public function edit(Request $request, adress $adress): Response
     {
         $form = $this->createForm(AdressType::class, $adress);
         $form->handleRequest($request);
