@@ -14,7 +14,7 @@ use App\Repository\RubriqueRepository;
 use App\Service\Includor;
 
 define('ENTETE_HTML', '<!DOCTYPE html><html lang="fr">');
-define('END_HTML','</div></body></html>');
+define('END_HTML','</div></div></body></html>');
 define('METAS_HTML', '<head><meta charset="utf-8"/><meta name="viewport" content="width=device-width" />');
 define('MIDDLE_HTML', '</head><body><div id = "conteneur">');
 define('IMAGEUR', '<p>Cette page a été générée automatiquement par <a href="https://github.com/christinezedday/Imageur_Symfony">Imageur</a></p>');
@@ -54,7 +54,6 @@ class Generator
 		$rubriques = $this->rubriqueRepository->findAll();
 
 		fwrite($file, '<div class="element" id="som"> <nav  class=sommaire id="flexnav"> <ul>');
-	   
         if ($type !== 'HomePage'){
 			fwrite($file, '<li><a href="'.$this->adressRepository->findOnebyName('home')->getRelativeAccueil().'index.php">Accueil</a></li>' );
 		}
@@ -107,11 +106,11 @@ class Generator
 	$type= get_class_name($type);
     if ($type === 'HomePage') {
 		$path = $this->adressRepository->findOnebyName('includes')->getRelativeAccueil();
-		$css = $this->adressRepository->findOnebyName('styles')->getRelativeAccueil();
+		$css = $this->adressRepository->findOnebyName('css')->getRelativeAccueil();
 	}
 	else {
 		$path = $this->adressRepository->findOnebyName('includes')->getRelativeFichiers();
-		$css = $this->adressRepository->findOnebyName('styles')->getRelativeFichiers();
+		$css = $this->adressRepository->findOnebyName('css')->getRelativeFichiers();
 	}
 
 
@@ -148,16 +147,27 @@ class Generator
    
 	$this->genereNav($type);
 	if ($type === 'HomePage') {
-		$nom = 'sommaireaccueil.php';
+		$nom = $path.'sommaireaccueil.php';
 	}
 	else {
-		$nom = 'sommaire.php';
+		$nom = $path.'sommaire.php';
 	}
-	fwrite ($file, '<?php include('.$path.$nom.')?>');
+	
+	fwrite ($file, '<?php include(\''.$nom.'\'); ?>');
 
+	fwrite ($file, '<div class="element" id="main">
+	<article class="contenu">');
+	
+	if (null !== $entity->getTitre()) {
+		fwrite ($file, '<h1>'.$entity->getTitre().'</h1>')	;
+	}
+	if (null !== $entity->getContenu()) {
+		fwrite ($file, $entity->getContenu())	;
+	}
+	fwrite ($file, '</article>');
 	$this->genereFooter();
 	
-	fwrite ($file, '<?php include('.$path.'footer.php\')?>');
+	fwrite ($file, '<?php include(\''.$path.'footer.php\'); ?>');
 	fwrite($file, END_HTML);
 	fclose($file);
 			
