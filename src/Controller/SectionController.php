@@ -7,6 +7,7 @@ use App\Entity\Article;
 use App\Form\SectionType;
 use App\Repository\SectionRepository;
 use App\Repository\ArticleRepository;
+use App\Repository\HomePageRepository;
 use App\Repository\ImageRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -31,14 +32,14 @@ class SectionController extends AbstractController
     /**
      * @Route("/new", name="section_new", methods={"GET","POST"})
      */
-    public function new(Request $request, ArticleRepository $articleRepository,  ImageRepository $imageRepository): Response
+    public function new(Request $request, ImageRepository $imageRepository): Response
     {
         $section = new Section();
         $images = $imageRepository->findIllustrations();
-        $articles = $articleRepository->findAll();
+      
       
     
-        $form = $this->createForm(SectionType::class, $section, ['articles' => $articles, 'images' => $images]);
+        $form = $this->createForm(SectionType::class, $section, ['images' => $images]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -101,11 +102,10 @@ class SectionController extends AbstractController
     /**
      * @Route("/{id}/edit", name="section_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, Section $section, ArticleRepository $articleRepository,  ImageRepository $imageRepository ): Response
+    public function edit(Request $request, Section $section,   ImageRepository $imageRepository ): Response
     {
-        $articles = $articleRepository->findAll();
         $images = $imageRepository->findIllustrations();
-        $form = $this->createForm(SectionType::class, $section,  ['articles' => $articles, 'images' => $images]);
+        $form = $this->createForm(SectionType::class, $section,  [ 'images' => $images]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

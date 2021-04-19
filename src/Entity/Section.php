@@ -31,7 +31,7 @@ class Section
 
     /**
      * @ORM\ManyToOne(targetEntity=Article::class, inversedBy="sections")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $article;
 
@@ -49,6 +49,11 @@ class Section
      * @ORM\OneToOne(targetEntity=Image::class, mappedBy="section", cascade={"persist", "remove"})
      */
     private $image;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=HomePage::class, inversedBy="section")
+     */
+    private $homePage;
 
     
 
@@ -180,6 +185,18 @@ class Section
         }
 
         $this->image = $image;
+
+        return $this;
+    }
+
+    public function getHomePage(): ?HomePage
+    {
+        return $this->homePage;
+    }
+
+    public function setHomePage(?HomePage $homePage): self
+    {
+        $this->homePage = $homePage;
 
         return $this;
     }

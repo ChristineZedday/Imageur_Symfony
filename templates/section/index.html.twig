@@ -23,7 +23,7 @@
         {% for section in sections %}
             <tr>
                 <td>{{ section.id }}</td>
-                 <td>{{ section.article.titre }}</td>
+                 <td> {% if section.article %}{{ section.article.titre }} {% else %} {{ section.homePage.titre }} {% endif %}</td>
                 <td>{{ section.titre }}</td>
                  <td>{{ section.rang }}</td>
                    <td>{% if (section.slider) %}<a href="{{ path('slider_show',{'id': section.slider.id}) }}">{{ section.slider.nom }}</a> {% else %} Pas de carrousel {% endif %}</td>
