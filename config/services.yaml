@@ -14,8 +14,7 @@ parameters:
     generated_pages: '%generated_directory%/fichiers'
     generated_includes: '%generated_directory%/fichiers'
     author: 'Christine Zedday'
-    footerText1: 'Textes et dessins de Christine Zedday'
-    footerText2: 'Photos Christine Zedday, Alain et H&eacute;l&egrave;ne Bache, Leïla et Nora Zedday '
+   
     contact: 'chrizedday@free.fr'
     icons_directory: 'C:/laragon/www/imageur_symfony/public/icones/'
      ##chevaux2021.test correspond à localhost/chevaux2021 (pretty URL Laragon)

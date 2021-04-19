@@ -109,11 +109,11 @@ class HomePageController extends AbstractController
       /**
      * @Route("home/genere/{id}", name="home_page_genere", methods={"GET"})
      */
-    public function homePageGenere(Generator $generator, Includor $includor, HomePage $home, AdressRepository $adressRepository)
+    public function homePageGenere(Generator $generator, Includor $includor, HomePage $home)
     {
       
       
-        $generator->genereFileHomePage($home, $home, $adressRepository);
+        $generator->genereFileHomePage($home, $home);
    
 
         return $this->redirectToRoute('home_page_index');
