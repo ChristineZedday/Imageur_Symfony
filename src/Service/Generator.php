@@ -198,7 +198,7 @@ class Generator
 	if (null !== $entity->getSection()) {
 		foreach ($entity->getSection() as $section) 
 		{
-			if (!file_exists($this->adressRepository->findOnebyName('includes')->getPysique()))
+			if (!file_exists($this->adressRepository->findOnebyName('includes')->getPhysique()))
 			{
 				$this->genereSection($section);
 			}

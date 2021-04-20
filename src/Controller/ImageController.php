@@ -35,12 +35,12 @@ class ImageController extends AbstractController
     /**
      * @Route("/new", name="image_new", methods={"GET","POST"})
      */
-    public function new(Request $request): Response
+    public function new(Request $request, AdressRepository $adressRepository): Response
     {
        
-        $thumbs = $this->getParameter('thumbs_directory');
-        $grandes = $this->getParameter('big_images_directory');
-        $autres = $this->getParameter('middle_images_directory');
+        $thumbs = $this->$adressRepository->findOneByName('petites_images')->getPhysique();
+        $grandes = $this->$adressRepository->findOneByName('grandes_images')->getPhysique();
+        $autres = $this->$adressRepository->findOneByName('moyennes_images')->getPhysique();;
         $image = new Image();
         $form = $this->createForm(ImageType::class, $image);
         $form->handleRequest($request);
