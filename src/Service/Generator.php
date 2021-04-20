@@ -89,6 +89,13 @@ class Generator
 			fclose($file);
     }
 
+	private function genereSection(Section $section)
+	{
+		$dir = $this->adressRepository->findOneByName('includes')->getPhysique() ;
+		$filename = $dir.'section_'.$sectionGetId().'.php';
+		$file = fopen($filename, 'w');
+	}
+
 	private function genereFooter()
     {
 		$path = $this->adressRepository->findOnebyName('includes')->getPhysique().'/footer.php';
@@ -100,6 +107,8 @@ class Generator
         fclose($footerFile);
     }
 
+
+
 	private function makePage($filename, Object $entity)
 {
 	$type= get_class($entity);
@@ -108,7 +117,7 @@ class Generator
 		$path = $this->adressRepository->findOnebyName('includes')->getRelativeAccueil();
 		$css = $this->adressRepository->findOnebyName('css')->getRelativeAccueil();
 	}
-	else {
+	else  if ($type === 'Article') {
 		$path = $this->adressRepository->findOnebyName('includes')->getRelativeFichiers();
 		$css = $this->adressRepository->findOnebyName('css')->getRelativeFichiers();
 	}
@@ -161,8 +170,16 @@ class Generator
 	if (null !== $entity->getTitre()) {
 		fwrite ($file, '<h1>'.$entity->getTitre().'</h1>')	;
 	}
-	if (null !== $entity->getContenu()) {
-		fwrite ($file, $entity->getContenu())	;
+	if (null !== $entity->getSection()) {
+		foreach ($entity->getSection() as $section) 
+		{
+			if (!file_exists($this->adressRepository->findOnebyName('includes')->getPysique()))
+			{
+				$this->genereSection($section);
+			}
+			$nom = $path.'section_'.$section->getId().'.php';
+			fwrite ($file, '<?php include(\''.$nom.'\'); ?>');
+		}
 	}
 	fwrite ($file, '</article>');
 	$this->genereFooter();
@@ -177,29 +194,34 @@ class Generator
 	
 	
 
-	public function genereFileArticle(Article $article, Object $entity)
-    {
-		$type= get_class($entity);
-		$dir = $this->adressRepository->findOneByName('fichiers')->getPhysique() ;
-		$includes_path = $this->adressRepository->findOneByName('includes')->getPhysique();
-    }
+	// public function genereFileArticle(Article $article, Object $entity)
+    // {
+	// 	$type= get_class($entity);
+	// 	$dir = $this->adressRepository->findOneByName('fichiers')->getPhysique() ;
+	// 	$includes_path = $this->adressRepository->findOneByName('includes')->getPhysique();
+    // }
 
-    public function genereFileHomePage(HomePage $home, Object $entity)
+    public function genereFile(Object $entity)
     {
         $type= get_class($entity);
 		$type= get_class_name($type);
 
-		$dir = $this->adressRepository->findOneByName('home')->getPhysique() ;
+		$dirh = $this->adressRepository->findOneByName('home')->getPhysique() ;
+		$dir = $this->adressRepository->findOneByName('fichiers')->getPhysique() ;
 		$includes_path = $this->adressRepository->findOneByName('includes')->getPhysique();
 
-
-		
         switch($type){
 			case 'HomePage':
-				$filepath = $dir.'index.php';
-				$this->makePage($filepath, $home);
+				$filepath = $dirh.'index.php';
+				$this->makePage($filepath, $entity);
 				
 				break;
+			
+			case 'Article':
+					$filepath = $dir.$entity->getNom().'.php';
+					$this->makePage($filepath, $entity);
+					
+					break;
 			
            
             case 'Aside':
