@@ -31,13 +31,12 @@ function get_class_name($classname)
 
 class Generator 
 {
-	private $adressRepository, $rubriqueRepository, $includor;
+	private $adressRepository, $rubriqueRepository;
 
-	public function __construct(AdressRepository $adressRepository, RubriqueRepository $rubriqueRepository, Includor $includor) //service appelé ds un service
+	public function __construct(AdressRepository $adressRepository, RubriqueRepository $rubriqueRepository) //service appelé ds un service
     {
         $this->adressRepository = $adressRepository;
 		$this->rubriqueRepository = $rubriqueRepository;
-		$this->includor = $includor;
     }
 
 
@@ -92,8 +91,34 @@ class Generator
 	private function genereSection(Section $section)
 	{
 		$dir = $this->adressRepository->findOneByName('includes')->getPhysique() ;
+		$rel = $this->adressRepository->findOneByName('includes')->getRelativeFichiers() ;
+		$imgs = $this->adressRepository->findOneByName('moyennes_images')->getRelativeFichiers() ;
 		$filename = $dir.'section_'.$sectionGetId().'.php';
 		$file = fopen($filename, 'w');
+		fwrite($file,'<section>');
+        if (null !== $section->getTitre() && 'sans' !== $section->getTitre()) { 
+            fwrite($file, '<h2>'.$section->getTitre().'</h2>');
+        }
+       
+        fwrite($file, $section->getContenu());
+
+		if (null !== $section->getSlider())
+        {
+            $nom = $section->getSlider()->getNom();
+            if (!file_exists($dir.'slider_'.$nom.'.php'))
+            {
+                $$section->getSlider()->genereSlider($dir, $imgs);
+            }
+            $fichier = $rel.'slider_'.$nom.'.php'; 
+            fwrite($file, '<?php include (\''.$fichier.'\'); ?>');
+        }
+        else if (null !== $section->getImage()) {
+            $nom = $section->getImage()->getNom();
+            $alt = $section->getImage()->getAlt();
+            fwrite($file, '<img src="'.$imgs.$nom.'" alt="'.$alt.'" />');
+        }
+		fwrite($file,'</section>');
+		fclose($file);
 	}
 
 	private function genereFooter()
