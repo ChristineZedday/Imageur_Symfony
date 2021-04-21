@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Section;
+use App\Service\Generator;
 
 /**
  * @Route("/article")
@@ -105,15 +106,9 @@ class ArticleController extends AbstractController
       /**
      * @Route("article/genere/{id}", name="article_genere", methods={"GET"})
      */
-    public function articleGenere(Article $article)
+    public function articleGenere(Generator $generator, Article $article)
     {
-       $dir = $this->getParameter('generated_directory');
-        $pages = $this->getParameter('generated_pages');
-        $imgs = $this->getParameter('petites_images_url');
-        $includes = $this->getParameter('generated_includes');
-        $imgs = $this->getParameter('relatif_includes_petites_images_url').'/';
-        $image = $this->getParameter('relatif_files_moyennes_images_url').'/';
-        $article->genereArticle($dir, $pages, $imgs, $includes, $image);
+        $generator->genereFile($article);
 
         return $this->redirectToRoute('article_index');
     }

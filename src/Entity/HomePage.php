@@ -54,11 +54,11 @@ class HomePage
     /**
      * @ORM\OneToMany(targetEntity=Section::class, mappedBy="homePage")
      */
-    private $section;
+    private $sections;
 
     public function __construct()
     {
-        $this->section = new ArrayCollection();
+        $this->sections = new ArrayCollection();
     }
 
   
@@ -147,9 +147,9 @@ class HomePage
     /**
      * @return Collection|Section[]
      */
-    public function getSection(): Collection
+    public function getSections(): Collection
     {
-        return $this->section;
+        return $this->sections;
     }
 
     public function addSection(Section $section): self

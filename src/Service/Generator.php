@@ -93,6 +93,7 @@ class Generator
 		$dir = $this->adressRepository->findOneByName('includes')->getPhysique() ;
 		$rel = $this->adressRepository->findOneByName('includes')->getRelativeFichiers() ;
 		$imgs = $this->adressRepository->findOneByName('moyennes_images')->getRelativeFichiers() ;
+		$thumbs = $this->adressRepository->findOneByName('vignette')->getRelativeFichiers() ;
 		$filename = $dir.'section_'.$section->GetId().'.php';
 		$file = fopen($filename, 'w');
 		fwrite($file,'<section>');
@@ -107,7 +108,7 @@ class Generator
             $nom = $section->getSlider()->getNom();
             if (!file_exists($dir.'slider_'.$nom.'.php'))
             {
-                $$section->getSlider()->genereSlider($dir, $imgs);
+                $section->getSlider()->genereSlider($dir, $thumbs);
             }
             $fichier = $rel.'slider_'.$nom.'.php'; 
             fwrite($file, '<?php include (\''.$fichier.'\'); ?>');
@@ -195,10 +196,10 @@ class Generator
 	if (null !== $entity->getTitre()) {
 		fwrite ($file, '<h1>'.$entity->getTitre().'</h1>')	;
 	}
-	if (null !== $entity->getSection()) {
-		foreach ($entity->getSection() as $section) 
+	if (null !== $entity->getSections()) {
+		foreach ($entity->getSections() as $section) 
 		{
-			if (!file_exists($this->adressRepository->findOnebyName('includes')->getPhysique()))
+			if (!file_exists($this->adressRepository->findOnebyName('includes')->getPhysique().'section_'.$section->getId().'.php'))
 			{
 				$this->genereSection($section);
 			}
@@ -254,11 +255,9 @@ class Generator
 			
            
             case 'Aside':
-				if (!file_exists($path.'aside_'.$entity->getNom()))
-				{
-					$entity->genereAside($dir);
-				}
-				return '<?php include('.$path.'aside_'.$entity->getNom().'.php) ?>';
+
+			break;
+				
             }
     }
 }

@@ -51,7 +51,7 @@ class Section
     private $image;
 
     /**
-     * @ORM\ManyToOne(targetEntity=HomePage::class, inversedBy="section")
+     * @ORM\ManyToOne(targetEntity=HomePage::class, inversedBy="sections")
      */
     private $homePage;
 

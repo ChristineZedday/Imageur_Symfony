@@ -12,6 +12,7 @@ use App\Entity\Footer;
 use App\Entity\Section;
 
 
+
 /**
  * @ORM\Entity(repositoryClass=ArticleRepository::class)
  */
@@ -184,58 +185,7 @@ class Article
         return $this;
     }
 
-    public function genereArticle($dir, $pages, $imgs, $includes, $image)
-    {
-        $path = $pages.'/'.$this->getNom().'.php';
 
-        $rel_includes = '';
-       
-        $articleFile = fopen($path, 'w');
-
-        fwrite($articleFile, '<!DOCTYPE html><html lang="fr"><head><title>'.$this->getTitre().'</title>');
-        fwrite($articleFile, '<meta name="author" content="'.$this->getAuteur().'" />');
-        fwrite($articleFile, '<meta name="description" content="'.$this->getDescription().'"/>');
-        fwrite($articleFile, '<meta name="keywords" content="'.$this->getKeywords().'"/>');
-       if (!file_exists($includes.'/metas.php'))
-        {
-            $metas = new Metas();
-            $metas->genereMetas($includes);}
-        fwrite($articleFile, '<?php include(\''.$rel_includes.'metas.php\'); ?>');
-     fwrite($articleFile, '</head><body><div id = "conteneur">');
-        if (file_exists($includes.'/sommaire.php'))
-        { fwrite($articleFile, '<div><?php include(\''.$rel_includes.'sommaire.php\'); ?></div>');}
-        fwrite($articleFile, '<div class="element" id="main"><article class="contenu">');
-        fwrite($articleFile, '<h1>'.$this->getTitre().'</h1>');
-       foreach ($this->getSections() as $section)
-       {
-        if (!file_exists($includes.'/section_'.$section->getId().'.php'))
-        {$section->genereSection($includes,$imgs, $image);}
-       fwrite($articleFile, '<?php include (\''.$rel_includes.'section_'.$section->getId().'.php\'); ?>');
-      
-      
-       }
-    
-      if (!file_exists($includes.'/footer.php'))
-        {
-            $footer = new Footer();
-            $footer->genereFooter($includes,'');}
-            fwrite($articleFile, '<?php include(\''.$rel_includes.'footer.php\'); ?>');
-
-        fwrite($articleFile, '</article></div>');
-       if ($this->GetAside())
-        {
-            fwrite($articleFile, '<div class=element id="acote">'); 
-            if (file_exists($includes.'/aside_'.$this->getAside()->getNom().'.php'))
-            {
-                fwrite($articleFile, '<?php include(\''.$rel_includes.'aside_'.$this->getAside()->getNom().'.php\'); ?>');
-            }
-            fwrite($articleFile, '</div>');   
-        }
-        fwrite($articleFile, '</div>');   
-        fwrite($articleFile, '<script type="text/javascript" src="../ressources/js/main.js"> </script></body></html>');
-        fclose($articleFile);
-        
-    }
 
     public function getRubrique(): ?Rubrique
     {
