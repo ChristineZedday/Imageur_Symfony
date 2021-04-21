@@ -9,6 +9,7 @@ use App\Repository\SectionRepository;
 use App\Repository\ArticleRepository;
 use App\Repository\HomePageRepository;
 use App\Repository\ImageRepository;
+use App\Service\Generator;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -137,12 +138,13 @@ class SectionController extends AbstractController
       /**
      * @Route("section/genere/{id}", name="section_genere", methods={"GET"})
      */
-    public function sectionGenere(Section $section)
+    public function sectionGenere(Generator $generator, Section $section)
     {
-        $dir = $this->getParameter('generated_includes');
-        $imgs = $this->getParameter('relatif_includes_petites_images_url').'/';
-        $image = $this->getParameter('relatif_files_moyennes_images_url').'/';
-        $section->genereSection($dir, $imgs, $image);
+        // $dir = $this->getParameter('generated_includes');
+        // $imgs = $this->getParameter('relatif_includes_petites_images_url').'/';
+        // $image = $this->getParameter('relatif_files_moyennes_images_url').'/';
+        // $section->genereSection($dir, $imgs, $image);
+        $generator->genereFile($section);
 
         return $this->redirectToRoute('section_index');
     }

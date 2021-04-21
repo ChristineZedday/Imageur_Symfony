@@ -9,9 +9,9 @@ namespace App\Service;
 
 
 use App\Entity\HomePage;
+use App\Entity\Section;
 use App\Repository\AdressRepository;
 use App\Repository\RubriqueRepository;
-use App\Service\Includor;
 
 define('ENTETE_HTML', '<!DOCTYPE html><html lang="fr">');
 define('END_HTML','</div></div></body></html>');
@@ -33,7 +33,7 @@ class Generator
 {
 	private $adressRepository, $rubriqueRepository;
 
-	public function __construct(AdressRepository $adressRepository, RubriqueRepository $rubriqueRepository) //service appelé ds un service
+	public function __construct(AdressRepository $adressRepository, RubriqueRepository $rubriqueRepository) //services appelés ds un service
     {
         $this->adressRepository = $adressRepository;
 		$this->rubriqueRepository = $rubriqueRepository;
@@ -93,7 +93,7 @@ class Generator
 		$dir = $this->adressRepository->findOneByName('includes')->getPhysique() ;
 		$rel = $this->adressRepository->findOneByName('includes')->getRelativeFichiers() ;
 		$imgs = $this->adressRepository->findOneByName('moyennes_images')->getRelativeFichiers() ;
-		$filename = $dir.'section_'.$sectionGetId().'.php';
+		$filename = $dir.'section_'.$section->GetId().'.php';
 		$file = fopen($filename, 'w');
 		fwrite($file,'<section>');
         if (null !== $section->getTitre() && 'sans' !== $section->getTitre()) { 
@@ -247,6 +247,10 @@ class Generator
 					$this->makePage($filepath, $entity);
 					
 					break;
+			
+			case 'Section':
+				$this->genereSection($entity);
+			break;
 			
            
             case 'Aside':
