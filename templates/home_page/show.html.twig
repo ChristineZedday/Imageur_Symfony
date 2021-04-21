@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+  
+
+{% block title %}HomePage{% endblock %}
+
+{% block body %}
+  {{ parent() }}
+<article>
+    <h1>Page d'accueil</h1>
+
+    <table class="table">
+        <tbody>
+           
+            <tr>
+                <th>Nom</th>
+                <td>{{ home_page.nom }}</td>
+            </tr>
+            <tr>
+                <th>Titre</th>
+                <td>{{ home_page.titre }}</td>
+            </tr>
+             <tr>
+                <th>Auteur</th>
+                <td>{{ home_page.auteur }}</td>
+            </tr>
+             <tr>
+                <th>Description</th>
+                <td>{{ home_page.description }}</td>
+            </tr>
+             <tr>
+                <th>Mots clés</th>
+                <td>{{ home_page.keywords }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('home_page_index') }}">Retour à la liste</a>
+
+    <a href="{{ path('home_page_edit', {'id': home_page.id}) }}">Modifier</a>
+
+      <a href="{{ path('home_page_genere', {'id': home_page.id}) }}">Générer cette page comme page d'accueil du site</a>
+
+    {{ include('home_page/_delete_form.html.twig') }}
+    
+</article>
+{% endblock %}

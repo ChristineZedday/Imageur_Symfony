@@ -12,6 +12,7 @@ use App\Entity\Footer;
 use App\Entity\Section;
 
 
+
 /**
  * @ORM\Entity(repositoryClass=ArticleRepository::class)
  */
@@ -81,6 +82,12 @@ class Article
      */
     private $rang;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Javascript::class, inversedBy="articles")
+     */
+    private $javascript;
+
+
    
 
    
@@ -92,6 +99,7 @@ class Article
         $this->sliders = new ArrayCollection();
         $this->sections = new ArrayCollection();
         $this->auteur = $auteur;
+        $this->javascript = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -184,58 +192,7 @@ class Article
         return $this;
     }
 
-    public function genereArticle($dir, $pages, $imgs, $includes, $image)
-    {
-        $path = $pages.'/'.$this->getNom().'.php';
 
-        $rel_includes = '';
-       
-        $articleFile = fopen($path, 'w');
-
-        fwrite($articleFile, '<!DOCTYPE html><html lang="fr"><head><title>'.$this->getTitre().'</title>');
-        fwrite($articleFile, '<meta name="author" content="'.$this->getAuteur().'" />');
-        fwrite($articleFile, '<meta name="description" content="'.$this->getDescription().'"/>');
-        fwrite($articleFile, '<meta name="keywords" content="'.$this->getKeywords().'"/>');
-       if (!file_exists($includes.'/metas.php'))
-        {
-            $metas = new Metas();
-            $metas->genereMetas($includes);}
-        fwrite($articleFile, '<?php include(\''.$rel_includes.'metas.php\'); ?>');
-     fwrite($articleFile, '</head><body><div id = "conteneur">');
-        if (file_exists($includes.'/nav.php'))
-        { fwrite($articleFile, '<div><?php include(\''.$rel_includes.'sommaire.php\'); ?></div>');}
-        fwrite($articleFile, '<div class="element" id="main"><article class="contenu">');
-        fwrite($articleFile, '<h1>'.$this->getTitre().'</h1>');
-       foreach ($this->getSections() as $section)
-       {
-        if (!file_exists($includes.'/section_'.$section->getId().'.php'))
-        {$section->genereSection($includes,$imgs, $image);}
-       fwrite($articleFile, '<?php include (\''.$rel_includes.'section_'.$section->getId().'.php\'); ?>');
-      
-      
-       }
-    
-      if (!file_exists($includes.'/footer.php'))
-        {
-            $footer = new Footer();
-            $footer->genereFooter($includes,'');}
-            fwrite($articleFile, '<?php include(\''.$rel_includes.'footer.php\'); ?>');
-
-        fwrite($articleFile, '</article></div>');
-       if ($this->GetAside())
-        {
-            fwrite($articleFile, '<div class=element id="acote">'); 
-            if (file_exists($includes.'/aside_'.$this->getAside()->getNom().'.php'))
-            {
-                fwrite($articleFile, '<?php include(\''.$rel_includes.'aside_'.$this->getAside()->getNom().'.php\'); ?>');
-            }
-            fwrite($articleFile, '</div>');   
-        }
-        fwrite($articleFile, '</div>');   
-        fwrite($articleFile, '<script type="text/javascript" src="../ressources/js/main.js"> </script></body></html>');
-        fclose($articleFile);
-        
-    }
 
     public function getRubrique(): ?Rubrique
     {
@@ -320,6 +277,32 @@ class Article
 
         return $this;
     }
+
+    /**
+     * @return Collection|Javascript[]
+     */
+    public function getJavascript(): Collection
+    {
+        return $this->javascript;
+    }
+
+    public function addJavascript(Javascript $javascript): self
+    {
+        if (!$this->javascript->contains($javascript)) {
+            $this->javascript[] = $javascript;
+        }
+
+        return $this;
+    }
+
+    public function removeJavascript(Javascript $javascript): self
+    {
+        $this->javascript->removeElement($javascript);
+
+        return $this;
+    }
+
+   
 
    
 

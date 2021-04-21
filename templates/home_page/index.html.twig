@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}HomePage index{% endblock %}
+
+{% block body %}
+    {{ parent() }}
+<article>
+    <h1>Index des pages d'accueil</h1>
+    <p>Une seule peut-être utilisé à la fois, se sera la dernière générée</p>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Titre</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for home_page in home_pages %}
+            <tr>
+                <td>{{ home_page.id }}</td>
+                <td>{{ home_page.nom }}</td>
+                <td>{{ home_page.titre }}</td>
+                <td>
+                    <a href="{{ path('home_page_show', {'id': home_page.id}) }}">    {{ include('./_showicone.html.twig')}}</a>
+                    <a href="{{ path('home_page_edit', {'id': home_page.id}) }}">    {{ include('./_editicone.html.twig')}}</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">Pas encore de page d'accueil enregistrée</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+        {{ include('./_crediticones.html.twig')}}
+    </article>
+
+    <a href="{{ path('home_page_new') }}">Créer une nouvelle page d'accueil</a>
+{% endblock %}

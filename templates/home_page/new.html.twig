@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New HomePage{% endblock %}
+
+{% block body %}
+    {{ parent() }}
+<article>
+    <h1>Créer une nouvelle page d'accueil</h1>
+
+    {{ include('home_page/_form.html.twig') }}
+
+    <a href="{{ path('home_page_index') }}">Retour à la liste</a>
+       
+</article>
+{% endblock %}

@@ -3,6 +3,9 @@
 namespace App\Form;
 
 use App\Entity\Section;
+use App\Entity\Article;
+use App\Entity\HomePage;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -17,12 +20,7 @@ class SectionType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $titresArticles = [];
-            if (!empty($options['articles'])) {
-                foreach ($options['articles'] as $article) {
-                    $titresArticles[$article->getTitre()] = $article;
-                }
-              }
+       
         $imagesUniques = [];
         if (!empty($options['images'])) {
             foreach ($options['images'] as $image) {
@@ -31,18 +29,26 @@ class SectionType extends AbstractType
           }
            
         $builder
-        ->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) use ($titresArticles) {
+        ->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
             $section = $event->getData();
             $form = $event->getForm();
            
-           if (null === $section->getArticle()) {
+           if (null === $section->getArticle() && null === $section->getHomePage()) {
            
-           
-               $form->add('article', ChoiceType::class,[
-            'choices' => $titresArticles,
-            'multiple' => false,
-            'mapped' => true,
-            'required' => true]);
+            $form->add('article', EntityType::class, [
+                // looks for choices from this entity
+                'class' => Article::class,
+                'choice_label' => 'titre',
+                'multiple' =>false,
+                'mapped' => true,
+                'required' =>false]);
+            $form->add('homePage', EntityType::class,[
+                'class' => HomePage::class,
+                'choice_label' => 'titre',
+                'multiple' =>false,
+                'mapped' => true,
+                'required' =>false]);
+
             }});
        
       $builder
@@ -72,7 +78,6 @@ class SectionType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Section::class,
-            'articles' => [],
             'images' =>[],
         ]);
     }

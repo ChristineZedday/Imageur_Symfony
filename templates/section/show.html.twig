@@ -15,7 +15,7 @@
             </tr>
               <tr>
                 <th>Article</th>
-                <td>{{ section.article.titre }}</td>
+                <td>{% if section.article %}{{ section.article.titre }}{% else %}{{ section.homePage.titre }}{% endif %}</td>
             </tr>
             <tr>
                 <th>Titre</th>

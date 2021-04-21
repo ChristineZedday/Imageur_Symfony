@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Service\Generator;
 
 /**
  * @Route("/aside")
@@ -96,10 +97,9 @@ class AsideController extends AbstractController
       /**
      * @Route("aside/genere/{id}", name="aside_genere", methods={"GET"})
      */
-    public function asideGenere(Aside $aside)
+    public function asideGenere(Generator $generator, Aside $aside)
     {
-        $dir = $this->getParameter('generated_includes');
-        $aside->genereAside($dir);
+        $generator->genereFile($aside);
 
         return $this->redirectToRoute('aside_index');
     }

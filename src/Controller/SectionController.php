@@ -7,7 +7,9 @@ use App\Entity\Article;
 use App\Form\SectionType;
 use App\Repository\SectionRepository;
 use App\Repository\ArticleRepository;
+use App\Repository\HomePageRepository;
 use App\Repository\ImageRepository;
+use App\Service\Generator;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -31,14 +33,14 @@ class SectionController extends AbstractController
     /**
      * @Route("/new", name="section_new", methods={"GET","POST"})
      */
-    public function new(Request $request, ArticleRepository $articleRepository,  ImageRepository $imageRepository): Response
+    public function new(Request $request, ImageRepository $imageRepository): Response
     {
         $section = new Section();
         $images = $imageRepository->findIllustrations();
-        $articles = $articleRepository->findAll();
+      
       
     
-        $form = $this->createForm(SectionType::class, $section, ['articles' => $articles, 'images' => $images]);
+        $form = $this->createForm(SectionType::class, $section, ['images' => $images]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -101,11 +103,10 @@ class SectionController extends AbstractController
     /**
      * @Route("/{id}/edit", name="section_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, Section $section, ArticleRepository $articleRepository,  ImageRepository $imageRepository ): Response
+    public function edit(Request $request, Section $section,   ImageRepository $imageRepository ): Response
     {
-        $articles = $articleRepository->findAll();
         $images = $imageRepository->findIllustrations();
-        $form = $this->createForm(SectionType::class, $section,  ['articles' => $articles, 'images' => $images]);
+        $form = $this->createForm(SectionType::class, $section,  [ 'images' => $images]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -137,12 +138,13 @@ class SectionController extends AbstractController
       /**
      * @Route("section/genere/{id}", name="section_genere", methods={"GET"})
      */
-    public function sectionGenere(Section $section)
+    public function sectionGenere(Generator $generator, Section $section)
     {
-        $dir = $this->getParameter('generated_includes');
-        $imgs = $this->getParameter('relatif_includes_petites_images_url').'/';
-        $image = $this->getParameter('relatif_files_moyennes_images_url').'/';
-        $section->genereSection($dir, $imgs, $image);
+        // $dir = $this->getParameter('generated_includes');
+        // $imgs = $this->getParameter('relatif_includes_petites_images_url').'/';
+        // $image = $this->getParameter('relatif_files_moyennes_images_url').'/';
+        // $section->genereSection($dir, $imgs, $image);
+        $generator->genereFile($section);
 
         return $this->redirectToRoute('section_index');
     }
