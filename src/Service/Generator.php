@@ -10,11 +10,12 @@ namespace App\Service;
 
 use App\Entity\HomePage;
 use App\Entity\Section;
+use App\Entity\Aside;
 use App\Repository\AdressRepository;
 use App\Repository\RubriqueRepository;
 
 define('ENTETE_HTML', '<!DOCTYPE html><html lang="fr">');
-define('END_HTML','</div></div></body></html>');
+define('END_HTML','</div></body></html>');
 define('METAS_HTML', '<head><meta charset="utf-8"/><meta name="viewport" content="width=device-width" />');
 define('MIDDLE_HTML', '</head><body><div id = "conteneur">');
 define('IMAGEUR', '<p>Cette page a été générée automatiquement par <a href="https://github.com/christinezedday/Imageur_Symfony">Imageur</a></p>');
@@ -53,8 +54,11 @@ class Generator
 		$rubriques = $this->rubriqueRepository->findAll();
 
 		fwrite($file, '<div class="element" id="som"> <nav  class=sommaire id="flexnav"> <ul>');
-        if ($type !== 'HomePage'){
+        if ($type === 'HomePage'){
 			fwrite($file, '<li><a href="'.$this->adressRepository->findOnebyName('home')->getRelativeAccueil().'index.php">Accueil</a></li>' );
+		}
+		else if ($type === 'Article'){
+			fwrite($file, '<li><a href="'.$this->adressRepository->findOnebyName('home')->getRelativeFichiers().'index.php">Accueil</a></li>' );
 		}
 
 		foreach ($rubriques as $rubrique) {
@@ -86,6 +90,9 @@ class Generator
 	}
 	fwrite($file, ' </ul> </nav></div>');
 			fclose($file);
+			if ($type === 'Article') {
+				$this->genereNav('HomePage'); //eh oui, faut la mettre à jour!
+			}
     }
 
 	private function genereSection(Section $section)
@@ -122,9 +129,9 @@ class Generator
 		fclose($file);
 	}
 
-	private function genereFooter()
+	private function genereFooter($path)
     {
-		$path = $this->adressRepository->findOnebyName('includes')->getPhysique().'/footer.php';
+		
         $footerFile = fopen($path, 'w');
 		
 
@@ -133,6 +140,24 @@ class Generator
         fclose($footerFile);
     }
 
+	private function genereAside(Object $aside)
+    {
+		$path = $this->adressRepository->findOnebyName('includes')->getPhysique().'aside_'.$aside->getNom().'.php';
+        $file = fopen($path, 'w');
+		
+		
+        fwrite($file, '<aside class="acote">');
+		if (null !== $aside->getTitre() && 'sans' !== $aside->getTitre()) { 
+            fwrite( $file, '<h2>'.$aside->getTitre().'</h2>');
+        }
+       
+        fwrite( $file, $aside->getContenu());
+
+
+		fwrite($file, '</aside>');
+       
+        fclose($file);
+    }
 
 
 	private function makePage($filename, Object $entity)
@@ -142,10 +167,12 @@ class Generator
     if ($type === 'HomePage') {
 		$path = $this->adressRepository->findOnebyName('includes')->getRelativeAccueil();
 		$css = $this->adressRepository->findOnebyName('css')->getRelativeAccueil();
+		$this->adressRepository->findOnebyName('js')->getRelativeAccueil();
 	}
 	else  if ($type === 'Article') {
 		$path = $this->adressRepository->findOnebyName('includes')->getRelativeFichiers();
 		$css = $this->adressRepository->findOnebyName('css')->getRelativeFichiers();
+		$js = $this->adressRepository->findOnebyName('js')->getRelativeFichiers();
 	}
 
 
@@ -208,9 +235,29 @@ class Generator
 		}
 	}
 	fwrite ($file, '</article>');
-	$this->genereFooter();
+	$chemin = $this->adressRepository->findOnebyName('includes')->getPhysique().'footer.php';
+	if (!file_exists($chemin))
+	{$this->genereFooter($chemin);}
 	
 	fwrite ($file, '<?php include(\''.$path.'footer.php\'); ?>');
+
+	fwrite($file,'</div>');
+	fwrite($file,'<div class="element" id="acote">');
+	$aside = $entity->getAside();
+	if (null !== $aside) {
+		$chemin = $this->adressRepository->findOnebyName('includes')->getPhysique().'_aside'.$aside->getNom().'.php';
+	if (!file_exists($chemin))
+	{$this->genereAside($aside);}
+	
+	fwrite ($file, '<?php include(\''.$path.'aside_'.$aside->getNom().'.php\'); ?>');
+	}
+	fwrite($file,'</div>');
+	if (!empty($entity->getJavascript())) {
+	foreach ($entity->getJavascript() as $javascript) {
+	
+		fwrite($file, '<script type="text/javascript" src="'.$js.$javascript->getNom().'">  </script>');
+	}
+}
 	fwrite($file, END_HTML);
 	fclose($file);
 			
@@ -255,7 +302,7 @@ class Generator
 			
            
             case 'Aside':
-
+				$this->genereAside($entity);
 			break;
 				
             }

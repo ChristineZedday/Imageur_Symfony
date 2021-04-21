@@ -3,27 +3,23 @@
 namespace App\Form;
 
 use App\Entity\Article;
+use App\Entity\Rubrique;
+use App\Entity\Aside;
+use App\Entity\Javascript;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 class ArticleType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         
-        $noms = [];
-        foreach ($options['rubriques'] as $rubrique) {
-            $noms[$rubrique->getNom()] = $rubrique;
-
-        }
-        $sides = [];
-        foreach ($options['asides'] as $aside) {
-            $sides[$aside->getNom()] = $aside;
-        }
+     
         $builder
             ->add('titre',  TextType::class, [
                  'attr' => ['size' => '150']])
@@ -33,8 +29,9 @@ class ArticleType extends AbstractType
             ->add('auteur')
             ->add('nom', TextType::class, [
                 'label' => 'Nom pour le fichier (éviter accents)'])
-            ->add('rubrique', ChoiceType::class,[ 
-                'choices' => $noms,
+            ->add('rubrique', EntityType::class,[ 
+                'class' => Rubrique::class,
+                'choice_label' => 'nom',
                 'multiple' => false,
                 'mapped' => true,
                 'required' => true])
@@ -44,8 +41,9 @@ class ArticleType extends AbstractType
              ->add('keywords',  TextType::class, [
                  'required' => false, 
                 'attr' => ['size' => '150']])
-            ->add('aside', ChoiceType::class, [
-                'choices' => $sides,
+            ->add('aside',EntityType::class, [
+                'class' => Aside::class,
+                'choice_label' => 'nom',
                 'required' =>false,
                 'multiple' => false,
                 'mapped' => true,])
@@ -54,6 +52,13 @@ class ArticleType extends AbstractType
                 'required' =>false,
                 'mapped' => true,
             ])
+            ->add('javascript', EntityType::class, [
+                // looks for choices from this entity
+                'class' => Javascript::class,
+                'choice_label' => 'nom',
+                'multiple' => true,
+                'required' =>false,
+                'mapped' => true,])
         ;
     }
 
@@ -61,8 +66,8 @@ class ArticleType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Article::class,
-            'rubriques' => [],
-            'asides' => [],
+           
+            
         ]);
     }
 }

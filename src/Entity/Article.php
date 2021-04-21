@@ -82,6 +82,12 @@ class Article
      */
     private $rang;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Javascript::class, inversedBy="articles")
+     */
+    private $javascript;
+
+
    
 
    
@@ -93,6 +99,7 @@ class Article
         $this->sliders = new ArrayCollection();
         $this->sections = new ArrayCollection();
         $this->auteur = $auteur;
+        $this->javascript = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -270,6 +277,32 @@ class Article
 
         return $this;
     }
+
+    /**
+     * @return Collection|Javascript[]
+     */
+    public function getJavascript(): Collection
+    {
+        return $this->javascript;
+    }
+
+    public function addJavascript(Javascript $javascript): self
+    {
+        if (!$this->javascript->contains($javascript)) {
+            $this->javascript[] = $javascript;
+        }
+
+        return $this;
+    }
+
+    public function removeJavascript(Javascript $javascript): self
+    {
+        $this->javascript->removeElement($javascript);
+
+        return $this;
+    }
+
+   
 
    
 

@@ -32,13 +32,11 @@ class ArticleController extends AbstractController
     /**
      * @Route("/new", name="article_new", methods={"GET","POST"})
      */
-    public function new(Request $request, RubriqueRepository $rubriqueRepository, AsideRepository $asideRepository): Response
+    public function new(Request $request): Response
     {
         $auteur = $this->getParameter('author');
         $article = new Article($auteur);
-        $rubriques = $rubriqueRepository->findAll();
-        $asides = $asideRepository->findAll();
-        $form = $this->createForm(ArticleType::class, $article, ['rubriques' => $rubriques, 'asides' => $asides]);
+        $form = $this->createForm(ArticleType::class, $article);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -68,11 +66,10 @@ class ArticleController extends AbstractController
     /**
      * @Route("/{id}/edit", name="article_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, Article $article, RubriqueRepository $rubriqueRepository, AsideRepository $asideRepository): Response
+    public function edit(Request $request, Article $article ): Response
     {
-        $rubriques = $rubriqueRepository->findAll();
-        $asides = $asideRepository->findAll();
-        $form = $this->createForm(ArticleType::class, $article, ['rubriques' => $rubriques, 'asides' => $asides]);
+       
+        $form = $this->createForm(ArticleType::class, $article);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

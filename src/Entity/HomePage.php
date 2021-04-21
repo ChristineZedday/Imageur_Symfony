@@ -56,9 +56,16 @@ class HomePage
      */
     private $sections;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Javascript::class, inversedBy="homes")
+     */
+    private $javascript;
+
+
     public function __construct()
     {
         $this->sections = new ArrayCollection();
+      
     }
 
   
@@ -174,5 +181,18 @@ class HomePage
         return $this;
     }
 
+    public function getJavascript(): ?Javascript
+    {
+        return $this->javascript;
+    }
+
+    public function setJavascript(?Javascript $javascript): self
+    {
+        $this->javascript = $javascript;
+
+        return $this;
+    }
+
+   
 }
 

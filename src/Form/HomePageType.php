@@ -7,6 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use App\Entity\Aside;
+use App\Entity\Javascript;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
@@ -31,6 +32,13 @@ class HomePageType extends AbstractType
                        ->add('auteur',  TextType::class, [
                         'required' => false, 
                        'attr' => ['size' => '150']])
+                       ->add('javascript', EntityType::class, [
+                        // looks for choices from this entity
+                        'class' => Javascript::class,
+                        'choice_label' => 'nom',
+                        'multiple' => false,
+                        'required' =>false,
+                        'mapped' => true,])
         ;
     }
 
