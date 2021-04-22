@@ -17,6 +17,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Service\Generator;
 
 /**
  * @Route("/slider")
@@ -117,11 +118,11 @@ class SliderController extends AbstractController
     /**
      * @Route("/{id}/edit", name="slider_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, Slider $slider, ImageRepository $imageRepository,  SectionRepository $sectionRepository): Response
+    public function edit(Request $request, Slider $slider, ImageRepository $imageRepository): Response
     {
         $images = $imageRepository->findDispo($slider);
-        $sections = $sectionRepository->findAll();
-        $form = $this->createForm(SliderType::class, $slider, ['sections' => $sections]);
+       
+        $form = $this->createForm(SliderType::class, $slider);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -163,15 +164,9 @@ class SliderController extends AbstractController
     /**
      * @Route("slider/genere/{id}", name="slider_genere", methods={"GET"})
      */
-    public function sliderGenere(Slider $slider)
+    public function sliderGenere(Generator $generator, Slider $slider)
     {
-        $dir = $this->getParameter('generated_includes');
-        $imgs = $this->getParameter('petites_images_url');
-        $imgs = $imgs.'/';
-        $slider->genereSlider($dir, $imgs);
-        
-        $entityManager = $this->getDoctrine()->getManager();
-        $entityManager->flush();
+        $generator->genereFile($slider);
 
         return $this->redirectToRoute('slider_index');
     }
