@@ -338,4 +338,15 @@ class Generator
 				
             }
     }
+
+	public function genereSite()
+	{
+		$rubriques = $this->rubriqueRepository->findAll();
+		foreach ($rubriques as $rubrique) {
+			$articles = $rubrique->getArticles();
+			foreach ($articles as $article) {
+				$this->genereFile($article);
+			}
+		}
+	}
 }
