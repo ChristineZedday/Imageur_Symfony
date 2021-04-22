@@ -21,8 +21,8 @@
                 <td>{{ javascript.id }}</td>
                 <td>{{ javascript.nom }}</td>
                 <td>
-                    <a href="{{ path('javascript_show', {'id': javascript.id}) }}">show</a>
-                    <a href="{{ path('javascript_edit', {'id': javascript.id}) }}">edit</a>
+                    <a href="{{ path('javascript_show', {'id': javascript.id}) }}">    {{ include('./_showicone.html.twig')}}</a>
+                    <a href="{{ path('javascript_edit', {'id': javascript.id}) }}">    {{ include('./_editicone.html.twig')}}</a>
                 </td>
             </tr>
         {% else %}
@@ -34,4 +34,6 @@
     </table>
 
     <a href="{{ path('javascript_new') }}">Ajouter un fichier</a>
+        {{ include('./_crediticones.html.twig')}}
+        </article>
 {% endblock %}

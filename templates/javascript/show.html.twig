@@ -3,6 +3,8 @@
 {% block title %}Javascript{% endblock %}
 
 {% block body %}
+{{ parent()}}
+<article>
     <h1>Javascript</h1>
 
     <table class="table">
@@ -18,9 +20,10 @@
         </tbody>
     </table>
 
-    <a href="{{ path('javascript_index') }}">back to list</a>
+    <a href="{{ path('javascript_index') }}">Retour à la liste</a>
 
-    <a href="{{ path('javascript_edit', {'id': javascript.id}) }}">edit</a>
+    <a href="{{ path('javascript_edit', {'id': javascript.id}) }}">Modifier le fichier</a>
 
     {{ include('javascript/_delete_form.html.twig') }}
+    <:article>
 {% endblock %}
