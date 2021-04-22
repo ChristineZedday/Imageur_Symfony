@@ -37,5 +37,5 @@
 Je travaille actuellement à mettre toute l'architecture du site généré dans les fichiers de config afin que ce soit plus facile à adapter à n'importe quel site.
  </p>
  <p>Pour le javascript de la vue twig des carrousels (main.js qui est dans le dossier public/js), il faut mettre la valeur {{ grandes_images }} dans un input hidden pour la récupérer (ça ne concerne pas le site généré, pour lequel il faut l'url du dossier grandes_images du site en dur, évidemment).</p>
- <p>Pour accéder aux adresses hors des contrôleurs ou des vues, notamment dans mes tous nouveaux services Generator et Includor, j'ai créé une entité adress avec sa table:<p>
-<img src="adressindex.png">
+ <p>Pour accéder aux adresses hors des contrôleurs ou des vues, notamment dans mon tout nouveau service Generator, j'ai créé une entité adress avec sa table:<p>
+<img src="Adressindex.png">
