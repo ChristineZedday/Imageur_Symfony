@@ -41,9 +41,9 @@ class SliderController extends AbstractController
     {
         $slider = new Slider();
 
-        $sections = $sectionRepository->findAll();
+        
 
-        $form = $this->createForm(SliderType::class, $slider, ['sections' => $sections]);
+        $form = $this->createForm(SliderType::class, $slider);
 
         $form->handleRequest($request);
 
@@ -52,14 +52,7 @@ class SliderController extends AbstractController
             $entityManager->persist($slider);
             $entityManager->flush();
 
-            // $images = $form->get('images')->getData();
-            // foreach ( $images as $image)
-            // {
-            //     $image = $imageRepository->find($image);
-            //     $slider->addImage($image);
-            // }
-
-            // $entityManager->flush();
+           
 
             return $this->redirectToRoute('slider_edit', ['id' => $slider->getId()]);
         }
@@ -67,7 +60,7 @@ class SliderController extends AbstractController
         return $this->render('slider/new.html.twig', [
             'slider' => $slider,
             'form' => $form->createView(),
-            // 'images' => $images,
+           
         ]);
     }
 
@@ -128,14 +121,6 @@ class SliderController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            // $images = $form->get('images')->getData();
-            // foreach ( $images as $image)
-            // {
-            //     $image = $imageRepository->find($image);
-            //     $slider->addImage($image);
-            // }
-
-            // $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('slider_index');
         }

@@ -2,9 +2,7 @@
 
 {% block title %}HomePage index{% endblock %}
 
-{% block body %}
-    {{ parent() }}
-<article>
+{% block content %}
     <h1>Index des pages d'accueil</h1>
     <p>Une seule peut-être utilisé à la fois, se sera la dernière générée</p>
 
@@ -36,7 +34,7 @@
         </tbody>
     </table>
         {{ include('./_crediticones.html.twig')}}
-    </article>
+    
 
     <a href="{{ path('home_page_new') }}">Créer une nouvelle page d'accueil</a>
 {% endblock %}

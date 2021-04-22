@@ -2,13 +2,11 @@
 
 {% block title %}New Javascript{% endblock %}
 
-{% block body %}
-{{ parent()}}
-<article>
+{% block content %}
     <h1>Enregistrer un nouveau fichier</h1>
 
     {{ include('javascript/_form.html.twig') }}
 
     <a href="{{ path('javascript_index') }}">Retour à la liste</a>
-    </article>
+  
 {% endblock %}

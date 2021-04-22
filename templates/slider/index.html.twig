@@ -2,9 +2,7 @@
 
 {% block title %}Slider index{% endblock %}
 
-{% block body %}
-{{ parent() }}
-<article>
+{% block content %}
     <h1>Index des carrousels</h1>
 
     <table class="table">
@@ -41,6 +39,6 @@
 
     <a href="{{ path('slider_new') }}">Nouveau carrousel</a>
     {{ include('./_crediticones.html.twig')}}
-    </article>
+    
      
 {% endblock %}

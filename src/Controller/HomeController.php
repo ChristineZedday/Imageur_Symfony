@@ -15,6 +15,7 @@ use App\Entity\Nav;
 use App\Entity\Metas;
 use App\Entity\Footer;
 use App\Repository\RubriqueRepository;
+use App\Service\Generator;
 
 
 class HomeController extends AbstractController
@@ -74,6 +75,17 @@ class HomeController extends AbstractController
     {
         $dir = $this->getParameter('generated_css');
         $cop = copy ('build/app.css' , $dir.'/app.css' );
+
+        return $this->redirectToRoute('home');
+    }
+
+    
+     /**
+     * @Route("site/genere/", name="site", methods={"GET"})
+     */
+    public function siteGenere(Generator $generator)
+    {
+       $generator->genereSite();
 
         return $this->redirectToRoute('home');
     }

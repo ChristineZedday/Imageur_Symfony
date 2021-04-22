@@ -2,9 +2,8 @@
 
 {% block title %}Slider{% endblock %}
 
-{% block body %}
-{{ parent() }}
-<article>
+{% block content %}
+
     <h1>Carrousel</h1>
 
     <table class="table">
@@ -47,5 +46,5 @@
       <a href="{{ path('slider_genere', {'id': slider.id}) }}">Générer le carrousel PHP</a>
 
     {{ include('slider/_delete_form.html.twig') }}
-    </article>
+   
 {% endblock %}

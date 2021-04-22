@@ -4,13 +4,11 @@
 {% block title %}Nouvelle adresse{% endblock %}
 
 
-{% block body %}
-{{ parent() }}
-<article>
+{% block content %}
     <h1>Créer une nouvelle adresse</h1>
 
     {{ include('adress/_form.html.twig') }}
 
     <a href="{{ path('adress_index') }}">Retour à la liste</a>
-    </article>
+    
 {% endblock %}
