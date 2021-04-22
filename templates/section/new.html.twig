@@ -2,13 +2,11 @@
 
 {% block title %}New Section{% endblock %}
 
-{% block body %}
-{{ parent() }}
-<article>
+{% block content %}
     <h1>Créer une nouvelle section d'article</h1>
 
     {{ include('section/_form.html.twig') }}
 
     <a href="{{ path('section_index') }}">Retour à la liste</a>
-    </article>
+    
 {% endblock %}

@@ -2,9 +2,7 @@
 
 {% block title %}Rubrique index{% endblock %}
 
-{% block body %}
-{{ parent() }}
-<article>
+{% block content %}
     <h1>Index des rubriques</h1>
 
     <table class="table">
@@ -37,5 +35,5 @@
 
     <a href="{{ path('rubrique_new') }}">Ajouter une rubrique</a>
       {{ include('./_crediticones.html.twig')}}
-      </article>
+    
 {% endblock %}

@@ -2,13 +2,11 @@
 
 {% block title %}New Aside{% endblock %}
 
-{% block body %}
-{{ parent() }}
-<article>
+{% block content %}
     <h1>Créer un nouvel à-côté</h1>
 
     {{ include('aside/_form.html.twig') }}
 
     <a href="{{ path('aside_index') }}">Retour à la liste</a>
-    </article
+   
 {% endblock %}

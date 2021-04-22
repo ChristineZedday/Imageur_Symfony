@@ -2,9 +2,8 @@
 
 {% block title %}Javascript index{% endblock %}
 
-{% block body %}
- {{ parent() }}
- <article>
+{% block content %}
+ 
     <h1>Index des fichiers javascript</h1>
 
     <table class="table">
@@ -35,5 +34,5 @@
 
     <a href="{{ path('javascript_new') }}">Ajouter un fichier</a>
         {{ include('./_crediticones.html.twig')}}
-        </article>
+      
 {% endblock %}

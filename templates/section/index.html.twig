@@ -2,9 +2,7 @@
 
 {% block title %}Section index{% endblock %}
 
-{% block body %}
-{{ parent() }}
-<article>
+{% block content %}
     <h1>Index des sections d'article</h1>
 
     <table class="table">
@@ -42,5 +40,5 @@
     </table>
 
   <p class="supertitre">  <a href="{{ path('section_new') }}">Ajouter une section</a></p>
-    </article>
+   
 {% endblock %}

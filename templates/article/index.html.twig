@@ -2,9 +2,8 @@
 
 {% block title %}Article index{% endblock %}
 
-{% block body %}
-{{ parent() }}
-<article>
+{% block content %}
+
     <h1>Article index</h1>
 
     <table class="table">
@@ -44,5 +43,5 @@
     <p class="supertitre"><a href="{{ path('article_new') }}">Ajouter un article</a></p>
 
        {{ include('./_crediticones.html.twig')}}
-       <article>
+     
 {% endblock %}

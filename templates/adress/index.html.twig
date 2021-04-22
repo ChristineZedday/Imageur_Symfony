@@ -2,9 +2,7 @@
 
 {% block title %}adress index{% endblock %}
 
-{% block body %}
-{{ parent() }}
-<article>
+{% block content %}
     <h1>Index des adresses</h1>
 
     <table class="table">
@@ -43,5 +41,5 @@
 
     <a href="{{ path('adress_new') }}">Ajouter une adresse</a>
      {{ include('./_crediticones.html.twig')}}
-    </article>
+   
 {% endblock %}

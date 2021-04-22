@@ -2,9 +2,7 @@
 
 {% block title %}Javascript{% endblock %}
 
-{% block body %}
-{{ parent()}}
-<article>
+{% block content %}
     <h1>Javascript</h1>
 
     <table class="table">
@@ -25,5 +23,5 @@
     <a href="{{ path('javascript_edit', {'id': javascript.id}) }}">Modifier le fichier</a>
 
     {{ include('javascript/_delete_form.html.twig') }}
-    <:article>
+ 
 {% endblock %}
