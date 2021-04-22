@@ -159,6 +159,33 @@ class Generator
         fclose($file);
     }
 
+	private function genereSlider(Object $slider)
+    {
+		$path = $this->adressRepository->findOnebyName('includes')->getPhysique().'slider_'.$slider->getNom().'.php';
+		if (null !== $slider->getSection()->getArticle())
+	{	$src = $this->adressRepository->findOnebyName('vignette')->getRelativeFichiers();}
+	else if (null !== $slider->getSection()->getArticle())
+	{
+		$src = $this->adressRepository->findOnebyName('petites_images')->getRelativeAccueil();
+	}
+
+        $sliderFile = fopen($path, 'w');
+		
+		fwrite($sliderFile, '<div class="container"> ');
+        foreach ($slider->getImages() as $image) {
+            fwrite($sliderFile, '<figure class="slide"> ');
+           
+            fwrite($sliderFile, ' <img class="clickable" src="'.$src.$image->getNom().'" width=150 height=100 onclick="displaySlides(src) ;" /> ');
+            fwrite($sliderFile, '<figcaption hidden>'.$image->getLegend().'</figcaption>');
+            fwrite($sliderFile, '</figure> ');
+        }
+
+        fwrite($sliderFile, '</div>');
+        
+       
+        fclose($sliderFile);
+    }
+
 
 	private function makePage($filename, Object $entity)
 {
@@ -303,6 +330,10 @@ class Generator
            
             case 'Aside':
 				$this->genereAside($entity);
+			break;
+
+			case 'Slider':
+				$this->genereSlider($entity);
 			break;
 				
             }
