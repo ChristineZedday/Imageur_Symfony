@@ -12,6 +12,7 @@ use App\Entity\Image;
 use App\Form\ImageType;
 use App\Repository\ImageRepository;
 use App\Repository\SectionRepository;
+use App\Repository\AdressRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -38,9 +39,9 @@ class ImageController extends AbstractController
     public function new(Request $request, AdressRepository $adressRepository): Response
     {
        
-        $thumbs = $this->$adressRepository->findOneByName('petites_images')->getPhysique();
-        $grandes = $this->$adressRepository->findOneByName('grandes_images')->getPhysique();
-        $autres = $this->$adressRepository->findOneByName('moyennes_images')->getPhysique();;
+        $thumbs = $adressRepository->findOnebyName('vignette')->getPhysique();
+        $grandes = $adressRepository->findOneByName('grandes_images')->getPhysique();
+        $autres = $adressRepository->findOneByName('moyennes_images')->getPhysique();
         $image = new Image();
         $form = $this->createForm(ImageType::class, $image);
         $form->handleRequest($request);
@@ -65,11 +66,13 @@ class ImageController extends AbstractController
 
             $photo->move($dossier,$fichier);
 
-            if (\array_key_exists('vignette', $_POST) && null !== $form->get('vignette')) {
+            if ( null !== $form->get('vignette') && null !== $form->get('vignette')->getData()) {
                 $dossier = $thumbs;
+                $vignette=$form->get('vignette')->getData();
                 $vignette->move($dossier,$fichier);
+                // dd('true vig');
                 $image->setVignette(true);
-            }
+            }//array_key_exists('vignette', $_POST) &&
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($image);
