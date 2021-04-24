@@ -20,6 +20,7 @@ define('METAS_HTML', '<head><meta charset="utf-8"/><meta name="viewport" content
 define('MIDDLE_HTML', '</head><body><div id = "conteneur">');
 define('IMAGEUR', '<p>Cette page a été générée automatiquement par <a href="https://github.com/christinezedday/Imageur_Symfony">Imageur</a></p>');
 define('FOOTER','<p>Textes et dessins de Christine Zedday<br/>Photos Christine Zedday, Alain et H&eacute;l&egrave;ne Bache, Leïla et Nora Zedday </p>'); //faudra faire une table pour le/les footer
+define('WARNING','<p>Attention travaux! je restructure mon site, des parties peuvent être momentanément inaccessibles, excusez-moi pour la gène occasionnée.</p>');
 
 
 function get_class_name($classname)
@@ -41,7 +42,7 @@ class Generator
     }
 
 
-	private function genereNav($type)
+	public function genereNav($type)
     {
         if ($type === 'HomePage') {
 		$path = $this->adressRepository->findOnebyName('includes')->getPhysique().'sommaireaccueil.php';
@@ -135,7 +136,7 @@ class Generator
         $footerFile = fopen($path, 'w');
 		
 
-        fwrite($footerFile, '<footer>'.FOOTER.IMAGEUR.'</footer>');
+        fwrite($footerFile, '<footer>'.WARNING.FOOTER.IMAGEUR.'</footer>');
        
         fclose($footerFile);
     }
