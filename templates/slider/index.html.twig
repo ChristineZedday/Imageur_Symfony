@@ -12,7 +12,6 @@
                 <th>Nom</th>
                  <th>Article</th>
                 <th>Section</th>
-                <th>Généré?</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -23,8 +22,7 @@
                 <td>{{ slider.nom }}</td>
                  <td>{{ slider.section.article.titre }}</td>
                 <td>{{ slider.section.titre }}</td>
-                <td>{% if (slider.isGenerated) %}<a href="{{ fichiers~'slider_'~slider.nom~'.php' }}" target = "_blank">Oui</a> {% else %} Non {% endif %}</td>
-                <td>
+               <td>
                     <a href="{{ path('slider_show', {'id': slider.id}) }}">{{ include('./_showicone.html.twig')}}</a>
                     <a href="{{ path('slider_edit', {'id': slider.id}) }}">{{ include('./_editicone.html.twig')}}</a>
                 </td>
