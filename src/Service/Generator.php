@@ -116,7 +116,7 @@ class Generator
             $nom = $section->getSlider()->getNom();
             if (!file_exists($dir.'slider_'.$nom.'.php'))
             {
-                $section->getSlider()->genereSlider($dir, $thumbs);
+                $this->genereSlider($section->getSlider());
             }
             $fichier = $rel.'slider_'.$nom.'.php'; 
             fwrite($file, '<?php include (\''.$fichier.'\'); ?>');
