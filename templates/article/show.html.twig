@@ -21,7 +21,7 @@
             </tr>
             <tr>
                 <th>Rubrique</th>
-                <td>{{ article.rubrique.nom }}</td>
+                <td><a href="{{ path('rubrique_show', {'id': article.rubrique.id}) }}">{{ article.rubrique.nom }}</a></td>
             </tr>
              <tr>
                 <th>Description</th>

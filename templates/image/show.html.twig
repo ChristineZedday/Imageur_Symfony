@@ -45,7 +45,10 @@
         </tbody>
     </table>
       {%  if image.pour == 'carrousel' %}
+        {% if image.vignette == true %}
         <img src="{{ petites_images~image.nom}}"  width="150">
+        {% endif %}
+         <img src="{{ grandes_images~image.nom}}"  width="400">
       {% else %}
       <img src="{{ moyennes_images~image.nom }}"  width="300">
       {% endif %}
