@@ -13,7 +13,7 @@
             </tr>
               <tr>
                 <th>Article</th>
-                <td>{% if section.article %}{{ section.article.titre }}{% else %}{{ section.homePage.titre }}{% endif %}</td>
+                <td>{% if section.article %}<a href="{{ path('article_show', {'id': section.article.id}) }}">{{ section.article.titre }}</a>{% else %}<a href="{{ path('home_page_show', {'id': section.homePage.id}) }}">{{ section.homePage.titre }}</a>{% endif %}</td>
             </tr>
             <tr>
                 <th>Titre</th>
@@ -29,7 +29,7 @@
             </tr>
              <tr>
                 <th>Carrousel?</th>
-                 <td>{% if (section.slider) %}{{ section.slider.nom }} {% else %} Pas de carrousel {% endif %}</td>
+                 <td>{% if (section.slider) %}<a href="{{ path('slider_show', {'id': section.slider.id}) }}">{{ section.slider.nom }}</a> {% else %} Pas de carrousel {% endif %}</td>
             </tr>
         </tbody>
     </table>

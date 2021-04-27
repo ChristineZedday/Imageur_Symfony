@@ -24,7 +24,7 @@
                 <td>{{ article.nom }}</td>
                 <td>{{ article.titre }}</td>
                 <td>{{ article.auteur }}</td>
-                <td>{% if (article.rubrique) %}{{ article.rubrique.nom }}{% endif %}</td>
+                <td>{% if (article.rubrique) %}<a href="{{ path('rubrique_show', {'id': article.rubrique.id}) }}">{{ article.rubrique.nom }}</a>{% endif %}</td>
                <td>{% if (article.description) %}{{ article.description }}{% endif %}</td>
                <td>{% if (article.keywords) %}{{ article.keywords }}{% endif %}</td>
                 <td>
