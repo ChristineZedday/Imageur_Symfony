@@ -6,6 +6,7 @@ use App\Entity\Article;
 use App\Entity\Rubrique;
 use App\Entity\Aside;
 use App\Entity\Javascript;
+use App\Entity\CSS;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -59,7 +60,14 @@ class ArticleType extends AbstractType
                 'multiple' => true,
                 'required' =>false,
                 'mapped' => true,])
-        ;
+        ->add('css', EntityType::class, [
+            // looks for choices from this entity
+            'class' => CSS::class,
+            'choice_label' => 'nom',
+            'multiple' => true,
+            'required' =>false,
+            'mapped' => true,])
+    ;
     }
 
     public function configureOptions(OptionsResolver $resolver)

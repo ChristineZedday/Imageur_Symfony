@@ -61,10 +61,16 @@ class HomePage
      */
     private $javascript;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=CSS::class, inversedBy="homePages")
+     */
+    private $css;
+
 
     public function __construct()
     {
         $this->sections = new ArrayCollection();
+        $this->css = new ArrayCollection();
       
     }
 
@@ -189,6 +195,30 @@ class HomePage
     public function setJavascript(?Javascript $javascript): self
     {
         $this->javascript = $javascript;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|CSS[]
+     */
+    public function getCss(): Collection
+    {
+        return $this->css;
+    }
+
+    public function addCss(CSS $css): self
+    {
+        if (!$this->css->contains($css)) {
+            $this->css[] = $css;
+        }
+
+        return $this;
+    }
+
+    public function removeCss(CSS $css): self
+    {
+        $this->css->removeElement($css);
 
         return $this;
     }

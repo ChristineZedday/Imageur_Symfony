@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}CSS{% endblock %}
+
+{% block body %}
+    <h1>CSS</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ css.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ css.nom }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('css_index') }}">Retour à la liste</a>
+
+    <a href="{{ path('css_edit', {'id': css.id}) }}">edit</a>
+
+    {{ include('css/_delete_form.html.twig') }}
+{% endblock %}
