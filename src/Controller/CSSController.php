@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Service\Generator;
 
 /**
  * @Route("/c/s/s")
@@ -88,6 +89,17 @@ class CSSController extends AbstractController
             $entityManager->remove($cSS);
             $entityManager->flush();
         }
+
+        return $this->redirectToRoute('css_index');
+    }
+
+      /**
+     * @Route("css/copy/{id}", name="css_copy", methods={"GET"})
+     */
+    public function cssCopie(Generator $generator, CSS $css)
+    {
+        $generator->genereFile($css);
+        
 
         return $this->redirectToRoute('css_index');
     }

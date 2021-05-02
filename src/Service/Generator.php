@@ -290,16 +290,11 @@ class Generator
 			
    }
 
-
-	
-	
-
-	// public function genereFileArticle(Article $article, Object $entity)
-    // {
-	// 	$type= get_class($entity);
-	// 	$dir = $this->adressRepository->findOneByName('fichiers')->getPhysique() ;
-	// 	$includes_path = $this->adressRepository->findOneByName('includes')->getPhysique();
-    // }
+    private function genereCSS(Object $css)
+	{
+		$dir = $this->adressRepository->findOnebyName('css')->getPhysique();
+		copy('build/app.css',$dir.$css->getNom().'.css');
+	}
 
     public function genereFile(Object $entity)
     {
@@ -335,9 +330,15 @@ class Generator
 			case 'Slider':
 				$this->genereSlider($entity);
 			break;
+
+			case 'CSS':
+				$this->genereCSS($entity);
+			break;
 				
             }
     }
+
+	
 
 	public function genereSite()
 	{
