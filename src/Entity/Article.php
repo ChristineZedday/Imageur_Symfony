@@ -87,6 +87,11 @@ class Article
      */
     private $javascript;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=CSS::class, inversedBy="articles")
+     */
+    private $css;
+
 
    
 
@@ -100,6 +105,7 @@ class Article
         $this->sections = new ArrayCollection();
         $this->auteur = $auteur;
         $this->javascript = new ArrayCollection();
+        $this->css = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -298,6 +304,30 @@ class Article
     public function removeJavascript(Javascript $javascript): self
     {
         $this->javascript->removeElement($javascript);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|CSS[]
+     */
+    public function getCss(): Collection
+    {
+        return $this->css;
+    }
+
+    public function addCss(CSS $css): self
+    {
+        if (!$this->css->contains($css)) {
+            $this->css[] = $css;
+        }
+
+        return $this;
+    }
+
+    public function removeCss(CSS $css): self
+    {
+        $this->css->removeElement($css);
 
         return $this;
     }

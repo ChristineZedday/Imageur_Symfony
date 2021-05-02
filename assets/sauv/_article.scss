@@ -1,4 +1,4 @@
-@import 'couleurs';
+@import 'variables';
 @import 'jeu';
 
 #main {
@@ -8,7 +8,7 @@
 
 .supertitre
 {
-	color: $title1; 
+	color: $bay; 
 		text-align:left; 
 		font-size:20px; 
 		font-variant:small-caps;
@@ -22,20 +22,20 @@ article {
 	
 
 		h1 {
-			color: $title1; 
+			color: $bay; 
 			text-align:center; 
 			font-size:30px; 
 			font-variant:small-caps;
 		}
 
 		h2 {
-			color: $title1; 
+			color: $bay; 
 			text-align:justify; 
 			font-size:24px; 
 		}
 
 		h3 {
-			color: $title2; 
+			color: $dark; 
 			text-align:justify; 
 			font-size:20px;
 		}

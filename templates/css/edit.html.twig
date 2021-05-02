@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit CSS{% endblock %}
+
+{% block content %}
+    <h1>Modifier le fichier CSS</h1>
+
+    {{ include('css/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('css_index') }}">Retour à la liste</a>
+
+    {{ include('css/_delete_form.html.twig') }}
+{% endblock %}

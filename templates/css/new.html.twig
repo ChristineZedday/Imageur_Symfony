@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New CSS{% endblock %}
+
+{% block body %}
+    <h1>Ajouter un fichier CSS</h1>
+
+    {{ include('css/_form.html.twig') }}
+
+    <a href="{{ path('css_index') }}">Retour à la liste</a>
+{% endblock %}

@@ -8,6 +8,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use App\Entity\Aside;
 use App\Entity\Javascript;
+use App\Entity\CSS;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
@@ -39,6 +40,13 @@ class HomePageType extends AbstractType
                         'multiple' => false,
                         'required' =>false,
                         'mapped' => true,])
+                        ->add('css', EntityType::class, [
+                            // looks for choices from this entity
+                            'class' => CSS::class,
+                            'choice_label' => 'nom',
+                            'multiple' => false,
+                            'required' =>false,
+                            'mapped' => true,])
         ;
     }
 

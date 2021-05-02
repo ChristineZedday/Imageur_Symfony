@@ -222,12 +222,11 @@ class Generator
 	{
 		fwrite ($file, '<meta name="keywords" content="'.$entity->getKeywords().'"/>');
 	}
-	if ($type === 'HomePage') {
-		fwrite ($file, '<liNK href="'.$css.'app.css" rel="stylesheet" type="text/css">');
-	}
-	else {
-		fwrite ($file, '<liNK href="'.$css.'app.css" rel="stylesheet" type="text/css">');
-	}
+	foreach ($entity->getcss() as $style) {
+	
+		fwrite ($file, '<liNK href="'.$css.$style->getNom().'.css" rel="stylesheet" type="text/css">');
+	
+        }     
 	
 
 
