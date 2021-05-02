@@ -1,5 +1,4 @@
-@import 'couleurs';
-@import 'polices';
+@import 'variables';
 
 #aside {
 	flex-grow: 1;
@@ -7,7 +6,7 @@
 
 #acote {
 	flex-grow: 1;
-	background-color: $aside;
+	background-color: $vert;
 	height: 300px;
 }
 

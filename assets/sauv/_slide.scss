@@ -1,4 +1,4 @@
-@import 'couleurs';
+@import 'variables';
 
 .container {
 
@@ -48,7 +48,7 @@
 
 .popup
 {
-    background-color: $bgcolor;
+    background-color: $cream;
     padding:50px;
     width: 60%;  /*carré width: 60vh height: 60vh;*/
     height: 100vh;
@@ -67,14 +67,14 @@
 .next
 {
     cursor: pointer;
-    color: $title1;
+    color: $bay;
     font-size: 30px;
     margin:10px;
 }
 
 .prev {
     cursor: pointer;
-    color: $title1;
+    color: $bay;
     font-size: 30px;
     margin:10px;
 }
@@ -84,7 +84,7 @@
     position: absolute;
     right: 30px;
     top: 30px;
-    color: $title1;
+    color: $bay;
     font-size: 30px;
     margin:10px;
 }

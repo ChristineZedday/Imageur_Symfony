@@ -224,7 +224,7 @@ class Generator
 	}
 	foreach ($entity->getcss() as $style) {
 	
-		fwrite ($file, '<liNK href="'.$css.$style.'.css" rel="stylesheet" type="text/css">');
+		fwrite ($file, '<liNK href="'.$css.$style->getNom().'.css" rel="stylesheet" type="text/css">');
 	
         }     
 	
