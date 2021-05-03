@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Foot index{% endblock %}
+
+{% block body %}
+    <h1>Foot index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Contenu</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for foot in feet %}
+            <tr>
+                <td>{{ foot.id }}</td>
+                <td>{{ foot.nom }}</td>
+                <td>{{ foot.contenu }}</td>
+                <td>
+                    <a href="{{ path('foot_show', {'id': foot.id}) }}">show</a>
+                    <a href="{{ path('foot_edit', {'id': foot.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('foot_new') }}">Create new</a>
+{% endblock %}

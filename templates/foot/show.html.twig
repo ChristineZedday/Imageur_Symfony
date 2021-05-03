@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Foot{% endblock %}
+
+{% block body %}
+    <h1>Foot</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ foot.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ foot.nom }}</td>
+            </tr>
+            <tr>
+                <th>Contenu</th>
+                <td>{{ foot.contenu }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('foot_index') }}">back to list</a>
+
+    <a href="{{ path('foot_edit', {'id': foot.id}) }}">edit</a>
+
+    {{ include('foot/_delete_form.html.twig') }}
+{% endblock %}

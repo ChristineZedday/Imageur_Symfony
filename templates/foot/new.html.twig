@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Foot{% endblock %}
+
+{% block body %}
+    <h1>Create new Foot</h1>
+
+    {{ include('foot/_form.html.twig') }}
+
+    <a href="{{ path('foot_index') }}">back to list</a>
+{% endblock %}

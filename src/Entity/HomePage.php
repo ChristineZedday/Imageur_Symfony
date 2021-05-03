@@ -66,6 +66,11 @@ class HomePage
      */
     private $css;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Foot::class, inversedBy="homePages")
+     */
+    private $footer;
+
 
     public function __construct()
     {
@@ -219,6 +224,18 @@ class HomePage
     public function removeCss(CSS $css): self
     {
         $this->css->removeElement($css);
+
+        return $this;
+    }
+
+    public function getFooter(): ?Foot
+    {
+        return $this->footer;
+    }
+
+    public function setFooter(?Foot $footer): self
+    {
+        $this->footer = $footer;
 
         return $this;
     }

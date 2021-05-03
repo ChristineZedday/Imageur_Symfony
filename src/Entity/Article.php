@@ -89,6 +89,11 @@ class Article
      */
     private $css;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Foot::class, inversedBy="articles")
+     */
+    private $footer;
+
 
    
 
@@ -325,6 +330,18 @@ class Article
     public function removeCss(CSS $css): self
     {
         $this->css->removeElement($css);
+
+        return $this;
+    }
+
+    public function getFooter(): ?Foot
+    {
+        return $this->footer;
+    }
+
+    public function setFooter(?Foot $footer): self
+    {
+        $this->footer = $footer;
 
         return $this;
     }
