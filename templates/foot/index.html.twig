@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Foot index{% endblock %}
+{% block title %}Footer index{% endblock %}
 
-{% block body %}
-    <h1>Foot index</h1>
+{% block content %}
+    <h1>Index des pieds-de-pages</h1>
 
     <table class="table">
         <thead>
@@ -21,17 +21,18 @@
                 <td>{{ foot.nom }}</td>
                 <td>{{ foot.contenu }}</td>
                 <td>
-                    <a href="{{ path('foot_show', {'id': foot.id}) }}">show</a>
-                    <a href="{{ path('foot_edit', {'id': foot.id}) }}">edit</a>
+                    <a href="{{ path('foot_show', {'id': foot.id}) }}">{{ include('./_showicone.html.twig')}}</a>
+                    <a href="{{ path('foot_edit', {'id': foot.id}) }}">{{ include('./_editicone.html.twig')}}</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="4">no records found</td>
+                <td colspan="4">Pas de pieds de pages enregistrés</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('foot_new') }}">Create new</a>
+    <a href="{{ path('foot_new') }}">Ajouter un nouveau</a>
+    {{ include('./_crediticones.html.twig')}}
 {% endblock %}
