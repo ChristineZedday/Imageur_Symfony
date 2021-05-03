@@ -7,6 +7,7 @@ use App\Entity\Rubrique;
 use App\Entity\Aside;
 use App\Entity\Javascript;
 use App\Entity\CSS;
+use App\Entity\Foot;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -48,7 +49,7 @@ class ArticleType extends AbstractType
                 'required' =>false,
                 'multiple' => false,
                 'mapped' => true,])
-                ->add('foot',EntityType::class, [
+                ->add('footer',EntityType::class, [
                     'class' => Foot::class,
                     'choice_label' => 'nom',
                     'required' =>false,

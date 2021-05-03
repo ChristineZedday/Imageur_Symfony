@@ -11,6 +11,7 @@ namespace App\Service;
 use App\Entity\HomePage;
 use App\Entity\Section;
 use App\Entity\Aside;
+use App\Entity\Foot;
 use App\Repository\AdressRepository;
 use App\Repository\RubriqueRepository;
 
@@ -18,9 +19,7 @@ define('ENTETE_HTML', '<!DOCTYPE html><html lang="fr">');
 define('END_HTML','</div></body></html>');
 define('METAS_HTML', '<head><meta charset="utf-8"/><meta name="viewport" content="width=device-width" />');
 define('MIDDLE_HTML', '</head><body><div id = "conteneur">');
-define('IMAGEUR', '<p>Cette page a été générée automatiquement par <a href="https://github.com/christinezedday/Imageur_Symfony">Imageur</a></p>');
-define('FOOTER','<p>Textes et dessins de Christine Zedday<br/>Photos Christine Zedday, Alain et H&eacute;l&egrave;ne Bache, Leïla et Nora Zedday </p>'); //faudra faire une table pour le/les footer
-define('WARNING','<p>Attention travaux! je restructure mon site, des parties peuvent être momentanément inaccessibles, excusez-moi pour la gène occasionnée.</p>');
+
 
 
 function get_class_name($classname)
@@ -130,15 +129,27 @@ class Generator
 		fclose($file);
 	}
 
-	private function genereFooter($path)
+	private function genereFooter(Object $foot)
     {
 		
-        $footerFile = fopen($path, 'w');
+		$path = $this->adressRepository->findOnebyName('includes')->getPhysique().'foot_'.$foot->getNom().'.php';
+        $file = fopen($path, 'w');
 		
-
-        fwrite($footerFile, '<footer>'.WARNING.FOOTER.IMAGEUR.'</footer>');
+		
+        fwrite($file, '<footer>');
+		
        
-        fclose($footerFile);
+        fwrite( $file, $foot->getContenu());
+		$image = $foot->getImage();
+		if (null !== $image) {
+			$chemin = $this->adressRepository->findOnebyName('moyennes_images')->getRelativeFichiers();
+			fwrite($file, '<img src="'.$chemin.$image->getNom().'">');
+		}//pas de footer à image sur page d'accueil, du coup, pour le moment!
+
+
+		fwrite($file, '</footer>');
+       
+        fclose($file);
     }
 
 	private function genereAside(Object $aside)
@@ -262,12 +273,14 @@ class Generator
 		}
 	}
 	fwrite ($file, '</article>');
-	$chemin = $this->adressRepository->findOnebyName('includes')->getPhysique().'footer.php';
+	$foot = $entity->getFooter();
+	if ( null !== $foot) {
+	$chemin = $this->adressRepository->findOnebyName('includes')->getPhysique().'foot_'.$foot->getNom().'.php';
 	if (!file_exists($chemin))
 	{$this->genereFooter($chemin);}
 	
-	fwrite ($file, '<?php include(\''.$path.'footer.php\'); ?>');
-
+	fwrite ($file, '<?php include(\''.$path.'foot_'.$foot->getNom().'.php\'); ?>');
+}
 	fwrite($file,'</div>');
 	fwrite($file,'<div class="element" id="acote">');
 	$aside = $entity->getAside();
@@ -333,6 +346,10 @@ class Generator
 
 			case 'CSS':
 				$this->genereCSS($entity);
+			break;
+
+			case 'Foot':
+				$this->genereFooter($entity);
 			break;
 				
             }

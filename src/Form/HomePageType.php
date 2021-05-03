@@ -9,6 +9,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use App\Entity\Aside;
 use App\Entity\Javascript;
 use App\Entity\CSS;
+use App\Entity\Foot;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
@@ -29,7 +30,7 @@ class HomePageType extends AbstractType
                     ->add('keywords',  TextType::class, [
                         'required' => false, 
                        'attr' => ['size' => '150']])
-                       ->add('foot',EntityType::class, [
+                       ->add('footer',EntityType::class, [
                         'class' => Foot::class,
                         'choice_label' => 'nom',
                         'required' =>false,

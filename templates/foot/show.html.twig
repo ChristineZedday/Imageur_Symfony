@@ -26,5 +26,7 @@
 
     <a href="{{ path('foot_edit', {'id': foot.id}) }}">Modifier</a>
 
+      <a href="{{ path('foot_genere', {'id': foot.id}) }}">Générer le pied-de-page</a>
+
     {{ include('foot/_delete_form.html.twig') }}
 {% endblock %}

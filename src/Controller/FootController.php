@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Foot;
 use App\Form\FootType;
+use App\Service\Generator;
 use App\Repository\FootRepository;
 use App\Repository\ImageRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -93,6 +94,16 @@ class FootController extends AbstractController
             $entityManager->remove($foot);
             $entityManager->flush();
         }
+
+        return $this->redirectToRoute('foot_index');
+    }
+
+       /**
+     * @Route("footer/genere/{id}", name="foot_genere", methods={"GET"})
+     */
+    public function footerGenere(Generator $generator, Foot $foot)
+    {
+        $generator->genereFile($foot);
 
         return $this->redirectToRoute('foot_index');
     }
