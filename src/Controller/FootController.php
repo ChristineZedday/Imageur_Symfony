@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Foot;
 use App\Form\FootType;
 use App\Repository\FootRepository;
+use App\Repository\ImageRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -28,10 +29,12 @@ class FootController extends AbstractController
     /**
      * @Route("/new", name="foot_new", methods={"GET","POST"})
      */
-    public function new(Request $request): Response
+    public function new(Request $request, ImageRepository $imageRepository): Response
     {
+        $images = $imageRepository->findIllustrations();
+        
         $foot = new Foot();
-        $form = $this->createForm(FootType::class, $foot);
+        $form = $this->createForm(FootType::class, $foot, ['images' =>$images]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -61,9 +64,11 @@ class FootController extends AbstractController
     /**
      * @Route("/{id}/edit", name="foot_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, Foot $foot): Response
+    public function edit(Request $request, ImageRepository $imageRepository, Foot $foot): Response
     {
-        $form = $this->createForm(FootType::class, $foot);
+        $images = $imageRepository->findIllustrations();
+        
+        $form = $this->createForm(FootType::class, $foot, ['images'=>$images]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

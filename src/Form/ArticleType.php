@@ -48,6 +48,12 @@ class ArticleType extends AbstractType
                 'required' =>false,
                 'multiple' => false,
                 'mapped' => true,])
+                ->add('foot',EntityType::class, [
+                    'class' => Foot::class,
+                    'choice_label' => 'nom',
+                    'required' =>false,
+                    'multiple' => false,
+                    'mapped' => true,])
             ->add('rang', NumberType::class, [
                 'label' =>'rang dans la rubrique',
                 'required' =>false,

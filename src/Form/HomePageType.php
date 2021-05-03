@@ -29,7 +29,12 @@ class HomePageType extends AbstractType
                     ->add('keywords',  TextType::class, [
                         'required' => false, 
                        'attr' => ['size' => '150']])
-
+                       ->add('foot',EntityType::class, [
+                        'class' => Foot::class,
+                        'choice_label' => 'nom',
+                        'required' =>false,
+                        'multiple' => false,
+                        'mapped' => true,])
                        ->add('auteur',  TextType::class, [
                         'required' => false, 
                        'attr' => ['size' => '150']])

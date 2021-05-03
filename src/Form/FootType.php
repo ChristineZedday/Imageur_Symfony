@@ -6,15 +6,28 @@ use App\Entity\Foot;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class FootType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $imagesUniques = [];
+        if (!empty($options['images'])) {
+            foreach ($options['images'] as $image) {
+                $imagesUniques[$image->getNom()] = $image;
+            }
+          }
+        
+        
         $builder
             ->add('nom')
             ->add('contenu')
-            ->add('image')
+            ->add('image', ChoiceType::class,[
+                'choices' => $imagesUniques,
+                'multiple' => false,
+                'mapped' => true,
+                'required' => false])
         ;
     }
 
@@ -22,6 +35,7 @@ class FootType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Foot::class,
+            'images' =>[],
         ]);
     }
 }
