@@ -44,6 +44,11 @@ class Foot
      */
     private $homePages;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $type;
+
     public function __construct()
     {
         $this->articles = new ArrayCollection();
@@ -147,6 +152,18 @@ class Foot
                 $homePage->setFooter(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getType(): ?string
+    {
+        return $this->type;
+    }
+
+    public function setType(string $type): self
+    {
+        $this->type = $type;
 
         return $this;
     }

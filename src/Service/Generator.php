@@ -131,8 +131,9 @@ class Generator
 
 	private function genereFooter(Object $foot)
     {
-		
+	
 		$path = $this->adressRepository->findOnebyName('includes')->getPhysique().'foot_'.$foot->getNom().'.php';
+	
         $file = fopen($path, 'w');
 		
 		
@@ -142,9 +143,12 @@ class Generator
         fwrite( $file, $foot->getContenu());
 		$image = $foot->getImage();
 		if (null !== $image) {
-			$chemin = $this->adressRepository->findOnebyName('moyennes_images')->getRelativeFichiers();
+			if ($foot->getType() === 'Article')
+		{	$chemin = $this->adressRepository->findOnebyName('moyennes_images')->getRelativeFichiers();}
+		else
+		{	$chemin = $this->adressRepository->findOnebyName('moyennes_images')->getRelativeAccueil();}
 			fwrite($file, '<img src="'.$chemin.$image->getNom().'">');
-		}//pas de footer à image sur page d'accueil, du coup, pour le moment!
+		}
 
 
 		fwrite($file, '</footer>');
@@ -277,7 +281,7 @@ class Generator
 	if ( null !== $foot) {
 	$chemin = $this->adressRepository->findOnebyName('includes')->getPhysique().'foot_'.$foot->getNom().'.php';
 	if (!file_exists($chemin))
-	{$this->genereFooter($chemin);}
+	{$this->genereFooter($foot);}
 	
 	fwrite ($file, '<?php include(\''.$path.'foot_'.$foot->getNom().'.php\'); ?>');
 }

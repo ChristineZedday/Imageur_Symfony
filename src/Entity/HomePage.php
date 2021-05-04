@@ -6,7 +6,6 @@ use App\Repository\HomePageRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use App\Service\Includor;
 
 /**
  * @ORM\Entity(repositoryClass=HomePageRepository::class)
@@ -57,7 +56,7 @@ class HomePage
     private $sections;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Javascript::class, inversedBy="homes")
+     * @ORM\ManyToMany(targetEntity=Javascript::class, inversedBy="homes")
      */
     private $javascript;
 
@@ -192,17 +191,7 @@ class HomePage
         return $this;
     }
 
-    public function getJavascript(): ?Javascript
-    {
-        return $this->javascript;
-    }
-
-    public function setJavascript(?Javascript $javascript): self
-    {
-        $this->javascript = $javascript;
-
-        return $this;
-    }
+  
 
     /**
      * @return Collection|CSS[]
@@ -236,6 +225,30 @@ class HomePage
     public function setFooter(?Foot $footer): self
     {
         $this->footer = $footer;
+
+        return $this;
+    }
+
+     /**
+     * @return Collection|Javascript[]
+     */
+    public function getJavascript(): Collection
+    {
+        return $this->javascript;
+    }
+
+    public function addJavascript(Javascript $javascript): self
+    {
+        if (!$this->javascript->contains($javascript)) {
+            $this->javascript[] = $javascript;
+        }
+
+        return $this;
+    }
+
+    public function removeJavascript(Javascript $javascript): self
+    {
+        $this->javascript->removeElement($javascript);
 
         return $this;
     }

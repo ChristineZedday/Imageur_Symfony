@@ -28,6 +28,9 @@ class FootType extends AbstractType
                 'multiple' => false,
                 'mapped' => true,
                 'required' => false])
+            ->add('type', ChoiceType::class, ['choices' => ['HomePage' => 'HomePage', 'Article' => 'Article'],
+            'label' => 'Pour quel type de page?',
+            'multiple' => false])
         ;
     }
 

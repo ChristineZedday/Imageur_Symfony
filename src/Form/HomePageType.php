@@ -43,14 +43,14 @@ class HomePageType extends AbstractType
                         // looks for choices from this entity
                         'class' => Javascript::class,
                         'choice_label' => 'nom',
-                        'multiple' => false,
+                        'multiple' => true,
                         'required' =>false,
                         'mapped' => true,])
                         ->add('css', EntityType::class, [
                             // looks for choices from this entity
                             'class' => CSS::class,
                             'choice_label' => 'nom',
-                            'multiple' => false,
+                            'multiple' => true,
                             'required' =>false,
                             'mapped' => true,])
         ;
