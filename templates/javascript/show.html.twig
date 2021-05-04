@@ -21,6 +21,7 @@
     <a href="{{ path('javascript_index') }}">Retour à la liste</a>
 
     <a href="{{ path('javascript_edit', {'id': javascript.id}) }}">Modifier le fichier</a>
+     <a href="{{ path('javascript_articles', {'id': javascript.id}) }}">Appliquer ce javascript à tous les articles</a>
 
     {{ include('javascript/_delete_form.html.twig') }}
  

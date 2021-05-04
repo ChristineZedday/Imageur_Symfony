@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Javascript;
 use App\Form\JavascriptType;
 use App\Repository\JavascriptRepository;
+use App\Repository\ArticleRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -89,6 +90,21 @@ class JavascriptController extends AbstractController
             $entityManager->flush();
         }
 
+        return $this->redirectToRoute('javascript_index');
+    }
+
+      /**
+     * @Route("javascript/articles/{id}", name="javascript_articles", methods={"GET"})
+     */
+    public function javascriptApplyArticles(ArticleRepository $articleRepository, Javascript $js)
+    {
+        $articles = $articleRepository->findAll();
+        foreach ($articles as $article) {
+            $js->addArticle($article);
+           
+        }
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->flush();
         return $this->redirectToRoute('javascript_index');
     }
 }

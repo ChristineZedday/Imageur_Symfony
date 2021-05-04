@@ -24,5 +24,7 @@
 
      <a href="{{ path('css_copy', {'id': css.id}) }}">Copier build/app.css dans ce fichier</a>
 
+        <a href="{{ path('css_articles', {'id': css.id}) }}">Appliquer ce style à tous les articles</a>
+
     {{ include('css/_delete_form.html.twig') }}
 {% endblock %}

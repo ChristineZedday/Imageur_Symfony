@@ -7,6 +7,7 @@ use App\Form\FootType;
 use App\Service\Generator;
 use App\Repository\FootRepository;
 use App\Repository\ImageRepository;
+use App\Repository\ArticleRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -107,4 +108,21 @@ class FootController extends AbstractController
 
         return $this->redirectToRoute('foot_index');
     }
+
+    
+       /**
+     * @Route("footer/articles/{id}", name="foot_articles", methods={"GET"})
+     */
+    public function footerApplyArticles(ArticleRepository $articleRepository, Foot $foot)
+    {
+        $articles = $articleRepository->findAll();
+        foreach ($articles as $article) {
+            $foot->addArticle($article);
+          
+        }
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->flush();
+        return $this->redirectToRoute('foot_index');
+    }
+
 }

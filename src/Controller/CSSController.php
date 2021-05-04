@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\CSS;
 use App\Form\CSSType;
 use App\Repository\CSSRepository;
+use App\Repository\ArticleRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -103,4 +104,20 @@ class CSSController extends AbstractController
 
         return $this->redirectToRoute('css_index');
     }
+
+      /**
+     * @Route("css/articles/{id}", name="css_articles", methods={"GET"})
+     */
+    public function cssApplyArticles(ArticleRepository $articleRepository, CSS $css)
+    {
+        $articles = $articleRepository->findAll();
+        foreach ($articles as $article) {
+            $css->addArticle($article);
+           
+        }
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->flush();
+        return $this->redirectToRoute('css_index');
+    }
+
 }

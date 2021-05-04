@@ -14,6 +14,7 @@ use App\Entity\Aside;
 use App\Entity\Foot;
 use App\Repository\AdressRepository;
 use App\Repository\RubriqueRepository;
+use App\Repository\ArticleRepository;
 
 define('ENTETE_HTML', '<!DOCTYPE html><html lang="fr">');
 define('END_HTML','</div></body></html>');
@@ -32,12 +33,13 @@ function get_class_name($classname)
 
 class Generator 
 {
-	private $adressRepository, $rubriqueRepository;
+	private $adressRepository, $rubriqueRepository, $articleRepository;
 
-	public function __construct(AdressRepository $adressRepository, RubriqueRepository $rubriqueRepository) //services appelés ds un service
+	public function __construct(AdressRepository $adressRepository, RubriqueRepository $rubriqueRepository, ArticleRepository $articleRepository) //services appelés ds un service
     {
         $this->adressRepository = $adressRepository;
 		$this->rubriqueRepository = $rubriqueRepository;
+		$this->articleRepository = $articleRepository;
     }
 
 
@@ -363,12 +365,12 @@ class Generator
 
 	public function genereSite()
 	{
-		$rubriques = $this->rubriqueRepository->findAll();
-		foreach ($rubriques as $rubrique) {
-			$articles = $rubrique->getArticles();
+		
+			$articles = $this->articleRepository->findAll();
 			foreach ($articles as $article) {
 				$this->genereFile($article);
+				
 			}
-		}
+		
 	}
 }
