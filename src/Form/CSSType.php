@@ -14,6 +14,11 @@ class CSSType extends AbstractType
     {
         $builder
             ->add('nom')
+            ->add('couleurTexte')
+            ->add('couleurFond')
+            ->add('couleurTexteSommaire')
+            ->add('couleurFondSommaire')
+
             
         ;
     }

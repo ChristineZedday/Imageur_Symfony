@@ -37,7 +37,7 @@ class CSS
     /**
      * @ORM\Column(type="string", length=10, nullable=true)
      */
-    private $couleurText;
+    private $couleurTexte;
 
     /**
      * @ORM\Column(type="string", length=10, nullable=true)
@@ -168,12 +168,12 @@ class CSS
 
     public function getCouleurText(): ?string
     {
-        return $this->couleurText;
+        return $this->couleurTexte;
     }
 
-    public function setCouleurText(?string $couleurText): self
+    public function setCouleurText(?string $couleurTexte): self
     {
-        $this->couleurText = $couleurText;
+        $this->couleurTexte = $couleurTexte;
 
         return $this;
     }
