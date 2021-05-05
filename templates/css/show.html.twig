@@ -15,12 +15,42 @@
                 <th>Nom</th>
                 <td>{{ css.nom }}</td>
             </tr>
+             <tr>
+                <th>Couleur du fond</th>
+                <td bgcolor="#{{css.couleurFond}}"></td>
+            </tr>
+            <tr>
+                <th>Couleur du texte</th>
+                <td bgcolor="#{{css.couleurTexte}}"></td>
+            </tr>
+            <tr>
+                <th>Couleur de l'à-côté</th>
+                <td bgcolor="#{{css.couleurAcote}}"></td>
+            </tr>
+            <tr>
+                <th>Couleur Titre 1</th>
+                <td bgcolor="#{{css.couleurTitre1}}"></td>
+            </tr>
+             <tr>
+                <th>Couleur Titre 2</th>
+                <td bgcolor="'#'~{{css.couleurTitre2}}"></td>
+            </tr>
+             <tr>
+                <th>Couleur de fond du sommaire</th>
+                <td bgcolor="#{{css.couleurFondSommaire}}"></td>
+            </tr>
+            <tr>
+                <th>Couleur du texte du sommaire</th>
+                <td bgcolor="#{{css.couleurTexteSommaire}}"></td>
+            </tr>
         </tbody>
     </table>
 
     <a href="{{ path('css_index') }}">Retour à la liste</a>
 
     <a href="{{ path('css_edit', {'id': css.id}) }}">Modifier</a>
+
+      <a href="{{ path('css_colors', {'id': css.id}) }}">Générer le scss des couleurs (faire npm run dev pour voir)</a>
 
      <a href="{{ path('css_copy', {'id': css.id}) }}">Copier build/app.css dans ce fichier</a>
 

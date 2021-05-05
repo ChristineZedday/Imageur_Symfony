@@ -166,12 +166,12 @@ class CSS
         return $this;
     }
 
-    public function getCouleurText(): ?string
+    public function getCouleurTexte(): ?string
     {
         return $this->couleurTexte;
     }
 
-    public function setCouleurText(?string $couleurTexte): self
+    public function setCouleurTexte(?string $couleurTexte): self
     {
         $this->couleurTexte = $couleurTexte;
 

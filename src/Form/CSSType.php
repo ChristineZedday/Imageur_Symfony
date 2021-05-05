@@ -18,6 +18,14 @@ class CSSType extends AbstractType
             ->add('couleurFond')
             ->add('couleurTexteSommaire')
             ->add('couleurFondSommaire')
+            ->add('couleurTitre1')
+            ->add('couleurTitre2')
+            ->add('couleurTitre1')
+            ->add('couleurAcote')
+            ->add('couleurLiens')
+            ->add('couleurLiensVisites')
+            ->add('couleurLiensSommaire')
+            ->add('couleurLiensVisitesSommaire')
 
             
         ;
