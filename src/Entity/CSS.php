@@ -89,6 +89,11 @@ class CSS
      */
     private $couleurLiensVisitesSommaire;
 
+    /**
+     * @ORM\Column(type="string", length=10, nullable=true)
+     */
+    private $couleurTexteAcote;
+
     public function __construct()
     {
         $this->articles = new ArrayCollection();
@@ -294,6 +299,18 @@ class CSS
     public function setCouleurLiensVisitesSommaire(?string $couleurLiensVisitesSommaire): self
     {
         $this->couleurLiensVisitesSommaire = $couleurLiensVisitesSommaire;
+
+        return $this;
+    }
+
+    public function getCouleurTexteAcote(): ?string
+    {
+        return $this->couleurTexteAcote;
+    }
+
+    public function setCouleurTexteAcote(?string $couleurTexteAcote): self
+    {
+        $this->couleurTexteAcote = $couleurTexteAcote;
 
         return $this;
     }

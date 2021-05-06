@@ -26,6 +26,7 @@ class CSSType extends AbstractType
             ->add('couleurLiensVisites')
             ->add('couleurLiensSommaire')
             ->add('couleurLiensVisitesSommaire')
+            ->add('couleurTexteAcote')
 
             
         ;
