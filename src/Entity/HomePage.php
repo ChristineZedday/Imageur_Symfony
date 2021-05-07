@@ -6,7 +6,6 @@ use App\Repository\HomePageRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use App\Service\Includor;
 
 /**
  * @ORM\Entity(repositoryClass=HomePageRepository::class)
@@ -57,7 +56,7 @@ class HomePage
     private $sections;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Javascript::class, inversedBy="homes")
+     * @ORM\ManyToMany(targetEntity=Javascript::class, inversedBy="homes")
      */
     private $javascript;
 
@@ -65,6 +64,11 @@ class HomePage
      * @ORM\ManyToMany(targetEntity=CSS::class, inversedBy="homePages")
      */
     private $css;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Foot::class, inversedBy="homePages")
+     */
+    private $footer;
 
 
     public function __construct()
@@ -187,17 +191,7 @@ class HomePage
         return $this;
     }
 
-    public function getJavascript(): ?Javascript
-    {
-        return $this->javascript;
-    }
-
-    public function setJavascript(?Javascript $javascript): self
-    {
-        $this->javascript = $javascript;
-
-        return $this;
-    }
+  
 
     /**
      * @return Collection|CSS[]
@@ -219,6 +213,42 @@ class HomePage
     public function removeCss(CSS $css): self
     {
         $this->css->removeElement($css);
+
+        return $this;
+    }
+
+    public function getFooter(): ?Foot
+    {
+        return $this->footer;
+    }
+
+    public function setFooter(?Foot $footer): self
+    {
+        $this->footer = $footer;
+
+        return $this;
+    }
+
+     /**
+     * @return Collection|Javascript[]
+     */
+    public function getJavascript(): Collection
+    {
+        return $this->javascript;
+    }
+
+    public function addJavascript(Javascript $javascript): self
+    {
+        if (!$this->javascript->contains($javascript)) {
+            $this->javascript[] = $javascript;
+        }
+
+        return $this;
+    }
+
+    public function removeJavascript(Javascript $javascript): self
+    {
+        $this->javascript->removeElement($javascript);
 
         return $this;
     }

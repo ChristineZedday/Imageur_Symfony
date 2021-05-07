@@ -15,12 +15,67 @@
                 <th>Nom</th>
                 <td>{{ css.nom }}</td>
             </tr>
+             <tr>
+                <th>Couleur du fond</th>
+                <td bgcolor="#{{css.couleurFond}}"></td>
+            </tr>
+            <tr>
+                <th>Couleur du texte</th>
+                <td bgcolor="#{{css.couleurTexte}}"></td>
+            </tr>
+            <tr>
+                <th>Couleur de l'à-côté</th>
+                <td bgcolor="#{{css.couleurAcote}}"></td>
+            </tr>
+            <tr>
+                <th>Couleur Titre 1</th>
+                <td bgcolor="#{{css.couleurTitre1}}"></td>
+            </tr>
+             <tr>
+                <th>Couleur Titre 2</th>
+                <td bgcolor="#{{css.couleurTitre2}}"></td>
+            </tr>
+             <tr>
+                <th>Couleur de fond du sommaire</th>
+                <td bgcolor="#{{css.couleurFondSommaire}}"></td>
+            </tr>
+            <tr>
+                <th>Couleur du texte du sommaire</th>
+                <td bgcolor="#{{css.couleurTexteSommaire}}"></td>
+            </tr>
+                <tr>
+                <th>Couleur des liens</th>
+                <td bgcolor="#{{css.couleurLiens}}"></td>
+            </tr>
+              <tr>
+                <th>Couleur des liens du sommaire</th>
+                <td bgcolor="#{{css.couleurLiensSommaire}}"></td>
+            </tr>
+              <tr>
+                <th>Couleur des liens visités</th>
+                <td bgcolor="#{{css.couleurLiensVisites}}"></td>
+            </tr>
+            </tr>
+              <tr>
+                <th>Couleur des liens visités du sommaire</th>
+                <td bgcolor="#{{css.couleurLiensVisitesSommaire}}"></td>
+            </tr>
+             <tr>
+                <th>Couleur du texte de l'à-côté</th>
+                <td bgcolor="#{{css.couleurTexteAcote}}"></td>
+            </tr>
         </tbody>
     </table>
 
     <a href="{{ path('css_index') }}">Retour à la liste</a>
 
-    <a href="{{ path('css_edit', {'id': css.id}) }}">edit</a>
+    <a href="{{ path('css_edit', {'id': css.id}) }}">Modifier</a>
+
+      <a href="{{ path('css_colors', {'id': css.id}) }}">Générer le scss des couleurs (faire npm run dev pour voir)</a>
+
+     <a href="{{ path('css_copy', {'id': css.id}) }}">Copier build/app.css dans ce fichier</a>
+
+        <a href="{{ path('css_articles', {'id': css.id}) }}">Appliquer ce style à tous les articles</a>
 
     {{ include('css/_delete_form.html.twig') }}
 {% endblock %}

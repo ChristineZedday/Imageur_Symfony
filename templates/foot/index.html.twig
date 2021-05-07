@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Footer index{% endblock %}
+
+{% block content %}
+    <h1>Index des pieds-de-pages</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Contenu</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for foot in feet %}
+            <tr>
+                <td>{{ foot.id }}</td>
+                <td>{{ foot.nom }}</td>
+                <td>{{ foot.contenu }}</td>
+                <td>
+                    <a href="{{ path('foot_show', {'id': foot.id}) }}">{{ include('./_showicone.html.twig')}}</a>
+                    <a href="{{ path('foot_edit', {'id': foot.id}) }}">{{ include('./_editicone.html.twig')}}</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">Pas de pieds de pages enregistrés</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('foot_new') }}">Ajouter un nouveau</a>
+    {{ include('./_crediticones.html.twig')}}
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Footer{% endblock %}
+
+{% block body %}
+    <h1>Pied de page</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ foot.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ foot.nom }}</td>
+            </tr>
+            <tr>
+                <th>Contenu</th>
+                <td>{{ foot.contenu }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('foot_index') }}">Retour à la liste</a>
+
+    <a href="{{ path('foot_edit', {'id': foot.id}) }}">Modifier</a>
+
+      <a href="{{ path('foot_genere', {'id': foot.id}) }}">Générer le pied-de-page</a>
+
+        <a href="{{ path('foot_articles', {'id': foot.id}) }}">Appliquer ce pied de page à tous les articles</a>
+
+    {{ include('foot/_delete_form.html.twig') }}
+{% endblock %}

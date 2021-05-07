@@ -2,8 +2,8 @@
 @import 'jeu';
 
 #main {
-	flex-grow: 2;
-	max-width: 650px;
+	
+	max-width: 900px;
 }
 
 .supertitre
@@ -29,7 +29,7 @@ article {
 		}
 
 		h2 {
-			color: $title1; 
+			color: $title2; 
 			text-align:justify; 
 			font-size:24px; 
 		}
@@ -41,11 +41,14 @@ article {
 		}
 
 		a {
-			color: $dark;
+			color: $links;
+			:visited {
+				color:$visited;
+			}
 		}
 
 		p {
-			color: $dark;
+			color: $textcolor;
 			text-align:justify; 
 			font-size:16px; 
 			font-family:$principale

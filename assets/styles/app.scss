@@ -1,7 +1,7 @@
 @import 'couleurs';
 @import 'polices';
 @import 'sommaire';
-@import 'article';
+@import 'article_flex';
 @import 'aside';
 @import 'footer';
 @import 'jeu';
@@ -15,7 +15,7 @@ body {
 	position: relative; 
 	min-height: 100%; 
 	background-color: $bgcolor; 
-	color: $dark; 
+	color: $textcolor; 
 	font-family:$principale; 
 	text-align:justify; 
 	font-size:16px; 
@@ -44,7 +44,7 @@ body {
 		position: relative; 
 		min-height: 100%; 
 		background-color: $bgcolor; 
-		color: $dark; 
+		color: $textcolor; 
 		font-family:$principale; 
 		text-align:justify; 
 		font-size:16px; 

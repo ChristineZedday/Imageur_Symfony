@@ -48,10 +48,13 @@ class Image
      */
     private $vignette;
 
-    /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Slider", cascade={"persist"})
-     */
-    private $sliders;
+    // /**
+    //  * @ORM\ManyToMany(targetEntity="App\Entity\Slider", cascade={"persist"})
+    //  *  @ORM\JoinTable(name="slider_image",
+    //  * joinColumns={@ORM\JoinColumn(name="user_id", *referencedColumnName="id", nullable=true)}
+    //  *)
+    //  */
+    // private $sliders;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
@@ -130,13 +133,13 @@ class Image
         return $this;
     }
 
-    /**
-     * @return Collection|Slider[]
-     */
-    public function getSliders(): Collection
-    {
-        return $this->sliders;
-    }
+    // /**
+    //  * @return Collection|Slider[]
+    //  */
+    // public function getSliders(): Collection
+    // {
+    //     return $this->sliders;
+    // }
 
     public function getRang(): ?int
     {

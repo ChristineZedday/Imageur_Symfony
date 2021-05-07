@@ -1,4 +1,5 @@
-@import 'variables';
+@import 'couleurs';
+@import 'polices';
 @import 'jeu';
 
 #main {
@@ -8,7 +9,8 @@
 
 .supertitre
 {
-	color: $bay; 
+	color: $title1; 
+	font: $fonth1;
 		text-align:left; 
 		font-size:20px; 
 		font-variant:small-caps;
@@ -22,26 +24,32 @@ article {
 	
 
 		h1 {
-			color: $bay; 
+			color: $title1; 
 			text-align:center; 
+			font-family: $fonth1;
 			font-size:30px; 
 			font-variant:small-caps;
 		}
 
 		h2 {
-			color: $bay; 
+			color: $title2; 
+			font-family: $fonth1;
 			text-align:justify; 
 			font-size:24px; 
 		}
 
 		h3 {
-			color: $textcolor; 
+			color: $title2; 
+			font-family: $fonth2;
 			text-align:justify; 
 			font-size:20px;
 		}
 
 		a {
-			color: $textcolor;
+			color: $links;
+			:visited {
+				color:$visited;
+			}
 		}
 
 		p {

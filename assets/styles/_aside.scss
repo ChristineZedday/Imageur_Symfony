@@ -1,18 +1,14 @@
 @import 'couleurs';
 @import 'polices';
 
-#aside {
-	flex-grow: 1;
-}
-
-#acote {
-	flex-grow: 1;
-	background-color: $aside;
-	height: 300px;
-}
 
 
 aside {
+	flex-grow: 1;
+	background-color: $aside;
+	color: $coloraside;
+	font-family: $principale;
+	height: 300px;
 	display:block;
 	padding: 30px;
 	padding-top: 50px;
@@ -21,7 +17,7 @@ aside {
 
 a {
 	text-decoration: none;
-	color: $dark;
+	color: $coloraside;
 	padding:10px;
 }
 

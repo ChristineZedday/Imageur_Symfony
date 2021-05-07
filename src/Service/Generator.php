@@ -11,16 +11,16 @@ namespace App\Service;
 use App\Entity\HomePage;
 use App\Entity\Section;
 use App\Entity\Aside;
+use App\Entity\Foot;
 use App\Repository\AdressRepository;
 use App\Repository\RubriqueRepository;
+use App\Repository\ArticleRepository;
 
 define('ENTETE_HTML', '<!DOCTYPE html><html lang="fr">');
 define('END_HTML','</div></body></html>');
 define('METAS_HTML', '<head><meta charset="utf-8"/><meta name="viewport" content="width=device-width" />');
 define('MIDDLE_HTML', '</head><body><div id = "conteneur">');
-define('IMAGEUR', '<p>Cette page a été générée automatiquement par <a href="https://github.com/christinezedday/Imageur_Symfony">Imageur</a></p>');
-define('FOOTER','<p>Textes et dessins de Christine Zedday<br/>Photos Christine Zedday, Alain et H&eacute;l&egrave;ne Bache, Leïla et Nora Zedday </p>'); //faudra faire une table pour le/les footer
-define('WARNING','<p>Attention travaux! je restructure mon site, des parties peuvent être momentanément inaccessibles, excusez-moi pour la gène occasionnée.</p>');
+
 
 
 function get_class_name($classname)
@@ -33,12 +33,13 @@ function get_class_name($classname)
 
 class Generator 
 {
-	private $adressRepository, $rubriqueRepository;
+	private $adressRepository, $rubriqueRepository, $articleRepository;
 
-	public function __construct(AdressRepository $adressRepository, RubriqueRepository $rubriqueRepository) //services appelés ds un service
+	public function __construct(AdressRepository $adressRepository, RubriqueRepository $rubriqueRepository, ArticleRepository $articleRepository) //services appelés ds un service
     {
         $this->adressRepository = $adressRepository;
 		$this->rubriqueRepository = $rubriqueRepository;
+		$this->articleRepository = $articleRepository;
     }
 
 
@@ -130,15 +131,31 @@ class Generator
 		fclose($file);
 	}
 
-	private function genereFooter($path)
+	private function genereFooter(Object $foot)
     {
+	
+		$path = $this->adressRepository->findOnebyName('includes')->getPhysique().'foot_'.$foot->getNom().'.php';
+	
+        $file = fopen($path, 'w');
 		
-        $footerFile = fopen($path, 'w');
 		
-
-        fwrite($footerFile, '<footer>'.WARNING.FOOTER.IMAGEUR.'</footer>');
+        fwrite($file, '<footer>');
+		
        
-        fclose($footerFile);
+        fwrite( $file, $foot->getContenu());
+		$image = $foot->getImage();
+		if (null !== $image) {
+			if ($foot->getType() === 'Article')
+		{	$chemin = $this->adressRepository->findOnebyName('moyennes_images')->getRelativeFichiers();}
+		else
+		{	$chemin = $this->adressRepository->findOnebyName('moyennes_images')->getRelativeAccueil();}
+			fwrite($file, '<img src="'.$chemin.$image->getNom().'">');
+		}
+
+
+		fwrite($file, '</footer>');
+       
+        fclose($file);
     }
 
 	private function genereAside(Object $aside)
@@ -262,12 +279,14 @@ class Generator
 		}
 	}
 	fwrite ($file, '</article>');
-	$chemin = $this->adressRepository->findOnebyName('includes')->getPhysique().'footer.php';
+	$foot = $entity->getFooter();
+	if ( null !== $foot) {
+	$chemin = $this->adressRepository->findOnebyName('includes')->getPhysique().'foot_'.$foot->getNom().'.php';
 	if (!file_exists($chemin))
-	{$this->genereFooter($chemin);}
+	{$this->genereFooter($foot);}
 	
-	fwrite ($file, '<?php include(\''.$path.'footer.php\'); ?>');
-
+	fwrite ($file, '<?php include(\''.$path.'foot_'.$foot->getNom().'.php\'); ?>');
+}
 	fwrite($file,'</div>');
 	fwrite($file,'<div class="element" id="acote">');
 	$aside = $entity->getAside();
@@ -290,16 +309,11 @@ class Generator
 			
    }
 
-
-	
-	
-
-	// public function genereFileArticle(Article $article, Object $entity)
-    // {
-	// 	$type= get_class($entity);
-	// 	$dir = $this->adressRepository->findOneByName('fichiers')->getPhysique() ;
-	// 	$includes_path = $this->adressRepository->findOneByName('includes')->getPhysique();
-    // }
+    private function genereCSS(Object $css)
+	{
+		$dir = $this->adressRepository->findOnebyName('css')->getPhysique();
+		copy('build/app.css',$dir.$css->getNom().'.css');
+	}
 
     public function genereFile(Object $entity)
     {
@@ -335,18 +349,28 @@ class Generator
 			case 'Slider':
 				$this->genereSlider($entity);
 			break;
+
+			case 'CSS':
+				$this->genereCSS($entity);
+			break;
+
+			case 'Foot':
+				$this->genereFooter($entity);
+			break;
 				
             }
     }
 
+	
+
 	public function genereSite()
 	{
-		$rubriques = $this->rubriqueRepository->findAll();
-		foreach ($rubriques as $rubrique) {
-			$articles = $rubrique->getArticles();
+		
+			$articles = $this->articleRepository->findAll();
 			foreach ($articles as $article) {
 				$this->genereFile($article);
+				
 			}
-		}
+		
 	}
 }
