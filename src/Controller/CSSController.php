@@ -113,7 +113,11 @@ class CSSController extends AbstractController
     {
         $articles = $articleRepository->findAll();
         foreach ($articles as $article) {
+            foreach ($article->getCSS() as $oldcss) {
+                $oldcss->removeArticle($article);
+            }
             $css->addArticle($article);
+          
            
         }
         $entityManager = $this->getDoctrine()->getManager();
