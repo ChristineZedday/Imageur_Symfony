@@ -72,7 +72,7 @@ class CSSGenerator
 		fwrite($file,'$colorsom: #000000;');
 	}
 	if (null !== $css->getCouleurTexteAcote())
-	{	fwrite($file,'$coloraside: #'.$css->getCouleurTexteAcotee().';');}
+	{	fwrite($file,'$coloraside: #'.$css->getCouleurTexteAcote().';');}
 	else {
 		fwrite($file,'$coloraside: #000000;');
 	}
