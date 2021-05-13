@@ -27,7 +27,7 @@ class ImageRepository extends ServiceEntityRepository
 
     public function findDispo($slider)
     {
-// public function notIn($x, $y); // Returns Expr\Func instance
+        // public function notIn($x, $y); // Returns Expr\Func instance
 
         $images = $slider->getImages();
         $imids = [];
@@ -54,19 +54,15 @@ class ImageRepository extends ServiceEntityRepository
 
     public function findIllustrations()
     {
-
         $entityManager = $this->getEntityManager();
 
-       
-            $query = $entityManager->createQuery(
+        $query = $entityManager->createQuery(
                 'select i
                 from App\Entity\Image i
                 where i.pour = \'illustration\'');
-        
-     
 
         return $query->getResult();
-    } 
+    }
 
     // /**
     //  * @return Image[] Returns an array of Image objects

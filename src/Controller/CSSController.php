@@ -1,17 +1,23 @@
 <?php
 
+/*
+ * Imageur_Symfony
+ * Symfony 5
+ * Christine Zedday
+ */
+
 namespace App\Controller;
 
 use App\Entity\CSS;
 use App\Form\CSSType;
-use App\Repository\CSSRepository;
 use App\Repository\ArticleRepository;
+use App\Repository\CSSRepository;
+use App\Service\CSSGenerator;
+use App\Service\Generator;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Service\Generator;
-use App\Service\CSSGenerator;
 
 /**
  * @Route("/c/s/s")
@@ -95,18 +101,17 @@ class CSSController extends AbstractController
         return $this->redirectToRoute('css_index');
     }
 
-      /**
+    /**
      * @Route("css/copy/{id}", name="css_copy", methods={"GET"})
      */
     public function cssCopie(Generator $generator, CSS $css)
     {
         $generator->genereFile($css);
-        
 
         return $this->redirectToRoute('css_index');
     }
 
-      /**
+    /**
      * @Route("css/articles/{id}", name="css_articles", methods={"GET"})
      */
     public function cssApplyArticles(ArticleRepository $articleRepository, CSS $css)
@@ -117,21 +122,20 @@ class CSSController extends AbstractController
                 $oldcss->removeArticle($article);
             }
             $css->addArticle($article);
-          
-           
         }
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->flush();
+
         return $this->redirectToRoute('css_index');
     }
 
-      /**
+    /**
      * @Route("css/colors/{id}", name="css_colors", methods={"GET"})
      */
     public function ChangeColors(CSSGenerator $cssGenerator, CSS $css)
     {
         $cssGenerator->colorsScssGenere($css);
+
         return $this->redirectToRoute('css_index');
     }
-
 }

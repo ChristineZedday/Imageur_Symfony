@@ -1,10 +1,14 @@
 <?php
 
+/*
+ * Imageur_Symfony
+ * Symfony 5
+ * Christine Zedday
+ */
+
 namespace App\Entity;
 
 use App\Repository\SectionRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -22,7 +26,7 @@ class Section
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $titre= 'sans';
+    private $titre = 'sans';
 
     /**
      * @ORM\OneToOne(targetEntity=Slider::class, mappedBy="section", cascade={"persist", "remove"})
@@ -55,9 +59,6 @@ class Section
      */
     private $homePage;
 
-    
-
-
     public function getId(): ?int
     {
         return $this->id;
@@ -87,8 +88,6 @@ class Section
         return $this;
     }
 
-  
-
     public function getSlider(): ?Slider
     {
         return $this->slider;
@@ -97,12 +96,12 @@ class Section
     public function setSlider(?Slider $slider): self
     {
         // unset the owning side of the relation if necessary
-        if ($slider === null && $this->slider !== null) {
+        if (null === $slider && null !== $this->slider) {
             $this->slider->setSection(null);
         }
 
         // set the owning side of the relation if necessary
-        if ($slider !== null && $slider->getSection() !== $this) {
+        if (null !== $slider && $slider->getSection() !== $this) {
             $slider->setSection($this);
         }
 
@@ -135,30 +134,25 @@ class Section
         return $this;
     }
 
-   
-
     public function genereSection($dir, $imgs, $image)
     {
         $path = $dir.'/section_'.$this->getId().'.php';
         $sectionFile = fopen($path, 'w');
         fwrite($sectionFile, '<section>');
-        if (null !== $this->getTitre() && 'sans' !== $this->getTitre()) { 
+        if (null !== $this->getTitre() && 'sans' !== $this->getTitre()) {
             fwrite($sectionFile, '<h2>'.$this->getTitre().'</h2>');
         }
-       
+
         fwrite($sectionFile, $this->getContenu());
 
-        if (null !== $this->getSlider())
-        {
+        if (null !== $this->getSlider()) {
             $nom = $this->getSlider()->getNom();
-            if (!file_exists($dir.'/slider_'.$nom.'.php'))
-            {
+            if (!file_exists($dir.'/slider_'.$nom.'.php')) {
                 $this->getSlider()->genereSlider($dir, $imgs);
             }
             $fichier = $dir.'/slider_'.$nom.'.php'; //si structure site distant différents dossiers, ajuster
             fwrite($sectionFile, '<?php include (\''.$fichier.'\'); ?>');
-        }
-        else if (null !== $this->getImage()) {
+        } elseif (null !== $this->getImage()) {
             $nom = $this->getImage()->getNom();
             $alt = $this->getImage()->getAlt();
             fwrite($sectionFile, '<img src="'.$image.$nom.'" alt="'.$alt.'" />');
@@ -175,12 +169,12 @@ class Section
     public function setImage(?Image $image): self
     {
         // unset the owning side of the relation if necessary
-        if ($image === null && $this->image !== null) {
+        if (null === $image && null !== $this->image) {
             $this->image->setSection(null);
         }
 
         // set the owning side of the relation if necessary
-        if ($image !== null && $image->getSection() !== $this) {
+        if (null !== $image && $image->getSection() !== $this) {
             $image->setSection($this);
         }
 
@@ -200,8 +194,4 @@ class Section
 
         return $this;
     }
-
- 
-
-   
 }

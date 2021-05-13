@@ -30,26 +30,20 @@ class Slider
      */
     private $nom;
 
-
-  
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Image", cascade={"persist"})
      * @ORM\OrderBy({"rang" = "ASC"})
      */
     private $images;
 
-
     /**
      * @ORM\OneToOne(targetEntity=Section::class, inversedBy="slider", cascade={"persist"})
      */
     private $section;
 
-    
-
     public function __construct()
     {
         $this->images = new ArrayCollection();
-       
     }
 
     public function getId(): ?int
@@ -81,7 +75,6 @@ class Slider
         return $this;
     }
 
-
     /**
      * @return Collection|Image[]
      */
@@ -105,9 +98,6 @@ class Slider
 
         return $this;
     }
-
-  
-
 
     public function getSection(): ?Section
     {

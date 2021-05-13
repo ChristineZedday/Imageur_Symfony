@@ -1,11 +1,18 @@
 <?php
 
+/*
+ * Imageur_Symfony
+ * Symfony 5
+ * Christine Zedday
+ */
+
 namespace App\Form;
 
 use App\Entity\CSS;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+
 // use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 class CSSType extends AbstractType
@@ -28,7 +35,6 @@ class CSSType extends AbstractType
             ->add('couleurLiensVisitesSommaire')
             ->add('couleurTexteAcote')
 
-            
         ;
     }
 

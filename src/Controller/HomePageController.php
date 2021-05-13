@@ -1,18 +1,21 @@
 <?php
 
+/*
+ * Imageur_Symfony
+ * Symfony 5
+ * Christine Zedday
+ */
+
 namespace App\Controller;
 
 use App\Entity\HomePage;
 use App\Form\HomePageType;
 use App\Repository\HomePageRepository;
-use App\Repository\AdressRepository;
+use App\Service\Generator;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Service\Generator;
-
-
 
 /**
  * @Route("/home/page")
@@ -97,24 +100,21 @@ class HomePageController extends AbstractController
     }
 
 //     public function newGenerator(Generator $generator): Response
-// {
+    // {
 //     // thanks to the type-hint, the container will instantiate a
 //     // new MessageGenerator and pass it to you!
 //     // ...
 
 //     $this->addFlash('success', 'oui');
 //     // ...
-// }
+    // }
 
-      /**
+    /**
      * @Route("home/genere/{id}", name="home_page_genere", methods={"GET"})
      */
     public function homePageGenere(Generator $generator, HomePage $home)
     {
-      
-      
         $generator->genereFile($home);
-   
 
         return $this->redirectToRoute('home_page_index');
     }

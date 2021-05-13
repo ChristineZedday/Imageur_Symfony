@@ -1,5 +1,11 @@
 <?php
 
+/*
+ * Imageur_Symfony
+ * Symfony 5
+ * Christine Zedday
+ */
+
 namespace App\Repository;
 
 use App\Entity\Adress;
@@ -36,7 +42,6 @@ class AdressRepository extends ServiceEntityRepository
     }
     */
 
-    
     public function findOneByName($value): ?adress
     {
         return $this->createQueryBuilder('a')
@@ -46,5 +51,4 @@ class AdressRepository extends ServiceEntityRepository
             ->getOneOrNullResult()
         ;
     }
-    
 }

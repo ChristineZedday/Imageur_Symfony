@@ -66,8 +66,6 @@ class Image
      */
     private $section;
 
-   
-
     public function getId(): ?int
     {
         return $this->id;
@@ -164,8 +162,4 @@ class Image
 
         return $this;
     }
-
-  
-
-   
 }

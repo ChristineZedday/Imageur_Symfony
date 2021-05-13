@@ -11,13 +11,13 @@ namespace App\Controller;
 use App\Entity\Slider;
 use App\Form\SliderType;
 use App\Repository\ImageRepository;
-use App\Repository\SliderRepository;
 use App\Repository\SectionRepository;
+use App\Repository\SliderRepository;
+use App\Service\Generator;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Service\Generator;
 
 /**
  * @Route("/slider")
@@ -41,8 +41,6 @@ class SliderController extends AbstractController
     {
         $slider = new Slider();
 
-        
-
         $form = $this->createForm(SliderType::class, $slider);
 
         $form->handleRequest($request);
@@ -52,15 +50,12 @@ class SliderController extends AbstractController
             $entityManager->persist($slider);
             $entityManager->flush();
 
-           
-
             return $this->redirectToRoute('slider_edit', ['id' => $slider->getId()]);
         }
 
         return $this->render('slider/new.html.twig', [
             'slider' => $slider,
             'form' => $form->createView(),
-           
         ]);
     }
 
@@ -114,13 +109,12 @@ class SliderController extends AbstractController
     public function edit(Request $request, Slider $slider, ImageRepository $imageRepository): Response
     {
         $images = $imageRepository->findDispo($slider);
-       
+
         $form = $this->createForm(SliderType::class, $slider);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
-
 
             return $this->redirectToRoute('slider_index');
         }
