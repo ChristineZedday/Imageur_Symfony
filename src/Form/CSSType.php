@@ -27,13 +27,19 @@ class CSSType extends AbstractType
             ->add('couleurFondSommaire')
             ->add('couleurTitre1')
             ->add('couleurTitre2')
-            ->add('couleurTitre1')
+            ->add('couleurTitre3')
             ->add('couleurAcote')
             ->add('couleurLiens')
             ->add('couleurLiensVisites')
             ->add('couleurLiensSommaire')
             ->add('couleurLiensVisitesSommaire')
             ->add('couleurTexteAcote')
+            ->add('couleurTitreAcote')
+            ->add('policeTexte')
+            ->add('policeTitre1')
+            ->add('policeTitre2')
+            ->add('policeTitre3')
+           
 
         ;
     }
