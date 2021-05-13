@@ -90,9 +90,11 @@ class CSSGenerator
         fclose($file);
     }
 
-	public function fontScssGenere(CSS $css) 
+	public function fontsScssGenere(CSS $css) 
 	{
-		if (null !== $css->getPoliceTexte()) {
+        $path = '../assets/styles/_polices.scss';
+        $file = fopen($path, 'w');
+        if (null !== $css->getPoliceTexte()) {
             fwrite($file, '$principale: '.$css->getPoliceTexte().';');
         } else {
             fwrite($file, '$principale: sans-serif;');
@@ -112,5 +114,6 @@ class CSSGenerator
         } else {
             fwrite($file, '$fonth3: sans-serif;');
         }
+        fclose($file);
 	}
 }
