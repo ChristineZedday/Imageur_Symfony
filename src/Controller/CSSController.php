@@ -108,7 +108,7 @@ class CSSController extends AbstractController
     {
         $generator->genereFile($css);
 
-        return $this->redirectToRoute('home');
+        return $this->redirectToRoute('css_show', array('id' => $css->getId()));
     }
 
     /**
@@ -126,7 +126,7 @@ class CSSController extends AbstractController
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->flush();
 
-        return $this->redirectToRoute('css_index');
+        return $this->redirectToRoute('home');
     }
 
     /**
