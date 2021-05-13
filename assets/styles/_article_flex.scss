@@ -39,15 +39,15 @@ article {
 		}
 
 		h3 {
-			color: $title2; 
-			font-family: $fonth2;
+			color: $title3; 
+			font-family: $fonth3;
 			text-align:justify; 
 			font-size:20px;
 		}
 
 		a {
 			color: $links;
-			:visited {
+			a:visited {
 				color:$visited;
 			}
 		}

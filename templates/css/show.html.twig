@@ -55,7 +55,6 @@
                 <th>Couleur des liens visités</th>
                 <td bgcolor="#{{css.couleurLiensVisites}}"></td>
             </tr>
-            </tr>
               <tr>
                 <th>Couleur des liens visités du sommaire</th>
                 <td bgcolor="#{{css.couleurLiensVisitesSommaire}}"></td>
@@ -64,6 +63,31 @@
                 <th>Couleur du texte de l'à-côté</th>
                 <td bgcolor="#{{css.couleurTexteAcote}}"></td>
             </tr>
+             <tr>
+                <th>Couleur du titre de l'à-côté</th>
+                <td bgcolor="#{{css.couleurTitreAcote}}"></td>
+            </tr>
+        </tbody>
+          <tbody>
+           
+             <tr>
+                <th>Police du texte</th>
+                <td font="{{css.policeTexte}}">C'est bien ça?</td>
+            </tr>
+            <tr>
+                <th>Police du titre 1</th>
+                <td> <font face="{{css.policeTitre1}}">C'est bien ça?</font></td>
+            </tr>
+           <tr>
+                <th>Police du titre 2</th>
+                 <td> <font face="{{css.policeTitre2}}">C'est bien ça?</font></td>
+            </tr>
+            <tr>
+                <th>Police du titre 3</th>
+                 <td> <font face="{{css.policeTitre3}}">C'est bien ça?</font></td>
+            </tr>
+            
+          
         </tbody>
     </table>
 
@@ -71,11 +95,15 @@
 
     <a href="{{ path('css_edit', {'id': css.id}) }}">Modifier</a>
 
-      <a href="{{ path('css_colors', {'id': css.id}) }}">Générer le scss des couleurs (faire npm run dev pour voir)</a>
+    <p>En cas de modification, les actions suivantes sont à effectuer dans l'ordre!</br>
 
-     <a href="{{ path('css_copy', {'id': css.id}) }}">Copier build/app.css dans ce fichier</a>
+      <a href="{{ path('css_colors', {'id': css.id}) }}">Générer le scss des couleurs (faire npm run dev pour appliquer!)</a><br/>
 
-        <a href="{{ path('css_articles', {'id': css.id}) }}">Appliquer ce style à tous les articles</a>
+       <a href="{{ path('css_fonts', {'id': css.id}) }}">Ou celui des familles de polices (faire npm run dev pour appliquer!)</a><br/>
+
+     <a href="{{ path('css_copy', {'id': css.id}) }}">Copier build/app.css dans ce fichier</a></br>
+
+        <a href="{{ path('css_articles', {'id': css.id}) }}">Appliquer ce style à tous les articles, <em>à la place</em> du style précédent</a> (n'oubliez pas de re-générer les articles ensuite!)</p>
 
     {{ include('css/_delete_form.html.twig') }}
 {% endblock %}

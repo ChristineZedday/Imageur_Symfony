@@ -1,13 +1,19 @@
 <?php
 
+/*
+ * Imageur_Symfony
+ * Symfony 5
+ * Christine Zedday
+ */
+
 namespace App\Controller;
 
 use App\Entity\Foot;
 use App\Form\FootType;
-use App\Service\Generator;
+use App\Repository\ArticleRepository;
 use App\Repository\FootRepository;
 use App\Repository\ImageRepository;
-use App\Repository\ArticleRepository;
+use App\Service\Generator;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -34,9 +40,9 @@ class FootController extends AbstractController
     public function new(Request $request, ImageRepository $imageRepository): Response
     {
         $images = $imageRepository->findIllustrations();
-        
+
         $foot = new Foot();
-        $form = $this->createForm(FootType::class, $foot, ['images' =>$images]);
+        $form = $this->createForm(FootType::class, $foot, ['images' => $images]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -69,8 +75,8 @@ class FootController extends AbstractController
     public function edit(Request $request, ImageRepository $imageRepository, Foot $foot): Response
     {
         $images = $imageRepository->findIllustrations();
-        
-        $form = $this->createForm(FootType::class, $foot, ['images'=>$images]);
+
+        $form = $this->createForm(FootType::class, $foot, ['images' => $images]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -99,7 +105,7 @@ class FootController extends AbstractController
         return $this->redirectToRoute('foot_index');
     }
 
-       /**
+    /**
      * @Route("footer/genere/{id}", name="foot_genere", methods={"GET"})
      */
     public function footerGenere(Generator $generator, Foot $foot)
@@ -109,8 +115,7 @@ class FootController extends AbstractController
         return $this->redirectToRoute('foot_index');
     }
 
-    
-       /**
+    /**
      * @Route("footer/articles/{id}", name="foot_articles", methods={"GET"})
      */
     public function footerApplyArticles(ArticleRepository $articleRepository, Foot $foot)
@@ -118,11 +123,10 @@ class FootController extends AbstractController
         $articles = $articleRepository->findAll();
         foreach ($articles as $article) {
             $foot->addArticle($article);
-          
         }
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->flush();
+
         return $this->redirectToRoute('foot_index');
     }
-
 }

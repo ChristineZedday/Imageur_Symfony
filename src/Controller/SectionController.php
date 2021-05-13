@@ -1,14 +1,19 @@
 <?php
 
+/*
+ * Imageur_Symfony
+ * Symfony 5
+ * Christine Zedday
+ */
+
 namespace App\Controller;
 
-use App\Entity\Section;
 use App\Entity\Article;
+use App\Entity\Section;
 use App\Form\SectionType;
-use App\Repository\SectionRepository;
 use App\Repository\ArticleRepository;
-use App\Repository\HomePageRepository;
 use App\Repository\ImageRepository;
+use App\Repository\SectionRepository;
 use App\Service\Generator;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -37,9 +42,7 @@ class SectionController extends AbstractController
     {
         $section = new Section();
         $images = $imageRepository->findIllustrations();
-      
-      
-    
+
         $form = $this->createForm(SectionType::class, $section, ['images' => $images]);
         $form->handleRequest($request);
 
@@ -57,11 +60,7 @@ class SectionController extends AbstractController
         ]);
     }
 
-
-   
-
-
-     /**
+    /**
      * @Route("/article/{id}/new", name="new_section_article", methods={"GET","POST"})
      */
     public function newSectionArticle(Request $request, ArticleRepository $articleRepository, ImageRepository $imageRepository, Article $article): Response
@@ -69,9 +68,8 @@ class SectionController extends AbstractController
         $section = new Section();
         $images = $imageRepository->findIllustrations();
 
-        $section->setArticle($article) ;
-        
-       
+        $section->setArticle($article);
+
         $form = $this->createForm(SectionType::class, $section, ['images' => $images]);
         $form->handleRequest($request);
 
@@ -80,7 +78,7 @@ class SectionController extends AbstractController
             $entityManager->persist($section);
             $entityManager->flush();
 
-            return $this->redirectToRoute('article_show', ['id' =>$article->getId()]);
+            return $this->redirectToRoute('article_show', ['id' => $article->getId()]);
         }
 
         return $this->render('section/new.html.twig', [
@@ -103,10 +101,10 @@ class SectionController extends AbstractController
     /**
      * @Route("/{id}/edit", name="section_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, Section $section,   ImageRepository $imageRepository ): Response
+    public function edit(Request $request, Section $section, ImageRepository $imageRepository): Response
     {
         $images = $imageRepository->findIllustrations();
-        $form = $this->createForm(SectionType::class, $section,  [ 'images' => $images]);
+        $form = $this->createForm(SectionType::class, $section, ['images' => $images]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -135,7 +133,7 @@ class SectionController extends AbstractController
         return $this->redirectToRoute('section_index');
     }
 
-      /**
+    /**
      * @Route("section/genere/{id}", name="section_genere", methods={"GET"})
      */
     public function sectionGenere(Generator $generator, Section $section)

@@ -1,11 +1,18 @@
 <?php
 
+/*
+ * Imageur_Symfony
+ * Symfony 5
+ * Christine Zedday
+ */
+
 namespace App\Form;
 
 use App\Entity\CSS;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+
 // use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 class CSSType extends AbstractType
@@ -20,15 +27,20 @@ class CSSType extends AbstractType
             ->add('couleurFondSommaire')
             ->add('couleurTitre1')
             ->add('couleurTitre2')
-            ->add('couleurTitre1')
+            ->add('couleurTitre3')
             ->add('couleurAcote')
             ->add('couleurLiens')
             ->add('couleurLiensVisites')
             ->add('couleurLiensSommaire')
             ->add('couleurLiensVisitesSommaire')
             ->add('couleurTexteAcote')
+            ->add('couleurTitreAcote')
+            ->add('policeTexte')
+            ->add('policeTitre1')
+            ->add('policeTitre2')
+            ->add('policeTitre3')
+           
 
-            
         ;
     }
 

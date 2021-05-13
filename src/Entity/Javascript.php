@@ -1,5 +1,11 @@
 <?php
 
+/*
+ * Imageur_Symfony
+ * Symfony 5
+ * Christine Zedday
+ */
+
 namespace App\Entity;
 
 use App\Repository\JavascriptRepository;
@@ -34,13 +40,10 @@ class Javascript
      */
     private $homes;
 
-  
-
     public function __construct()
     {
         $this->articles = new ArrayCollection();
         $this->homes = new ArrayCollection();
-      
     }
 
     public function getId(): ?int
@@ -116,5 +119,4 @@ class Javascript
 
         return $this;
     }
-
 }

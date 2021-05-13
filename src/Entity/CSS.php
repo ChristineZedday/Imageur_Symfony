@@ -1,5 +1,11 @@
 <?php
 
+/*
+ * Imageur_Symfony
+ * Symfony 5
+ * Christine Zedday
+ */
+
 namespace App\Entity;
 
 use App\Repository\CSSRepository;
@@ -93,6 +99,38 @@ class CSS
      * @ORM\Column(type="string", length=10, nullable=true)
      */
     private $couleurTexteAcote;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $couleurTitreAcote;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $couleurTitre3;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $policeTexte;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $policeTitre1;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $PoliceTitre2;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $policeTitre3;
+
+   
 
     public function __construct()
     {
@@ -314,4 +352,78 @@ class CSS
 
         return $this;
     }
+
+    public function getCouleurTitreAcote(): ?string
+    {
+        return $this->couleurTitreAcote;
+    }
+
+    public function setCouleurTitreAcote(?string $couleurTitreAcote): self
+    {
+        $this->couleurTitreAcote = $couleurTitreAcote;
+
+        return $this;
+    }
+
+    public function getCouleurTitre3(): ?string
+    {
+        return $this->couleurTitre3;
+    }
+
+    public function setCouleurTitre3(?string $couleurTitre3): self
+    {
+        $this->couleurTitre3 = $couleurTitre3;
+
+        return $this;
+    }
+
+    public function getPoliceTexte(): ?string
+    {
+        return $this->policeTexte;
+    }
+
+    public function setPoliceTexte(?string $policeTexte): self
+    {
+        $this->policeTexte = $policeTexte;
+
+        return $this;
+    }
+
+    public function getPoliceTitre1(): ?string
+    {
+        return $this->policeTitre1;
+    }
+
+    public function setPoliceTitre1(?string $policeTitre1): self
+    {
+        $this->policeTitre1 = $policeTitre1;
+
+        return $this;
+    }
+
+    public function getPoliceTitre2(): ?string
+    {
+        return $this->PoliceTitre2;
+    }
+
+    public function setPoliceTitre2(?string $PoliceTitre2): self
+    {
+        $this->PoliceTitre2 = $PoliceTitre2;
+
+        return $this;
+    }
+
+    public function getPoliceTitre3(): ?string
+    {
+        return $this->policeTitre3;
+    }
+
+    public function setPoliceTitre3(?string $policeTitre3): self
+    {
+        $this->policeTitre3 = $policeTitre3;
+
+        return $this;
+    }
+
+   
 }

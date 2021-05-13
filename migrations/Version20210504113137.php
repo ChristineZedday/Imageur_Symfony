@@ -2,6 +2,12 @@
 
 declare(strict_types=1);
 
+/*
+ * Imageur_Symfony
+ * Symfony 5
+ * Christine Zedday
+ */
+
 namespace DoctrineMigrations;
 
 use Doctrine\DBAL\Schema\Schema;
@@ -12,12 +18,12 @@ use Doctrine\Migrations\AbstractMigration;
  */
 final class Version20210504113137 extends AbstractMigration
 {
-    public function getDescription() : string
+    public function getDescription(): string
     {
         return '';
     }
 
-    public function up(Schema $schema) : void
+    public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
         $this->addSql('CREATE TABLE home_page_javascript (home_page_id INT NOT NULL, javascript_id INT NOT NULL, INDEX IDX_18580039B966A8BC (home_page_id), INDEX IDX_18580039E754219D (javascript_id), PRIMARY KEY(home_page_id, javascript_id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
@@ -29,7 +35,7 @@ final class Version20210504113137 extends AbstractMigration
         $this->addSql('ALTER TABLE home_page DROP javascript_id');
     }
 
-    public function down(Schema $schema) : void
+    public function down(Schema $schema): void
     {
         // this down() migration is auto-generated, please modify it to your needs
         $this->addSql('CREATE TABLE image_slider (image_id INT NOT NULL, slider_id INT NOT NULL, INDEX IDX_60DA4ECF3DA5256D (image_id), INDEX IDX_60DA4ECF2CCC9638 (slider_id), PRIMARY KEY(image_id, slider_id)) DEFAULT CHARACTER SET utf8 COLLATE `utf8_unicode_ci` ENGINE = InnoDB COMMENT = \'\' ');

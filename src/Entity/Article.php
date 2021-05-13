@@ -1,14 +1,17 @@
 <?php
 
+/*
+ * Imageur_Symfony
+ * Symfony 5
+ * Christine Zedday
+ */
+
 namespace App\Entity;
 
 use App\Repository\ArticleRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use App\Entity\Section;
-
-
 
 /**
  * @ORM\Entity(repositoryClass=ArticleRepository::class)
@@ -31,7 +34,6 @@ class Article
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $auteur;
-
 
     /**
      * @ORM\OneToMany(targetEntity=Slider::class, mappedBy="article")
@@ -57,12 +59,12 @@ class Article
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $description ='';
+    private $description = '';
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $keywords ='';
+    private $keywords = '';
 
     /**
      * @ORM\ManyToOne(targetEntity=Aside::class, inversedBy="articles")
@@ -93,13 +95,6 @@ class Article
      * @ORM\ManyToOne(targetEntity=Foot::class, inversedBy="articles")
      */
     private $footer;
-
-
-   
-
-   
-
-    
 
     public function __construct($auteur)
     {
@@ -138,7 +133,6 @@ class Article
 
         return $this;
     }
-
 
     /**
      * @return Collection|Slider[]
@@ -199,8 +193,6 @@ class Article
 
         return $this;
     }
-
-
 
     public function getRubrique(): ?Rubrique
     {
@@ -345,10 +337,4 @@ class Article
 
         return $this;
     }
-
-   
-
-   
-
-
 }

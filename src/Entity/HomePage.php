@@ -1,5 +1,11 @@
 <?php
 
+/*
+ * Imageur_Symfony
+ * Symfony 5
+ * Christine Zedday
+ */
+
 namespace App\Entity;
 
 use App\Repository\HomePageRepository;
@@ -44,7 +50,6 @@ class HomePage
      */
     private $keywords;
 
-
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
@@ -70,15 +75,11 @@ class HomePage
      */
     private $footer;
 
-
     public function __construct()
     {
         $this->sections = new ArrayCollection();
         $this->css = new ArrayCollection();
-      
     }
-
-  
 
     public function getId(): ?int
     {
@@ -121,8 +122,6 @@ class HomePage
         return $this;
     }
 
-   
-
     public function getDescription(): ?string
     {
         return $this->description;
@@ -146,8 +145,6 @@ class HomePage
 
         return $this;
     }
-
-   
 
     public function getAuteur(): ?string
     {
@@ -191,8 +188,6 @@ class HomePage
         return $this;
     }
 
-  
-
     /**
      * @return Collection|CSS[]
      */
@@ -229,7 +224,7 @@ class HomePage
         return $this;
     }
 
-     /**
+    /**
      * @return Collection|Javascript[]
      */
     public function getJavascript(): Collection
@@ -252,7 +247,4 @@ class HomePage
 
         return $this;
     }
-
-   
 }
-

@@ -1,15 +1,21 @@
 <?php
 
+/*
+ * Imageur_Symfony
+ * Symfony 5
+ * Christine Zedday
+ */
+
 namespace App\Controller;
 
 use App\Entity\Aside;
 use App\Form\AsideType;
 use App\Repository\AsideRepository;
+use App\Service\Generator;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Service\Generator;
 
 /**
  * @Route("/aside")
@@ -93,8 +99,7 @@ class AsideController extends AbstractController
         return $this->redirectToRoute('aside_index');
     }
 
-    
-      /**
+    /**
      * @Route("aside/genere/{id}", name="aside_genere", methods={"GET"})
      */
     public function asideGenere(Generator $generator, Aside $aside)

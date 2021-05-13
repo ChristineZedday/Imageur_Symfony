@@ -10,9 +10,8 @@ namespace App\Controller;
 
 use App\Entity\Image;
 use App\Form\ImageType;
-use App\Repository\ImageRepository;
-use App\Repository\SectionRepository;
 use App\Repository\AdressRepository;
+use App\Repository\ImageRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -38,7 +37,6 @@ class ImageController extends AbstractController
      */
     public function new(Request $request, AdressRepository $adressRepository): Response
     {
-       
         $thumbs = $adressRepository->findOnebyName('vignette')->getPhysique();
         $grandes = $adressRepository->findOneByName('grandes_images')->getPhysique();
         $autres = $adressRepository->findOneByName('moyennes_images')->getPhysique();
@@ -64,12 +62,12 @@ class ImageController extends AbstractController
 
             // On copie le fichier dans le dossier images du site
 
-            $photo->move($dossier,$fichier);
+            $photo->move($dossier, $fichier);
 
-            if ( null !== $form->get('vignette') && null !== $form->get('vignette')->getData()) {
+            if (null !== $form->get('vignette') && null !== $form->get('vignette')->getData()) {
                 $dossier = $thumbs;
-                $vignette=$form->get('vignette')->getData();
-                $vignette->move($dossier,$fichier);
+                $vignette = $form->get('vignette')->getData();
+                $vignette->move($dossier, $fichier);
                 // dd('true vig');
                 $image->setVignette(true);
             }//array_key_exists('vignette', $_POST) &&
@@ -103,8 +101,7 @@ class ImageController extends AbstractController
     public function edit(Request $request, Image $image): Response
     {
         $thumbs = $this->getParameter('thumbs_directory');
-       
-       
+
         $form = $this->createForm(ImageType::class, $image);
         $form->handleRequest($request);
 
@@ -141,6 +138,4 @@ class ImageController extends AbstractController
 
         return $this->redirectToRoute('image_index');
     }
-
-
 }

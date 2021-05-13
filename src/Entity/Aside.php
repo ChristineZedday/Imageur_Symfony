@@ -1,5 +1,11 @@
 <?php
 
+/*
+ * Imageur_Symfony
+ * Symfony 5
+ * Christine Zedday
+ */
+
 namespace App\Entity;
 
 use App\Repository\AsideRepository;
@@ -114,6 +120,4 @@ class Aside
 
         return $this;
     }
-
-   
 }

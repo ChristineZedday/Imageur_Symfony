@@ -1,18 +1,21 @@
 <?php
 
+/*
+ * Imageur_Symfony
+ * Symfony 5
+ * Christine Zedday
+ */
+
 namespace App\Controller;
 
 use App\Entity\Article;
 use App\Form\ArticleType;
 use App\Repository\ArticleRepository;
-use App\Repository\RubriqueRepository;
-use App\Repository\AsideRepository;
+use App\Service\Generator;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Entity\Section;
-use App\Service\Generator;
 
 /**
  * @Route("/article")
@@ -25,7 +28,7 @@ class ArticleController extends AbstractController
     public function index(ArticleRepository $articleRepository): Response
     {
         return $this->render('article/index.html.twig', [
-            'articles' => $articleRepository->findAll(), 
+            'articles' => $articleRepository->findAll(),
         ]);
     }
 
@@ -66,9 +69,8 @@ class ArticleController extends AbstractController
     /**
      * @Route("/{id}/edit", name="article_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, Article $article ): Response
+    public function edit(Request $request, Article $article): Response
     {
-       
         $form = $this->createForm(ArticleType::class, $article);
         $form->handleRequest($request);
 
@@ -83,7 +85,6 @@ class ArticleController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
-
 
     /**
      * @Route("/{id}", name="article_delete", methods={"DELETE"})
@@ -100,8 +101,7 @@ class ArticleController extends AbstractController
         return $this->redirectToRoute('article_index');
     }
 
-    
-      /**
+    /**
      * @Route("article/genere/{id}", name="article_genere", methods={"GET"})
      */
     public function articleGenere(Generator $generator, Article $article)

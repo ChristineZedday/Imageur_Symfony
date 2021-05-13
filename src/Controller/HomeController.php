@@ -8,12 +8,10 @@
 
 namespace App\Controller;
 
+use App\Service\Generator;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Repository\RubriqueRepository;
-use App\Service\Generator;
-
 
 class HomeController extends AbstractController
 {
@@ -26,16 +24,13 @@ class HomeController extends AbstractController
             'controller_name' => 'HomeController',
         ]);
     }
-     
-   
 
-    
-     /**
+    /**
      * @Route("site/genere/", name="site", methods={"GET"})
      */
     public function siteGenere(Generator $generator)
     {
-       $generator->genereSite();
+        $generator->genereSite();
 
         return $this->redirectToRoute('home');
     }
