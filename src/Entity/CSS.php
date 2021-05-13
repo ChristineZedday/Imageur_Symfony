@@ -101,34 +101,36 @@ class CSS
     private $couleurTexteAcote;
 
     /**
-     * @ORM\Column(type="string", length=10, nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $color_titre_acote;
-
-    /**
-     * @ORM\Column(type="string", length=10, nullable=true)
-     */
-    private $color_titre3;
+    private $couleurTitreAcote;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $police_texte;
+    private $couleurTitre3;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $police_titre1;
+    private $policeTexte;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $police_titre2;
+    private $policeTitre1;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $police_titre3;
+    private $PoliceTitre2;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $policeTitre3;
+
+   
 
     public function __construct()
     {
@@ -351,75 +353,77 @@ class CSS
         return $this;
     }
 
-    public function getColorTitreAcote(): ?string
+    public function getCouleurTitreAcote(): ?string
     {
-        return $this->color_titre_acote;
+        return $this->couleurTitreAcote;
     }
 
-    public function setColorTitreAcote(?string $color_titre_acote): self
+    public function setCouleurTitreAcote(?string $couleurTitreAcote): self
     {
-        $this->color_titre_acote = $color_titre_acote;
+        $this->couleurTitreAcote = $couleurTitreAcote;
 
         return $this;
     }
 
-    public function getColorTitre3(): ?string
+    public function getCouleurTitre3(): ?string
     {
-        return $this->color_titre3;
+        return $this->couleurTitre3;
     }
 
-    public function setColorTitre3(?string $color_titre3): self
+    public function setCouleurTitre3(?string $couleurTitre3): self
     {
-        $this->color_titre3 = $color_titre3;
+        $this->couleurTitre3 = $couleurTitre3;
 
         return $this;
     }
 
     public function getPoliceTexte(): ?string
     {
-        return $this->police_texte;
+        return $this->policeTexte;
     }
 
-    public function setPoliceTexte(?string $police_texte): self
+    public function setPoliceTexte(?string $policeTexte): self
     {
-        $this->police_texte = $police_texte;
+        $this->policeTexte = $policeTexte;
 
         return $this;
     }
 
     public function getPoliceTitre1(): ?string
     {
-        return $this->police_titre1;
+        return $this->policeTitre1;
     }
 
-    public function setPoliceTitre1(?string $police_titre1): self
+    public function setPoliceTitre1(?string $policeTitre1): self
     {
-        $this->police_titre1 = $police_titre1;
+        $this->policeTitre1 = $policeTitre1;
 
         return $this;
     }
 
     public function getPoliceTitre2(): ?string
     {
-        return $this->police_titre2;
+        return $this->PoliceTitre2;
     }
 
-    public function setPoliceTitre2(?string $police_titre2): self
+    public function setPoliceTitre2(?string $PoliceTitre2): self
     {
-        $this->police_titre2 = $police_titre2;
+        $this->PoliceTitre2 = $PoliceTitre2;
 
         return $this;
     }
 
     public function getPoliceTitre3(): ?string
     {
-        return $this->police_titre3;
+        return $this->policeTitre3;
     }
 
-    public function setPoliceTitre3(?string $police_titre3): self
+    public function setPoliceTitre3(?string $policeTitre3): self
     {
-        $this->police_titre3 = $police_titre3;
+        $this->policeTitre3 = $policeTitre3;
 
         return $this;
     }
+
+   
 }

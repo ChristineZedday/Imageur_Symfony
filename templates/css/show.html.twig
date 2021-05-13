@@ -64,6 +64,10 @@
                 <th>Couleur du texte de l'à-côté</th>
                 <td bgcolor="#{{css.couleurTexteAcote}}"></td>
             </tr>
+             <tr>
+                <th>Couleur du titree de l'à-côté</th>
+                <td bgcolor="#{{css.couleurTitreAcote}}"></td>
+            </tr>
         </tbody>
     </table>
 
@@ -71,11 +75,15 @@
 
     <a href="{{ path('css_edit', {'id': css.id}) }}">Modifier</a>
 
-      <a href="{{ path('css_colors', {'id': css.id}) }}">Générer le scss des couleurs (faire npm run dev pour voir)</a>
+    <p>En cas de modification, les actions suivantes sont à effectuer dans l'ordre!</br>
 
-     <a href="{{ path('css_copy', {'id': css.id}) }}">Copier build/app.css dans ce fichier</a>
+      <a href="{{ path('css_colors', {'id': css.id}) }}">Générer le scss des couleurs (faire npm run dev pour appliquer!)</a><br/>
 
-        <a href="{{ path('css_articles', {'id': css.id}) }}">Appliquer ce style à tous les articles</a>
+       <a href="{{ path('css_fonts', {'id': css.id}) }}">Ou celui des familles de polices (faire npm run dev pour appliquer!)</a><br/>
+
+     <a href="{{ path('css_copy', {'id': css.id}) }}">Copier build/app.css dans ce fichier</a></br>
+
+        <a href="{{ path('css_articles', {'id': css.id}) }}">Appliquer ce style à tous les articles, <em>à la place</em> du style précédent</a> (n'oubliez pas de re-générer les articles ensuite!)</p>
 
     {{ include('css/_delete_form.html.twig') }}
 {% endblock %}

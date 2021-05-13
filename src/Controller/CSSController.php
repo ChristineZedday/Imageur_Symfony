@@ -138,4 +138,14 @@ class CSSController extends AbstractController
 
         return $this->redirectToRoute('css_index');
     }
+
+      /**
+     * @Route("css/fonts/{id}", name="css_fonts", methods={"GET"})
+     */
+    public function ChangeFonts(CSSGenerator $cssGenerator, CSS $css)
+    {
+        $cssGenerator->fontsScssGenere($css);
+
+        return $this->redirectToRoute('css_index');
+    }
 }

@@ -77,6 +77,40 @@ class CSSGenerator
         } else {
             fwrite($file, '$coloraside: #000000;');
         }
+		if (null !== $css->getCouleurTitreAcote()) {
+            fwrite($file, '$colortitleaside: #'.$css->getCouleurTitreAcote().';');
+        } else {
+            fwrite($file, '$colortitleaside: #000000;');
+        }
+		if (null !== $css->getCouleurTitre3()) {
+            fwrite($file, '$title3: #'.$css->getCouleurTitre3().';');
+        } else {
+            fwrite($file, '$title3: #000000;');
+        }
         fclose($file);
     }
+
+	public function fontScssGenere(CSS $css) 
+	{
+		if (null !== $css->getPoliceTexte()) {
+            fwrite($file, '$principale: '.$css->getPoliceTexte().';');
+        } else {
+            fwrite($file, '$principale: sans-serif;');
+        }
+		if (null !== $css->getPoliceTitre1()) {
+            fwrite($file, '$fonth1: '.$css->getPoliceTitre1().';');
+        } else {
+            fwrite($file, '$fonth1: serif;');
+        }
+		if (null !== $css->getPoliceTitre2()) {
+            fwrite($file, '$fonth2: '.$css->getPoliceTitre2().';');
+        } else {
+            fwrite($file, '$fonth2: serif;');
+        }
+		if (null !== $css->getPoliceTitre3()) {
+            fwrite($file, '$fonth3: '.$css->getPoliceTitre3().';');
+        } else {
+            fwrite($file, '$fonth3: sans-serif;');
+        }
+	}
 }
