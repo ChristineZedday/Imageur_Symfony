@@ -51,14 +51,15 @@ class Generator
 
         $rubriques = $this->rubriqueRepository->findAll();
 
-        fwrite($file, '<div class="element" id="som"> <nav  class=sommaire id="flexnav"> <ul>');
+        fwrite($file, '<div class="element" id="som"> <nav  class=sommaire id="flexnav"> ');
         if ('HomePage' === $type) {
-            fwrite($file, '<li><a href="'.$this->adressRepository->findOnebyName('home')->getRelativeAccueil().'index.php">Accueil</a></li>');
+            fwrite($file, '<ul><li><a href="'.$this->adressRepository->findOnebyName('home')->getRelativeAccueil().'index.php">Accueil</a></li></ul>');
         } elseif ('Article' === $type) {
-            fwrite($file, '<li><a href="'.$this->adressRepository->findOnebyName('home')->getRelativeFichiers().'index.php">Accueil</a></li>');
+            fwrite($file, '<ul><li><a href="'.$this->adressRepository->findOnebyName('home')->getRelativeFichiers().'index.php">Accueil</a></li></ul>');
         }
 
         foreach ($rubriques as $rubrique) {
+            fwrite($file, '<ul>');
             if (null !== $rubrique->getTitre()) {
                 fwrite($file, '<h1>'.$rubrique->getTitre().'</h1>');
             }
@@ -78,9 +79,11 @@ class Generator
                         fwrite($file, '<li><a href="'.$path.$nom.'">'.$article->getTitre().'</a></li>');
                     }
                 }
+               
             }
+            fwrite($file, '</ul>');
         }
-        fwrite($file, ' </ul> </nav></div>');
+        fwrite($file, '  </nav></div>');
         fclose($file);
         if ('Article' === $type) {
             $this->genereNav('HomePage'); //eh oui, faut la mettre à jour!
