@@ -53,16 +53,42 @@ class Generator
 
         fwrite($file, '<div class="element" id="som"> <nav  class=sommaire id="flexnav"> ');
         if ('HomePage' === $type) {
-            fwrite($file, '<ul><li><a href="'.$this->adressRepository->findOnebyName('home')->getRelativeAccueil().'index.php">Accueil</a></li></ul>');
+            fwrite($file, '<ul><h1><a href="'.$this->adressRepository->findOnebyName('home')->getRelativeAccueil().'index.php">Accueil</a></h1></ul>');
         } elseif ('Article' === $type) {
-            fwrite($file, '<ul><li><a href="'.$this->adressRepository->findOnebyName('home')->getRelativeFichiers().'index.php">Accueil</a></li></ul>');
+            fwrite($file, '<ul><h1><a href="'.$this->adressRepository->findOnebyName('home')->getRelativeFichiers().'index.php">Accueil</a></h1></ul>');
         }
 
         foreach ($rubriques as $rubrique) {
-            fwrite($file, '<ul>');
-            if (null !== $rubrique->getTitre()) {
-                fwrite($file, '<h1>'.$rubrique->getTitre().'</h1>');
+          
+            //each article from untitled rubrique is considred as a mono-article rubrique
+            if (null === $rubrique->getTitre()) {
+               
+                foreach ($rubrique->getArticles() as $article) {
+                    fwrite($file, '<ul>');
+                    $nom = $article->getNom().'.php';
+                    $lien = $article->getLien();
+                    if ('HomePage' === $type) {
+                        $path = $this->adressRepository->findOnebyName('fichiers')->getRelativeAccueil();
+                    } else {
+                        $path = $this->adressRepository->findOnebyName('fichiers')->getRelativeFichiers();
+                    }
+    
+                    if (file_exists($this->adressRepository->findOnebyName('fichiers')->getPhysique().'/'.$nom)) {
+                        if (null !== $lien) {
+                            fwrite($file, '<h1><a href="'.$path.$nom.'">'.$lien.'</a></h1>');
+                        } else {
+                            fwrite($file, '<h1><a href="'.$path.$nom.'">'.$article->getTitre().'</a></h1>');
+                            fwrite($file, '</ul>');
+                        }
+                    }
+                   
+                }
+                
             }
+            
+            else {
+                fwrite($file, '<ul>');
+                fwrite($file, '<h1>'.$rubrique->getTitre().'</h1>');
             foreach ($rubrique->getArticles() as $article) {
                 $nom = $article->getNom().'.php';
                 $lien = $article->getLien();
@@ -82,6 +108,7 @@ class Generator
                
             }
             fwrite($file, '</ul>');
+        }
         }
         fwrite($file, '  </nav></div>');
         fclose($file);

@@ -29,12 +29,7 @@
 	
 	
 
-	h1 {
-		font-size: 20px;
-		margin:15px;
-		font-variant: small-caps;
-		color: $colorsom;
-	}
+
 
 
 	#clic{
@@ -51,6 +46,21 @@
 		flex-wrap:wrap;
 		align-items: flex-start;
 		justify-content: space-between;
+		h1 {
+			font-size: 20px;
+			margin:15px;
+			font-variant: small-caps;
+			color: $colorsom;
+		}
+		a {
+			text-decoration:none;
+			color: $colorsom;
+			font-variant: small-caps;
+			&:visited {
+				color: $visitedsom;
+			}
+			padding: 5px;
+		}
 			li 
 			{
 				display: none;
