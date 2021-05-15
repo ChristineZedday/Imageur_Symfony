@@ -15,6 +15,7 @@
     </head>
     <body>
         {% block body %}<p class="supertitre"><a href="{{ path('home') }}">Accueil</a></p>
+          {{ include('./_sommaire.html.twig')}}
         <article>
             {% block content%}
         
