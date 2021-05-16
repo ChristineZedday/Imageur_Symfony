@@ -105,5 +105,7 @@
 
         <a href="{{ path('css_articles', {'id': css.id}) }}">Appliquer ce style à tous les articles, <em>à la place</em> du style précédent</a> (n'oubliez pas de re-générer les articles ensuite!)</p>
 
+         <a href="{{ path('css_duplicate', {'id': css.id}) }}">Dupliquer ce style</a></br>
+
     {{ include('css/_delete_form.html.twig') }}
 {% endblock %}

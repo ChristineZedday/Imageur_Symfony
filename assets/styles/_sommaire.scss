@@ -38,6 +38,18 @@
 		font-size: 20px;
 		margin:15px;
 		font-variant: small-caps;
+		a {
+			text-decoration:none;
+			color: $colorsom;
+			font-variant: small-caps;
+			&:visited {
+				color: $visitedsom;
+			}
+			padding: 5px;
+			// border-radius: 5px;
+			// border: thin solid $textcolor;
+			
+		}
 	}
 
 
@@ -63,8 +75,8 @@
 			text-decoration:none;
 			color: $colorsom;
 			font-variant: small-caps;
-			:visited {
-				color: $visited;
+			&:visited {
+				color: $visitedsom;
 			}
 			padding: 5px;
 			// border-radius: 5px;
@@ -86,37 +98,34 @@
 			padding:15px; 
 			display: flex;
 			flex-wrap: wrap;
-			flex-direction: column;
+			flex-direction: row;
 			align-items: flex-start;
 			justify-content: space-between;
 
 			ul {
 				display: flex;
-				flex-direction: row;
+				flex-direction: column;
 				flex-wrap:wrap;
 				align-items: flex-start;
 				justify-content: space-between;
+				li 
+				{
+					display: none;
+				}
+				&:hover {
+	
+					li
+					{
+						display: block;	
+						li {
+							display: block;
+						}
+					}
 			
 				}
 			
 		}
 	}
-
-	// #deroule 
-	// {
-	// 		#sousmenu 
-	// 		{
-	// 			display: none;
-	// 		}
-	// 		&:hover {
-
-	// 			#sousmenu
-	// 			{
-	// 				display: block;	
-	// 				li {
-	// 					display: block;
-	// 				}
-	// 			}
-	// 		}
-	// }
+	}
+	
 }
