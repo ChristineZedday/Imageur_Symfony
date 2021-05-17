@@ -86,6 +86,10 @@
                 <th>Police du titre 3</th>
                  <td> <font face="{{css.policeTitre3}}">C'est bien ça?</font></td>
             </tr>
+              <tr>
+                <th>Structure de la page</th>
+                 <td>{{css.structure}}</td>
+            </tr>
             
           
         </tbody>
@@ -100,6 +104,8 @@
       <a href="{{ path('css_colors', {'id': css.id}) }}">Générer le scss des couleurs (faire npm run dev pour appliquer!)</a><br/>
 
        <a href="{{ path('css_fonts', {'id': css.id}) }}">Ou celui des familles de polices (faire npm run dev pour appliquer!)</a><br/>
+
+           <a href="{{ path('css_structure', {'id': css.id}) }}">Ou celui de la structure de la page (faire npm run dev pour appliquer!)</a><br/>
 
      <a href="{{ path('css_copy', {'id': css.id}) }}">Copier build/app.css dans ce fichier</a></br>
 

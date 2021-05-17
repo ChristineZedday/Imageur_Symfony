@@ -165,4 +165,12 @@ $em->flush();
 
         return $this->redirectToRoute('css_show', array('id' => $newCSS->getId()));
     }
+   /**
+     * @Route("css/structure/{id}", name="css_structure", methods={"GET"})
+     */
+    public function changeStructure(CSSGenerator $cssGenerator, CSS $css)
+    {
+        $cssGenerator->appScssGenere($css);
+        return $this->redirectToRoute('css_show', array('id' => $css->getId()));
+    }
 }
