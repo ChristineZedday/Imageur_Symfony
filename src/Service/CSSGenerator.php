@@ -121,7 +121,7 @@ class CSSGenerator
      {
         switch ($css->getStructure())
         {
-            case 'menu à gauche, aside à droite, sauf téléphone':
+            case 'menu à gauche, aside à droite, sauf téléphones':
             $path = '../assets/styles/app.scss';
             $file = fopen($path, 'w');
             fwrite($file, "@import 'sommaire';
@@ -137,10 +137,17 @@ class CSSGenerator
 
             break;
 
-            case 'menu en haut, 2 colonnes, pas d\'aside':
+            case 'menu en haut, aside en bas':
             $path = '../assets/styles/app.scss';
             $file = fopen($path, 'w');
-            
+            fwrite($file, "@import 'sommairehorizontalderoule';
+            @import 'article_flex';
+            @import 'corps2';
+            @import 'aside'; 
+            @import 'footer';
+            @import 'jeu';
+            @import 'slide';"
+            );
             fclose($file);
             break;
         }
