@@ -14,13 +14,19 @@
         {% block javascripts %} <script type="text/javascript" src="/js/main.js">  </script>{% endblock %}
     </head>
     <body>
-        {% block body %}<p class="supertitre"><a href="{{ path('home') }}">Accueil</a></p>
+        {% block body %}
+        <div id="conteneur">
           {{ include('./_sommaire.html.twig')}}
+          <div class="element" id="main">
         <article>
             {% block content%}
         
             {% endblock %}
+             </article>
+             </div>
+                {{ include('./_aside.html.twig')}}
+            </div>
         {% endblock %}
-        </article>
+       
     </body>
 </html>

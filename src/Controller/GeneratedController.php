@@ -24,4 +24,13 @@ class GeneratedController extends AbstractController
 
         return new RedirectResponse($url);
     }
+    /**
+     * @Route("/online", name="online_index")
+     */
+    public function showOnline(): Response
+    {
+        $url = $this->getParameter('online_site_url');
+
+        return new RedirectResponse($url);
+    }
 }
