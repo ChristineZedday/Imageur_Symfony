@@ -32,11 +32,11 @@
         </tbody>
     </table>
 
-    <a href="{{ path('home_page_index') }}">Retour à la liste</a>
+    <p><a href="{{ path('home_page_index') }}">Retour à la liste</a></p>
 
-    <a href="{{ path('home_page_edit', {'id': home_page.id}) }}">Modifier</a>
+   <p> <a href="{{ path('home_page_edit', {'id': home_page.id}) }}">Modifier</a></p>
 
-      <a href="{{ path('home_page_genere', {'id': home_page.id}) }}">Générer cette page comme page d'accueil du site</a>
+  <p>    <a href="{{ path('home_page_genere', {'id': home_page.id}) }}">Générer cette page comme page d'accueil du site</a></p>
 
     {{ include('home_page/_delete_form.html.twig') }}
     

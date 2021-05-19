@@ -2,7 +2,7 @@
 
 {% block title %}Footer{% endblock %}
 
-{% block body %}
+{% block content %}
     <h1>Pied de page</h1>
 
     <table class="table">
@@ -22,13 +22,13 @@
         </tbody>
     </table>
 
-    <a href="{{ path('foot_index') }}">Retour à la liste</a>
+  <p>  <a href="{{ path('foot_index') }}">Retour à la liste</a></p>
 
-    <a href="{{ path('foot_edit', {'id': foot.id}) }}">Modifier</a>
+   <P> <a href="{{ path('foot_edit', {'id': foot.id}) }}">Modifier</a></p>
 
-      <a href="{{ path('foot_genere', {'id': foot.id}) }}">Générer le pied-de-page</a>
+ <p>     <a href="{{ path('foot_genere', {'id': foot.id}) }}">Générer le pied-de-page</a></p>
 
-        <a href="{{ path('foot_articles', {'id': foot.id}) }}">Appliquer ce pied de page à tous les articles</a>
+    <p>    <a href="{{ path('foot_articles', {'id': foot.id}) }}">Appliquer ce pied de page à tous les articles</a></p>
 
     {{ include('foot/_delete_form.html.twig') }}
 {% endblock %}
