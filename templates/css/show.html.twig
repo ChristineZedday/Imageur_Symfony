@@ -95,23 +95,23 @@
         </tbody>
     </table>
 
-    <a href="{{ path('css_index') }}">Retour à la liste</a>
+    <p> <a href="{{ path('css_index') }}">Retour à la liste</a></p>
 
-    <a href="{{ path('css_edit', {'id': css.id}) }}">Modifier</a>
+    <p> <a href="{{ path('css_edit', {'id': css.id}) }}">Modifier</a></p>
 
-    <p>En cas de modification, les actions suivantes sont à effectuer dans l'ordre!</br>
+    <p>En cas de modification, les actions suivantes sont à effectuer dans l'ordre!</p>
 
-      <a href="{{ path('css_colors', {'id': css.id}) }}">Générer le scss des couleurs (faire npm run dev pour appliquer!)</a><br/>
+     <p> <a href="{{ path('css_colors', {'id': css.id}) }}">Générer le scss des couleurs (faire npm run dev pour appliquer!)</a></p>
 
-       <a href="{{ path('css_fonts', {'id': css.id}) }}">Ou celui des familles de polices (faire npm run dev pour appliquer!)</a><br/>
+     <p>  <a href="{{ path('css_fonts', {'id': css.id}) }}">Ou celui des familles de polices (faire npm run dev pour appliquer!)</a></p>
 
-           <a href="{{ path('css_structure', {'id': css.id}) }}">Ou celui de la structure de la page (faire npm run dev pour appliquer!)</a><br/>
+     <p>      <a href="{{ path('css_structure', {'id': css.id}) }}">Ou celui de la structure de la page (faire npm run dev pour appliquer!)</a></p>
 
-     <a href="{{ path('css_copy', {'id': css.id}) }}">Copier build/app.css dans ce fichier</a></br>
+     <p><a href="{{ path('css_copy', {'id': css.id}) }}">Copier build/app.css dans ce fichier</a></p>
 
-        <a href="{{ path('css_articles', {'id': css.id}) }}">Appliquer ce style à tous les articles, <em>à la place</em> du style précédent</a> (n'oubliez pas de re-générer les articles ensuite!)</p>
+      <p>  <a href="{{ path('css_articles', {'id': css.id}) }}">Appliquer ce style à tous les articles, <em>à la place</em> du style précédent</a> (n'oubliez pas de re-générer les articles ensuite!)</p>
 
-         <a href="{{ path('css_duplicate', {'id': css.id}) }}">Dupliquer ce style</a></br>
+        <p> <a href="{{ path('css_duplicate', {'id': css.id}) }}">Dupliquer ce style</a></p>
 
     {{ include('css/_delete_form.html.twig') }}
 {% endblock %}

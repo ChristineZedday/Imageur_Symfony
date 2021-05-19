@@ -18,10 +18,10 @@
         </tbody>
     </table>
 
-    <a href="{{ path('javascript_index') }}">Retour à la liste</a>
+  <p>  <a href="{{ path('javascript_index') }}">Retour à la liste</a></p>
 
-    <a href="{{ path('javascript_edit', {'id': javascript.id}) }}">Modifier le fichier</a>
-     <a href="{{ path('javascript_articles', {'id': javascript.id}) }}">Appliquer ce javascript à tous les articles</a>
+  <p>  <a href="{{ path('javascript_edit', {'id': javascript.id}) }}">Modifier le fichier</a></p>
+   <p>  <a href="{{ path('javascript_articles', {'id': javascript.id}) }}">Appliquer ce javascript à tous les articles</a></p>
 
     {{ include('javascript/_delete_form.html.twig') }}
  
