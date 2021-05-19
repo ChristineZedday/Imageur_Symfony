@@ -79,6 +79,7 @@ class HomePage
     {
         $this->sections = new ArrayCollection();
         $this->css = new ArrayCollection();
+        $this->javascript = new ArrayCollection();
     }
 
     public function getId(): ?int
