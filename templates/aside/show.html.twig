@@ -25,13 +25,12 @@
             </tr>
         </tbody>
     </table>
-<p>
-    <a href="{{ path('aside_index') }}">Retour à la liste</a>
 
-    <a href="{{ path('aside_edit', {'id': aside.id}) }}">Mofifier</a>
+    <p><a href="{{ path('aside_index') }}">Retour à la liste</a></p>
 
-     <a href="{{ path('aside_genere', {'id': aside.id}) }}">Générer l'à côté</a>
-     </p>
+    <p><a href="{{ path('aside_edit', {'id': aside.id}) }}">Modifier</a></p>
+
+    <p> <a href="{{ path('aside_genere', {'id': aside.id}) }}">Générer l'à côté</a></p>
 
     {{ include('aside/_delete_form.html.twig') }}
    
