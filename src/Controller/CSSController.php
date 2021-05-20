@@ -148,4 +148,29 @@ class CSSController extends AbstractController
 
         return $this->redirectToRoute('css_show', array('id' => $css->getId()));
     }
+
+       /**
+     * @Route("css/duplicate/{id}", name="css_duplicate", methods={"GET"})
+     */
+    public function DuplicateStyle( CSS $css)
+    {
+        $newCSS = new CSS();
+        $newCSS = clone $css;
+        $newCSS->setNom('copie_'.$css->getNom()) ; 
+        $em = $this->getDoctrine()->getManager();
+$em->persist($newCSS);
+$em->flush();
+// $newCSS->setNom()= 'copie_'.$css->getNom(); 
+// $em->flush();
+
+        return $this->redirectToRoute('css_show', array('id' => $newCSS->getId()));
+    }
+   /**
+     * @Route("css/structure/{id}", name="css_structure", methods={"GET"})
+     */
+    public function changeStructure(CSSGenerator $cssGenerator, CSS $css)
+    {
+        $cssGenerator->appScssGenere($css);
+        return $this->redirectToRoute('css_show', array('id' => $css->getId()));
+    }
 }

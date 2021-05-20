@@ -2,10 +2,10 @@
 
 {% block title %}New Foot{% endblock %}
 
-{% block body %}
+{% block content %}
     <h1>Créer un nouveau pied de page</h1>
 
     {{ include('foot/_form.html.twig') }}
 
-    <a href="{{ path('foot_index') }}">Retour à la liste</a>
+   <p> <a href="{{ path('foot_index') }}">Retour à la liste</a></p>
 {% endblock %}

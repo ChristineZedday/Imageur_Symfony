@@ -12,6 +12,7 @@ use App\Entity\CSS;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 // use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
@@ -39,6 +40,7 @@ class CSSType extends AbstractType
             ->add('policeTitre1')
             ->add('policeTitre2')
             ->add('policeTitre3')
+            ->add('structure', ChoiceType::class, ['choices' => ['menu à gauche, aside à droite, sauf téléphones' => 'menu à gauche, aside à droite, sauf téléphones', 'menu en haut, aside en bas' => 'menu en haut, aside en bas']]);
            
 
         ;

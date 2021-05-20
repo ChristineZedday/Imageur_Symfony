@@ -116,4 +116,40 @@ class CSSGenerator
         }
         fclose($file);
 	}
+
+    public function appScssGenere(CSS $css)
+     {
+        switch ($css->getStructure())
+        {
+            case 'menu à gauche, aside à droite, sauf téléphones':
+            $path = '../assets/styles/app.scss';
+            $file = fopen($path, 'w');
+            fwrite($file, "@import 'sommaire';
+            @import 'article_flex';
+            @import 'corpsflex';
+            @import 'aside';
+            @import 'footer';
+            @import 'jeu';
+            @import 'slide';"
+            );
+
+            fclose($file);
+
+            break;
+
+            case 'menu en haut, aside en bas':
+            $path = '../assets/styles/app.scss';
+            $file = fopen($path, 'w');
+            fwrite($file, "@import 'sommairehorizontalderoule';
+            @import 'article_flex';
+            @import 'corps2';
+            @import 'aside'; 
+            @import 'footer';
+            @import 'jeu';
+            @import 'slide';"
+            );
+            fclose($file);
+            break;
+        }
+     }
 }

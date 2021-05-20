@@ -19,6 +19,7 @@ parameters:
     icons_directory: 'C:/laragon/www/imageur_symfony/public/icones/'
      ##chevaux2021.test correspond à localhost/chevaux2021 (pretty URL Laragon)
     generated_site_url: 'http://chevaux2021.test'
+    online_site_url: 'http://chrizedday.free.fr'
     images_url: '%generated_site_url%/images'
     petites_images_url: '%images_url%/petites_images'
     files_url: '%generated_site_url%/fichiers'
@@ -65,7 +66,6 @@ services:
     ####Services generating and including files for generated site
 #    Generator:
 #        class: App\Service\Generator
-#    Includor:
-#        class: App\Service\Includor
+
     
     

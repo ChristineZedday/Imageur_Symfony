@@ -8,17 +8,24 @@ aside {
 	background-color: $aside;
 	color: $coloraside;
 	font-family: $principale;
-	height: 300px;
 	display:block;
 	padding: 30px;
 	padding-top: 50px;
+	min-width: 350px;
+	max-width: 500px;
 	
 }
 
 a {
 	text-decoration: none;
-	color: $coloraside;
+	
 	padding:10px;
+	
+		color: $links;
+		&:visited {
+			color:$visited;
+		
+	}
 }
 
 #me {

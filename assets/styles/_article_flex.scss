@@ -3,8 +3,8 @@
 @import 'jeu';
 
 #main {
-	flex-grow: 2;
-	max-width: 650px;
+	flex-grow: 1.5;
+
 }
 
 .supertitre
@@ -18,9 +18,11 @@
 
 article {
 		display:block; 
+		max-width: 800px;
+		margin: 25px;
 		padding: 30px; 
-		width: 100%;
-
+		
+		
 	
 
 		h1 {
@@ -30,6 +32,8 @@ article {
 			font-size:30px; 
 			font-variant:small-caps;
 		}
+		section {
+			margin-top: 50px;
 
 		h2 {
 			color: $title2; 
@@ -47,7 +51,7 @@ article {
 
 		a {
 			color: $links;
-			a:visited {
+			&:visited {
 				color:$visited;
 			}
 		}
@@ -75,7 +79,7 @@ article {
 				font-style:italic;
 			}
 		}
-
+	}
 }
 
 		
@@ -83,7 +87,7 @@ article {
 {
 
 	article {  
-			width:100%; 
+			width:100vw; 
 			padding: 15px;
 	}
 

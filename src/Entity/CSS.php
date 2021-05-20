@@ -130,6 +130,11 @@ class CSS
      */
     private $policeTitre3;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $structure;
+
    
 
     public function __construct()
@@ -421,6 +426,18 @@ class CSS
     public function setPoliceTitre3(?string $policeTitre3): self
     {
         $this->policeTitre3 = $policeTitre3;
+
+        return $this;
+    }
+
+    public function getStructure(): ?string
+    {
+        return $this->structure;
+    }
+
+    public function setStructure(?string $structure): self
+    {
+        $this->structure = $structure;
 
         return $this;
     }
