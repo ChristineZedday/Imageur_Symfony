@@ -65,13 +65,13 @@
         </tbody>
     </table>
 <p>
-    <a href="{{ path('article_index') }}">Retour à la liste</a>
+   <p> <a href="{{ path('article_index') }}">Retour à la liste</a></p>
 
-    <a href="{{ path('article_edit', {'id': article.id}) }}">Modifier</a>
+  <p>  <a href="{{ path('article_edit', {'id': article.id}) }}">Modifier</a></p>
 
-      <a href="{{ path('new_section_article', {'id': article.id}) }}">Ajouter une section</a>
+  <p>    <a href="{{ path('new_section_article', {'id': article.id}) }}">Ajouter une section</a></p>
 
-     <a href="{{ path('article_genere', {'id': article.id}) }}">Générer l'article</a>
+ <p>    <a href="{{ path('article_genere', {'id': article.id}) }}">Générer le fichier PHP de l'article</a></p>
      </p>
     
 

@@ -51,7 +51,7 @@ article {
 
 		a {
 			color: $links;
-			a:visited {
+			&:visited {
 				color:$visited;
 			}
 		}

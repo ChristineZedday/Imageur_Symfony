@@ -18,8 +18,14 @@ aside {
 
 a {
 	text-decoration: none;
-	color: $coloraside;
+	
 	padding:10px;
+	
+		color: $links;
+		&:visited {
+			color:$visited;
+		
+	}
 }
 
 #me {
