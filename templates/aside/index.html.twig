@@ -4,7 +4,7 @@
 
 {% block content %}
     <h1>Index des à-côté</h1>
-
+<p>   <a href="{{ path('aside_new') }}">Ajouter un à-côté</a></p>
     <table class="table">
         <thead>
             <tr>
@@ -36,7 +36,7 @@
         </tbody>
     </table>
 
- <p>   <a href="{{ path('aside_new') }}">Ajouter un à-côté</a></p>
+ 
     {{ include('./_crediticones.html.twig')}}
     
 {% endblock %}

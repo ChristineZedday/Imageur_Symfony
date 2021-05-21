@@ -5,6 +5,9 @@
 {% block content %}
     <h1>Index des rubriques</h1>
 
+    <p>   <a href="{{ path('rubrique_new') }}">Ajouter une rubrique</a></p>
+ <p>Une rubrique sans titre sera considérée dans le sommaire comme un ensemble d'articles indépendants, ou de rubriques mono-article pour le style (pas de menus déroulants le cas échéant).</p>
+
     <table class="table">
         <thead>
             <tr>
@@ -33,8 +36,7 @@
         </tbody>
     </table>
 
- <p>   <a href="{{ path('rubrique_new') }}">Ajouter une rubrique</a></p>
- <p>Une rubrique sans titre sera considérée dans le sommaire comme un ensemble d'articles indépendants, ou de rubriques mono-article pour le style (pas de menus déroulants le cas échéant).</p>
+ 
     {{ include('./_crediticones.html.twig')}}
     
 {% endblock %}

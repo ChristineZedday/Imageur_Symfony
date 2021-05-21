@@ -8,6 +8,7 @@
     {{ include('rubrique/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
 
  <p>   <a href="{{ path('rubrique_index') }}">Retour à la liste</a></p>
+   <p><a href="{{ path('rubrique_show',{id: rubrique.id}) }}">Voir</a></p>
 
     {{ include('rubrique/_delete_form.html.twig') }}
     
