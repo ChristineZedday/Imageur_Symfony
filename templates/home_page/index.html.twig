@@ -5,7 +5,7 @@
 {% block content %}
     <h1>Index des pages d'accueil</h1>
     <p>Une seule peut-être utilisé à la fois, se sera la dernière générée</p>
-
+ <p>   <a href="{{ path('home_page_new') }}">Créer une nouvelle page d'accueil</a></p>
     <table class="table">
         <thead>
             <tr>
@@ -36,5 +36,5 @@
         {{ include('./_crediticones.html.twig')}}
     
 
-  <p>   <a href="{{ path('home_page_new') }}">Créer une nouvelle page d'accueil</a></p>
+ 
 {% endblock %}

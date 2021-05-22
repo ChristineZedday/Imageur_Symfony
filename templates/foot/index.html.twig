@@ -4,6 +4,7 @@
 
 {% block content %}
     <h1>Index des pieds-de-pages</h1>
+     <p> <a href="{{ path('foot_new') }}">Ajouter un nouveau</a></p>
 
     <table class="table">
         <thead>
@@ -33,6 +34,6 @@
         </tbody>
     </table>
 
-   <p> <a href="{{ path('foot_new') }}">Ajouter un nouveau</a></p>
+  
     {{ include('./_crediticones.html.twig')}}
 {% endblock %}

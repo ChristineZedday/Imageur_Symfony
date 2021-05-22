@@ -76,7 +76,7 @@ class AsideController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('aside_index');
+            return $this->redirectToRoute('aside_show',  array('id' => $aside->getId()));
         }
 
         return $this->render('aside/edit.html.twig', [

@@ -75,7 +75,7 @@ class RubriqueController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('rubrique_index');
+            return $this->redirectToRoute('rubrique_show',  array('id' => $rubrique->getId()));
         }
 
         return $this->render('rubrique/edit.html.twig', [

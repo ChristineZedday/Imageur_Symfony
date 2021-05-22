@@ -82,7 +82,7 @@ class FootController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('foot_index');
+            return $this->redirectToRoute('foot_show',  array('id' => $foot->getId()));
         }
 
         return $this->render('foot/edit.html.twig', [

@@ -116,7 +116,7 @@ class ImageController extends AbstractController
 
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('image_index');
+            return $this->redirectToRoute('image_show',  array('id' => $image->getId()));
         }
 
         return $this->render('image/edit.html.twig', [

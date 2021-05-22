@@ -75,7 +75,9 @@ class AdressController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('adress_index');
+            return $this->redirectToRoute('adress_show',  array('id' => $adress->getId()));
+
+            
         }
 
         return $this->render('adress/edit.html.twig', [
@@ -96,5 +98,6 @@ class AdressController extends AbstractController
         }
 
         return $this->redirectToRoute('adress_index');
+       
     }
 }

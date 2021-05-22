@@ -4,12 +4,13 @@
 
 {% block content %}
     <h1>Modifier</h1>
-<p>
+
     {{ include('section/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
-</p><p>
-    <a href="{{ path('section_index') }}">Retour à la liste</a>
-</p><p>
+<p>
+    <a href="{{ path('section_index') }}">Retour à la liste</a></p>
+    <p>  <a href="{{ path('section_show', {id: section.id}) }}">Voir</a></p>
+
     {{ include('section/_delete_form.html.twig') }}
-    </p>
+    
     
 {% endblock %}

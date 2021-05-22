@@ -76,7 +76,7 @@ class JavascriptController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('javascript_index');
+            return $this->redirectToRoute('javascript_show',  array('id' => $javascript->getId()));
         }
 
         return $this->render('javascript/edit.html.twig', [

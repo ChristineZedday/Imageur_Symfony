@@ -8,6 +8,8 @@
     {{ include('foot/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
 
    <p> <a href="{{ path('foot_index') }}">Retour à la liste</a></p>
+    <p> <a href="{{ path('foot_show', {id:foot.id}) }}">Voir</a></p>
+
 
     {{ include('foot/_delete_form.html.twig') }}
 {% endblock %}

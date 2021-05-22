@@ -76,7 +76,7 @@ class HomePageController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('home_page_index');
+            return $this->redirectToRoute('home_page_show',  array('id' => $homePage->getId()));
         }
 
         return $this->render('home_page/edit.html.twig', [

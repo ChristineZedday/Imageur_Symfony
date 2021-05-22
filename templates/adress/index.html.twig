@@ -4,6 +4,12 @@
 
 {% block content %}
     <h1>Index des adresses</h1>
+    <p>   <a href="{{ path('adress_new') }}">Ajouter une adresse</a> (si vous voulez que le programme la prenne en compte, il faudra vous en occuper)</p>
+    <p>Adresse physique: emplacement du disque dur ou devra être généré tel type de fichier an attendant de le mettre en ligne.<br/>
+     <p>URL: le lien qui permet de visionner le fichier généré.<br/>
+       <p>Relative accueil: pour générer les liens de navigation de la page d'accueil (index.php qui se trouve en principe à la racine du site). Cette adresse est relative pour rester valable sur le site en ligne.<br/>
+         <p>Relative fichiers: pour générer les liens de navigation des articles.<br/>
+    </p>
 
     <table class="table">
         <thead>
@@ -39,7 +45,7 @@
         </tbody>
     </table>
 
- <p>   <a href="{{ path('adress_new') }}">Ajouter une adresse</a></p>
+ 
    {{ include('./_crediticones.html.twig')}}
    
 {% endblock %}
