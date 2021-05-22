@@ -110,7 +110,7 @@ class SectionController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('section_index');
+            return $this->redirectToRoute('section_show',  array('id' => $section->getId()));
         }
 
         return $this->render('section/edit.html.twig', [

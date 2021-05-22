@@ -116,7 +116,7 @@ class SliderController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('slider_index');
+            return $this->redirectToRoute('slider_show',  array('id' => $slider->getId()));
         }
 
         return $this->render('slider/edit.html.twig', [

@@ -78,7 +78,7 @@ class CSSController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('css_index');
+            return $this->redirectToRoute('css_show', array('id' => $cSS->getId()));
         }
 
         return $this->render('css/edit.html.twig', [
