@@ -35,7 +35,6 @@ class Section
 
     /**
      * @ORM\ManyToOne(targetEntity=Article::class, inversedBy="sections")
-     * @ORM\JoinColumn(nullable=true)
      */
     private $article;
 

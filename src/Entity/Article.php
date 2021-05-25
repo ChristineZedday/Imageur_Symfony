@@ -13,6 +13,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
+
 /**
  * @ORM\Entity(repositoryClass=ArticleRepository::class)
  */
@@ -43,6 +44,7 @@ class Article
     /**
      * @ORM\OneToMany(targetEntity=Section::class, mappedBy="article")
      * @ORM\OrderBy({"rang" = "ASC"})
+     * @ORM\JoinColumn(name="section_id", referencedColumnName="id", *onDelete="cascade")
      */
     private $sections;
 
@@ -176,7 +178,7 @@ class Article
     {
         if (!$this->sections->contains($section)) {
             $this->sections[] = $section;
-            $section->setG($this);
+            $section->setArticle($this);
         }
 
         return $this;
@@ -186,8 +188,11 @@ class Article
     {
         if ($this->sections->removeElement($section)) {
             // set the owning side to null (unless already changed)
-            if ($section->getG() === $this) {
-                $section->setG(null);
+            if ($section->getArticle() === $this) {
+                $section->setArticle(null);
+                // $em = $this->getDoctrine()->getEntityManager();
+                // $em->remove($section);
+                // $em->flush();
             }
         }
 
