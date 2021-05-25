@@ -39,6 +39,7 @@
   <p>  <a href="{{ path('section_edit', {'id': section.id}) }}">Modifier</a></p>
 
   <p>    <a href="{{ path('section_genere', {'id': section.id}) }}">Générer la section</a></p>
+   <p>Si c'est une nouvelle section, <a href="{{ path('article_genere', {'id': section.article.id}) }}">re-générer l'article pour qu'il puisse l'inclure!</a></p>
 
     {{ include('section/_delete_form.html.twig') }}
 
