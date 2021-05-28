@@ -2,3 +2,28 @@
     {{ form_widget(form) }}
     <button class="btn">{{ button_label|default('Enregistrer') }}</button>
 {{ form_end(form) }}
+<script>
+var $bicol = $('#section_bicolonne');
+// When bicol gets selected ...
+$bicol.change(function() {
+  // ... retrieve the corresponding form.
+  var $form = $(this).closest('form');
+  // Simulate form data, but only include the selected sport value.
+  var data = {};
+  data[$bicol.attr('name')] = $bicol.val();
+  // Submit data via AJAX to the form's action path.
+  $.ajax({
+    url : $form.attr('action'),
+    type: $form.attr('method'),
+    data : data,
+    success: function(html) {
+      // Replace current position field ...
+      $('#section_colonne2').replaceWith(
+        // ... with the returned one from the AJAX response.
+        $(html).find('#section_colonne2')
+      );
+      // euh non je voulais ajouter un champ, je fais comment?
+    }
+  });
+});
+</script>

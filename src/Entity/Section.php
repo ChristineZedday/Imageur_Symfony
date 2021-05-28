@@ -58,6 +58,16 @@ class Section
      */
     private $homePage;
 
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $bicolonne;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $colonne2;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -190,6 +200,30 @@ class Section
     public function setHomePage(?HomePage $homePage): self
     {
         $this->homePage = $homePage;
+
+        return $this;
+    }
+
+    public function getBicolonne(): ?bool
+    {
+        return $this->bicolonne;
+    }
+
+    public function setBicolonne(?bool $bicolonne): self
+    {
+        $this->bicolonne = $bicolonne;
+
+        return $this;
+    }
+
+    public function getColonne2(): ?string
+    {
+        return $this->colonne2;
+    }
+
+    public function setColonne2(?string $colonne2): self
+    {
+        $this->colonne2 = $colonne2;
 
         return $this;
     }
