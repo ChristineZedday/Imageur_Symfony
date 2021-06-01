@@ -17,6 +17,7 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+// use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -101,30 +102,25 @@ class SectionType extends AbstractType
                 $form = $event->getForm();
                
                 if ($colonnes) {
-                    $this->addFieldColonne2($form);
+                    
+                    $form->add('colonne2',
+                    TextAreaType::class,
+                    [
+                      
+                      'mapped'          => true,
+                      'required'        => true,
+                      'label' => 'contenu colonne de droite',
+                      'attr' => ['rows' => '15', 'cols' => '100']
+                     
+                    ]);
                 }
             })->getForm();
             
     }
 
-    private function addFieldColonne2($form)
-    {
-    
+  
 
-        $builder = $form->getConfig()->getFormFactory()->createNamedBuilder(
-            'colonne2',
-            TextAreaType::class,
-            null,
-            [
-              
-              'mapped'          => true,
-              'required'        => false,
-              'label' => 'contenu colonne de droite',
-              'attr' => ['rows' => '15', 'cols' => '100']
-             
-            ]
-          );
-    }
+    
 
     public function configureOptions(OptionsResolver $resolver)
     {
