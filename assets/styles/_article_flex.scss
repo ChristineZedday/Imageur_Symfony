@@ -43,13 +43,12 @@ article {
 			font-size:24px; 
 		}
 
-		div .bicol {
+		div.bicol {
 			display: flex;
 			flex-direction: row;
 			justify-content: space-between;
 			div {
-				width: 300px;
-				color: blue;
+				width: 290px;
 			}
 		}
 
