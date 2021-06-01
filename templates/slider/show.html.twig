@@ -47,6 +47,7 @@
 
  <p>   <a href="{{ path('slider_edit', {'id': slider.id}) }}">Modifier</a></p>
  <p>     <a href="{{ path('slider_genere', {'id': slider.id}) }}">Générer le carrousel PHP</a></p>
+ <p>Important: s'il s'agit d'un nouveau carrousel, il faut regénérer la section (ou les sections) pour qu'elle l'inclue, pour une modification regénérer le carrousel suffit.</p>
 
     {{ include('slider/_delete_form.html.twig') }}
    

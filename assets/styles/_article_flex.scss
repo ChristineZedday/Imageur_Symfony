@@ -10,7 +10,7 @@
 .supertitre
 {
 	color: $title1; 
-	font: $fonth1;
+	font-family: $fonth1;
 		text-align:left; 
 		font-size:20px; 
 		font-variant:small-caps;
@@ -34,6 +34,7 @@ article {
 		}
 		section {
 			margin-top: 50px;
+			
 
 		h2 {
 			color: $title2; 
@@ -41,6 +42,16 @@ article {
 			text-align:justify; 
 			font-size:24px; 
 		}
+
+		div.bicol {
+			display: flex;
+			flex-direction: row;
+			justify-content: space-between;
+			div {
+				width: 290px;
+			}
+		}
+
 
 		h3 {
 			color: $title3; 
@@ -80,7 +91,12 @@ article {
 			}
 		}
 	}
+
+
+	
 }
+
+
 
 		
 @media all and (max-width: 900px)

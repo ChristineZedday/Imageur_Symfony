@@ -124,13 +124,21 @@ class SectionController extends AbstractController
      */
     public function delete(Request $request, Section $section): Response
     {
+        if (! empty($section->getImage())) {
+            $section->setImage(null);
+        }
+
+        if (! empty($section->getSlider())) {
+            $section->setSlider(null);
+        }
+        
         if ($this->isCsrfTokenValid('delete'.$section->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($section);
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('section_index');
+        return $this->redirectToRoute('article_show',  array('id' => $section->getArticle()->getId()));
     }
 
     /**
@@ -144,6 +152,6 @@ class SectionController extends AbstractController
         // $section->genereSection($dir, $imgs, $image);
         $generator->genereFile($section);
 
-        return $this->redirectToRoute('section_index');
+        return $this->redirectToRoute('article_show',  array('id' => $section->getArticle()->getId()));
     }
 }

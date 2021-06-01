@@ -18,6 +18,7 @@ use App\Repository\RubriqueRepository;
 \define('METAS_HTML', '<head><meta charset="utf-8"/><meta name="viewport" content="width=device-width" />');
 \define('MIDDLE_HTML', '</head><body><div id = "conteneur">');
 
+
 function get_class_name($classname)
 {
     if ($pos = mb_strrpos($classname, '\\')) {
@@ -125,12 +126,22 @@ class Generator
         $thumbs = $this->adressRepository->findOneByName('vignette')->getRelativeFichiers();
         $filename = $dir.'section_'.$section->GetId().'.php';
         $file = fopen($filename, 'w');
-        fwrite($file, '<section>');
+       fwrite($file, '<section>');
+    
         if (null !== $section->getTitre() && 'sans' !== $section->getTitre()) {
             fwrite($file, '<h2>'.$section->getTitre().'</h2>');
         }
+        if (!$section->getBicolonne())
 
-        fwrite($file, $section->getContenu());
+       { fwrite($file, $section->getContenu());}
+
+       else {
+           fwrite($file, '<div class="bicol"><div>');
+           fwrite($file, $section->getContenu());
+           fwrite($file, '</div><div>');
+           fwrite($file, $section->getColonne2());
+           fwrite($file, '</div></div>');
+       }
 
         if (null !== $section->getSlider()) {
             $nom = $section->getSlider()->getNom();
