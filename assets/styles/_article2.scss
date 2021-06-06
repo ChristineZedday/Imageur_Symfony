@@ -25,18 +25,21 @@ article {
 			color: $title1; 
 			text-align:center; 
 			font-size:30px; 
+			font-family: $fonth1;
 			font-variant:small-caps;
 		}
 
 		h2 {
 			color: $title2; 
 			text-align:justify; 
+			font-family: $fonth2;
 			font-size:24px; 
 		}
 
 		h3 {
 			color: $title2; 
 			text-align:justify; 
+			font-family: $fonth3;
 			font-size:20px;
 		}
 

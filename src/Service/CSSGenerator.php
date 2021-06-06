@@ -141,9 +141,9 @@ class CSSGenerator
             $path = '../assets/styles/app.scss';
             $file = fopen($path, 'w');
             fwrite($file, "@import 'sommairehorizontalderoule';
-            @import 'article_flex';
+            @import 'article2';
             @import 'corps2';
-            @import 'aside'; 
+            @import 'aside2'; 
             @import 'footer';
             @import 'jeu';
             @import 'slide';"
