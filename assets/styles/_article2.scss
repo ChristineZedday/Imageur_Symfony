@@ -3,7 +3,9 @@
 
 #main {
 	
-	max-width: 900px;
+	
+	justify-content: space-around;
+	align-items: center;
 }
 
 .supertitre
@@ -31,9 +33,19 @@ article {
 
 		h2 {
 			color: $title2; 
-			text-align:justify; 
+			text-align:center; 
 			font-family: $fonth2;
 			font-size:24px; 
+		}
+		div.bicol {
+			display: flex;
+			flex-direction: row;
+			justify-content: space-around;
+			width: 90vw;
+			div {
+				width: 500px;
+				padding:25px;
+			}
 		}
 
 		h3 {
@@ -77,7 +89,7 @@ article {
 }
 
 		
-@media all and (max-width: 900px)
+@media all and (max-width: 1024px)
 {
 
 	article {  
@@ -88,8 +100,18 @@ article {
 	img {
 		max-width: 90vw;
 	}
-		
+	div.bicol {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		flex-wrap: wrap;
+		div {
+			width: 300px;
+			padding: 20px;
+		}
+	}
 }
 
+	
 
 
