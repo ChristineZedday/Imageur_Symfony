@@ -79,8 +79,9 @@ class Generator
                             fwrite($file, '<h1><a href="'.$path.$nom.'">'.$lien.'</a></h1>');
                         } else {
                             fwrite($file, '<h1><a href="'.$path.$nom.'">'.$article->getTitre().'</a></h1>');
-                            fwrite($file, '</ul>');
+                           
                         }
+                        fwrite($file, '</ul>');
                     }
                    
                 }
