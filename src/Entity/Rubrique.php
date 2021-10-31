@@ -41,9 +41,15 @@ class Rubrique
      */
     private $articles;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Image::class, mappedBy="rubrique")
+     */
+    private $images;
+
     public function __construct()
     {
         $this->articles = new ArrayCollection();
+        $this->images = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -99,6 +105,36 @@ class Rubrique
             // set the owning side to null (unless already changed)
             if ($article->getRubrique() === $this) {
                 $article->setRubrique(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Image[]
+     */
+    public function getImages(): Collection
+    {
+        return $this->images;
+    }
+
+    public function addImage(Image $image): self
+    {
+        if (!$this->images->contains($image)) {
+            $this->images[] = $image;
+            $image->setRubrique($this);
+        }
+
+        return $this;
+    }
+
+    public function removeImage(Image $image): self
+    {
+        if ($this->images->removeElement($image)) {
+            // set the owning side to null (unless already changed)
+            if ($image->getRubrique() === $this) {
+                $image->setRubrique(null);
             }
         }
 
