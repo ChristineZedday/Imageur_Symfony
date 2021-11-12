@@ -246,7 +246,7 @@ class Generator
             fwrite($file, '<meta name="author" content="'.$entity->getAuteur().'"/>');
         }
         if (null !== $entity->getTitre()) {
-            fwrite($file, '<meta name="title" content="'.$entity->getTitre().'"/>');
+            fwrite($file, '<title>'.$entity->getTitre().'</title>');
         }
         if (null !== $entity->getDescription()) {
             fwrite($file, '<meta name="description" content="'.$entity->getDescription().'"/>');
