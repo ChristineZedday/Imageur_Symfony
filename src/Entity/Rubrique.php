@@ -46,10 +46,16 @@ class Rubrique
      */
     private $images;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Slider::class, mappedBy="rubriquesPiocheImages")
+     */
+    private $sliders;
+
     public function __construct()
     {
         $this->articles = new ArrayCollection();
         $this->images = new ArrayCollection();
+        $this->sliders = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -136,6 +142,33 @@ class Rubrique
             if ($image->getRubrique() === $this) {
                 $image->setRubrique(null);
             }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Slider[]
+     */
+    public function getSliders(): Collection
+    {
+        return $this->sliders;
+    }
+
+    public function addSlider(Slider $slider): self
+    {
+        if (!$this->sliders->contains($slider)) {
+            $this->sliders[] = $slider;
+            $slider->addRubriquesPiocheImage($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSlider(Slider $slider): self
+    {
+        if ($this->sliders->removeElement($slider)) {
+            $slider->removeRubriquesPiocheImage($this);
         }
 
         return $this;
