@@ -68,7 +68,7 @@ class ImageController extends AbstractController
                 $dossier = $thumbs;
                 $vignette = $form->get('vignette')->getData();
                 $vignette->move($dossier, $fichier);
-                // dd('true vig');
+              
                 $image->setVignette(true);
             }//array_key_exists('vignette', $_POST) &&
 
@@ -98,7 +98,7 @@ class ImageController extends AbstractController
     /**
      * @Route("/{id}/edit", name="image_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, Image $image): Response
+    public function edit(Request $request, AdressRepository $adressRepository, Image $image): Response
     {
         $thumbs = $this->getParameter('thumbs_directory');
 
@@ -106,7 +106,9 @@ class ImageController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+              
             if (\array_key_exists('vignette', $_POST)) {
+              
                 $vignette->move(
                     $thumbs,
                     $image->getNom()
@@ -114,7 +116,14 @@ class ImageController extends AbstractController
                 $image->setVignette(true);
             }
 
+            if ($_POST['image']['nouveau'] !== "") {
+               
+              $this->rename($image, $_POST['image']['nouveau'], $adressRepository);
+               
+            }
             $this->getDoctrine()->getManager()->flush();
+
+
 
             return $this->redirectToRoute('image_show',  array('id' => $image->getId()));
         }
@@ -134,8 +143,35 @@ class ImageController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($image);
             $entityManager->flush();
+            //et effacer le fichier et vignette
         }
 
         return $this->redirectToRoute('image_index');
     }
+
+      
+    private function rename( Image $image, String $nouveau, AdressRepository $adressRepository )
+    {
+        $thumbs = $adressRepository->findOnebyName('vignette')->getPhysique();
+        $grandes = $adressRepository->findOneByName('grandes_images')->getPhysique();
+        $autres = $adressRepository->findOneByName('moyennes_images')->getPhysique();
+     
+            $old = $image->getNom();
+           if ($image->getPour() === 'illustration') {
+           
+            rename($autres.$old,$autres.$nouveau);
+           }
+           else {
+            rename($grandes.$old,$grandes.$nouveau); 
+            if ($image->getVignette() === true){
+            rename($thumbs.$old,$thumbs.$nouveau);   }
+           }
+            $entityManager = $this->getDoctrine()->getManager();
+            $image->setNom($nouveau);
+    
+            $entityManager->flush();
+    
+  
+}
+
 }

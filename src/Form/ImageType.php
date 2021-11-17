@@ -34,7 +34,7 @@ class ImageType extends AbstractType
                 // If no data is passed to the form, the data is "null".
                 // This should be considered a new "Image"
                 if (!$image || null === $image->getId()) {
-                    $form->add('nom', TextType::class, ['required' => false]);
+                   
                     $form->add('pour', ChoiceType::class, ['choices' => ['carrousel' => 'carrousel', 'illustration' => 'illustration']]);
                     $form->add('image', FileType::class, [
                         'label' => 'fichier à télécharger',
@@ -52,6 +52,7 @@ class ImageType extends AbstractType
             ->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
                 $image = $event->getData();
                 $form = $event->getForm();
+               
                 if ($image && false === $image->getVignette() && 'carrousel' === $image->getPour()) {
                     $form->add('vignette', FileType::class, [
                         'label' => 'vignette ',
@@ -62,7 +63,7 @@ class ImageType extends AbstractType
                 }
             });
       
-
+        $builder->add('nouveau', TextType::class, ['label' => 'changer le nom?', 'mapped'=>false, 'required'=>false]);
         $builder->add('alt', TextType::class, ['label' => 'texte alternatif', 'attr' => ['size' => '150']]);
         $builder->add('legend', TextType::class, ['label' => 'légende', 'required' => 'false', 'attr' => ['size' => '150']]);
         $builder->add('rang');
