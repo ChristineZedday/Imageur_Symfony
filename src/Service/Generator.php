@@ -50,7 +50,7 @@ class Generator
         }
         $file = fopen($path, 'w');
 
-        $rubriques = $this->rubriqueRepository->findAll();
+        $rubriques = $this->rubriqueRepository->findBy([],['rang' => 'asc']);
 
         fwrite($file, '<div class="element" id="som"> <nav  class=sommaire id="flexnav"> ');
         if ('HomePage' === $type) {
