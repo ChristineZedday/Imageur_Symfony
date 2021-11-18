@@ -103,6 +103,7 @@ class ImageController extends AbstractController
         $thumbs = $this->getParameter('thumbs_directory');
 
         $form = $this->createForm(ImageType::class, $image);
+        $ancien = $image->getNom();
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -116,9 +117,9 @@ class ImageController extends AbstractController
                 $image->setVignette(true);
             }
 
-            if ($_POST['image']['nouveau'] !== "") {
+            if ($_POST['image']['nom'] !== $ancien) {
                
-              $this->rename($image, $_POST['image']['nouveau'], $adressRepository);
+              $this->rename($image, $ancien, $_POST['image']['nom'], $adressRepository);
                
             }
             $this->getDoctrine()->getManager()->flush();
@@ -150,26 +151,26 @@ class ImageController extends AbstractController
     }
 
       
-    private function rename( Image $image, String $nouveau, AdressRepository $adressRepository )
+    private function rename( Image $image, String $ancien, String $nouveau, AdressRepository $adressRepository )
     {
         $thumbs = $adressRepository->findOnebyName('vignette')->getPhysique();
         $grandes = $adressRepository->findOneByName('grandes_images')->getPhysique();
         $autres = $adressRepository->findOneByName('moyennes_images')->getPhysique();
      
-            $old = $image->getNom();
+           
            if ($image->getPour() === 'illustration') {
            
-            rename($autres.$old,$autres.$nouveau);
+            rename($autres.$ancien,$autres.$nouveau);
            }
            else {
-            rename($grandes.$old,$grandes.$nouveau); 
+            rename($grandes.$ancien,$grandes.$nouveau); 
             if ($image->getVignette() === true){
-            rename($thumbs.$old,$thumbs.$nouveau);   }
+            rename($thumbs.$ancien,$thumbs.$nouveau);   }
            }
-            $entityManager = $this->getDoctrine()->getManager();
-            $image->setNom($nouveau);
+            // $entityManager = $this->getDoctrine()->getManager();
+            // $image->setNom($nouveau); //inutile?
     
-            $entityManager->flush();
+            // $entityManager->flush();
     
   
 }
