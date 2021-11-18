@@ -14,6 +14,7 @@
                 <th>Id</th>
                 <th>Nom</th>
                 <th>Titre</th>
+                 <th>Rang</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -23,6 +24,7 @@
                 <td>{{ rubrique.id }}</td>
                 <td>{{ rubrique.nom }}</td>
                 <td>{{ rubrique.titre }}</td>
+                 <td>{{ rubrique.rang }}</td>
                 <td>
                     <a href="{{ path('rubrique_show', {'id': rubrique.id}) }}">  {{ include('./_showicone.html.twig')}}</a>
                     <a href="{{ path('rubrique_edit', {'id': rubrique.id}) }}">  {{ include('./_editicone.html.twig')}}</a>

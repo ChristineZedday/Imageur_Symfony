@@ -51,6 +51,11 @@ class Rubrique
      */
     private $sliders;
 
+    /**
+     * @ORM\Column(type="decimal", precision=2, scale=0, nullable=true)
+     */
+    private $rang;
+
     public function __construct()
     {
         $this->articles = new ArrayCollection();
@@ -170,6 +175,18 @@ class Rubrique
         if ($this->sliders->removeElement($slider)) {
             $slider->removeRubriquesPiocheImage($this);
         }
+
+        return $this;
+    }
+
+    public function getRang(): ?string
+    {
+        return $this->rang;
+    }
+
+    public function setRang(?string $rang): self
+    {
+        $this->rang = $rang;
 
         return $this;
     }

@@ -52,7 +52,7 @@ class ImageType extends AbstractType
             ->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
                 $image = $event->getData();
                 $form = $event->getForm();
-               
+              
                 if ($image && false === $image->getVignette() && 'carrousel' === $image->getPour()) {
                     $form->add('vignette', FileType::class, [
                         'label' => 'vignette ',
@@ -63,7 +63,7 @@ class ImageType extends AbstractType
                 }
             });
       
-        $builder->add('nouveau', TextType::class, ['label' => 'changer le nom?', 'mapped'=>false, 'required'=>false]);
+            $builder->add('nouveau', TextType::class, ['label' => 'changer le nom?', 'mapped'=>false, 'required'=>false, 'attr'=>['value'=>'nouveau_nom.jpg']]);
         $builder->add('alt', TextType::class, ['label' => 'texte alternatif', 'attr' => ['size' => '150']]);
         $builder->add('legend', TextType::class, ['label' => 'légende', 'required' => 'false', 'attr' => ['size' => '150']]);
         $builder->add('rang');
