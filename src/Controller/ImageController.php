@@ -138,9 +138,19 @@ class ImageController extends AbstractController
     /**
      * @Route("/{id}", name="image_delete", methods={"DELETE"})
      */
-    public function delete(Request $request, Image $image): Response
+    public function delete(Request $request, Image $image, AdressRepository $adressRepository): Response
     {
         if ($this->isCsrfTokenValid('delete'.$image->getId(), $request->request->get('_token'))) {
+            $thumbs = $adressRepository->findOnebyName('vignette')->getPhysique();
+            $grandes = $adressRepository->findOneByName('grandes_images')->getPhysique();
+            $autres = $adressRepository->findOneByName('moyennes_images')->getPhysique();
+            if ($image->getPour() === 'carrousel') {
+                @unlink($grandes.$image->getNom());
+                @unlink($thumbs.$image->getNom());
+            }
+            else {
+                @unlink($autres.$image->getNom());
+            }
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($image);
             $entityManager->flush();
@@ -167,11 +177,6 @@ class ImageController extends AbstractController
             if ($image->getVignette() === true){
             rename($thumbs.$ancien,$thumbs.$nouveau);   }
            }
-            // $entityManager = $this->getDoctrine()->getManager();
-            // $image->setNom($nouveau); //inutile?
-    
-            // $entityManager->flush();
-    
   
 }
 
