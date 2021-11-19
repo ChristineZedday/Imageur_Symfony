@@ -9,6 +9,7 @@
 namespace App\Form;
 
 use App\Entity\Section;
+use App\Entity\Rubrique;
 use App\Entity\Slider;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -28,12 +29,12 @@ class SliderType extends AbstractType
                 'multiple' => false,
                 'mapped' => true,
                 'required' => true, ])
-            // ->add('images', ChoiceType::class,[
-            //     'choices' => $photos,
-            //     // 'choice_attr' => $attr,
-            //     'multiple' => true,
-            //     'mapped' => false,
-            //     'required' => false])
+            ->add('rubriquesPiocheImages', EntityType::class, [
+                    'class' => Rubrique::class,
+                    'choice_label' => 'nom',
+                    'multiple' => true,
+                    'mapped' => true,
+                    'required' => true, ])
         ;
     }
 

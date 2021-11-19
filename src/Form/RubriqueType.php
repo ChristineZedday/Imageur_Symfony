@@ -20,6 +20,7 @@ class RubriqueType extends AbstractType
         $builder
             ->add('nom')
             ->add('titre')
+            ->add('rang')
         ;
     }
 

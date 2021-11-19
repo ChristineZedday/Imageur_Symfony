@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Imageur_Symfony
+ * Imageur_symfony
  * Symfony 5
  * Christine Zedday
  */

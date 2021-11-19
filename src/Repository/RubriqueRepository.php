@@ -16,7 +16,7 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method Rubrique|null find($id, $lockMode = null, $lockVersion = null)
  * @method Rubrique|null findOneBy(array $criteria, array $orderBy = null)
  * @method Rubrique[]    findAll()
- * @method Rubrique[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Rubrique[]    findBy(array $criteria = [], array $orderBy = 'rang', $limit = null, $offset = null)
  */
 class RubriqueRepository extends ServiceEntityRepository
 {

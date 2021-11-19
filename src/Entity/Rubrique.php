@@ -41,9 +41,26 @@ class Rubrique
      */
     private $articles;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Image::class, mappedBy="rubrique")
+     */
+    private $images;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Slider::class, mappedBy="rubriquesPiocheImages")
+     */
+    private $sliders;
+
+    /**
+     * @ORM\Column(type="decimal", precision=2, scale=0, nullable=true)
+     */
+    private $rang;
+
     public function __construct()
     {
         $this->articles = new ArrayCollection();
+        $this->images = new ArrayCollection();
+        $this->sliders = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -101,6 +118,75 @@ class Rubrique
                 $article->setRubrique(null);
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Image[]
+     */
+    public function getImages(): Collection
+    {
+        return $this->images;
+    }
+
+    public function addImage(Image $image): self
+    {
+        if (!$this->images->contains($image)) {
+            $this->images[] = $image;
+            $image->setRubrique($this);
+        }
+
+        return $this;
+    }
+
+    public function removeImage(Image $image): self
+    {
+        if ($this->images->removeElement($image)) {
+            // set the owning side to null (unless already changed)
+            if ($image->getRubrique() === $this) {
+                $image->setRubrique(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Slider[]
+     */
+    public function getSliders(): Collection
+    {
+        return $this->sliders;
+    }
+
+    public function addSlider(Slider $slider): self
+    {
+        if (!$this->sliders->contains($slider)) {
+            $this->sliders[] = $slider;
+            $slider->addRubriquesPiocheImage($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSlider(Slider $slider): self
+    {
+        if ($this->sliders->removeElement($slider)) {
+            $slider->removeRubriquesPiocheImage($this);
+        }
+
+        return $this;
+    }
+
+    public function getRang(): ?string
+    {
+        return $this->rang;
+    }
+
+    public function setRang(?string $rang): self
+    {
+        $this->rang = $rang;
 
         return $this;
     }

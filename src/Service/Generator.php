@@ -50,7 +50,7 @@ class Generator
         }
         $file = fopen($path, 'w');
 
-        $rubriques = $this->rubriqueRepository->findAll();
+        $rubriques = $this->rubriqueRepository->findBy([],['rang' => 'asc']);
 
         fwrite($file, '<div class="element" id="som"> <nav  class=sommaire id="flexnav"> ');
         if ('HomePage' === $type) {
@@ -79,8 +79,9 @@ class Generator
                             fwrite($file, '<h1><a href="'.$path.$nom.'">'.$lien.'</a></h1>');
                         } else {
                             fwrite($file, '<h1><a href="'.$path.$nom.'">'.$article->getTitre().'</a></h1>');
-                            fwrite($file, '</ul>');
+                           
                         }
+                        fwrite($file, '</ul>');
                     }
                    
                 }
@@ -245,7 +246,7 @@ class Generator
             fwrite($file, '<meta name="author" content="'.$entity->getAuteur().'"/>');
         }
         if (null !== $entity->getTitre()) {
-            fwrite($file, '<meta name="title" content="'.$entity->getTitre().'"/>');
+            fwrite($file, '<title>'.$entity->getTitre().'</title>');
         }
         if (null !== $entity->getDescription()) {
             fwrite($file, '<meta name="description" content="'.$entity->getDescription().'"/>');

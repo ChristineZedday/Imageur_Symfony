@@ -68,7 +68,7 @@ class ImageController extends AbstractController
                 $dossier = $thumbs;
                 $vignette = $form->get('vignette')->getData();
                 $vignette->move($dossier, $fichier);
-                // dd('true vig');
+              
                 $image->setVignette(true);
             }//array_key_exists('vignette', $_POST) &&
 
@@ -98,15 +98,18 @@ class ImageController extends AbstractController
     /**
      * @Route("/{id}/edit", name="image_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, Image $image): Response
+    public function edit(Request $request, AdressRepository $adressRepository, Image $image): Response
     {
         $thumbs = $this->getParameter('thumbs_directory');
 
         $form = $this->createForm(ImageType::class, $image);
+        $ancien = $image->getNom();
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+              
             if (\array_key_exists('vignette', $_POST)) {
+              
                 $vignette->move(
                     $thumbs,
                     $image->getNom()
@@ -114,7 +117,14 @@ class ImageController extends AbstractController
                 $image->setVignette(true);
             }
 
+            if ($_POST['image']['nom'] !== $ancien) {
+               
+              $this->rename($image, $ancien, $_POST['image']['nom'], $adressRepository);
+               
+            }
             $this->getDoctrine()->getManager()->flush();
+
+
 
             return $this->redirectToRoute('image_show',  array('id' => $image->getId()));
         }
@@ -128,14 +138,46 @@ class ImageController extends AbstractController
     /**
      * @Route("/{id}", name="image_delete", methods={"DELETE"})
      */
-    public function delete(Request $request, Image $image): Response
+    public function delete(Request $request, Image $image, AdressRepository $adressRepository): Response
     {
         if ($this->isCsrfTokenValid('delete'.$image->getId(), $request->request->get('_token'))) {
+            $thumbs = $adressRepository->findOnebyName('vignette')->getPhysique();
+            $grandes = $adressRepository->findOneByName('grandes_images')->getPhysique();
+            $autres = $adressRepository->findOneByName('moyennes_images')->getPhysique();
+            if ($image->getPour() === 'carrousel') {
+                @unlink($grandes.$image->getNom());
+                @unlink($thumbs.$image->getNom());
+            }
+            else {
+                @unlink($autres.$image->getNom());
+            }
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($image);
             $entityManager->flush();
+            //et effacer le fichier et vignette
         }
 
         return $this->redirectToRoute('image_index');
     }
+
+      
+    private function rename( Image $image, String $ancien, String $nouveau, AdressRepository $adressRepository )
+    {
+        $thumbs = $adressRepository->findOnebyName('vignette')->getPhysique();
+        $grandes = $adressRepository->findOneByName('grandes_images')->getPhysique();
+        $autres = $adressRepository->findOneByName('moyennes_images')->getPhysique();
+     
+           
+           if ($image->getPour() === 'illustration') {
+           
+            rename($autres.$ancien,$autres.$nouveau);
+           }
+           else {
+            rename($grandes.$ancien,$grandes.$nouveau); 
+            if ($image->getVignette() === true){
+            rename($thumbs.$ancien,$thumbs.$nouveau);   }
+           }
+  
+}
+
 }

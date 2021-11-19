@@ -28,7 +28,7 @@ class ImageRepository extends ServiceEntityRepository
     public function findDispo($slider)
     {
         // public function notIn($x, $y); // Returns Expr\Func instance
-
+        $rubriques = $slider->getRubriquesPiocheImages();
         $images = $slider->getImages();
         $imids = [];
         $i = 0;
@@ -43,8 +43,9 @@ class ImageRepository extends ServiceEntityRepository
             $query = $entityManager->createQuery(
                 'select i
                 from App\Entity\Image i
-                where i.id NOT IN (:imids)'
-            )->setParameter('imids', $imids);
+                where i.id NOT IN (:imids) and i.rubrique IN (:rubriques)'
+            )->setParameter('imids', $imids)
+            ->setParameter('rubriques', $rubriques);
         } else {
             return $this->findAll();
         }

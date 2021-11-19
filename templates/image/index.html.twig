@@ -16,6 +16,7 @@
                 <th>Légende</th>
                 <th>Usage</th>
                  <th>Rang</th>
+                 <th>Rubrique</th>
                 <th>Vignette</th>
                   <th>Image</th>
                 <th>actions</th>
@@ -31,6 +32,7 @@
                 <td>{{ image.legend }}</td>
                 <td>{{ image.pour}}</td>
                  <td>{{ image.rang}}</td>
+                     <td>{{ image.rubrique.nom}}</td>
                  <td>{% if image.vignette %} oui {% else %} non {% endif %}</td>
                  <td>{% if image.vignette %}<img src="{{ petites_images~image.nom}}" width="60px" height="40px">{% else %} <img src="{{ moyennes_images~image.nom}}" width="60px" height="40px">{% endif %}</td>
                 <td>

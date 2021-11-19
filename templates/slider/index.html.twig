@@ -20,8 +20,8 @@
             <tr>
                 
                 <td>{{ slider.nom }}</td>
-                 <td>{{ slider.section.article.titre }}</td>
-                <td>{{ slider.section.titre }}</td>
+                 <td>{% if slider.section %}{{ slider.section.article.titre }}{% endif %}</td>
+                <td>{% if slider.section %}{{ slider.section.titre }}{% endif %}</td>
                <td>
                     <a href="{{ path('slider_show', {'id': slider.id}) }}">{{ include('./_showicone.html.twig')}}</a>
                     <a href="{{ path('slider_edit', {'id': slider.id}) }}">{{ include('./_editicone.html.twig')}}</a>

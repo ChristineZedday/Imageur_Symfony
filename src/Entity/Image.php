@@ -24,7 +24,7 @@ class Image
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=50)
+     * @ORM\Column(type="string", length=100)
      */
     private $nom;
 
@@ -65,6 +65,11 @@ class Image
      * @ORM\OneToOne(targetEntity=Section::class, inversedBy="image", cascade={"persist"})
      */
     private $section;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Rubrique::class, inversedBy="images")
+     */
+    private $rubrique;
 
     public function getId(): ?int
     {
@@ -159,6 +164,18 @@ class Image
     public function setSection(?Section $section): self
     {
         $this->section = $section;
+
+        return $this;
+    }
+
+    public function getRubrique(): ?Rubrique
+    {
+        return $this->rubrique;
+    }
+
+    public function setRubrique(?Rubrique $rubrique): self
+    {
+        $this->rubrique = $rubrique;
 
         return $this;
     }

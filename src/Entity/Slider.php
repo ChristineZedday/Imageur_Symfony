@@ -41,9 +41,15 @@ class Slider
      */
     private $section;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Rubrique::class, inversedBy="sliders")
+     */
+    private $rubriquesPiocheImages;
+
     public function __construct()
     {
         $this->images = new ArrayCollection();
+        $this->rubriquesPiocheImages = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -119,6 +125,30 @@ class Slider
     public function setIsGenerated(?bool $isGenerated): self
     {
         $this->isGenerated = $isGenerated;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Rubrique[]
+     */
+    public function getRubriquesPiocheImages(): Collection
+    {
+        return $this->rubriquesPiocheImages;
+    }
+
+    public function addRubriquesPiocheImage(Rubrique $rubriquesPiocheImage): self
+    {
+        if (!$this->rubriquesPiocheImages->contains($rubriquesPiocheImage)) {
+            $this->rubriquesPiocheImages[] = $rubriquesPiocheImage;
+        }
+
+        return $this;
+    }
+
+    public function removeRubriquesPiocheImage(Rubrique $rubriquesPiocheImage): self
+    {
+        $this->rubriquesPiocheImages->removeElement($rubriquesPiocheImage);
 
         return $this;
     }
