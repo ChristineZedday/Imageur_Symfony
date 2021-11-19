@@ -1,0 +1,94 @@
+@import 'variables';
+
+table {
+	margin: auto;
+	border: medium solid $textcolor;;
+	width: 90%;
+	border-collapse: collapse;
+
+	th {
+		border: thin solid $bay;
+		width: 20%;
+		text-align: left;
+	}
+	td {
+		border: thin solid $bay;
+		width: 40%;
+		text-align: center;
+	}
+
+}
+
+caption {
+	color:$bay; 
+	text-align:center; 
+	font-size:24px; 
+	font-family:$principale;
+	 height: 40px;
+	}
+
+.jeu
+{
+	
+	figure {
+		position: relative !important; 
+		display:block;
+		top: 0px; 
+		left:0px;
+		width: 500px; 
+		height: 370px; 
+		padding:0px; 
+		margin:30px;
+	}
+	
+	
+		img {
+
+		width: 500px; 
+		height: 365px; 
+		position:absolute !important; 
+		display:block;
+		top: 0px; 
+		left:0px;
+		
+
+			#fond
+			{
+			z-index: 0;
+			}
+
+			#base
+			{
+			z-index: 2;
+			}
+
+			#gris
+			{
+			z-index:4;
+			}
+
+			#motif1
+			{
+			z-index: 6;
+			}
+
+			#motif2
+			{
+			z-index: 8;
+			}
+		}
+
+		
+		figcaption {
+			position:absolute; 
+			top: 400;
+			left:0; 
+			text-align:center;
+			}
+		
+}
+
+
+
+
+

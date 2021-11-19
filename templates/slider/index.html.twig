@@ -2,15 +2,15 @@
 
 {% block title %}Slider index{% endblock %}
 
-{% block body %}
-{{ parent() }}
-    <h1>Slider index</h1>
-
+{% block content %}
+    <h1>Index des carrousels</h1>
+<p>  <a href="{{ path('slider_new') }}">Ajouter un carrousel</a></p>
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
+                
                 <th>Nom</th>
+                 <th>Article</th>
                 <th>Section</th>
                 <th>actions</th>
             </tr>
@@ -18,12 +18,13 @@
         <tbody>
         {% for slider in sliders %}
             <tr>
-                <td>{{ slider.id }}</td>
+                
                 <td>{{ slider.nom }}</td>
+                 <td>{{ slider.section.article.titre }}</td>
                 <td>{{ slider.section.titre }}</td>
-                <td>
-                    <a href="{{ path('slider_show', {'id': slider.id}) }}">show</a>
-                    <a href="{{ path('slider_edit', {'id': slider.id}) }}">edit</a>
+               <td>
+                    <a href="{{ path('slider_show', {'id': slider.id}) }}">{{ include('./_showicone.html.twig')}}</a>
+                    <a href="{{ path('slider_edit', {'id': slider.id}) }}">{{ include('./_editicone.html.twig')}}</a>
                 </td>
             </tr>
         {% else %}
@@ -34,6 +35,8 @@
         </tbody>
     </table>
 
-    <a href="{{ path('slider_new') }}">Nouveau carrousel</a>
+  
+    {{ include('./_crediticones.html.twig')}}
+    
      
 {% endblock %}

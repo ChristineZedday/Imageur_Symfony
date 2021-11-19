@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}CSS index{% endblock %}
+
+{% block content %}
+    <h1>Index des fichiers css</h1>
+ <p>   <a href="{{ path('css_new') }}">Ajouter un fichier css</a></p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for css in csses %}
+            <tr>
+                <td>{{ css.id }}</td>
+                <td>{{ css.nom }}</td>
+                <td>
+                    <a href="{{ path('css_show', {'id': css.id}) }}">{{ include('./_showicone.html.twig')}}</a>
+                    <a href="{{ path('css_edit', {'id': css.id}) }}">{{ include('./_editicone.html.twig')}}</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">Aucun fichier css enregistré</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+     {{ include('./_crediticones.html.twig')}}
+{% endblock %}

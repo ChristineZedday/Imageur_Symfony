@@ -11,8 +11,9 @@ namespace App\Controller;
 use App\Entity\Slider;
 use App\Form\SliderType;
 use App\Repository\ImageRepository;
-use App\Repository\SliderRepository;
 use App\Repository\SectionRepository;
+use App\Repository\SliderRepository;
+use App\Service\Generator;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -40,9 +41,7 @@ class SliderController extends AbstractController
     {
         $slider = new Slider();
 
-        $sections = $sectionRepository->findAll();
-
-        $form = $this->createForm(SliderType::class, $slider, ['sections' => $sections]);
+        $form = $this->createForm(SliderType::class, $slider);
 
         $form->handleRequest($request);
 
@@ -51,22 +50,12 @@ class SliderController extends AbstractController
             $entityManager->persist($slider);
             $entityManager->flush();
 
-            // $images = $form->get('images')->getData();
-            // foreach ( $images as $image)
-            // {
-            //     $image = $imageRepository->find($image);
-            //     $slider->addImage($image);
-            // }
-
-            // $entityManager->flush();
-
             return $this->redirectToRoute('slider_edit', ['id' => $slider->getId()]);
         }
 
         return $this->render('slider/new.html.twig', [
             'slider' => $slider,
             'form' => $form->createView(),
-            // 'images' => $images,
         ]);
     }
 
@@ -117,26 +106,17 @@ class SliderController extends AbstractController
     /**
      * @Route("/{id}/edit", name="slider_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, Slider $slider, ImageRepository $imageRepository,  SectionRepository $sectionRepository): Response
+    public function edit(Request $request, Slider $slider, ImageRepository $imageRepository): Response
     {
         $images = $imageRepository->findDispo($slider);
-        $sections = $sectionRepository->findAll();
-        $form = $this->createForm(SliderType::class, $slider, ['sections' => $sections]);
+
+        $form = $this->createForm(SliderType::class, $slider);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            // $images = $form->get('images')->getData();
-            // foreach ( $images as $image)
-            // {
-            //     $image = $imageRepository->find($image);
-            //     $slider->addImage($image);
-            // }
-
-            // $this->getDoctrine()->getManager()->flush();
-
-            return $this->redirectToRoute('slider_index');
+            return $this->redirectToRoute('slider_show',  array('id' => $slider->getId()));
         }
 
         return $this->render('slider/edit.html.twig', [
@@ -163,10 +143,9 @@ class SliderController extends AbstractController
     /**
      * @Route("slider/genere/{id}", name="slider_genere", methods={"GET"})
      */
-    public function sliderGenere(Slider $slider)
+    public function sliderGenere(Generator $generator, Slider $slider)
     {
-        $dir = $this->getParameter('generated_directory');
-        $slider->genereSlider($dir);
+        $generator->genereFile($slider);
 
         return $this->redirectToRoute('slider_index');
     }

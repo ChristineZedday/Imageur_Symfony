@@ -2,14 +2,14 @@
 
 {% block title %}Article{% endblock %}
 
-{% block body %}
+{% block content %}
     <h1>Article</h1>
 
     <table class="table">
         <tbody>
             <tr>
-                <th>Id</th>
-                <td>{{ article.id }}</td>
+                <th>Nom</th>
+                <td>{{ article.nom }}</td>
             </tr>
             <tr>
                 <th>Titre</th>
@@ -20,15 +20,63 @@
                 <td>{{ article.auteur }}</td>
             </tr>
             <tr>
-                <th>Topic</th>
-                <td>{{ article.topic }}</td>
+                <th>Rubrique</th>
+                <td><a href="{{ path('rubrique_show', {'id': article.rubrique.id}) }}">{{ article.rubrique.nom }}</a></td>
+            </tr>
+             <tr>
+                <th>Description</th>
+                <td>{{ article.description }}</td>
+            </tr>
+             <tr>
+                <th>Mots clés</th>
+                <td>{{ article.keywords }}</td>
             </tr>
         </tbody>
+       
     </table>
+ <h2>Sections de cet article:</h2>
+     <table class="table">
+        <thead>
+            <tr>
+                <th>Titre</th>
+                <th>Rang dans l'article</th>
+                <th>Carrousel?</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for section in article.sections %}
+            <tr>
+               
+                
+                <td>{{ section.titre }}</td>
+                 <td>{{ section.rang }}</td>
+                 <td>{% if (section.slider) %}<a href="{{ path('slider_show',{'id': section.slider.id}) }}">{{ section.slider.nom }}</a> {% else %} Pas de carrousel {% endif %}</td>
+                <td>
+                    <a href="{{ path('section_show', {'id': section.id}) }}">{{ include('./_showicone.html.twig')}}</a>
+                    <a href="{{ path('section_edit', {'id': section.id}) }}">{{ include('./_editicone.html.twig')}}</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">Pas de sections enregistrées</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+<p>
+   <p> <a href="{{ path('article_index') }}">Retour à la liste</a></p>
 
-    <a href="{{ path('article_index') }}">back to list</a>
+  <p>  <a href="{{ path('article_edit', {'id': article.id}) }}">Modifier</a></p>
 
-    <a href="{{ path('article_edit', {'id': article.id}) }}">edit</a>
+  <p>    <a href="{{ path('new_section_article', {'id': article.id}) }}">Ajouter une section</a></p>
+
+ <p>    <a href="{{ path('article_genere', {'id': article.id}) }}">Générer le fichier PHP de l'article</a></p>
+     </p>
+    
 
     {{ include('article/_delete_form.html.twig') }}
+
+       {{ include('./_crediticones.html.twig')}} 
+   
 {% endblock %}

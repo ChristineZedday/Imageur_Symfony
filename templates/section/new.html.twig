@@ -1,11 +1,22 @@
 {% extends 'base.html.twig' %}
 
+
 {% block title %}New Section{% endblock %}
 
-{% block body %}
-    <h1>Create new Section</h1>
+{% block content %}
+
+    <h1>Créer une nouvelle section d'article</h1>
+    <p>Le contenu doit être en langage HTML. Le titre sera généré en h2, h1 étant réservé au titre de l'article (ne pas mettre la balise).</p>
 
     {{ include('section/_form.html.twig') }}
 
-    <a href="{{ path('section_index') }}">back to list</a>
+  <p>  <a href="{{ path('section_index') }}">Retour à la liste</a></p>
+   <p>N'oubliez pas de générer la nouvelle section et de re-générer l'article pour qu'il puisse inclure la nouvelle section!</p>
+   
+  
+    
 {% endblock %}
+
+
+
+

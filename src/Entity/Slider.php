@@ -30,17 +30,14 @@ class Slider
      */
     private $nom;
 
-
-  
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Image", cascade={"persist"})
      * @ORM\OrderBy({"rang" = "ASC"})
      */
     private $images;
 
-
     /**
-     * @ORM\OneToOne(targetEntity=Section::class, inversedBy="slider", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=Section::class, inversedBy="slider", cascade={"persist"})
      */
     private $section;
 
@@ -78,7 +75,6 @@ class Slider
         return $this;
     }
 
-
     /**
      * @return Collection|Image[]
      */
@@ -103,25 +99,6 @@ class Slider
         return $this;
     }
 
-    public function genereSlider($dir)
-    {
-        $path = $dir.'/slider_'.$this->getNom().'.php';
-        $sliderFile = fopen($path, 'w');
-
-        fwrite($sliderFile, '<div class="container"> ');
-        foreach ($this->getImages() as $image) {
-            fwrite($sliderFile, '<figure class="slide"> ');
-
-            fwrite($sliderFile, ' <img class="clickable" src="petites_images/'.$image->getNom().'" width=150 height=100 onclick="displaySlides(src) ;"> ');
-            fwrite($sliderFile, '<figcaption hidden>'.$image->getLegend().'</figcaption>');
-            fwrite($sliderFile, '</figure> ');
-        }
-
-        fwrite($sliderFile, '</div>');
-        fclose($sliderFile);
-    }
-
-
     public function getSection(): ?Section
     {
         return $this->section;
@@ -130,6 +107,18 @@ class Slider
     public function setSection(?Section $section): self
     {
         $this->section = $section;
+
+        return $this;
+    }
+
+    public function getIsGenerated(): ?bool
+    {
+        return $this->isGenerated;
+    }
+
+    public function setIsGenerated(?bool $isGenerated): self
+    {
+        $this->isGenerated = $isGenerated;
 
         return $this;
     }

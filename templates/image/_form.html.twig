@@ -4,9 +4,9 @@
      <label> Téléchargez l'image: </label>
     {% if app.request.attributes.get('_route') == 'image_edit' %}
       {%  if image.pour == 'carrousel' %}
-        <img src="{{ asset('/uploads/petites_images/'~image.nom) }}"  width="150">
+        <img src="{{ petites_images~image.nom}}"  width="150">
       {% else %}
-      <img src="{{ asset('/uploads/'~image.nom) }}"  width="300">
+      <img src="{{ moyennes_images~image.nom}}"  width="300">
       {% endif %}
     {% endif %}
     <button class="btn">{{ button_label|default('Enregistrer') }}</button>

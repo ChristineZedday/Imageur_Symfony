@@ -1,0 +1,117 @@
+@import 'couleurs';
+@import 'polices';
+@import 'jeu';
+
+#main {
+	flex-grow: 1.5;
+
+}
+
+.supertitre
+{
+	color: $title1; 
+	font-family: $fonth1;
+		text-align:left; 
+		font-size:20px; 
+		font-variant:small-caps;
+}
+
+article {
+		display:block; 
+		max-width: 800px;
+		margin: 25px;
+		padding: 30px; 
+		
+		
+	
+
+		h1 {
+			color: $title1; 
+			text-align:center; 
+			font-family: $fonth1;
+			font-size:30px; 
+			font-variant:small-caps;
+		}
+		section {
+			margin-top: 50px;
+			
+
+		h2 {
+			color: $title2; 
+			font-family: $fonth1;
+			text-align:justify; 
+			font-size:24px; 
+		}
+
+		div.bicol {
+			display: flex;
+			flex-direction: row;
+			justify-content: space-between;
+			div {
+				width: 290px;
+			}
+		}
+
+
+		h3 {
+			color: $title3; 
+			font-family: $fonth3;
+			text-align:justify; 
+			font-size:20px;
+		}
+
+		a {
+			color: $links;
+			&:visited {
+				color:$visited;
+			}
+		}
+
+		p {
+			color: $textcolor;
+			text-align:justify; 
+			font-size:16px; 
+			font-family:$principale
+		}
+
+		figure {
+			padding: 0; 
+			margin:0;
+
+			img {
+				border:0; 
+				max-width:100%; 
+			}
+
+			figcaption {
+				font-family:$principale; 
+				text-align:center; 
+				font-size:14px; 
+				font-style:italic;
+			}
+		}
+	}
+
+
+	
+}
+
+
+
+		
+@media all and (max-width: 900px)
+{
+
+	article {  
+			width:100vw; 
+			padding: 15px;
+	}
+
+	img {
+		max-width: 90vw;
+	}
+		
+}
+
+
+

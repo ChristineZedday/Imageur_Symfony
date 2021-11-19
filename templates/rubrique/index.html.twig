@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Rubrique index{% endblock %}
+
+{% block content %}
+    <h1>Index des rubriques</h1>
+
+    <p>   <a href="{{ path('rubrique_new') }}">Ajouter une rubrique</a></p>
+ <p>Une rubrique sans titre sera considérée dans le sommaire comme un ensemble d'articles indépendants, ou de rubriques mono-article pour le style (pas de menus déroulants le cas échéant). Pour les autres, selon le style choisi ou pour la version smartphone, le survol du titre de la rubrique affiche la liste des articles de la rubrique (rétrécissez la page pour vérifier!)</p>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Titre</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for rubrique in rubriques %}
+            <tr>
+                <td>{{ rubrique.id }}</td>
+                <td>{{ rubrique.nom }}</td>
+                <td>{{ rubrique.titre }}</td>
+                <td>
+                    <a href="{{ path('rubrique_show', {'id': rubrique.id}) }}">  {{ include('./_showicone.html.twig')}}</a>
+                    <a href="{{ path('rubrique_edit', {'id': rubrique.id}) }}">  {{ include('./_editicone.html.twig')}}</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">Pas de rubriques enregistrées</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+ 
+    {{ include('./_crediticones.html.twig')}}
+    
+{% endblock %}

@@ -1,10 +1,17 @@
 <?php
 
+/*
+ * Imageur_Symfony
+ * Symfony 5
+ * Christine Zedday
+ */
+
 namespace App\Controller;
 
 use App\Entity\Article;
 use App\Form\ArticleType;
 use App\Repository\ArticleRepository;
+use App\Service\Generator;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -30,7 +37,8 @@ class ArticleController extends AbstractController
      */
     public function new(Request $request): Response
     {
-        $article = new Article();
+        $auteur = $this->getParameter('author');
+        $article = new Article($auteur);
         $form = $this->createForm(ArticleType::class, $article);
         $form->handleRequest($request);
 
@@ -69,7 +77,7 @@ class ArticleController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('article_index');
+            return $this->redirectToRoute('article_show', array('id' => $article->getId()));
         }
 
         return $this->render('article/edit.html.twig', [
@@ -81,13 +89,32 @@ class ArticleController extends AbstractController
     /**
      * @Route("/{id}", name="article_delete", methods={"DELETE"})
      */
-    public function delete(Request $request, Article $article): Response
+    public function delete(Request $request, Generator $generator, Article $article): Response
     {
+        $entityManager = $this->getDoctrine()->getManager();
+       foreach ($article->getSections() as $section) {
+         
+           $article->removeSection($section);
+           $entityManager->remove($section);
+           $entityManager->flush();
+       }
+       
         if ($this->isCsrfTokenValid('delete'.$article->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
+           
             $entityManager->remove($article);
             $entityManager->flush();
+            $generator->genereNav('Article');
         }
+
+        return $this->redirectToRoute('article_index');
+    }
+
+    /**
+     * @Route("article/genere/{id}", name="article_genere", methods={"GET"})
+     */
+    public function articleGenere(Generator $generator, Article $article)
+    {
+        $generator->genereFile($article);
 
         return $this->redirectToRoute('article_index');
     }

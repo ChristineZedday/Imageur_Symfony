@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Javascript index{% endblock %}
+
+{% block content %}
+ 
+    <h1>Index des fichiers javascript</h1>
+ <p>  <a href="{{ path('javascript_new') }}">Ajouter un fichier</a></p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for javascript in javascripts %}
+            <tr>
+                <td>{{ javascript.id }}</td>
+                <td>{{ javascript.nom }}</td>
+                <td>
+                    <a href="{{ path('javascript_show', {'id': javascript.id}) }}">    {{ include('./_showicone.html.twig')}}</a>
+                    <a href="{{ path('javascript_edit', {'id': javascript.id}) }}">    {{ include('./_editicone.html.twig')}}</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">Pas de .js enregistrés</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+  <p>  <a href="{{ path('javascript_new') }}">Ajouter un fichier</a></p>
+        {{ include('./_crediticones.html.twig')}}
+      
+{% endblock %}

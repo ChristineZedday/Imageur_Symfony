@@ -1,0 +1,92 @@
+@import 'couleurs';
+@import 'jeu';
+
+#main {
+	
+	max-width: 900px;
+}
+
+.supertitre
+{
+	color: $title1; 
+		text-align:left; 
+		font-size:20px; 
+		font-variant:small-caps;
+}
+
+article {
+		display:block; 
+		padding: 30px; 
+		width: 100%;
+
+	
+
+		h1 {
+			color: $title1; 
+			text-align:center; 
+			font-size:30px; 
+			font-variant:small-caps;
+		}
+
+		h2 {
+			color: $title2; 
+			text-align:justify; 
+			font-size:24px; 
+		}
+
+		h3 {
+			color: $title2; 
+			text-align:justify; 
+			font-size:20px;
+		}
+
+		a {
+			color: $links;
+			:visited {
+				color:$visited;
+			}
+		}
+
+		p {
+			color: $textcolor;
+			text-align:justify; 
+			font-size:16px; 
+			font-family:$principale
+		}
+
+		figure {
+			padding: 0; 
+			margin:0;
+
+			img {
+				border:0; 
+				max-width:100%; 
+			}
+
+			figcaption {
+				font-family:$principale; 
+				text-align:center; 
+				font-size:14px; 
+				font-style:italic;
+			}
+		}
+
+}
+
+		
+@media all and (max-width: 900px)
+{
+
+	article {  
+			width:100%; 
+			padding: 15px;
+	}
+
+	img {
+		max-width: 90vw;
+	}
+		
+}
+
+
+

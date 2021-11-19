@@ -16,24 +16,41 @@ class AppFixtures extends Fixture
 {
     public function load(ObjectManager $manager)
     {
-        $nb_fichiers = 0;
-        if ($dossier = opendir("C:\laragon\www\Imageur\public\uploads\petites_images")) {
-            while (false !== ($fichier = readdir($dossier))) {
-                if ('.' !== $fichier && '..' !== $fichier && 'index.php' !== $fichier) {
-                    ++$nb_fichiers;
+        $adress = new Adress();
+        $adress->setNom('vignette');
+        $manager->persist($adress);
+      
+        $adress = new Adress();
+        $adress->setNom('grandes_images');
+        $manager->persist($adress);
+      
+        $adress = new Adress();
+        $adress->setNom('moyennes_images');
+        $manager->persist($adress);
 
-                    $image = new Image();
-                    $image->setNom($fichier);
-                    $image->setAlt('à compléter!');
-                    $image->setLegend('');
-                    $image->setPour('carrousel');
-                    $image->setVignette(true);
-                    $manager->persist($image);
-                }
-            }
-            $manager->flush();
-        } else {
-            dd('pas bon le chemin');
-        }
+        $adress = new Adress();
+        $adress->setNom('fichiers');
+        $manager->persist($adress);
+
+        $adress = new Adress();
+        $adress->setNom('includes');
+        $manager->persist($adress);
+
+        $adress = new Adress();
+        $adress->setNom('home');
+        $manager->persist($adress);
+
+        $adress = new Adress();
+        $adress->setNom('css');
+        $manager->persist($adress);
+
+        $adress = new Adress();
+        $adress->setNom('js');
+        $manager->persist($adress);
+
+        $manager->flush();
+
+       
+   
     }
 }

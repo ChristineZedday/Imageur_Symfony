@@ -5,13 +5,13 @@
         {% for image in slider.images %}
          
             <figure>
-                <img src="/uploads/petites_images/{{image.nom}}" alt="{{image.alt}}" width="150">
+                <img src="{{ 'http://chevaux2021.test/images/petites_images/'~image.nom}}" alt="{{image.alt}}" width="150">
                 <figcaption>{{ image.legend }}</figcaption>
                  <input type="checkbox" value="{{image.id}}" name="images[]"/>
             </figure>
          
         {% endfor %}
            </div>
-           <button class="btn" type="submit">enlever les images cochées du carrousel</button>
+           <button class="btn" type="submit">Enlever les images cochées du carrousel</button>
   
 </form>

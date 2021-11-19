@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Aside{% endblock %}
+
+{% block content %}
+    <h1>Créer un nouvel à-côté</h1>
+<p>Le contenu doit être en langage HTML.</p>
+    {{ include('aside/_form.html.twig') }}
+
+   <p> <a href="{{ path('aside_index') }}">Retour à la liste</a></p>
+   
+{% endblock %}

@@ -1,22 +1,44 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}Imageur{% endblock %}
 
 {% block body %}
 <style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+    .example-wrapper {  display:flex; flex-direction: row; justify-content: space-around;}
+    h1 {text-align: center;}
+  
 </style>
 
-<div class="example-wrapper">
+<div>
    
-    <h1>Imageur, mon petit gestionnaire d'images</h1>
-     <p>  <a href="{{ path('article_index') }}">Mes articles</a></p>
-      <p>  <a href="{{ path('section_index') }}">Mes sections</a></p>
-<p>  <a href="{{ path('image_index') }}">Mes images</a></p>
- <p>  <a href="{{ path('slider_index') }}">Mes carrousels</a></p>
+    <h1>Imageur, mon mini CMS pour site perso</h1>
+    <div class="example-wrapper">
+    <div>
+    <h2>Eléments communs</h2>
+     <p>  <a href="{{ path('adress_index') }}">Configurer mes adresses </a></p>
+     <p>  <a href="{{ path('rubrique_index') }}">Gérer mes rubriques</a></p>
+      <p>  <a href="{{ path('aside_index') }}">Gérer mes à-côté</a></p>
+        <p>  <a href="{{ path('foot_index') }}">Gérer mes pieds-de-pages</a></p>
+       <p>  <a href="{{ path('home_page_index') }}">Choisir et gérer ma page d'accueil</a></p>
+
+       <br/><p> <a href="{{ path('site') }}">Générer tous les articles en base!</a></p>
+  
+ <p>  <a href="{{ path('javascript_index') }}">Gérer mes fichiers javascript</a></p>
+ <p>  <a href="{{ path('css_index') }}">Gérer mes fichiers css</a></p></div><div>
+<h2>Articles et leurs composants</h2>
 
 
+  <p>  <a href="{{ path('article_index') }}">Gérer mes articles</a></p>
+      <p>  <a href="{{ path('section_index') }}">Gérer mes sections</a></p>
+<p>  <a href="{{ path('image_index') }}">Gérer mes images</a></p>
+ <p>  <a href="{{ path('slider_index') }}">Gérer mes carrousels</a></p></div><div>
+
+<h2>Le résultat</h2>
+
+  <p>  <a href="{{ path('generated_index') }}">Voir les pages générées</a></p>
+
+</div>
     
+</div>
 </div>
 {% endblock %}

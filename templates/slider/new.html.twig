@@ -2,11 +2,14 @@
 
 {% block title %}Nouveau Carrousel{% endblock %}
 
-{% block body %}
+{% block content %}
     <h1>Créer un nouveau carrousel</h1>
 
     {{ include('slider/_form.html.twig') }}
     
 
-    <a href="{{ path('slider_index') }}">retour à la liste</a>
+  <p>  <a href="{{ path('slider_index') }}">Retour à la liste</a></p>
+  
+  
+   
 {% endblock %}

@@ -2,7 +2,7 @@
 
 {% block title %}Image{% endblock %}
 
-{% block body %}
+{% block content %}
     <h1>Image</h1>
 
     <table class="table">
@@ -25,27 +25,38 @@
             </tr>
             <tr>
             <th>Vignette</th>
-            </tr>
+           
               <td>{% if image.vignette %} oui {% else %} non {% endif %}</td>
+              </tr>
             <tr>
                 <th>Usage</th>
                 <td>{{ image.pour }}</td>
             </tr>
+            {% if image.section %}
+            <tr>
+                <th>Section</th>
+                <td>{{ image.section.titre }}</td>
+            </tr>
+            {% endif %}
              <tr>
                 <th>Rang</th>
                 <td>{{ image.rang }}</td>
             </tr>
         </tbody>
     </table>
-      {%  if image.pour == 'carrousel' %}
-        <img src="{{ asset('/uploads/petites_images/'~image.nom) }}"  width="150">
+ <p>     {%  if image.pour == 'carrousel' %}
+        {% if image.vignette == true %}
+        <img src="{{ petites_images~image.nom}}"  width="150">
+        {% endif %}
+         <img src="{{ grandes_images~image.nom}}"  width="400">
       {% else %}
-      <img src="{{ asset('/uploads/'~image.nom) }}"  width="300">
-      {% endif %}
+      <img src="{{ moyennes_images~image.nom }}"  width="300">
+      {% endif %}</p>
 
-    <a href="{{ path('image_index') }}">back to list</a>
+ <p>   <a href="{{ path('image_index') }}">Retour à la liste</a></p>
 
-    <a href="{{ path('image_edit', {'id': image.id}) }}">edit</a>
+  <p>  <a href="{{ path('image_edit', {'id': image.id}) }}">Modifier</a></p>
 
     {{ include('image/_delete_form.html.twig') }}
+  
 {% endblock %}

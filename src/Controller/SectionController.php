@@ -1,11 +1,20 @@
 <?php
 
+/*
+ * Imageur_Symfony
+ * Symfony 5
+ * Christine Zedday
+ */
+
 namespace App\Controller;
 
+use App\Entity\Article;
 use App\Entity\Section;
 use App\Form\SectionType;
-use App\Repository\SectionRepository;
 use App\Repository\ArticleRepository;
+use App\Repository\ImageRepository;
+use App\Repository\SectionRepository;
+use App\Service\Generator;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -29,12 +38,12 @@ class SectionController extends AbstractController
     /**
      * @Route("/new", name="section_new", methods={"GET","POST"})
      */
-    public function new(Request $request, ArticleRepository $articleRepository): Response
+    public function new(Request $request, ImageRepository $imageRepository): Response
     {
         $section = new Section();
-        $articles = $articleRepository->findAll();
-    
-        $form = $this->createForm(SectionType::class, $section, ['articles' => $articles,]);
+        $images = $imageRepository->findIllustrations();
+
+        $form = $this->createForm(SectionType::class, $section, ['images' => $images]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -52,6 +61,34 @@ class SectionController extends AbstractController
     }
 
     /**
+     * @Route("/article/{id}/new", name="new_section_article", methods={"GET","POST"})
+     */
+    public function newSectionArticle(Request $request, ArticleRepository $articleRepository, ImageRepository $imageRepository, Article $article): Response
+    {
+        $section = new Section();
+        $images = $imageRepository->findIllustrations();
+
+        $section->setArticle($article);
+
+        $form = $this->createForm(SectionType::class, $section, ['images' => $images]);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($section);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('article_show', ['id' => $article->getId()]);
+        }
+
+        return $this->render('section/new.html.twig', [
+            'section' => $section,
+            'form' => $form->createView(),
+            'article' => $article,
+        ]);
+    }
+
+    /**
      * @Route("/{id}", name="section_show", methods={"GET"})
      */
     public function show(Section $section): Response
@@ -64,16 +101,16 @@ class SectionController extends AbstractController
     /**
      * @Route("/{id}/edit", name="section_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, Section $section, ArticleRepository $articleRepository): Response
+    public function edit(Request $request, Section $section, ImageRepository $imageRepository): Response
     {
-        $articles = $articleRepository->findAll();
-        $form = $this->createForm(SectionType::class, $section,  ['articles' => $articles,]);
+        $images = $imageRepository->findIllustrations();
+        $form = $this->createForm(SectionType::class, $section, ['images' => $images]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('section_index');
+            return $this->redirectToRoute('section_show',  array('id' => $section->getId()));
         }
 
         return $this->render('section/edit.html.twig', [
@@ -87,23 +124,34 @@ class SectionController extends AbstractController
      */
     public function delete(Request $request, Section $section): Response
     {
+        if (! empty($section->getImage())) {
+            $section->setImage(null);
+        }
+
+        if (! empty($section->getSlider())) {
+            $section->setSlider(null);
+        }
+        
         if ($this->isCsrfTokenValid('delete'.$section->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($section);
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('section_index');
+        return $this->redirectToRoute('article_show',  array('id' => $section->getArticle()->getId()));
     }
 
-      /**
+    /**
      * @Route("section/genere/{id}", name="section_genere", methods={"GET"})
      */
-    public function sectionGenere(Section $section)
+    public function sectionGenere(Generator $generator, Section $section)
     {
-        $dir = $this->getParameter('generated_directory');
-        $section->genereSection($dir);
+        // $dir = $this->getParameter('generated_includes');
+        // $imgs = $this->getParameter('relatif_includes_petites_images_url').'/';
+        // $image = $this->getParameter('relatif_files_moyennes_images_url').'/';
+        // $section->genereSection($dir, $imgs, $image);
+        $generator->genereFile($section);
 
-        return $this->redirectToRoute('section_index');
+        return $this->redirectToRoute('article_show',  array('id' => $section->getArticle()->getId()));
     }
 }

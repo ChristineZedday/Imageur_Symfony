@@ -78,7 +78,8 @@
 			function popupContent(ref, box, texte) {
 			    
 			          var img = document.createElement('img');
-			            img.src = "grandes_images/"+ref;
+					  var source = document.getElementById('param').value;
+			            img.src = source+ref;
 						img.alt = "photo " +ref;
 						img.maxWidth = "100%";
 						img.marginTop = 0;

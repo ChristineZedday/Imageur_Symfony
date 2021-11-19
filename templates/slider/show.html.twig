@@ -2,7 +2,8 @@
 
 {% block title %}Slider{% endblock %}
 
-{% block body %}
+{% block content %}
+
     <h1>Carrousel</h1>
 
     <table class="table">
@@ -29,19 +30,25 @@
     {% for image in slider.images %}
    
         <figure class="slide">
-            <img class="clickable" src="/uploads/petites_images/{{image.nom}}" onclick="displaySlides(src);" alt="{{image.alt}}" />
+            <img class="clickable" src="{{ petites_images~image.nom}}" onclick="displaySlides(src);" alt="{{image.alt}}" />
             <figcaption hidden>
             {{image.legend}}
+           
             </figcaption>
+             {{image.rang}}
+             <a href="{{ path('image_edit', {'id': image.id}) }}">Modifier l'image</a>
        </figure>
     
 
     {% endfor %}
+     <input type="hidden" id="param" value="{{ grandes_images }}"/>
     </div>
-    <a href="{{ path('slider_index') }}">retourner à la liste</a>
+<p>    <a href="{{ path('slider_index') }}">Retourner à la liste</a></p>
 
-    <a href="{{ path('slider_edit', {'id': slider.id}) }}">éditer</a>
-      <a href="{{ path('slider_genere', {'id': slider.id}) }}">générer le carrousel PHP</a>
+ <p>   <a href="{{ path('slider_edit', {'id': slider.id}) }}">Modifier</a></p>
+ <p>     <a href="{{ path('slider_genere', {'id': slider.id}) }}">Générer le carrousel PHP</a></p>
+ <p>Important: s'il s'agit d'un nouveau carrousel, il faut regénérer la section (ou les sections) pour qu'elle l'inclue, pour une modification regénérer le carrousel suffit.</p>
 
     {{ include('slider/_delete_form.html.twig') }}
+   
 {% endblock %}

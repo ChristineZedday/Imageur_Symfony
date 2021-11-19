@@ -2,39 +2,47 @@
 
 {% block title %}Article index{% endblock %}
 
-{% block body %}
-{{ parent() }}
+{% block content %}
+
     <h1>Article index</h1>
+    <p><a href="{{ path('article_new') }}">Ajouter un article</a></p>
 
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
+                <th>Nom</th>
                 <th>Titre</th>
                 <th>Auteur</th>
-                <th>Topic</th>
+                <th>Rubrique</th>
+                <th>Description</th>
+                <th>Mots clés</th>
                 <th>actions</th>
             </tr>
         </thead>
         <tbody>
         {% for article in articles %}
             <tr>
-                <td>{{ article.id }}</td>
+                <td>{{ article.nom }}</td>
                 <td>{{ article.titre }}</td>
                 <td>{{ article.auteur }}</td>
-                <td>{{ article.topic }}</td>
+                <td>{% if (article.rubrique) %}<a href="{{ path('rubrique_show', {'id': article.rubrique.id}) }}">{{ article.rubrique.nom }}</a>{% endif %}</td>
+               <td>{% if (article.description) %}{{ article.description }}{% endif %}</td>
+               <td>{% if (article.keywords) %}{{ article.keywords }}{% endif %}</td>
                 <td>
-                    <a href="{{ path('article_show', {'id': article.id}) }}">show</a>
-                    <a href="{{ path('article_edit', {'id': article.id}) }}">edit</a>
+                    <a href="{{ path('article_show', {'id': article.id}) }}"> {{ include('./_showicone.html.twig')}}</a>
+                    <a href="{{ path('article_edit', {'id': article.id}) }}">{{ include('./_editicone.html.twig')}}</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="5">no records found</td>
+                <td colspan="5">Pas d'articles enregistrés</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('article_new') }}">Create new</a>
+    
+
+       {{ include('./_crediticones.html.twig')}}
+     
 {% endblock %}

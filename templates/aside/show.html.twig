@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Aside{% endblock %}
+
+{% block content %}
+    <h1>A-côté</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ aside.id }}</td>
+            </tr>
+            <tr>
+                <th>Titre</th>
+                <td>{{ aside.titre }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ aside.nom }}</td>
+            </tr>
+            <tr>
+                <th>Contenu</th>
+                <td>{{ aside.contenu }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <p><a href="{{ path('aside_index') }}">Retour à la liste</a></p>
+
+    <p><a href="{{ path('aside_edit', {'id': aside.id}) }}">Modifier</a></p>
+
+    <p> <a href="{{ path('aside_genere', {'id': aside.id}) }}">Générer l'à côté</a></p>
+
+    {{ include('aside/_delete_form.html.twig') }}
+   
+{% endblock %}

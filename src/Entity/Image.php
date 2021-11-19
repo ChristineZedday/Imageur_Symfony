@@ -48,15 +48,23 @@ class Image
      */
     private $vignette;
 
-    /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Slider", cascade={"persist"})
-     */
-    private $sliders;
+    // /**
+    //  * @ORM\ManyToMany(targetEntity="App\Entity\Slider", cascade={"persist"})
+    //  *  @ORM\JoinTable(name="slider_image",
+    //  * joinColumns={@ORM\JoinColumn(name="user_id", *referencedColumnName="id", nullable=true)}
+    //  *)
+    //  */
+    // private $sliders;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
      */
     private $rang;
+
+    /**
+     * @ORM\OneToOne(targetEntity=Section::class, inversedBy="image", cascade={"persist"})
+     */
+    private $section;
 
     public function getId(): ?int
     {
@@ -123,13 +131,13 @@ class Image
         return $this;
     }
 
-    /**
-     * @return Collection|Slider[]
-     */
-    public function getSliders(): Collection
-    {
-        return $this->sliders;
-    }
+    // /**
+    //  * @return Collection|Slider[]
+    //  */
+    // public function getSliders(): Collection
+    // {
+    //     return $this->sliders;
+    // }
 
     public function getRang(): ?int
     {
@@ -139,6 +147,18 @@ class Image
     public function setRang(?int $rang): self
     {
         $this->rang = $rang;
+
+        return $this;
+    }
+
+    public function getSection(): ?Section
+    {
+        return $this->section;
+    }
+
+    public function setSection(?Section $section): self
+    {
+        $this->section = $section;
 
         return $this;
     }

@@ -4,13 +4,42 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
-    images_directory: '%kernel.project_dir%/public/uploads'
-    generated_directory: '%kernel.project_dir%/public/generated'
+    generated_directory: 'C:/laragon/www/chevaux2021'
+    images_directory: '%generated_directory%/images'
+    thumbs_directory: '%images_directory%/petites_images'
+    big_images_directory: '%images_directory%/grandes_images'
+    middle_images_directory: '%images_directory%' 
+    generated_assets: '%generated_directory%/ressources'
+    generated_css: '%generated_assets%/css'
+    generated_pages: '%generated_directory%/fichiers'
+    generated_includes: '%generated_directory%/fichiers'
+    author: 'Christine Zedday'
+   
+    contact: 'chrizedday@free.fr'
+    icons_directory: 'C:/laragon/www/imageur_symfony/public/icones/'
+     ##chevaux2021.test correspond à localhost/chevaux2021 (pretty URL Laragon)
+    generated_site_url: 'http://chevaux2021.test'
+    online_site_url: 'http://chrizedday.free.fr'
+    images_url: '%generated_site_url%/images'
+    petites_images_url: '%images_url%/petites_images'
+    files_url: '%generated_site_url%/fichiers'
+    relatif_files_images_url: '../images/'
+    relatif_includes_petites_images_url: '%relatif_files_images_url%petites_images/'
+    relatif_files_grandes_images_url: '%relatif_files_images_url%grandes_images/'
+    relatif_files_moyennes_images_url: '%relatif_files_images_url%'
+    relatif_files_includes_url: './'
+    relatif_home_includes_url: './fichiers'
+
 services:
     # default configuration for services in *this* file
     _defaults:
         autowire: true      # Automatically injects dependencies in your services.
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+        bind:
+             string $includes_dir_from_files: '%relatif_files_includes_url%'
+             string $includes_dir_from_home: '%relatif_home_includes_url%'
+             string $includes_dir: '%generated_includes%'
+            
 
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name
@@ -27,6 +56,16 @@ services:
     App\Controller\:
         resource: '../src/Controller/'
         tags: ['controller.service_arguments']
+       
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+    build\:
+        resource: '../public/build/'
+
+    ####Services generating and including files for generated site
+#    Generator:
+#        class: App\Service\Generator
+
+    
+    

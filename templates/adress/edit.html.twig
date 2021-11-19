@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit address{% endblock %}
+
+{% block content %}
+    <h1>Modifier une adresse</h1>
+
+ <p>   {{ include('adress/_form.html.twig', {'button_label': 'Mettre à jour'}) }} </p>
+
+  <p>  <a href="{{ path('adress_index') }}">Retour à la liste</a></p>
+  <p>  <a href="{{ path('adress_show', {id: adress.id}) }}">Voir</a></p>
+  <p>Ne pas modifier les noms des adresses, ils sont utilisés par le programme! Modifier les adresses pour qu'elle pointent vers les éléments de votre site.</p>
+
+
+   
+{% endblock %}

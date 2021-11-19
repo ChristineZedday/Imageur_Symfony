@@ -1,0 +1,50 @@
+@import 'couleurs';
+@import 'polices';
+
+
+
+aside {
+	
+	background-color: $aside;
+	color: $coloraside;
+	font-family: $principale;
+	display:block;
+	padding: 30px;
+	padding-top: 50px;
+	min-width: 350px;
+	max-width: 500px;
+	
+}
+
+a {
+	text-decoration: none;
+	
+	padding:10px;
+	
+		color: $links;
+		&:visited {
+			color:$visited;
+		
+	}
+}
+
+#me {
+	margin: 50px; 
+}
+h2 {
+	color: $colortitleaside;
+	font-family: fonth2;
+}
+
+
+@media all and (max-width: 900px)
+{
+	aside {
+		width:100%; 
+		padding: 15px;
+	}
+
+}
+
+
+

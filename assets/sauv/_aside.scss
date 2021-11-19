@@ -1,0 +1,42 @@
+@import 'variables';
+
+#aside {
+	flex-grow: 1;
+}
+
+#acote {
+	flex-grow: 1;
+	background-color: $vert;
+	height: 300px;
+}
+
+
+aside {
+	display:block;
+	padding: 30px;
+	padding-top: 50px;
+	
+}
+
+a {
+	text-decoration: none;
+	color: $textcolor;
+	padding:10px;
+}
+
+#me {
+	margin: 50px; 
+}
+
+
+@media all and (max-width: 900px)
+{
+	aside {
+		width:100%; 
+		padding: 15px;
+	}
+
+}
+
+
+

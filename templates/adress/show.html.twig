@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}adresse{% endblock %}
+
+{% block content %}
+    <h1>adresse</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ adress.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ adress.nom }}</td>
+            </tr>
+            <tr>
+                <th>Physique</th>
+                <td>{{ adress.physique }}</td>
+            </tr>
+            <tr>
+                <th>Url</th>
+                <td>{{ adress.url }}</td>
+            </tr>
+            <tr>
+                <th>Relative_accueil</th>
+                <td>{{ adress.relativeAccueil }}</td>
+            </tr>
+            <tr>
+                <th>Relative_fichiers</th>
+                <td>{{ adress.relativeFichiers }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+ <p>   <a href="{{ path('adress_index') }}">Retour à la liste</a></p>
+
+ <p>   <a href="{{ path('adress_edit', {'id': adress.id}) }}">Modifier</a></p>
+
+   
+  
+{% endblock %}

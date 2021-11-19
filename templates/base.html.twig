@@ -4,12 +4,29 @@
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}
-        <link href="{{ asset('css/styles.css') }}" rel="stylesheet" type="text/css"/>
+        {# 'app' must match the first argument to addEntry() in webpack.config.js #}
+            {{ encore_entry_link_tags('app') }}
+
+            <!-- Renders a link tag (if your module requires any CSS)
+                 <link rel="stylesheet" href="/build/app.css"> -->
         {% endblock %}
 
         {% block javascripts %} <script type="text/javascript" src="/js/main.js">  </script>{% endblock %}
     </head>
     <body>
-        {% block body %}<a href="{{ path('home') }}">Accueil</a>{% endblock %}
+        {% block body %}
+        <div id="conteneur">
+          {{ include('./_sommaire.html.twig')}}
+          <div class="element" id="main">
+        <article>
+            {% block content%}
+        
+            {% endblock %}
+             </article>
+             </div>
+                {{ include('./_aside.html.twig')}}
+            </div>
+        {% endblock %}
+       
     </body>
 </html>

@@ -1,10 +1,14 @@
 <?php
 
+/*
+ * Imageur_Symfony
+ * Symfony 5
+ * Christine Zedday
+ */
+
 namespace App\Entity;
 
 use App\Repository\SectionRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -22,7 +26,7 @@ class Section
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $titre;
+    private $titre = 'sans';
 
     /**
      * @ORM\OneToOne(targetEntity=Slider::class, mappedBy="section", cascade={"persist", "remove"})
@@ -31,7 +35,6 @@ class Section
 
     /**
      * @ORM\ManyToOne(targetEntity=Article::class, inversedBy="sections")
-     * @ORM\JoinColumn(nullable=false)
      */
     private $article;
 
@@ -45,11 +48,25 @@ class Section
      */
     private $contenu;
 
-    
-    public function __construct()
-    {
-        $this->articles = new ArrayCollection();
-    }
+    /**
+     * @ORM\OneToOne(targetEntity=Image::class, mappedBy="section", cascade={"persist", "remove"})
+     */
+    private $image;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=HomePage::class, inversedBy="sections")
+     */
+    private $homePage;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $bicolonne;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $colonne2;
 
     public function getId(): ?int
     {
@@ -80,8 +97,6 @@ class Section
         return $this;
     }
 
-  
-
     public function getSlider(): ?Slider
     {
         return $this->slider;
@@ -90,12 +105,12 @@ class Section
     public function setSlider(?Slider $slider): self
     {
         // unset the owning side of the relation if necessary
-        if ($slider === null && $this->slider !== null) {
+        if (null === $slider && null !== $this->slider) {
             $this->slider->setSection(null);
         }
 
         // set the owning side of the relation if necessary
-        if ($slider !== null && $slider->getSection() !== $this) {
+        if (null !== $slider && $slider->getSection() !== $this) {
             $slider->setSection($this);
         }
 
@@ -128,39 +143,88 @@ class Section
         return $this;
     }
 
-    public function getG(): ?Article
-    {
-        return $this->g;
-    }
-
-    public function setG(?Article $g): self
-    {
-        $this->g = $g;
-
-        return $this;
-    }
-
-    public function genereSection($dir)
+    public function genereSection($dir, $imgs, $image)
     {
         $path = $dir.'/section_'.$this->getId().'.php';
         $sectionFile = fopen($path, 'w');
+        fwrite($sectionFile, '<section>');
+        if (null !== $this->getTitre() && 'sans' !== $this->getTitre()) {
+            fwrite($sectionFile, '<h2>'.$this->getTitre().'</h2>');
+        }
 
-        fwrite($sectionFile, '<section><h2>'.$this->getTitre().'</h2>');
-       
-    
         fwrite($sectionFile, $this->getContenu());
-        if (null !== $this->getSlider())
-        {
+
+        if (null !== $this->getSlider()) {
             $nom = $this->getSlider()->getNom();
-            if (file_exists($dir.'/slider_'.$nom.'.php'))
-            {
-                $fichier = 'slider_'.$nom.'.php'; //si structure site distant différents dossiers, ajuster
-                fwrite($sectionFile, '<?php include ('.$fichier.'); ?>');
+            if (!file_exists($dir.'/slider_'.$nom.'.php')) {
+                $this->getSlider()->genereSlider($dir, $imgs);
             }
+            $fichier = $dir.'/slider_'.$nom.'.php'; //si structure site distant différents dossiers, ajuster
+            fwrite($sectionFile, '<?php include (\''.$fichier.'\'); ?>');
+        } elseif (null !== $this->getImage()) {
+            $nom = $this->getImage()->getNom();
+            $alt = $this->getImage()->getAlt();
+            fwrite($sectionFile, '<img src="'.$image.$nom.'" alt="'.$alt.'" />');
         }
         fwrite($sectionFile, '</section>');
         fclose($sectionFile);
     }
 
-   
+    public function getImage(): ?Image
+    {
+        return $this->image;
+    }
+
+    public function setImage(?Image $image): self
+    {
+        // unset the owning side of the relation if necessary
+        if (null === $image && null !== $this->image) {
+            $this->image->setSection(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if (null !== $image && $image->getSection() !== $this) {
+            $image->setSection($this);
+        }
+
+        $this->image = $image;
+
+        return $this;
+    }
+
+    public function getHomePage(): ?HomePage
+    {
+        return $this->homePage;
+    }
+
+    public function setHomePage(?HomePage $homePage): self
+    {
+        $this->homePage = $homePage;
+
+        return $this;
+    }
+
+    public function getBicolonne(): ?bool
+    {
+        return $this->bicolonne;
+    }
+
+    public function setBicolonne(?bool $bicolonne): self
+    {
+        $this->bicolonne = $bicolonne;
+
+        return $this;
+    }
+
+    public function getColonne2(): ?string
+    {
+        return $this->colonne2;
+    }
+
+    public function setColonne2(?string $colonne2): self
+    {
+        $this->colonne2 = $colonne2;
+
+        return $this;
+    }
 }
