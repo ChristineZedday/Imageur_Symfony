@@ -42,26 +42,26 @@ class ImageType extends AbstractType
                         'mapped' => false,
                         'required' => true, ]);
                     $form->add('vignette', FileType::class, [
-                        'label' => 'vignette (facultatif, vous pouvez la télécharger plus tard)',
+                        'label' => 'vignette (facultatif)',
                         'multiple' => false,
                         'mapped' => false,
                         'required' => false, ]);
                 }
             });
-        $builder
-            ->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
-                $image = $event->getData();
-                $form = $event->getForm();
+        // $builder
+        //     ->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
+        //         $image = $event->getData();
+        //         $form = $event->getForm();
               
-                if ($image && false === $image->getVignette() && 'carrousel' === $image->getPour()) {
-                    $form->add('vignette', FileType::class, [
-                        'label' => 'vignette ',
-                        'multiple' => false,
-                        'mapped' => false,
-                        'required' => false,
-                      ]);
-                }
-            });
+        //         if ($image && false === $image->getVignette() && 'carrousel' === $image->getPour()) {
+        //             $form->add('vignette', FileType::class, [
+        //                 'label' => 'vignette ',
+        //                 'multiple' => false,
+        //                 'mapped' => false,
+        //                 'required' => false,
+        //               ]);
+        //         }
+        //     });
       
             $builder->add('nom', TextType::class, ['label' => 'changer le nom?', 'mapped'=>true, 'required'=>false]);
         $builder->add('alt', TextType::class, ['label' => 'texte alternatif', 'attr' => ['size' => '150']]);
@@ -73,7 +73,7 @@ class ImageType extends AbstractType
             'choice_label' => 'titre',
             'multiple' => false,
             'mapped' => true,
-            'required' => false, ]);
+            'required' => true, ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)
