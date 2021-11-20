@@ -27,12 +27,7 @@
                 <th>rubrique</th>
                 <td>{{ image.rubrique.nom }}</td>
             </tr>
-            <tr>
-            <th>Vignette</th>
-           
-              <td>{% if image.vignette %} oui {% else %} non {% endif %}</td>
-              </tr>
-            <tr>
+            
                 <th>Usage</th>
                 <td>{{ image.pour }}</td>
             </tr>
@@ -49,9 +44,9 @@
         </tbody>
     </table>
  <p>     {%  if image.pour == 'carrousel' %}
-        {% if image.vignette == true %}
-        <img src="{{ petites_images~image.nom}}"  width="150">
-        {% endif %}
+       
+        <img src="{{ petites_images~image.nom}}">
+       
          <img src="{{ grandes_images~image.nom}}"  width="400">
       {% else %}
       <img src="{{ moyennes_images~image.nom }}"  width="300">

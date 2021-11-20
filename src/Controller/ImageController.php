@@ -63,14 +63,19 @@ class ImageController extends AbstractController
             // On copie le fichier dans le dossier images du site
 
             $photo->move($dossier, $fichier);
-
+           
             if (null !== $form->get('vignette') && null !== $form->get('vignette')->getData()) {
-                $dossier = $thumbs;
+               
                 $vignette = $form->get('vignette')->getData();
-                $vignette->move($dossier, $fichier);
+                $vignette->move($thumbs, $fichier);
               
                 $image->setVignette(true);
-            }//array_key_exists('vignette', $_POST) &&
+            }
+            else {
+                if ('carrousel' === $form->get('pour')) {
+                   copy($dossier.$fichier, $thumbs.$fichier);
+                }
+            }     
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($image);
@@ -108,14 +113,7 @@ class ImageController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
               
-            if (\array_key_exists('vignette', $_POST)) {
-              
-                $vignette->move(
-                    $thumbs,
-                    $image->getNom()
-                );
-                $image->setVignette(true);
-            }
+          
 
             if ($_POST['image']['nom'] !== $ancien) {
                
@@ -174,8 +172,7 @@ class ImageController extends AbstractController
            }
            else {
             rename($grandes.$ancien,$grandes.$nouveau); 
-            if ($image->getVignette() === true){
-            rename($thumbs.$ancien,$thumbs.$nouveau);   }
+            rename($thumbs.$ancien,$thumbs.$nouveau);   
            }
   
 }

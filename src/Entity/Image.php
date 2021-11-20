@@ -43,10 +43,7 @@ class Image
      */
     private $pour;
 
-    /**
-     * @ORM\Column(type="boolean", nullable=true)
-     */
-    private $vignette;
+  
 
     // /**
     //  * @ORM\ManyToMany(targetEntity="App\Entity\Slider", cascade={"persist"})
@@ -124,17 +121,7 @@ class Image
         return $this;
     }
 
-    public function getVignette(): ?bool
-    {
-        return $this->vignette;
-    }
-
-    public function setVignette(?bool $vignette): self
-    {
-        $this->vignette = $vignette;
-
-        return $this;
-    }
+   
 
     // /**
     //  * @return Collection|Slider[]
