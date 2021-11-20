@@ -69,7 +69,6 @@ class ImageController extends AbstractController
                 $vignette = $form->get('vignette')->getData();
                 $vignette->move($thumbs, $fichier);
               
-                $image->setVignette(true);
             }
             else {
                 if ('carrousel' === $form->get('pour')) {
