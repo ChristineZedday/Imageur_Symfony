@@ -17,7 +17,7 @@
                 <th>Usage</th>
                  <th>Rang</th>
                  <th>Rubrique</th>
-                <th>Vignette</th>
+               
                   <th>Image</th>
                 <th>actions</th>
               
@@ -33,8 +33,8 @@
                 <td>{{ image.pour}}</td>
                  <td>{{ image.rang}}</td>
                      <td>{{ image.rubrique.nom}}</td>
-                 <td>{% if image.vignette %} oui {% else %} non {% endif %}</td>
-                 <td>{% if image.vignette %}<img src="{{ petites_images~image.nom}}" width="60px" height="40px">{% else %} <img src="{{ moyennes_images~image.nom}}" width="60px" height="40px">{% endif %}</td>
+             
+                 <td>{% if image.pour is same as ('carrousel') %}<img src="{{ petites_images~image.nom}}" width="60px" height="40px">{% else %} <img src="{{ moyennes_images~image.nom}}" width="60px" height="40px">{% endif %}</td>
                 <td>
                     <a href="{{ path('image_show', {'id': image.id}) }}">  {{ include('./_showicone.html.twig')}}</a>
                     <a href="{{ path('image_edit', {'id': image.id}) }}">  {{ include('./_editicone.html.twig')}}</a>

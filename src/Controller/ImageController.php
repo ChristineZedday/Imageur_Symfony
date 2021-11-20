@@ -113,14 +113,7 @@ class ImageController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
               
-            if (\array_key_exists('vignette', $_POST)) {
-              
-                $vignette->move(
-                    $thumbs,
-                    $image->getNom()
-                );
-                $image->setVignette(true);
-            }
+          
 
             if ($_POST['image']['nom'] !== $ancien) {
                
@@ -179,8 +172,7 @@ class ImageController extends AbstractController
            }
            else {
             rename($grandes.$ancien,$grandes.$nouveau); 
-            if ($image->getVignette() === true){
-            rename($thumbs.$ancien,$thumbs.$nouveau);   }
+            rename($thumbs.$ancien,$thumbs.$nouveau);   
            }
   
 }
