@@ -108,6 +108,9 @@ class ImageController extends AbstractController
 
         $form = $this->createForm(ImageType::class, $image);
         $ancien = $image->getNom();
+        $extension = explode('.',$ancien);
+        $extension = $extension[1];
+        
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -115,8 +118,9 @@ class ImageController extends AbstractController
           
 
             if ($_POST['image']['nom'] !== $ancien) {
+               $nouveau = $_POST['image']['nom'].'.'.$extension;
                
-              $this->rename($image, $ancien, $_POST['image']['nom'], $adressRepository);
+              $this->rename($image, $ancien, $nouveau,$adressRepository);
                
             }
             $this->getDoctrine()->getManager()->flush();
@@ -173,6 +177,7 @@ class ImageController extends AbstractController
             rename($grandes.$ancien,$grandes.$nouveau); 
             rename($thumbs.$ancien,$thumbs.$nouveau);   
            }
+           $image->setNom($nouveau);
   
 }
 

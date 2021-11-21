@@ -63,7 +63,7 @@ class ImageType extends AbstractType
         //         }
         //     });
       
-            $builder->add('nom', TextType::class, ['label' => 'changer le nom?', 'mapped'=>true, 'required'=>false]);
+            $builder->add('nom', TextType::class, ['label' => 'changer le nom? (sans extension)', 'mapped'=>true, 'required'=>false]);
         $builder->add('alt', TextType::class, ['label' => 'texte alternatif', 'attr' => ['size' => '150']]);
         $builder->add('legend', TextType::class, ['label' => 'légende', 'required' => 'false', 'attr' => ['size' => '150']]);
         $builder->add('rang');
