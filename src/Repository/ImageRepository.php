@@ -65,6 +65,18 @@ class ImageRepository extends ServiceEntityRepository
         return $query->getResult();
     }
 
+    public function findImageByNameAnyExtension(String $name) {
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery(
+                'select i
+                from App\Entity\Image i
+                where i.nom LIKE :name')->setParameter('name',$name.'%');
+  if (!empty($query->getResult())) {
+        return $query->getResult()[0];
+  }
+    }
+
     // /**
     //  * @return Image[] Returns an array of Image objects
     //  */

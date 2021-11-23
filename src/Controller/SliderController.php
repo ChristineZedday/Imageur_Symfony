@@ -14,6 +14,7 @@ use App\Repository\ImageRepository;
 use App\Repository\SectionRepository;
 use App\Repository\SliderRepository;
 use App\Service\Generator;
+
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

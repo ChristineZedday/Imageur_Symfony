@@ -17,6 +17,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+
 /**
  * @Route("/image")
  */
@@ -180,5 +181,45 @@ class ImageController extends AbstractController
            $image->setNom($nouveau);
   
 }
+
+    /**
+     * @Route("/clean/extensions", name="image_clean", methods={"GET"})
+     */
+public function cleanExtBase(ImageRepository $imageRepository) 
+{
+    $images= $imageRepository->FindAll();
+    foreach ($images as $image) {
+    $tableau = explode('.', $image->getNom());
+    $nom = $tableau[0];
+    if (count($tableau)>1)
+    {
+            $ext = $tableau[1];
+            
+            switch($ext) {
+                case 'JPG':
+                case 'JPEG':
+                case 'jpeg':
+                    $image->setNom($nom.'.jpg');
+                    break;
+                case  'PNG':
+                    $image->setNom($nom.'.png');
+                    break;
+                
+                    break;
+                case  'GIF':
+                    $image->setNom($nom.'.gif');
+                
+                    break;
+                default:
+                break;
+            }
+            }	
+            else{
+                $image->setNom($nom.'.jpg');
+            }
+        }
+        $entityManager = $this->getDoctrine()->getManager();$entityManager->flush();
+        return $this->redirectToRoute('image_index');
+} 
 
 }

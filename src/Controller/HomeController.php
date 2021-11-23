@@ -12,6 +12,7 @@ use App\Service\Generator;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Service\ExtensionCleaner;
 
 class HomeController extends AbstractController
 {
@@ -34,4 +35,14 @@ class HomeController extends AbstractController
 
         return $this->redirectToRoute('home');
     }
+
+     /**
+     * @Route("/cleanExtensions", name="clean", methods={"GET"})
+     */
+public function cleanExtensions(ExtensionCleaner $extclean)
+{
+    
+$extclean->cleanAllJPG();
+return $this->redirectToRoute('image_index');
+}
 }

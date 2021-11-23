@@ -9,13 +9,14 @@
 namespace App\Service;
 
 use App\Repository\AdressRepository;
-use App\Entity\Image;
+use App\Repository\ImageRepository;
 
 class ExtensionCleaner
 {
-	public function __construct(AdressRepository $adressRepository) //service appelé ds un service
+	public function __construct(AdressRepository $adressRepository, ImageRepository $imageRepository) //services appelés ds un service
     {
         $this->adressRepository = $adressRepository;
+	
     }
 
 	/**
@@ -23,48 +24,67 @@ class ExtensionCleaner
 	 */
 	public function cleanAllJPG() 
 	{
+		
+		
 		$dir = $this->adressRepository->findOneByName('grandes_images')->getPhysique();
 		
 	    if ($dossier = opendir($dir)) {
-	        while(false !== ($fichier = readdir($dossier)) && is_file($fichier)) {
-				ExtensionCleaner::cleanJPG($fichier);
-			
+	        while(false !== ($fichier = readdir($dossier))) {
+				if ($fichier != '.' && $fichier != '..') {
+				ExtensionCleaner::cleanJPG($dir,$fichier);
+				}
 		    }
 		}
 		$dir = $this->adressRepository->findOneByName('vignette')->getPhysique();
 		
 	    if ($dossier = opendir($dir)) {
-	        while(false !== ($fichier = readdir($dossier))) {
-				ExtensionCleaner::cleanJPG($fichier);
+	        while(false !== ($fichier = readdir($dossier)))  { 
+				if ($fichier != '.' && $fichier != '..'){
+				ExtensionCleaner::cleanJPG($dir, $fichier);
+				}
 			}
 		}
 		$dir = $this->adressRepository->findOneByName('moyennes_images')->getPhysique();
 		
 	    if ($dossier = opendir($dir)) {
-	        while(false !== ($fichier = readdir($dossier))) {
-				ExtensionCleaner::cleanJPG($fichier);
+			while(false !== ($fichier = readdir($dossier)))  { 
+				if ($fichier != '.' && $fichier != '..'){
+				
+				ExtensionCleaner::cleanJPG($dir, $fichier);
+				}
 			}
 
 		}
 	}
-	static function cleanJPG($fichier) 
+	private function cleanJPG($dossier, $fichier) 
 	{
-		$nom = explode('.', $fichier)[0];
-				$ext = $fichier->gessExtension();
+		$old=  $fichier;
+		$tableau = explode('.', $fichier);
+		$nom = $tableau[0];
+		if (count($tableau)>1)
+		{
+				$ext = $tableau[1];
+				
 				switch($ext) {
 					case 'JPG':
 					case 'JPEG':
 					case 'jpeg':
-						rename($fichier, $nom.'.jpg');
+						
+						rename($dossier.$fichier, $dossier.$nom.'.jpg');
+						
 						break;
 					case  'PNG':
+						
 						rename($fichier, $nom.'.png');
 						break;
 					case  'GIF':
+						
 						rename($fichier, $nom.'.gif');
 						break;
 					default:
 					break;
+				}
 				}	
 	}
+	
 }
