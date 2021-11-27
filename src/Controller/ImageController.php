@@ -126,9 +126,15 @@ class ImageController extends AbstractController
           
 
             if ($_POST['image']['nom'] !== $ancien) {
-               $nouveau = $_POST['image']['nom'].'.'.$extension;
-               
-              $this->rename($image, $ancien, $nouveau,$adressRepository);
+            
+               if (count(explode('.', $_POST['image']['nom'])) > 1) {
+                  
+                $nouveau = $_POST['image']['nom'];
+               }//si j'ai laissé l'extension en renommant...
+               else {
+                $nouveau = $_POST['image']['nom'].'.'.$extension;
+               }
+               $this->rename($image, $ancien, $nouveau,$adressRepository);
                
             }
             $this->getDoctrine()->getManager()->flush();
