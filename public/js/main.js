@@ -17,7 +17,7 @@
 				var ref= im.getAttribute("src"); //enlever le chemin là aussi
 				ref = ref.split("/");
 				ref = ref[ref.length-1];
-				if ( slides[i].lastElementChild.tagName == "FIGCAPTION")
+				if ( slides[i].lastElementChild.tagName == "figcaption")
 				{texte = slides[i].lastElementChild.textContent;
 					
 				}
@@ -86,7 +86,7 @@
 						box.appendChild(img);
 						if (texte.length)
 							{
-								var fig = document.createElement('fig');
+								var fig = document.createElement('p');
 							var txt = document.createTextNode(texte);
 							fig.appendChild(txt);
 							box.appendChild(fig);
@@ -112,7 +112,7 @@ var overlay = document.querySelector('.overlay');
 if (overlay) {overlay.remove();}
     
 	var src = slides[index].firstElementChild.getAttribute("src");
-	if ( slides[index].lastElementChild.tagName == "FIGCAPTION")
+	if ( slides[index].lastElementChild.tagName == "figcaption")
 	{texte = slides[index].lastElementChild.textContent;
 		
 	}

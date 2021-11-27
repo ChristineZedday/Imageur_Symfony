@@ -16,6 +16,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Service\ExtensionCleaner;
 
 
 /**
@@ -36,7 +37,7 @@ class ImageController extends AbstractController
     /**
      * @Route("/new", name="image_new", methods={"GET","POST"})
      */
-    public function new(Request $request, AdressRepository $adressRepository): Response
+    public function new(Request $request, AdressRepository $adressRepository, ExtensionCleaner $extensionCleaner): Response
     {
         $thumbs = $adressRepository->findOnebyName('vignette')->getPhysique();
         $grandes = $adressRepository->findOneByName('grandes_images')->getPhysique();
@@ -50,16 +51,19 @@ class ImageController extends AbstractController
             $nom = $form->get('nom')->getData();
             if (null !== $nom) {
                 $fichier = $nom.'.'.$photo->guessExtension();
+
             } else {
                 $fichier = $form->get('image')->getData()->getClientOriginalName();
             }
-            $image->setNom($fichier);
+          
 
             if ('carrousel' === $form->get('pour')->getData()) {
                 $dossier = $grandes;
             } else {
                 $dossier = $autres;
             }
+
+           
 
             // On copie le fichier dans le dossier images du site
 
@@ -75,7 +79,10 @@ class ImageController extends AbstractController
                 if ('carrousel' === $form->get('pour')) {
                    copy($dossier.$fichier, $thumbs.$fichier);
                 }
-            }     
+            }    
+            
+            $nom = $extensionCleaner->cleanJPG($dossier,$fichier);
+            $image->setNom($nom);
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($image);

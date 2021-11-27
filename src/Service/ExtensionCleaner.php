@@ -56,7 +56,7 @@ class ExtensionCleaner
 
 		}
 	}
-	private function cleanJPG($dossier, $fichier) 
+	public function cleanJPG($dossier, $fichier) : String
 	{
 		$old=  $fichier;
 		$tableau = explode('.', $fichier);
@@ -71,15 +71,18 @@ class ExtensionCleaner
 					case 'jpeg':
 						
 						rename($dossier.$fichier, $dossier.$nom.'.jpg');
+						return $nom.'.jpg';
 						
 						break;
 					case  'PNG':
 						
 						rename($fichier, $nom.'.png');
+						return $nom.'.png';
 						break;
 					case  'GIF':
 						
 						rename($fichier, $nom.'.gif');
+						return $nom.'.gif';
 						break;
 					default:
 					break;

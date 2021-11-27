@@ -17,7 +17,7 @@
 				var ref= im.getAttribute("src"); //enlever le chemin là aussi
 				ref = ref.split("/");
 				ref = ref[ref.length-1];
-				if ( slides[i].lastElementChild.tagName == "FIGCAPTION")
+				if ( slides[i].lastElementChild.tagName == "figcaption")
 				{texte = slides[i].lastElementChild.textContent;
 					
 				}
