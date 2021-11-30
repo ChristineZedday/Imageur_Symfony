@@ -65,6 +65,7 @@ class ExtensionCleaner
 		{
 				$ext = $tableau[1];
 				
+				
 				switch($ext) {
 					case 'JPG':
 					case 'JPEG':
@@ -85,7 +86,7 @@ class ExtensionCleaner
 						return $nom.'.gif';
 						break;
 					default:
-					return $nom.'.jpg';
+					return $fichier; //si l'extension est bonne, on ne chanage rien!
 					break;
 				}
 				}	
