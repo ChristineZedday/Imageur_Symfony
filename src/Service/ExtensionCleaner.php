@@ -58,7 +58,7 @@ class ExtensionCleaner
 	}
 	public function cleanJPG($dossier, $fichier) : String
 	{
-		$old=  $fichier;
+		
 		$tableau = explode('.', $fichier);
 		$nom = $tableau[0];
 		if (count($tableau)>1)
@@ -76,18 +76,22 @@ class ExtensionCleaner
 						break;
 					case  'PNG':
 						
-						rename($fichier, $nom.'.png');
+						rename($dossier.$fichier, $dossier.$nom.'.png');
 						return $nom.'.png';
 						break;
 					case  'GIF':
 						
-						rename($fichier, $nom.'.gif');
+						rename($dossier.$fichier, $dossier.$nom.'.gif');
 						return $nom.'.gif';
 						break;
 					default:
+					return $nom.'.jpg';
 					break;
 				}
 				}	
+				else {
+					return $nom.'.jpg'; //si l'extension est perdue, on met jpg
+				}
 	}
 	
 }

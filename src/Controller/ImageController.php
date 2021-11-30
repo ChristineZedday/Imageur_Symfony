@@ -49,8 +49,14 @@ class ImageController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $photo = $form->get('image')->getData();
             $nom = $form->get('nom')->getData();
+            $ext = $photo->guessExtension();
             if (null !== $nom) {
-                $fichier = $nom.'.'.$photo->guessExtension();
+                if (count(explode('.',$nom))=== 1) {
+                $fichier = $nom.'.'.$ext; //pas d'extension donnée
+                }
+                else {
+                    $fichier = $nom;    //y avait une ext
+                }
 
             } else {
                 $fichier = $form->get('image')->getData()->getClientOriginalName();
