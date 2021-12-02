@@ -5,6 +5,7 @@
      
 		
         function displaySlides(src) {  
+			
 			var i;  
 			var texte ="";
 			
@@ -17,13 +18,13 @@
 				var ref= im.getAttribute("src"); //enlever le chemin là aussi
 				ref = ref.split("/");
 				ref = ref[ref.length-1];
-				if ( slides[i].lastElementChild.tagName == "figcaption")
-				{texte = slides[i].lastElementChild.textContent;
+				if ( slides[i].lastElementChild.id == "figcaption")
+				{texte = slides[i].lastElementChild.value;
 					
 				}
 				
 				
-		  if (nom == ref)
+		  		if (nom == ref)
 				{
 					//afficher grandes-images/ref dans une popup avec flèches, overlay...
 					slide_index = i;
