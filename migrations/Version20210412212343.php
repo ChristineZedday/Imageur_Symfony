@@ -26,12 +26,12 @@ final class Version20210412212343 extends AbstractMigration
     public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('ALTER TABLE article ADD lien VARCHAR(255) DEFAULT NULL');
+        $this->addSql('ALTER TABLE article ADD lien VARCHAR(255) DEFAULT NULL, ADD rang INT DEFAULT NULL');
     }
 
     public function down(Schema $schema): void
     {
         // this down() migration is auto-generated, please modify it to your needs
-        $this->addSql('ALTER TABLE article DROP lien');
+        $this->addSql('ALTER TABLE article DROP lien, DROP rang');
     }
 }

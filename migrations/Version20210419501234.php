@@ -16,7 +16,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20210409095848 extends AbstractMigration
+final class Version202104119501234 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -26,12 +26,13 @@ final class Version20210409095848 extends AbstractMigration
     public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('ALTER TABLE slider ADD is_generated TINYINT(1) DEFAULT NULL');
-    }
+        $this->addSql('CREATE TABLE article_javascript (id INT AUTO_INCREMENT NOT NULL, nom VARCHAR(255) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+    }  
 
     public function down(Schema $schema): void
     {
         // this down() migration is auto-generated, please modify it to your needs
-        $this->addSql('ALTER TABLE slider DROP is_generated');
+        $this->addSql('DROP TABLE article_javascript');
+       
     }
 }
