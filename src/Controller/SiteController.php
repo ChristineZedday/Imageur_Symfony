@@ -32,14 +32,14 @@ class SiteController extends AbstractController
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $site = new Site();
+        
         $form = $this->createForm(SiteType::class, $site);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($site);
             $entityManager->flush();
-
-            return $this->redirectToRoute('site_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('site_index', []);
         }
 
         return $this->render('site/new.html.twig', [
