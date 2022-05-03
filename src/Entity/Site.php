@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\SiteRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -31,6 +33,16 @@ class Site
      * @ORM\Column(type="string", length=255)
      */
     private $weburl;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Adress::class, mappedBy="site")
+     */
+    private $adresses;
+
+    public function __construct()
+    {
+        $this->adresses = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -69,6 +81,36 @@ class Site
     public function setWeburl(string $weburl): self
     {
         $this->weburl = $weburl;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Adress[]
+     */
+    public function getAdresses(): Collection
+    {
+        return $this->adresses;
+    }
+
+    public function addAdress(Adress $adress): self
+    {
+        if (!$this->adresses->contains($adress)) {
+            $this->adresses[] = $adress;
+            $adress->setSite($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAdress(Adress $adress): self
+    {
+        if ($this->adresses->removeElement($adress)) {
+            // set the owning side to null (unless already changed)
+            if ($adress->getSite() === $this) {
+                $adress->setSite(null);
+            }
+        }
 
         return $this;
     }

@@ -48,10 +48,12 @@ class Adress
      */
     private $relative_fichiers;
 
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
+    /**
+     * @ORM\ManyToOne(targetEntity=Site::class, inversedBy="adresses")
+     */
+    private $site;
+
+   
 
     public function getNom(): ?string
     {
@@ -109,6 +111,18 @@ class Adress
     public function setRelativeFichiers(string $relative_fichiers): self
     {
         $this->relative_fichiers = $relative_fichiers;
+
+        return $this;
+    }
+
+    public function getSite(): ?string
+    {
+        return $this->site;
+    }
+
+    public function setSite(string $site): self
+    {
+        $this->site = $site;
 
         return $this;
     }
