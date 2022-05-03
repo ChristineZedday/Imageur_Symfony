@@ -119,12 +119,12 @@ class Adress
         return $this;
     }
 
-    public function getSite(): ?string
+    public function getSite(): ?site
     {
         return $this->site;
     }
 
-    public function setSite(string $site): self
+    public function setSite(?Site $site): self
     {
         $this->site = $site;
 
