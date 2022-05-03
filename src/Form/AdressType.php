@@ -12,6 +12,7 @@ use App\Entity\Adress;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 class AdressType extends AbstractType
 {
@@ -23,6 +24,12 @@ class AdressType extends AbstractType
             ->add('url')
             ->add('relative_accueil')
             ->add('relative_fichiers')
+            ->add('site', EntityType::class, [
+                'class' => Site::class,
+                'choice_label' => 'nom',
+                'multiple' => false,
+                'mapped' => true,
+                'required' => true, ])
         ;
     }
 

@@ -53,7 +53,11 @@ class Adress
      */
     private $site;
 
-   
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
 
     public function getNom(): ?string
     {

@@ -14,7 +14,7 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
+               <th>Site</th>
                 <th>Nom</th>
                 <th>Physique</th>
                 <th>Url</th>
@@ -26,7 +26,9 @@
         <tbody>
         {% for adress in adresses %}
             <tr>
-                <td>{{ adress.id }}</td>
+                <td>{% if adress.site|default %}
+{{adress.site.nom}}
+{% endif %}</td>
                 <td>{{ adress.nom }}</td>
                 <td>{{ adress.physique }}</td>
                 <td>{{ adress.url }}</td>
