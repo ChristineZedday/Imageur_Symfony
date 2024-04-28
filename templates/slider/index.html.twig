@@ -12,6 +12,7 @@
                 <th>Nom</th>
                  <th>Article</th>
                 <th>Section</th>
+                <th>Vignettes verticales</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -21,7 +22,8 @@
                 
                 <td>{{ slider.nom }}</td>
                  <td>{% if slider.section %}{{ slider.section.article.titre }}{% endif %}</td>
-                <td>{% if slider.section %}{{ slider.section.titre }}{% endif %}</td>
+                 <td>{% if slider.section %}{{ slider.section.titre }}{% endif %}</td>
+                <td>{% if slider.vignetteverticale %}oui{% else %} non{% endif %}</td>
                <td>
                     <a href="{{ path('slider_show', {'id': slider.id}) }}">{{ include('./_showicone.html.twig')}}</a>
                     <a href="{{ path('slider_edit', {'id': slider.id}) }}">{{ include('./_editicone.html.twig')}}</a>

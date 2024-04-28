@@ -46,6 +46,11 @@ class Slider
      */
     private $rubriquesPiocheImages;
 
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $vignetteverticale;
+
     public function __construct()
     {
         $this->images = new ArrayCollection();
@@ -149,6 +154,18 @@ class Slider
     public function removeRubriquesPiocheImage(Rubrique $rubriquesPiocheImage): self
     {
         $this->rubriquesPiocheImages->removeElement($rubriquesPiocheImage);
+
+        return $this;
+    }
+
+    public function getVignetteverticale(): ?bool
+    {
+        return $this->vignetteverticale;
+    }
+
+    public function setVignetteverticale(?bool $vignetteverticale): self
+    {
+        $this->vignetteverticale = $vignetteverticale;
 
         return $this;
     }

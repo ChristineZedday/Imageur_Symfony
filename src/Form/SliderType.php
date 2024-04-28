@@ -29,6 +29,7 @@ class SliderType extends AbstractType
                 'multiple' => false,
                 'mapped' => true,
                 'required' => true, ])
+            ->add('vignetteverticale')
             ->add('rubriquesPiocheImages', EntityType::class, [
                     'class' => Rubrique::class,
                     'choice_label' => 'nom',
