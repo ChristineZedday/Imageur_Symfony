@@ -196,15 +196,10 @@ class Rubrique
         return $this;
     }
 
-    public function getSiteId(): ?Site
-    {
-        return $this->site_id;
-    }
+     /**
+     * @ORM\ManyToOne(targetEntity=Site::class, inversedBy="rubriques")
+     */
+    private $site;
 
-    public function setSiteId(?Site $site_id): self
-    {
-        $this->site_id = $site_id;
-
-        return $this;
-    }
+   
 }

@@ -21,6 +21,12 @@ class RubriqueType extends AbstractType
             ->add('nom')
             ->add('titre')
             ->add('rang')
+             ->add('Site', EntityType::class, [
+                'class' => Site::class,
+                'choice_label' => 'nom',
+                'multiple' => false,
+                'mapped' => true,
+                'required' => true, ])
         ;
     }
 
