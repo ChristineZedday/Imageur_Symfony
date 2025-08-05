@@ -198,9 +198,9 @@ class Rubrique
      */
     private $site;
 
- public function getSite(): ?Site
+    public function getSite(): ?Site
     {
-        return $this->getSite;
+        return $this->site;
     }
 
     public function setSite(?Site $site): self
