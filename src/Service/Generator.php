@@ -44,10 +44,10 @@ class Generator
         $this->siteRepository = $siteRepository;
     }
 
-    public function genereNav($type)
+    public function genereNav($type, $site)
     {
         if ('HomePage' === $type) {
-            $site = $this->site;
+           
             $path = $this->adressRepository->findOnebyName('includes', $site)->getPhysique().'sommaireaccueil.php';
         } else {
             $path = $this->adressRepository->findOnebyName('includes', $site)->getPhysique().'sommaire.php';
@@ -119,11 +119,11 @@ class Generator
         fwrite($file, '  </nav></div>');
         fclose($file);
         if ('Article' === $type) {
-            $this->genereNav('HomePage'); //eh oui, faut la mettre à jour!
+            $this->genereNav('HomePage',$site); //eh oui, faut la mettre à jour!
         }
     }
 
-    private function genereSection(Section $section)
+    private function genereSection(Section $section, Site $site)
     {
         $dir = $this->adressRepository->findOneByName('includes',$site)->getPhysique();
         $rel = $this->adressRepository->findOneByName('includes', $site)->getRelativeFichiers();
@@ -151,7 +151,7 @@ class Generator
         if (null !== $section->getSlider()) {
             $nom = $section->getSlider()->getNom();
             if (!file_exists($dir.'slider_'.$nom.'.php')) {
-                $this->genereSlider($section->getSlider());
+                $this->genereSlider($section->getSlider(), $site);
             }
             $fichier = $rel.'slider_'.$nom.'.php';
             fwrite($file, '<?php include (\''.$fichier.'\'); ?>');
@@ -164,7 +164,7 @@ class Generator
         fclose($file);
     }
 
-    private function genereFooter(object $foot)
+    private function genereFooter(object $foot, Site $site)
     {
         $path = $this->adressRepository->findOnebyName('includes',$site)->getPhysique().'foot_'.$foot->getNom().'.php';
 
@@ -188,7 +188,7 @@ class Generator
         fclose($file);
     }
 
-    private function genereAside(object $aside)
+    private function genereAside(object $aside, Site $site)
     {
         $path = $this->adressRepository->findOnebyName('includes',$site)->getPhysique().'aside_'.$aside->getNom().'.php';
         $file = fopen($path, 'w');
@@ -205,7 +205,7 @@ class Generator
         fclose($file);
     }
 
-    private function genereSlider(object $slider)
+    private function genereSlider(object $slider, Site $site)
     {
         $path = $this->adressRepository->findOnebyName('includes',$site)->getPhysique().'slider_'.$slider->getNom().'.php';
         if (null !== $slider->getSection()->getArticle()) {
@@ -238,7 +238,7 @@ class Generator
         fclose($sliderFile);
     }
 
-    private function makePage($filename, object $entity)
+    private function makePage($filename, object $entity, Site $site)
     {
         $type = \get_class($entity);
         $type = get_class_name($type);
@@ -272,7 +272,7 @@ class Generator
 
         fwrite($file, MIDDLE_HTML); //passage head à body
 
-        $this->genereNav($type);
+        $this->genereNav($type, $site);
         if ('HomePage' === $type) {
             $nom = $path.'sommaireaccueil.php';
         } else {
@@ -338,50 +338,82 @@ class Generator
         $type = \get_class($entity);
         $type = get_class_name($type);
 
-        $dirh = $this->adressRepository->findOneByName('home')->getPhysique();
+         switch ($type) {
+            case 'HomePage':
+                $site = $entity->site;
+
+                break;
+
+            case 'Article':
+                    $site = $entity->rubrique->site;
+
+                    break;
+
+            case 'Section':
+                 $site = $entity->article->rubrique->site;
+            break;
+
+            case 'Aside':
+                 $site = $entity->site;
+            break;
+
+            case 'Slider':
+                $site = $entity->section->article->rubrique->site;
+            break;
+
+            case 'CSS':
+                $site = $entity->site;
+            break;
+
+            case 'Foot':
+                 $site = $entity->site;
+            break;
+            }
+
+        $dirh = $this->adressRepository->findOneByName('home',$site)->getPhysique();
         $dir = $this->adressRepository->findOneByName('fichiers',$site)->getPhysique();
         $includes_path = $this->adressRepository->findOneByName('includes',$site)->getPhysique();
 
         switch ($type) {
             case 'HomePage':
                 $filepath = $dirh.'index.php';
-                $this->makePage($filepath, $entity);
+                $this->makePage($filepath, $entity, $site);
 
                 break;
 
             case 'Article':
                     $filepath = $dir.$entity->getNom().'.php';
-                    $this->makePage($filepath, $entity);
+                    $this->makePage($filepath, $entity, $site);
 
                     break;
 
             case 'Section':
-                $this->genereSection($entity);
+                $this->genereSection($entity, $site);
             break;
 
             case 'Aside':
-                $this->genereAside($entity);
+                $this->genereAside($entity, $site);
             break;
 
             case 'Slider':
-                $this->genereSlider($entity);
+                $this->genereSlider($entity, $site);
             break;
 
             case 'CSS':
-                $this->genereCSS($entity);
+                $this->genereCSS($entity, $site);
             break;
 
             case 'Foot':
-                $this->genereFooter($entity);
+                $this->genereFooter($entity, $site);
             break;
             }
     }
 
-    public function genereSite()
+ /* public function genereSite()
     {
         $articles = $this->articleRepository->findAll();
         foreach ($articles as $article) {
             $this->genereFile($article);
         }
-    }
+    }*/
 }
