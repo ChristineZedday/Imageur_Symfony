@@ -200,6 +200,7 @@ class Rubrique
      * @ORM\ManyToOne(targetEntity=Site::class, inversedBy="rubriques")
      */
     private $site;
+    
  public function getSite(): ?Site
     {
         return $this->getSite;
