@@ -215,10 +215,18 @@ class Generator
         fwrite($sliderFile, '<div class="container"> ');
         foreach ($slider->getImages() as $image) {
             fwrite($sliderFile, '<figure class="slide"> ');
-
-            fwrite($sliderFile, ' <img class="clickable" src="'.$src.$image->getNom().'" width=150 height=100 onclick="displaySlides(src) ;" /> ');
+            if (true == $slider->getvignetteverticale()) {
+              
+            fwrite($sliderFile, ' <img class="clickable" src="'.$src.$image->getNom().'" width=100 height=150 onclick="displaySlides(src) ;" /> ');
             fwrite($sliderFile, '<figcaption hidden>'.$image->getLegend().'</figcaption>');
             fwrite($sliderFile, '</figure> ');
+            } 
+            else {
+                fwrite($sliderFile, ' <img class="clickable" src="'.$src.$image->getNom().'" width=150 height=100 onclick="displaySlides(src) ;" /> ');
+                fwrite($sliderFile, '<figcaption hidden>'.$image->getLegend().'</figcaption>');
+                fwrite($sliderFile, '</figure> ');}
+
+            
         }
 
         fwrite($sliderFile, '</div>');
