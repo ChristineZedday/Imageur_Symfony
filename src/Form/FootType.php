@@ -9,6 +9,7 @@
 namespace App\Form;
 
 use App\Entity\Foot;
+use App\Entity\Site;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
