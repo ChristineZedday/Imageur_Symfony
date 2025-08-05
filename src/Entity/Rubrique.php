@@ -56,10 +56,7 @@ class Rubrique
      */
     private $rang;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Site::class, inversedBy="rubriques")
-     */
-    private $site_id;
+   
 
     public function __construct()
     {
@@ -200,7 +197,7 @@ class Rubrique
      * @ORM\ManyToOne(targetEntity=Site::class, inversedBy="rubriques")
      */
     private $site;
-    
+
  public function getSite(): ?Site
     {
         return $this->getSite;
