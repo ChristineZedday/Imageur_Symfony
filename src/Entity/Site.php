@@ -39,9 +39,15 @@ class Site
      */
     private $adresses;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Rubrique::class, mappedBy="site_id")
+     */
+    private $rubriques;
+
     public function __construct()
     {
         $this->adresses = new ArrayCollection();
+        $this->rubriques = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -109,6 +115,36 @@ class Site
             // set the owning side to null (unless already changed)
             if ($adress->getSite() === $this) {
                 $adress->setSite(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Rubrique[]
+     */
+    public function getRubriques(): Collection
+    {
+        return $this->rubriques;
+    }
+
+    public function addRubrique(Rubrique $rubrique): self
+    {
+        if (!$this->rubriques->contains($rubrique)) {
+            $this->rubriques[] = $rubrique;
+            $rubrique->setSiteId($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRubrique(Rubrique $rubrique): self
+    {
+        if ($this->rubriques->removeElement($rubrique)) {
+            // set the owning side to null (unless already changed)
+            if ($rubrique->getSiteId() === $this) {
+                $rubrique->setSiteId(null);
             }
         }
 

@@ -56,6 +56,11 @@ class Rubrique
      */
     private $rang;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Site::class, inversedBy="rubriques")
+     */
+    private $site_id;
+
     public function __construct()
     {
         $this->articles = new ArrayCollection();
@@ -187,6 +192,18 @@ class Rubrique
     public function setRang(?string $rang): self
     {
         $this->rang = $rang;
+
+        return $this;
+    }
+
+    public function getSiteId(): ?Site
+    {
+        return $this->site_id;
+    }
+
+    public function setSiteId(?Site $site_id): self
+    {
+        $this->site_id = $site_id;
 
         return $this;
     }
