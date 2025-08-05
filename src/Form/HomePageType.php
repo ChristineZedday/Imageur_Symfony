@@ -13,6 +13,7 @@ use App\Entity\CSS;
 use App\Entity\Foot;
 use App\Entity\HomePage;
 use App\Entity\Javascript;
+use App\Entity\Site;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -59,6 +60,13 @@ class HomePageType extends AbstractType
                             'multiple' => true,
                             'required' => false,
                             'mapped' => true, ])
+                              ->add('site', EntityType::class, [
+                'class' => Site::class,
+                'choice_label' => 'nom',
+                'multiple' => false,
+                'mapped' => true,
+                'required' => true, ])
+        ;
         ;
     }
 

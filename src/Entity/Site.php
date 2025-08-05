@@ -49,11 +49,35 @@ class Site
      */
     private $homePages;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Aside::class, mappedBy="site")
+     */
+    private $asides;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Foot::class, mappedBy="site")
+     */
+    private $footers;
+
+    /**
+     * @ORM\OneToMany(targetEntity=CSS::class, mappedBy="site")
+     */
+    private $css_files;
+
+    /**
+     * @ORM\OneToMany(targetEntity=JavaScript::class, mappedBy="site")
+     */
+    private $javaScripts;
+
     public function __construct()
     {
         $this->adresses = new ArrayCollection();
         $this->rubriques = new ArrayCollection();
         $this->homePages = new ArrayCollection();
+        $this->asides = new ArrayCollection();
+        $this->footers = new ArrayCollection();
+        $this->css_files = new ArrayCollection();
+        $this->javaScripts = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -181,6 +205,126 @@ class Site
             // set the owning side to null (unless already changed)
             if ($homePage->getSite() === $this) {
                 $homePage->setSite(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Aside[]
+     */
+    public function getAsides(): Collection
+    {
+        return $this->asides;
+    }
+
+    public function addAside(Aside $aside): self
+    {
+        if (!$this->asides->contains($aside)) {
+            $this->asides[] = $aside;
+            $aside->setSite($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAside(Aside $aside): self
+    {
+        if ($this->asides->removeElement($aside)) {
+            // set the owning side to null (unless already changed)
+            if ($aside->getSite() === $this) {
+                $aside->setSite(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Foot[]
+     */
+    public function getFooters(): Collection
+    {
+        return $this->footers;
+    }
+
+    public function addFooter(Foot $footer): self
+    {
+        if (!$this->footers->contains($footer)) {
+            $this->footers[] = $footer;
+            $footer->setSite($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFooter(Foot $footer): self
+    {
+        if ($this->footers->removeElement($footer)) {
+            // set the owning side to null (unless already changed)
+            if ($footer->getSite() === $this) {
+                $footer->setSite(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|CSS[]
+     */
+    public function getCssFiles(): Collection
+    {
+        return $this->css_files;
+    }
+
+    public function addCssFile(CSS $cssFile): self
+    {
+        if (!$this->css_files->contains($cssFile)) {
+            $this->css_files[] = $cssFile;
+            $cssFile->setSite($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCssFile(CSS $cssFile): self
+    {
+        if ($this->css_files->removeElement($cssFile)) {
+            // set the owning side to null (unless already changed)
+            if ($cssFile->getSite() === $this) {
+                $cssFile->setSite(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|JavaScript[]
+     */
+    public function getJavaScripts(): Collection
+    {
+        return $this->javaScripts;
+    }
+
+    public function addJavaScript(JavaScript $javaScript): self
+    {
+        if (!$this->javaScripts->contains($javaScript)) {
+            $this->javaScripts[] = $javaScript;
+            $javaScript->setSite($this);
+        }
+
+        return $this;
+    }
+
+    public function removeJavaScript(JavaScript $javaScript): self
+    {
+        if ($this->javaScripts->removeElement($javaScript)) {
+            // set the owning side to null (unless already changed)
+            if ($javaScript->getSite() === $this) {
+                $javaScript->setSite(null);
             }
         }
 

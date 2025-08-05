@@ -55,6 +55,11 @@ class Foot
      */
     private $type;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Site::class, inversedBy="footers")
+     */
+    private $site;
+
     public function __construct()
     {
         $this->articles = new ArrayCollection();
@@ -170,6 +175,18 @@ class Foot
     public function setType(string $type): self
     {
         $this->type = $type;
+
+        return $this;
+    }
+
+    public function getSite(): ?Site
+    {
+        return $this->site;
+    }
+
+    public function setSite(?Site $site): self
+    {
+        $this->site = $site;
 
         return $this;
     }

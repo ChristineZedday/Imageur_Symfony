@@ -36,7 +36,7 @@ class SiteRepository extends ServiceEntityRepository
     }
     */
 
-    /*
+    
     public function findOneBySomeField($value): ?Site
     {
         return $this->createQueryBuilder('s')
@@ -46,5 +46,5 @@ class SiteRepository extends ServiceEntityRepository
             ->getOneOrNullResult()
         ;
     }
-    */
+    
 }

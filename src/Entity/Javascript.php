@@ -40,6 +40,11 @@ class Javascript
      */
     private $homes;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Site::class, inversedBy="javaScripts")
+     */
+    private $site;
+
     public function __construct()
     {
         $this->articles = new ArrayCollection();
@@ -116,6 +121,18 @@ class Javascript
                 $home->setJavascript(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getSite(): ?Site
+    {
+        return $this->site;
+    }
+
+    public function setSite(?Site $site): self
+    {
+        $this->site = $site;
 
         return $this;
     }

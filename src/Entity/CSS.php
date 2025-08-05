@@ -135,6 +135,11 @@ class CSS
      */
     private $structure;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Site::class, inversedBy="css_files")
+     */
+    private $site;
+
    
 
     public function __construct()
@@ -438,6 +443,18 @@ class CSS
     public function setStructure(?string $structure): self
     {
         $this->structure = $structure;
+
+        return $this;
+    }
+
+    public function getSite(): ?Site
+    {
+        return $this->site;
+    }
+
+    public function setSite(?Site $site): self
+    {
+        $this->site = $site;
 
         return $this;
     }

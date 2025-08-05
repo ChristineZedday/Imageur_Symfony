@@ -45,6 +45,11 @@ class Aside
      */
     private $articles;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Site::class, inversedBy="asides")
+     */
+    private $site;
+
     public function __construct()
     {
         $this->articles = new ArrayCollection();
@@ -117,6 +122,18 @@ class Aside
                 $article->setAside(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getSite(): ?Site
+    {
+        return $this->site;
+    }
+
+    public function setSite(?Site $site): self
+    {
+        $this->site = $site;
 
         return $this;
     }
