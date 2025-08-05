@@ -47,9 +47,10 @@ class Generator
     public function genereNav($type)
     {
         if ('HomePage' === $type) {
-            $path = $this->adressRepository->findOnebyName('includes')->getPhysique().'sommaireaccueil.php';
+            $site = $this->site;
+            $path = $this->adressRepository->findOnebyName('includes', $site)->getPhysique().'sommaireaccueil.php';
         } else {
-            $path = $this->adressRepository->findOnebyName('includes')->getPhysique().'sommaire.php';
+            $path = $this->adressRepository->findOnebyName('includes', $site)->getPhysique().'sommaire.php';
         }
         $file = fopen($path, 'w');
 
@@ -57,9 +58,9 @@ class Generator
 
         fwrite($file, '<div class="element" id="som"> <nav  class=sommaire id="flexnav"> ');
         if ('HomePage' === $type) {
-            fwrite($file, '<ul><h1><a href="'.$this->adressRepository->findOnebyName('home')->getRelativeAccueil().'index.php">Accueil</a></h1></ul>');
+            fwrite($file, '<ul><h1><a href="'.$this->adressRepository->findOnebyName('home', $site)->getRelativeAccueil().'index.php">Accueil</a></h1></ul>');
         } elseif ('Article' === $type) {
-            fwrite($file, '<ul><h1><a href="'.$this->adressRepository->findOnebyName('home')->getRelativeFichiers().'index.php">Accueil</a></h1></ul>');
+            fwrite($file, '<ul><h1><a href="'.$this->adressRepository->findOnebyName('home',$site)->getRelativeFichiers().'index.php">Accueil</a></h1></ul>');
         }
 
         foreach ($rubriques as $rubrique) {
@@ -72,12 +73,12 @@ class Generator
                     $nom = $article->getNom().'.php';
                     $lien = $article->getLien();
                     if ('HomePage' === $type) {
-                        $path = $this->adressRepository->findOnebyName('fichiers')->getRelativeAccueil();
+                        $path = $this->adressRepository->findOnebyName('fichiers',$site)->getRelativeAccueil();
                     } else {
-                        $path = $this->adressRepository->findOnebyName('fichiers')->getRelativeFichiers();
+                        $path = $this->adressRepository->findOnebyName('fichiers',$site)->getRelativeFichiers();
                     }
     
-                    if (file_exists($this->adressRepository->findOnebyName('fichiers')->getPhysique().'/'.$nom)) {
+                    if (file_exists($this->adressRepository->findOnebyName('fichiers',$site)->getPhysique().'/'.$nom)) {
                         if (null !== $lien) {
                             fwrite($file, '<h1><a href="'.$path.$nom.'">'.$lien.'</a></h1>');
                         } else {
@@ -98,12 +99,12 @@ class Generator
                 $nom = $article->getNom().'.php';
                 $lien = $article->getLien();
                 if ('HomePage' === $type) {
-                    $path = $this->adressRepository->findOnebyName('fichiers')->getRelativeAccueil();
+                    $path = $this->adressRepository->findOnebyName('fichiers', $site)->getRelativeAccueil();
                 } else {
-                    $path = $this->adressRepository->findOnebyName('fichiers')->getRelativeFichiers();
+                    $path = $this->adressRepository->findOnebyName('fichiers',$site)->getRelativeFichiers();
                 }
 
-                if (file_exists($this->adressRepository->findOnebyName('fichiers')->getPhysique().'/'.$nom)) {
+                if (file_exists($this->adressRepository->findOnebyName('fichiers', $site)->getPhysique().'/'.$nom)) {
                     if (null !== $lien) {
                         fwrite($file, '<li><a href="'.$path.$nom.'">'.$lien.'</a></li>');
                     } else {
@@ -124,10 +125,10 @@ class Generator
 
     private function genereSection(Section $section)
     {
-        $dir = $this->adressRepository->findOneByName('includes')->getPhysique();
-        $rel = $this->adressRepository->findOneByName('includes')->getRelativeFichiers();
-        $imgs = $this->adressRepository->findOneByName('moyennes_images')->getRelativeFichiers();
-        $thumbs = $this->adressRepository->findOneByName('vignette')->getRelativeFichiers();
+        $dir = $this->adressRepository->findOneByName('includes',$site)->getPhysique();
+        $rel = $this->adressRepository->findOneByName('includes', $site)->getRelativeFichiers();
+        $imgs = $this->adressRepository->findOneByName('moyennes_images',$site)->getRelativeFichiers();
+        $thumbs = $this->adressRepository->findOneByName('vignette',$site)->getRelativeFichiers();
         $filename = $dir.'section_'.$section->GetId().'.php';
         $file = fopen($filename, 'w');
        fwrite($file, '<section>');
@@ -165,7 +166,7 @@ class Generator
 
     private function genereFooter(object $foot)
     {
-        $path = $this->adressRepository->findOnebyName('includes')->getPhysique().'foot_'.$foot->getNom().'.php';
+        $path = $this->adressRepository->findOnebyName('includes',$site)->getPhysique().'foot_'.$foot->getNom().'.php';
 
         $file = fopen($path, 'w');
 
@@ -175,9 +176,9 @@ class Generator
         $image = $foot->getImage();
         if (null !== $image) {
             if ('Article' === $foot->getType()) {
-                $chemin = $this->adressRepository->findOnebyName('moyennes_images')->getRelativeFichiers();
+                $chemin = $this->adressRepository->findOnebyName('moyennes_images',$site)->getRelativeFichiers();
             } else {
-                $chemin = $this->adressRepository->findOnebyName('moyennes_images')->getRelativeAccueil();
+                $chemin = $this->adressRepository->findOnebyName('moyennes_images',$site)->getRelativeAccueil();
             }
             fwrite($file, '<img src="'.$chemin.$image->getNom().'">');
         }
@@ -189,7 +190,7 @@ class Generator
 
     private function genereAside(object $aside)
     {
-        $path = $this->adressRepository->findOnebyName('includes')->getPhysique().'aside_'.$aside->getNom().'.php';
+        $path = $this->adressRepository->findOnebyName('includes',$site)->getPhysique().'aside_'.$aside->getNom().'.php';
         $file = fopen($path, 'w');
 
         fwrite($file, '<aside class="acote">');
@@ -206,11 +207,11 @@ class Generator
 
     private function genereSlider(object $slider)
     {
-        $path = $this->adressRepository->findOnebyName('includes')->getPhysique().'slider_'.$slider->getNom().'.php';
+        $path = $this->adressRepository->findOnebyName('includes',$site)->getPhysique().'slider_'.$slider->getNom().'.php';
         if (null !== $slider->getSection()->getArticle()) {
-            $src = $this->adressRepository->findOnebyName('vignette')->getRelativeFichiers();
+            $src = $this->adressRepository->findOnebyName('vignette',$site)->getRelativeFichiers();
         } elseif (null !== $slider->getSection()->getArticle()) {
-            $src = $this->adressRepository->findOnebyName('petites_images')->getRelativeAccueil();
+            $src = $this->adressRepository->findOnebyName('petites_images',$site)->getRelativeAccueil();
         }
 
         $sliderFile = fopen($path, 'w');
@@ -242,11 +243,11 @@ class Generator
         $type = \get_class($entity);
         $type = get_class_name($type);
         if ('HomePage' === $type) {
-            $path = $this->adressRepository->findOnebyName('includes')->getRelativeAccueil();
+            $path = $this->adressRepository->findOnebyName('includes',$site)->getRelativeAccueil();
             $css = $this->adressRepository->findOnebyName('css')->getRelativeAccueil();
             $this->adressRepository->findOnebyName('js')->getRelativeAccueil();
         } elseif ('Article' === $type) {
-            $path = $this->adressRepository->findOnebyName('includes')->getRelativeFichiers();
+            $path = $this->adressRepository->findOnebyName('includes',$site)->getRelativeFichiers();
             $css = $this->adressRepository->findOnebyName('css')->getRelativeFichiers();
             $js = $this->adressRepository->findOnebyName('js')->getRelativeFichiers();
         }
@@ -288,7 +289,7 @@ class Generator
         }
         if (null !== $entity->getSections()) {
             foreach ($entity->getSections() as $section) {
-                if (!file_exists($this->adressRepository->findOnebyName('includes')->getPhysique().'section_'.$section->getId().'.php')) {
+                if (!file_exists($this->adressRepository->findOnebyName('includes',$site)->getPhysique().'section_'.$section->getId().'.php')) {
                     $this->genereSection($section);
                 }
                 $nom = $path.'section_'.$section->getId().'.php';
@@ -298,7 +299,7 @@ class Generator
         fwrite($file, '</article>');
         $foot = $entity->getFooter();
         if (null !== $foot) {
-            $chemin = $this->adressRepository->findOnebyName('includes')->getPhysique().'foot_'.$foot->getNom().'.php';
+            $chemin = $this->adressRepository->findOnebyName('includes',$site)->getPhysique().'foot_'.$foot->getNom().'.php';
             if (!file_exists($chemin)) {
                 $this->genereFooter($foot);
             }
@@ -309,7 +310,7 @@ class Generator
         fwrite($file, '<div class="element" id="acote">');
         $aside = $entity->getAside();
         if (null !== $aside) {
-            $chemin = $this->adressRepository->findOnebyName('includes')->getPhysique().'_aside'.$aside->getNom().'.php';
+            $chemin = $this->adressRepository->findOnebyName('includes',$site)->getPhysique().'_aside'.$aside->getNom().'.php';
             if (!file_exists($chemin)) {
                 $this->genereAside($aside);
             }
@@ -328,7 +329,7 @@ class Generator
 
     private function genereCSS(object $css)
     {
-        $dir = $this->adressRepository->findOnebyName('css')->getPhysique();
+        $dir = $this->adressRepository->findOnebyName('css',$site)->getPhysique();
         copy('build/app.css', $dir.$css->getNom().'.css');
     }
 
@@ -338,8 +339,8 @@ class Generator
         $type = get_class_name($type);
 
         $dirh = $this->adressRepository->findOneByName('home')->getPhysique();
-        $dir = $this->adressRepository->findOneByName('fichiers')->getPhysique();
-        $includes_path = $this->adressRepository->findOneByName('includes')->getPhysique();
+        $dir = $this->adressRepository->findOneByName('fichiers',$site)->getPhysique();
+        $includes_path = $this->adressRepository->findOneByName('includes',$site)->getPhysique();
 
         switch ($type) {
             case 'HomePage':
