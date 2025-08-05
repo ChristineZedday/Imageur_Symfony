@@ -75,6 +75,11 @@ class HomePage
      */
     private $footer;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Site::class, inversedBy="homePages")
+     */
+    private $site;
+
     public function __construct()
     {
         $this->sections = new ArrayCollection();
@@ -245,6 +250,18 @@ class HomePage
     public function removeJavascript(Javascript $javascript): self
     {
         $this->javascript->removeElement($javascript);
+
+        return $this;
+    }
+
+    public function getSite(): ?Site
+    {
+        return $this->site;
+    }
+
+    public function setSite(?Site $site): self
+    {
+        $this->site = $site;
 
         return $this;
     }

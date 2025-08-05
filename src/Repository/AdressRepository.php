@@ -42,9 +42,11 @@ class AdressRepository extends ServiceEntityRepository
     }
     */
 
-    public function findOneByName($value): ?adress
+    public function findOneByName($value, $site): ?adress
     {
         return $this->createQueryBuilder('a')
+            ->where('a.site = :s')
+            ->setParameter('s', $site)
             ->andWhere('a.nom = :val')
             ->setParameter('val', $value)
             ->getQuery()

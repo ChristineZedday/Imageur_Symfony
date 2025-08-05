@@ -12,6 +12,7 @@ use App\Entity\Section;
 use App\Repository\AdressRepository;
 use App\Repository\ArticleRepository;
 use App\Repository\RubriqueRepository;
+use App\Repository\SiteRepository;
 
 \define('ENTETE_HTML', '<!DOCTYPE html><html lang="fr">');
 \define('END_HTML', '</div></body></html>');
@@ -33,12 +34,14 @@ class Generator
     private $adressRepository;
     private $rubriqueRepository;
     private $articleRepository;
+    private $siteRepository;
 
-    public function __construct(AdressRepository $adressRepository, RubriqueRepository $rubriqueRepository, ArticleRepository $articleRepository) //services appelés ds un service
+    public function __construct(AdressRepository $adressRepository, RubriqueRepository $rubriqueRepository, ArticleRepository $articleRepository, SiteRepository $siteRepository) //services appelés ds un service
     {
         $this->adressRepository = $adressRepository;
         $this->rubriqueRepository = $rubriqueRepository;
         $this->articleRepository = $articleRepository;
+        $this->siteRepository = $siteRepository;
     }
 
     public function genereNav($type)

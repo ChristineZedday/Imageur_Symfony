@@ -44,10 +44,16 @@ class Site
      */
     private $rubriques;
 
+    /**
+     * @ORM\OneToMany(targetEntity=HomePage::class, mappedBy="site")
+     */
+    private $homePages;
+
     public function __construct()
     {
         $this->adresses = new ArrayCollection();
         $this->rubriques = new ArrayCollection();
+        $this->homePages = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -145,6 +151,36 @@ class Site
             // set the owning side to null (unless already changed)
             if ($rubrique->getSiteId() === $this) {
                 $rubrique->setSiteId(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|HomePage[]
+     */
+    public function getHomePages(): Collection
+    {
+        return $this->homePages;
+    }
+
+    public function addHomePage(HomePage $homePage): self
+    {
+        if (!$this->homePages->contains($homePage)) {
+            $this->homePages[] = $homePage;
+            $homePage->setSite($this);
+        }
+
+        return $this;
+    }
+
+    public function removeHomePage(HomePage $homePage): self
+    {
+        if ($this->homePages->removeElement($homePage)) {
+            // set the owning side to null (unless already changed)
+            if ($homePage->getSite() === $this) {
+                $homePage->setSite(null);
             }
         }
 
