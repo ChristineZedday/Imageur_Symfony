@@ -200,6 +200,16 @@ class Rubrique
      * @ORM\ManyToOne(targetEntity=Site::class, inversedBy="rubriques")
      */
     private $site;
+ public function getSite(): ?Site
+    {
+        return $this->getSite;
+    }
 
+    public function setSite(?Site $site): self
+    {
+        $this->site = $site;
+
+        return $this;
+    }
    
 }
