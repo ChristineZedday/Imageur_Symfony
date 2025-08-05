@@ -27,6 +27,12 @@ class FootType extends AbstractType
 
         $builder
             ->add('nom')
+              ->add('site', EntityType::class, [
+                'class' => Site::class,
+                'choice_label' => 'nom',
+                'multiple' => false,
+                'mapped' => true,
+                'required' => true, ])
             ->add('contenu')
             ->add('image', ChoiceType::class, [
                 'choices' => $imagesUniques,

@@ -21,6 +21,12 @@ class AsideType extends AbstractType
             ->add('titre')
             ->add('nom')
             ->add('contenu')
+            ->add('site', EntityType::class, [
+                'class' => Site::class,
+                'choice_label' => 'nom',
+                'multiple' => false,
+                'mapped' => true,
+                'required' => true, ])
         ;
     }
 
