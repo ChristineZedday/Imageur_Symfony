@@ -65,9 +65,9 @@ class Site
     private $css_files;
 
     /**
-     * @ORM\OneToMany(targetEntity=JavaScript::class, mappedBy="site")
+     * @ORM\OneToMany(targetEntity=Javascript::class, mappedBy="site")
      */
-    private $javaScripts;
+    private $javascripts;
 
     public function __construct()
     {
@@ -77,7 +77,7 @@ class Site
         $this->asides = new ArrayCollection();
         $this->footers = new ArrayCollection();
         $this->css_files = new ArrayCollection();
-        $this->javaScripts = new ArrayCollection();
+        $this->javascripts = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -302,29 +302,29 @@ class Site
     }
 
     /**
-     * @return Collection|JavaScript[]
+     * @return Collection|Javascript[]
      */
-    public function getJavaScripts(): Collection
+    public function getJavascripts(): Collection
     {
-        return $this->javaScripts;
+        return $this->javascripts;
     }
 
-    public function addJavaScript(JavaScript $javaScript): self
+    public function addJavascript(Javascript $javascript): self
     {
-        if (!$this->javaScripts->contains($javaScript)) {
-            $this->javaScripts[] = $javaScript;
-            $javaScript->setSite($this);
+        if (!$this->javascripts->contains($javascript)) {
+            $this->javascripts[] = $javascript;
+            $javascript->setSite($this);
         }
 
         return $this;
     }
 
-    public function removeJavaScript(JavaScript $javaScript): self
+    public function removeJavascript(Javascript $javascript): self
     {
-        if ($this->javaScripts->removeElement($javaScript)) {
+        if ($this->javascripts->removeElement($javascript)) {
             // set the owning side to null (unless already changed)
-            if ($javaScript->getSite() === $this) {
-                $javaScript->setSite(null);
+            if ($javascript->getSite() === $this) {
+                $javascript->setSite(null);
             }
         }
 
