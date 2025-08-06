@@ -245,6 +245,7 @@ class Generator
     {
         $type = \get_class($entity);
         $type = get_class_name($type);
+      
         if ('HomePage' === $type) {
             $path = $this->adressRepository->findOnebyName('includes',$site)->getRelativeAccueil();
             $css = $this->adressRepository->findOnebyName('css', $site)->getRelativeAccueil();
@@ -330,7 +331,7 @@ class Generator
         fclose($file);
     }
 
-    private function genereCSS(object $css)
+    private function genereCSS(object $css, $site)
     {
         $dir = $this->adressRepository->findOnebyName('css',$site)->getPhysique();
         copy('build/app.css', $dir.$css->getNom().'.css');
