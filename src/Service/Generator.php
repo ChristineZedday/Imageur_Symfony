@@ -293,7 +293,7 @@ class Generator
         if (null !== $entity->getSections()) {
             foreach ($entity->getSections() as $section) {
                 if (!file_exists($this->adressRepository->findOnebyName('includes',$site)->getPhysique().'section_'.$section->getId().'.php')) {
-                    $this->genereSection($section);
+                    $this->genereSection($section, $site);
                 }
                 $nom = $path.'section_'.$section->getId().'.php';
                 fwrite($file, '<?php include(\''.$nom.'\'); ?>');
@@ -304,7 +304,7 @@ class Generator
         if (null !== $foot) {
             $chemin = $this->adressRepository->findOnebyName('includes',$site)->getPhysique().'foot_'.$foot->getNom().'.php';
             if (!file_exists($chemin)) {
-                $this->genereFooter($foot);
+                $this->genereFooter($foot, $site);
             }
 
             fwrite($file, '<?php include(\''.$path.'foot_'.$foot->getNom().'.php\'); ?>');
@@ -315,7 +315,7 @@ class Generator
         if (null !== $aside) {
             $chemin = $this->adressRepository->findOnebyName('includes',$site)->getPhysique().'_aside'.$aside->getNom().'.php';
             if (!file_exists($chemin)) {
-                $this->genereAside($aside);
+                $this->genereAside($aside,$site);
             }
 
             fwrite($file, '<?php include(\''.$path.'aside_'.$aside->getNom().'.php\'); ?>');
