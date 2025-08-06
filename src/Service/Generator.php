@@ -247,12 +247,12 @@ class Generator
         $type = get_class_name($type);
         if ('HomePage' === $type) {
             $path = $this->adressRepository->findOnebyName('includes',$site)->getRelativeAccueil();
-            $css = $this->adressRepository->findOnebyName('css')->getRelativeAccueil();
-            $this->adressRepository->findOnebyName('js')->getRelativeAccueil();
+            $css = $this->adressRepository->findOnebyName('css', $site)->getRelativeAccueil();
+            $this->adressRepository->findOnebyName('js',$site)->getRelativeAccueil();
         } elseif ('Article' === $type) {
             $path = $this->adressRepository->findOnebyName('includes',$site)->getRelativeFichiers();
-            $css = $this->adressRepository->findOnebyName('css')->getRelativeFichiers();
-            $js = $this->adressRepository->findOnebyName('js')->getRelativeFichiers();
+            $css = $this->adressRepository->findOnebyName('css',$site)->getRelativeFichiers();
+            $js = $this->adressRepository->findOnebyName('js',$site)->getRelativeFichiers();
         }
 
         $file = fopen($filename, 'w');
