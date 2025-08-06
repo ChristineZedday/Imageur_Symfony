@@ -28,19 +28,19 @@ class RubriqueRepository extends ServiceEntityRepository
     // /**
     //  * @return Rubrique[] Returns an array of Rubrique objects
     //  */
-    /*
-    public function findByExampleField($value)
+    
+    public function findBySite($value)
     {
         return $this->createQueryBuilder('r')
-            ->andWhere('r.exampleField = :val')
+            ->andWhere('r.site = :val')
             ->setParameter('val', $value)
-            ->orderBy('r.id', 'ASC')
-            ->setMaxResults(10)
+            ->orderBy('r.rang', 'ASC')
             ->getQuery()
             ->getResult()
         ;
+        
     }
-    */
+    
 
     /*
     public function findOneBySomeField($value): ?Rubrique
