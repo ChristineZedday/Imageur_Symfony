@@ -9,6 +9,9 @@
 namespace App\Service;
 
 use App\Entity\Section;
+use App\Entity\Site;
+use App\Entity\Article;
+use App\Entity\Rubrique;
 use App\Repository\AdressRepository;
 use App\Repository\ArticleRepository;
 use App\Repository\RubriqueRepository;
@@ -340,33 +343,33 @@ class Generator
 
          switch ($type) {
             case 'HomePage':
-                $site = $entity->site;
+                $site = $entity->getSite();
 
                 break;
 
             case 'Article':
-                    $site = $entity->rubrique->site;
+                    $site = $entity->getRubrique()->getSite();
 
                     break;
 
             case 'Section':
-                 $site = $entity->article->rubrique->site;
+                 $site = $entity->getArticle()->getRubrique()->getSite();
             break;
 
             case 'Aside':
-                 $site = $entity->site;
+                 $site = $entity->getSite();
             break;
 
             case 'Slider':
-                $site = $entity->section->article->rubrique->site;
+                $site = $entity->getSection()->getArticle()->getRubrique()->getSite();
             break;
 
             case 'CSS':
-                $site = $entity->site;
+                $site = $entity->getSite();
             break;
 
             case 'Foot':
-                 $site = $entity->site;
+                 $site = $entity->getSite();
             break;
             }
 
