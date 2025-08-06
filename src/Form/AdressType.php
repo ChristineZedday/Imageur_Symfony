@@ -11,9 +11,9 @@ namespace App\Form;
 use App\Entity\Adress;
 use App\Entity\Site;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 class AdressType extends AbstractType
 {
