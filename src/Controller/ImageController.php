@@ -39,14 +39,17 @@ class ImageController extends AbstractController
      */
     public function new(Request $request, AdressRepository $adressRepository, ExtensionCleaner $extensionCleaner): Response
     {
-        $thumbs = $adressRepository->findOnebyName('vignette')->getPhysique();
-        $grandes = $adressRepository->findOneByName('grandes_images')->getPhysique();
-        $autres = $adressRepository->findOneByName('moyennes_images')->getPhysique();
+        
         $image = new Image();
         $form = $this->createForm(ImageType::class, $image);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $rubrique = $form->get('rubrique')->getData();
+            $site = $rubrique->getSite();
+        $thumbs = $adressRepository->findOnebyName('vignette',$site)->getPhysique();
+        $grandes = $adressRepository->findOneByName('grandes_images',$site)->getPhysique();
+        $autres = $adressRepository->findOneByName('moyennes_images',$site)->getPhysique();
             $photo = $form->get('image')->getData();
             $nom = $form->get('nom')->getData();
             $ext = $photo->guessExtension();
